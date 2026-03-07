@@ -20,8 +20,8 @@ mac:
         - arm64
         - x64
   icon: build/icon.icns
-  hardenedRuntime: true
-  gatekeeperAssess: false
+  identity: null
+afterPack: ./scripts/ad-hoc-sign.js
 win:
   target:
     - target: nsis
