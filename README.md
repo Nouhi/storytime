@@ -6,9 +6,7 @@ Uses Claude for writing and Gemini for illustrations.
 
 ## Install
 
-1. Download the latest DMG from [Releases](https://github.com/fananta/storytime/releases/latest)
-   - **Apple Silicon (M1/M2/M3/M4):** `Storytime-arm64.dmg`
-   - **Intel Mac:** `Storytime.dmg`
+1. Download [Storytime-arm64.dmg](https://github.com/fananta/storytime/releases/latest/download/Storytime-arm64.dmg)
 2. Open the DMG and drag Storytime to Applications
 3. **First launch:** macOS will block it because it's not signed. Right-click (or Control-click) the app and select **Open**, then click **Open** again in the dialog. You only need to do this once.
 
