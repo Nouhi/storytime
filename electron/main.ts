@@ -71,7 +71,7 @@ async function startNextServer(): Promise<void> {
   const env: NodeJS.ProcessEnv = {
     ...process.env,
     PORT: String(serverPort),
-    HOSTNAME: "localhost",
+    HOSTNAME: "0.0.0.0",
     STORYTIME_DATA_DIR: dataDir,
     NODE_ENV: "production",
     // Tell Electron's fork to behave as plain Node.js
