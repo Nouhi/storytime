@@ -1,6 +1,6 @@
 # Storytime
 
-A personalized bedtime story generator. Enter a prompt, and it writes and illustrates a complete story starring your kid — delivered as an EPUB you can read together on Apple Books.
+A personalized bedtime story generator. Enter a prompt, and it writes and illustrates a complete story starring your kid, delivered as an EPUB you can read together on Apple Books. Costs about $0.70 per story.
 
 Uses Claude for writing and Gemini for illustrations.
 
