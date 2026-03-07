@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
+import { getGeneratedDir } from "@/lib/paths";
 
 export async function GET(
   request: Request,
@@ -14,7 +15,7 @@ export async function GET(
     return NextResponse.json({ error: "page param required" }, { status: 400 });
   }
 
-  const imagePath = path.join(process.cwd(), "generated", storyId, `page-${page}.png`);
+  const imagePath = path.join(getGeneratedDir(), storyId, `page-${page}.png`);
 
   try {
     const buffer = await fs.readFile(imagePath);

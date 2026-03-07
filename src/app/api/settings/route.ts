@@ -15,6 +15,7 @@ export async function GET() {
       .values({
         id: 1,
         kidName: "",
+        kidGender: "",
         readingLevel: "early-reader",
         kidPhotoPath: "",
         anthropicApiKey: "",
@@ -24,6 +25,7 @@ export async function GET() {
     return NextResponse.json({
       id: 1,
       kidName: "",
+      kidGender: "",
       readingLevel: "early-reader",
       kidPhotoPath: "",
       anthropicApiKey: "",
@@ -42,7 +44,7 @@ export async function GET() {
 
 export async function PUT(request: Request) {
   const body = await request.json();
-  const { kidName, readingLevel, kidPhotoPath, anthropicApiKey, googleAiApiKey } = body;
+  const { kidName, kidGender, readingLevel, kidPhotoPath, anthropicApiKey, googleAiApiKey } = body;
 
   const existing = db.select().from(settings).all();
 
@@ -51,6 +53,10 @@ export async function PUT(request: Request) {
     readingLevel,
     updatedAt: new Date().toISOString(),
   };
+
+  if (kidGender !== undefined) {
+    update.kidGender = kidGender;
+  }
 
   if (kidPhotoPath !== undefined) {
     update.kidPhotoPath = kidPhotoPath;

@@ -4,6 +4,7 @@ import { storyHistory } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import fs from "fs/promises";
 import path from "path";
+import { resolveDataPath } from "@/lib/paths";
 
 export async function GET(
   request: Request,
@@ -26,7 +27,7 @@ export async function GET(
     return NextResponse.json({ error: "File not found" }, { status: 404 });
   }
 
-  const fullPath = path.join(process.cwd(), story.pdfPath);
+  const fullPath = resolveDataPath(story.pdfPath);
   const ext = path.extname(story.pdfPath).toLowerCase();
   const isEpub = ext === ".epub";
 

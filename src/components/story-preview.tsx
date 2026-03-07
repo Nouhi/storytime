@@ -10,6 +10,7 @@ interface StoryPreviewProps {
   imageBaseUrl: string;
   epubUrl: string;
   pdfUrl?: string;
+  hasImages?: boolean;
   onCreateAnother?: () => void;
 }
 
@@ -19,6 +20,7 @@ export function StoryPreview({
   imageBaseUrl,
   epubUrl,
   pdfUrl,
+  hasImages = true,
   onCreateAnother,
 }: StoryPreviewProps) {
   const [currentPage, setCurrentPage] = useState(0);
@@ -52,13 +54,14 @@ export function StoryPreview({
 
   // Preload adjacent images
   useEffect(() => {
+    if (!hasImages) return;
     const toPreload = [currentPage - 1, currentPage + 1]
       .filter((i) => i >= 0 && i < pages.length);
     for (const i of toPreload) {
       const img = new Image();
       img.src = `${imageBaseUrl}?page=${pages[i].page}`;
     }
-  }, [currentPage, pages, imageBaseUrl]);
+  }, [currentPage, pages, imageBaseUrl, hasImages]);
 
   const imageUrl = `${imageBaseUrl}?page=${page.page}`;
 
@@ -76,26 +79,28 @@ export function StoryPreview({
   }
 
   return (
-    <div className="w-full max-w-lg mx-auto space-y-4">
-      {/* Page display card */}
+    <div className="w-full grid grid-cols-1 md:grid-cols-[1fr_220px] gap-6 items-start">
+      {/* Left: Story card */}
       <div className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden">
-        {/* Image */}
-        <div className="aspect-[3/2] bg-muted relative overflow-hidden">
-          <img
-            key={page.page}
-            src={imageUrl}
-            alt={`Page ${page.page} illustration`}
-            className="w-full h-full object-cover"
-          />
-          {!isCover && (
-            <span className="absolute top-3 right-4 text-[11px] font-mono text-white/70 drop-shadow-md">
-              {page.page}
-            </span>
-          )}
-        </div>
+        {/* Image (only when story has images) */}
+        {hasImages && (
+          <div className="aspect-[3/2] bg-muted relative overflow-hidden">
+            <img
+              key={page.page}
+              src={imageUrl}
+              alt={`Page ${page.page} illustration`}
+              className="w-full h-full object-contain"
+            />
+            {!isCover && (
+              <span className="absolute top-3 right-4 text-[11px] font-mono text-white/70 drop-shadow-md">
+                {page.page}
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Text */}
-        <div className="px-6 py-5">
+        <div className={`px-6 ${hasImages ? "py-5" : "py-8"}`}>
           {isCover ? (
             <div className="text-center">
               <p className="text-xl font-semibold text-foreground leading-snug">
@@ -108,9 +113,16 @@ export function StoryPreview({
               )}
             </div>
           ) : (
-            <p className="text-[15px] text-foreground leading-relaxed">
-              {page.text}
-            </p>
+            <>
+              {!hasImages && (
+                <span className="text-[11px] font-mono text-muted-foreground/50 float-right ml-2">
+                  {page.page}
+                </span>
+              )}
+              <p className="text-[15px] text-foreground leading-relaxed">
+                {page.text}
+              </p>
+            </>
           )}
         </div>
 
@@ -144,53 +156,53 @@ export function StoryPreview({
         </div>
       </div>
 
-      {/* Action buttons */}
+      {/* Right: Actions sidebar */}
       <div className="flex flex-col gap-2.5">
         {pdfUrl && (
           <a
             href={pdfUrl}
             download
-            className="flex items-center justify-center gap-2 px-5 py-2.5 border border-primary text-primary text-sm font-medium rounded-xl hover:bg-primary/5 transition-colors"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 border border-primary text-primary text-sm font-medium rounded-xl hover:bg-primary/5 transition-colors"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" x2="12" y1="15" y2="3" />
             </svg>
-            Download PDF
+            PDF
           </a>
         )}
         <a
           href={epubUrl}
           download
-          className="flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-medium rounded-xl hover:bg-primary-hover transition-colors"
+          className="flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white text-sm font-medium rounded-xl hover:bg-primary-hover transition-colors"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" x2="12" y1="15" y2="3" />
           </svg>
-          Download EPUB
+          EPUB
         </a>
         {qrUrl && (
-          <div className="flex flex-col items-center gap-2 py-4 px-5 bg-muted/50 rounded-xl">
+          <div className="flex flex-col items-center gap-2 py-4 px-4 bg-muted/50 rounded-xl">
             <QRCodeSVG
               value={qrUrl}
-              size={140}
+              size={120}
               level="M"
               bgColor="transparent"
             />
-            <p className="text-xs text-muted-foreground text-center">
-              Scan to open in Apple Books
+            <p className="text-[11px] text-muted-foreground text-center leading-tight">
+              Scan to open in<br />Apple Books
             </p>
           </div>
         )}
         {onCreateAnother && (
           <button
             onClick={onCreateAnother}
-            className="px-5 py-2.5 text-sm font-medium text-muted-foreground rounded-xl hover:bg-muted transition-colors"
+            className="px-4 py-2.5 text-sm font-medium text-muted-foreground rounded-xl hover:bg-muted transition-colors"
           >
-            Create Another Story
+            New Story
           </button>
         )}
       </div>

@@ -7,6 +7,7 @@ export interface GenerationSession {
   detail: string;
   epubBuffer?: Uint8Array;
   storyPages?: StoryPage[];
+  hasImages?: boolean;
   createdAt: Date;
   listeners: Set<(event: GenerationEvent) => void>;
 }
@@ -57,7 +58,7 @@ export function getSession(id: string): GenerationSession | undefined {
 
 export function updateSession(
   id: string,
-  update: Partial<Pick<GenerationSession, "status" | "progress" | "detail" | "epubBuffer" | "storyPages">>
+  update: Partial<Pick<GenerationSession, "status" | "progress" | "detail" | "epubBuffer" | "storyPages" | "hasImages">>
 ) {
   const session = sessions.get(id);
   if (!session) return;
@@ -76,6 +77,7 @@ export function updateSession(
     event.epubUrl = `/api/generate/${id}/epub`;
     event.storyId = id;
     event.storyPages = session.storyPages;
+    event.hasImages = session.hasImages !== false;
   }
   if (session.status === "error") {
     event.message = session.detail;

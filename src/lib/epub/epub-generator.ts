@@ -41,7 +41,7 @@ const CONTAINER_XML = `<?xml version="1.0" encoding="UTF-8"?>
   </rootfiles>
 </container>`;
 
-function buildContentOpf(title: string, storyId: string, pageCount: number): string {
+function buildContentOpf(title: string, storyId: string, pageCount: number, hasImages: boolean): string {
   const now = new Date().toISOString().replace(/\.\d+Z$/, "Z");
 
   let manifestItems = `    <item id="nav" href="toc.xhtml" media-type="application/xhtml+xml" properties="nav"/>
@@ -51,10 +51,13 @@ function buildContentOpf(title: string, storyId: string, pageCount: number): str
 
   for (let i = 1; i <= pageCount; i++) {
     const id = padNum(i);
-    const props = i === 1 ? ' properties="cover-image"' : "";
     manifestItems += `
-    <item id="page-${id}" href="text/page-${id}.xhtml" media-type="application/xhtml+xml"/>
+    <item id="page-${id}" href="text/page-${id}.xhtml" media-type="application/xhtml+xml"/>`;
+    if (hasImages) {
+      const props = i === 1 ? ' properties="cover-image"' : "";
+      manifestItems += `
     <item id="img-${id}" href="images/page-${id}.png" media-type="image/png"${props}/>`;
+    }
     spineItems += `
     <itemref idref="page-${id}"/>`;
   }
@@ -170,15 +173,25 @@ html, body {
   font-weight: bold;
   font-style: italic;
 }
+
+/* Text-only mode */
+.text-only .text-container {
+  padding: 2em 1.5em;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 `;
 
-function buildPageXhtml(page: StoryPage, isCover: boolean, isEnd: boolean): string {
+function buildPageXhtml(page: StoryPage, isCover: boolean, isEnd: boolean, hasImages: boolean): string {
   const id = padNum(page.page);
   const text = escapeXml(page.text);
 
   let bodyClass = "page";
   if (isCover) bodyClass += " cover";
   if (isEnd) bodyClass += " end-page";
+  if (!hasImages) bodyClass += " text-only";
 
   let textContent: string;
   if (isCover) {
@@ -195,6 +208,12 @@ function buildPageXhtml(page: StoryPage, isCover: boolean, isEnd: boolean): stri
     textContent = `<p>${text}</p>`;
   }
 
+  const imageHtml = hasImages
+    ? `    <div class="image-container">
+      <img src="../images/page-${id}.png" alt="Illustration for page ${page.page}"/>
+    </div>\n`
+    : "";
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -205,10 +224,7 @@ function buildPageXhtml(page: StoryPage, isCover: boolean, isEnd: boolean): stri
 </head>
 <body>
   <div class="${bodyClass}">
-    <div class="image-container">
-      <img src="../images/page-${id}.png" alt="Illustration for page ${page.page}"/>
-    </div>
-    <div class="text-container">
+${imageHtml}    <div class="text-container">
       ${textContent}
     </div>
   </div>
@@ -331,6 +347,7 @@ export async function generateEpub(
   title: string,
   pages: StoryPage[],
   images: Map<number, Buffer>,
+  hasImages: boolean = true,
 ): Promise<Uint8Array> {
   const storyId = crypto.randomUUID();
 
@@ -353,7 +370,7 @@ export async function generateEpub(
   // 3. content.opf
   entries.push({
     path: "OEBPS/content.opf",
-    data: Buffer.from(buildContentOpf(title, storyId, pages.length), "utf8"),
+    data: Buffer.from(buildContentOpf(title, storyId, pages.length, hasImages), "utf8"),
     compressed: true,
   });
 
@@ -380,7 +397,7 @@ export async function generateEpub(
     // XHTML page
     entries.push({
       path: `OEBPS/text/page-${id}.xhtml`,
-      data: Buffer.from(buildPageXhtml(page, isCover, isEnd), "utf8"),
+      data: Buffer.from(buildPageXhtml(page, isCover, isEnd, hasImages), "utf8"),
       compressed: true,
     });
 

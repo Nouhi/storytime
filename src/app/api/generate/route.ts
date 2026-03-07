@@ -42,10 +42,12 @@ async function runPipeline(storyId: string, prompt: string, writingStyle?: strin
   const members = db.select().from(familyMembers).all();
 
   const kidName = settingsRow?.kidName || "";
+  const kidGender = settingsRow?.kidGender || "";
   const kidPhotoPath = settingsRow?.kidPhotoPath || "";
 
   const context = {
     kidName,
+    kidGender,
     readingLevel: settingsRow?.readingLevel || "early-reader",
     familyMembers: members,
   };
@@ -65,39 +67,52 @@ async function runPipeline(storyId: string, prompt: string, writingStyle?: strin
     console.log("Character sheet generated:", JSON.stringify(characterSheet, null, 2));
   }
 
-  updateSession(storyId, {
-    status: "generating-images",
-    progress: 15,
-    detail: "Drawing illustrations (0/16)...",
-    storyPages,
-  });
+  const skipImages = imageStyle === "none";
+  let images = new Map<number, Buffer>();
+  let imageCount = 0;
 
-  // 3. Generate illustrations with Gemini
-  const images = await generateAllIllustrations(
-    storyPages.map((p) => ({ page: p.page, imageDescription: p.imageDescription })),
-    members,
-    (completed, total) => {
-      const imageProgress = 15 + (completed / total) * 70;
-      updateSession(storyId, {
-        progress: Math.round(imageProgress),
-        detail: `Drawing illustrations (${completed}/${total})...`,
-      });
-    },
-    kidName,
-    kidPhotoPath,
-    imageStyle,
-    characterSheet,
-  );
+  if (skipImages) {
+    // Update session with story pages for SSE stream
+    updateSession(storyId, {
+      progress: 80,
+      detail: "Story written!",
+      storyPages,
+    });
+  } else {
+    updateSession(storyId, {
+      status: "generating-images",
+      progress: 15,
+      detail: "Drawing illustrations (0/16)...",
+      storyPages,
+    });
 
-  const imageCount = images.size;
-  const failedCount = 16 - imageCount;
+    // 3. Generate illustrations with Gemini
+    images = await generateAllIllustrations(
+      storyPages.map((p) => ({ page: p.page, imageDescription: p.imageDescription })),
+      members,
+      (completed, total) => {
+        const imageProgress = 15 + (completed / total) * 70;
+        updateSession(storyId, {
+          progress: Math.round(imageProgress),
+          detail: `Drawing illustrations (${completed}/${total})...`,
+        });
+      },
+      kidName,
+      kidPhotoPath,
+      imageStyle,
+      characterSheet,
+      kidGender,
+    );
 
-  // 3.5. Save images to disk for preview
-  for (const [pageNum, buffer] of images) {
-    try {
-      await saveGeneratedImage(storyId, pageNum, buffer);
-    } catch (err) {
-      console.error(`Failed to save image for page ${pageNum}:`, err);
+    imageCount = images.size;
+
+    // 3.5. Save images to disk for preview
+    for (const [pageNum, buffer] of images) {
+      try {
+        await saveGeneratedImage(storyId, pageNum, buffer);
+      } catch (err) {
+        console.error(`Failed to save image for page ${pageNum}:`, err);
+      }
     }
   }
 
@@ -108,17 +123,21 @@ async function runPipeline(storyId: string, prompt: string, writingStyle?: strin
     console.error("Failed to save story data:", err);
   }
 
+  const failedCount = skipImages ? 0 : 16 - imageCount;
+
   // 4. Assemble EPUB
   updateSession(storyId, {
     status: "assembling-ebook",
     progress: 90,
-    detail: failedCount > 0
-      ? `Making your ebook (${failedCount} images couldn't be generated)...`
-      : "Making your ebook...",
+    detail: skipImages
+      ? "Making your ebook..."
+      : failedCount > 0
+        ? `Making your ebook (${failedCount} images couldn't be generated)...`
+        : "Making your ebook...",
   });
 
   const title = storyPages[0]?.text || prompt.slice(0, 100);
-  const epubBuffer = await generateEpub(title, storyPages, images);
+  const epubBuffer = await generateEpub(title, storyPages, images, !skipImages);
 
   // 5. Save EPUB to disk
   let epubPath = "";
@@ -158,5 +177,6 @@ async function runPipeline(storyId: string, prompt: string, writingStyle?: strin
     detail: "Your story is ready!",
     epubBuffer,
     storyPages,
+    hasImages: !skipImages,
   });
 }

@@ -1,9 +1,9 @@
 import Database from "better-sqlite3";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import * as schema from "./schema";
-import path from "path";
+import { getDbPath } from "../paths";
 
-const dbPath = path.join(process.cwd(), "storytime.db");
+const dbPath = getDbPath();
 
 // Use a singleton pattern to avoid multiple connections during build
 const globalForDb = globalThis as unknown as {

@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function Home() {
   const { settings, loading: settingsLoading } = useSettings();
-  const { status, step, detail, progress, epubUrl, storyPages, storyId, errorMessage, generate, reset } =
+  const { status, step, detail, progress, epubUrl, storyPages, storyId, hasImages, errorMessage, generate, reset } =
     useGeneration();
 
   const kidName = settings?.kidName || "";
@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center min-h-[calc(100vh-3.5rem)]">
       {/* Centered content area */}
-      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-2xl px-4 -mt-14">
+      <div className={`flex-1 flex flex-col items-center justify-center w-full px-4 -mt-14 ${isComplete ? "max-w-4xl" : "max-w-2xl"}`}>
         {/* Hero */}
         {!isComplete && (
           <div className="text-center space-y-3 mb-8">
@@ -94,6 +94,7 @@ export default function Home() {
             imageBaseUrl={`/api/generate/${storyId}/pages`}
             epubUrl={epubUrl}
             pdfUrl={`/api/generate/${storyId}/pdf`}
+            hasImages={hasImages}
             onCreateAnother={reset}
           />
         )}

@@ -40,6 +40,7 @@ export default function SettingsPage() {
   } = useSettings();
 
   const [kidName, setKidName] = useState("");
+  const [kidGender, setKidGender] = useState("");
   const [readingLevel, setReadingLevel] = useState("early-reader");
   const [anthropicApiKey, setAnthropicApiKey] = useState("");
   const [googleAiApiKey, setGoogleAiApiKey] = useState("");
@@ -48,13 +49,14 @@ export default function SettingsPage() {
   const [saving, setSaving] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [modalStory, setModalStory] = useState<{ id: number; pages: StoryPage[] } | null>(null);
+  const [modalStory, setModalStory] = useState<{ id: number; pages: StoryPage[]; hasImages: boolean } | null>(null);
   const [modalLoading, setModalLoading] = useState(false);
   const kidPhotoRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (settings) {
       setKidName(settings.kidName);
+      setKidGender(settings.kidGender || "");
       setReadingLevel(settings.readingLevel);
       setAnthropicApiKey(settings.anthropicApiKey);
       setGoogleAiApiKey(settings.googleAiApiKey);
@@ -71,7 +73,7 @@ export default function SettingsPage() {
 
   const handleSaveSettings = async () => {
     setSaving(true);
-    await updateSettings({ kidName, readingLevel, anthropicApiKey, googleAiApiKey });
+    await updateSettings({ kidName, kidGender, readingLevel, anthropicApiKey, googleAiApiKey });
     setSaving(false);
     setDirty(false);
     setSaved(true);
@@ -103,7 +105,9 @@ export default function SettingsPage() {
       const res = await fetch(`/api/story-history/${storyId}/story-data`);
       if (!res.ok) return;
       const { pages } = await res.json();
-      setModalStory({ id: storyId, pages });
+      const story = storyHistory.find((s) => s.id === storyId);
+      const hasImages = (story?.geminiImageCount ?? 1) > 0;
+      setModalStory({ id: storyId, pages, hasImages });
     } catch {
       // fail silently
     } finally {
@@ -156,6 +160,28 @@ export default function SettingsPage() {
               className={inputCls}
               placeholder="Enter your child's name"
             />
+          </div>
+          <div>
+            <label className={labelCls}>Gender</label>
+            <div className="flex gap-2">
+              {[
+                { value: "boy", label: "Boy" },
+                { value: "girl", label: "Girl" },
+              ].map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => { setKidGender(option.value); markDirty(); }}
+                  className={`px-4 py-2 text-sm font-medium rounded-xl border transition-all ${
+                    kidGender === option.value
+                      ? "bg-primary text-white border-primary"
+                      : "bg-background text-muted-foreground border-border hover:border-primary/40 hover:text-foreground"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
           </div>
           <div>
             <label className={labelCls}>Reading Level</label>
@@ -391,23 +417,14 @@ export default function SettingsPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
           onClick={(e) => { if (e.target === e.currentTarget) setModalStory(null); }}
         >
-          <div className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl bg-background p-4">
-            <button
-              onClick={() => setModalStory(null)}
-              className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-lg hover:bg-muted transition-colors text-muted-foreground"
-              aria-label="Close"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
+          <div className="w-full max-w-4xl rounded-2xl bg-background p-4">
             <StoryPreview
               pages={modalStory.pages}
               storyId={String(modalStory.id)}
               imageBaseUrl={`/api/story-history/${modalStory.id}/pages`}
               epubUrl={`/api/story-history/${modalStory.id}/download`}
               pdfUrl={`/api/story-history/${modalStory.id}/pdf`}
+              hasImages={modalStory.hasImages}
             />
           </div>
         </div>

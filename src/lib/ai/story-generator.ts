@@ -22,6 +22,7 @@ export async function generateStory(
   prompt: string,
   context: {
     kidName: string;
+    kidGender?: string;
     readingLevel: string;
     familyMembers: FamilyMember[];
   },

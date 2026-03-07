@@ -3,6 +3,7 @@ import { getSession } from "@/lib/generation-manager";
 import { generatePdf } from "@/lib/pdf/pdf-generator";
 import fs from "fs/promises";
 import path from "path";
+import { getGeneratedDir } from "@/lib/paths";
 
 export async function GET(
   _request: Request,
@@ -18,7 +19,7 @@ export async function GET(
   // Load images from disk
   const images = new Map<number, Buffer>();
   for (const page of session.storyPages) {
-    const imgPath = path.join(process.cwd(), "generated", storyId, `page-${page.page}.png`);
+    const imgPath = path.join(getGeneratedDir(), storyId, `page-${page.page}.png`);
     try {
       const buffer = await fs.readFile(imgPath);
       images.set(page.page, buffer);

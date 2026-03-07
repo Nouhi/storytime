@@ -58,6 +58,7 @@ function formatFamilyContext(members: FamilyMember[]): string {
 
 export function buildStorySystemPrompt(context: {
   kidName: string;
+  kidGender?: string;
   readingLevel: string;
   familyMembers: FamilyMember[];
   writingStyle?: string;
@@ -73,9 +74,18 @@ export function buildStorySystemPrompt(context: {
   const style = WRITING_STYLES.find((s) => s.id === styleId) || WRITING_STYLES[0];
   const writingStyleInstructions = style.instructions;
 
+  // Build gender context
+  const genderLabel = context.kidGender === "boy" ? "a boy" : context.kidGender === "girl" ? "a girl" : "";
+  const pronounLine = context.kidGender === "boy"
+    ? `Use he/him/his pronouns for ${context.kidName || "the child"}.`
+    : context.kidGender === "girl"
+      ? `Use she/her/her pronouns for ${context.kidName || "the child"}.`
+      : "";
+
   return `You are a beloved, award-winning children's story author. You create magical, personalized bedtime stories that captivate young minds and end with warmth and sleepiness.
 
-MAIN CHARACTER: ${context.kidName || "the child"}
+MAIN CHARACTER: ${context.kidName || "the child"}${genderLabel ? ` (${genderLabel})` : ""}
+${pronounLine ? pronounLine + "\n" : ""}
 READING LEVEL: ${levelGuide}
 
 WRITING STYLE: ${style.label}

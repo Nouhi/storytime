@@ -4,6 +4,7 @@ import { storyHistory } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import fs from "fs/promises";
 import path from "path";
+import { getGeneratedDir } from "@/lib/paths";
 
 export async function GET(
   request: Request,
@@ -30,7 +31,7 @@ export async function GET(
 
   // Extract uuid from path like "generated/{uuid}.epub"
   const uuid = path.basename(story.pdfPath, path.extname(story.pdfPath));
-  const imagePath = path.join(process.cwd(), "generated", uuid, `page-${page}.png`);
+  const imagePath = path.join(getGeneratedDir(), uuid, `page-${page}.png`);
 
   try {
     const buffer = await fs.readFile(imagePath);

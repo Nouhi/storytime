@@ -78,6 +78,7 @@ export async function generateIllustration(
   kidPhotoPath?: string,
   imageStyleId?: string,
   characterSheet?: CharacterSheet,
+  kidGender?: string,
 ): Promise<Buffer> {
   // Collect reference photos for family members mentioned in this page's description
   const photoRefs: { name: string; role: string; data: string; mimeType: string }[] = [];
@@ -118,9 +119,12 @@ export async function generateIllustration(
 
   // Add reference photos first
   for (const ref of photoRefs) {
+    const genderHint = ref.role === "main character" && kidGender
+      ? ` (${kidGender})`
+      : "";
     parts.push({
       text: ref.role === "main character"
-        ? `Reference photo of ${ref.name} — the MAIN CHARACTER of this story. This child MUST appear in every illustration and should closely resemble this photo.`
+        ? `Reference photo of ${ref.name}${genderHint} — the MAIN CHARACTER of this story. This child MUST appear in every illustration and should closely resemble this photo.`
         : `Reference photo of ${ref.name} (${ref.role}). The illustrated character should resemble this person's appearance.`,
     });
     parts.push({
@@ -190,6 +194,7 @@ export async function generateAllIllustrations(
   kidPhotoPath?: string,
   imageStyleId?: string,
   characterSheet?: CharacterSheet,
+  kidGender?: string,
 ): Promise<Map<number, Buffer>> {
   const results = new Map<number, Buffer>();
   const concurrency = 1; // Process one at a time to avoid rate limits
@@ -207,6 +212,7 @@ export async function generateAllIllustrations(
           kidPhotoPath,
           imageStyleId,
           characterSheet,
+          kidGender,
         );
         return { page: page.page, buffer };
       })

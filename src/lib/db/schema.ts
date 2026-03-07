@@ -4,6 +4,7 @@ export const settings = sqliteTable("settings", {
   id: integer("id").primaryKey().default(1),
   kidName: text("kid_name").notNull().default(""),
   readingLevel: text("reading_level").notNull().default("early-reader"),
+  kidGender: text("kid_gender").notNull().default(""),
   kidPhotoPath: text("kid_photo_path").notNull().default(""),
   anthropicApiKey: text("anthropic_api_key").notNull().default(""),
   googleAiApiKey: text("google_ai_api_key").notNull().default(""),

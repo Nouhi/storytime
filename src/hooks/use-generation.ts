@@ -11,6 +11,7 @@ type GenerationState = {
   epubUrl: string | null;
   storyPages: StoryPage[] | null;
   storyId: string | null;
+  hasImages: boolean;
   errorMessage: string | null;
 };
 
@@ -23,6 +24,7 @@ export function useGeneration() {
     epubUrl: null,
     storyPages: null,
     storyId: null,
+    hasImages: true,
     errorMessage: null,
   });
   const eventSourceRef = useRef<EventSource | null>(null);
@@ -36,6 +38,7 @@ export function useGeneration() {
       epubUrl: null,
       storyPages: null,
       storyId: null,
+      hasImages: imageStyle !== "none",
       errorMessage: null,
     });
 
@@ -72,6 +75,7 @@ export function useGeneration() {
             epubUrl: event.epubUrl || null,
             storyPages: event.storyPages || null,
             storyId: event.storyId || null,
+            hasImages: event.hasImages !== false,
             errorMessage: null,
           });
           es.close();
@@ -121,6 +125,7 @@ export function useGeneration() {
       epubUrl: null,
       storyPages: null,
       storyId: null,
+      hasImages: true,
       errorMessage: null,
     });
   }, []);

@@ -1,9 +1,10 @@
 import path from "path";
 import fs from "fs/promises";
 import sharp from "sharp";
+import { getUploadsDir, getGeneratedDir, resolveDataPath } from "./paths";
 
-const UPLOADS_DIR = path.join(process.cwd(), "uploads", "photos");
-const GENERATED_DIR = path.join(process.cwd(), "generated");
+const UPLOADS_DIR = getUploadsDir();
+const GENERATED_DIR = getGeneratedDir();
 
 export async function ensureDir(dir: string) {
   await fs.mkdir(dir, { recursive: true });
@@ -30,7 +31,7 @@ export async function savePhoto(
 }
 
 export async function deletePhoto(photoPath: string) {
-  const fullPath = path.join(process.cwd(), photoPath);
+  const fullPath = resolveDataPath(photoPath);
   try {
     await fs.unlink(fullPath);
   } catch {
@@ -41,7 +42,7 @@ export async function deletePhoto(photoPath: string) {
 export async function readPhotoAsBase64(
   photoPath: string
 ): Promise<{ data: string; mimeType: string } | null> {
-  const fullPath = path.join(process.cwd(), photoPath);
+  const fullPath = resolveDataPath(photoPath);
   try {
     const buffer = await fs.readFile(fullPath);
     const ext = path.extname(photoPath).toLowerCase();

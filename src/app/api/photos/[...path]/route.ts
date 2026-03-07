@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
 import path from "path";
 import fs from "fs/promises";
+import { getUploadsDir } from "@/lib/paths";
 
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ path: string[] }> }
 ) {
   const { path: segments } = await params;
-  const filePath = path.join(process.cwd(), "uploads", "photos", ...segments);
+  const filePath = path.join(getUploadsDir(), ...segments);
 
   try {
     const buffer = await fs.readFile(filePath);

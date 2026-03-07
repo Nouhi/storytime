@@ -1,6 +1,7 @@
 export interface Settings {
   id: number;
   kidName: string;
+  kidGender: string;
   readingLevel: string;
   kidPhotoPath: string;
   anthropicApiKey: string;
@@ -41,6 +42,7 @@ export interface GenerationEvent {
   epubUrl?: string;
   storyId?: string;
   storyPages?: StoryPage[];
+  hasImages?: boolean;
   message?: string;
 }
 

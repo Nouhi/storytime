@@ -165,6 +165,13 @@ export const IMAGE_STYLES: ImageStyle[] = [
     description: "Rich, textured oil painting style",
     prompt: "Rich oil painting-style children's illustration with visible brushstrokes and thick, textured paint application. Warm, glowing colors with dramatic but gentle lighting. Impressionistic background details with more refined character focus. Think a children's book painted by a classical artist — warm, rich, and luminous.",
   },
+  {
+    id: "none",
+    label: "No Images",
+    emoji: "📝",
+    description: "Text-only story, no illustrations",
+    prompt: "",
+  },
 ];
 
 export const DEFAULT_WRITING_STYLE = "standard";
