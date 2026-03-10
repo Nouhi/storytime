@@ -29,7 +29,7 @@ export function useGeneration() {
   });
   const eventSourceRef = useRef<EventSource | null>(null);
 
-  const generate = useCallback(async (prompt: string, writingStyle?: string, imageStyle?: string) => {
+  const generate = useCallback(async (prompt: string, writingStyle?: string, imageStyle?: string, lesson?: string) => {
     setState({
       status: "generating",
       step: "starting",
@@ -46,7 +46,7 @@ export function useGeneration() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt, writingStyle, imageStyle }),
+        body: JSON.stringify({ prompt, writingStyle, imageStyle, lesson }),
       });
 
       if (!res.ok) {

@@ -15,7 +15,7 @@ const CLAUDE_OUTPUT_COST_PER_TOKEN = 15.0 / 1_000_000;
 const GEMINI_COST_PER_IMAGE = 0.039;
 
 export async function POST(request: Request) {
-  const { prompt, writingStyle, imageStyle } = await request.json();
+  const { prompt, writingStyle, imageStyle, lesson } = await request.json();
 
   if (!prompt?.trim()) {
     return NextResponse.json({ error: "Prompt is required" }, { status: 400 });
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   createSession(storyId);
 
   // Run the pipeline asynchronously
-  runPipeline(storyId, prompt, writingStyle, imageStyle).catch((err) => {
+  runPipeline(storyId, prompt, writingStyle, imageStyle, lesson).catch((err) => {
     console.error("Pipeline error:", err);
     updateSession(storyId, {
       status: "error",
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
   return NextResponse.json({ storyId });
 }
 
-async function runPipeline(storyId: string, prompt: string, writingStyle?: string, imageStyle?: string) {
+async function runPipeline(storyId: string, prompt: string, writingStyle?: string, imageStyle?: string, lesson?: string) {
   // 1. Load settings and family members
   const settingsRow = db.select().from(settings).get();
   const members = db.select().from(familyMembers).all();
@@ -59,7 +59,7 @@ async function runPipeline(storyId: string, prompt: string, writingStyle?: strin
     detail: "Writing your story...",
   });
 
-  const storyResult = await generateStory(prompt, context, writingStyle);
+  const storyResult = await generateStory(prompt, context, writingStyle, lesson);
   const storyPages = storyResult.pages;
   const characterSheet = storyResult.characterSheet;
 

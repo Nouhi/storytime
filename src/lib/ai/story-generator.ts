@@ -27,8 +27,9 @@ export async function generateStory(
     familyMembers: FamilyMember[];
   },
   writingStyle?: string,
+  lesson?: string,
 ): Promise<StoryGenerationResult> {
-  const systemPrompt = buildStorySystemPrompt({ ...context, writingStyle });
+  const systemPrompt = buildStorySystemPrompt({ ...context, writingStyle, lesson });
 
   const message = await getClient().messages.create({
     model: "claude-sonnet-4-6",

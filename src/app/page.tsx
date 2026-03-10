@@ -72,7 +72,7 @@ export default function Home() {
         {kidName && status === "idle" && (
           <div className="w-full">
             <PromptInput
-              onSubmit={(prompt, writingStyle, imageStyle) => generate(prompt, writingStyle, imageStyle)}
+              onSubmit={(prompt, writingStyle, imageStyle, lesson) => generate(prompt, writingStyle, imageStyle, lesson)}
               disabled={isGenerating}
               kidName={kidName}
             />

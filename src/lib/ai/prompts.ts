@@ -1,5 +1,5 @@
 import type { FamilyMember } from "@/lib/types";
-import { WRITING_STYLES, DEFAULT_WRITING_STYLE } from "@/lib/styles";
+import { WRITING_STYLES, DEFAULT_WRITING_STYLE, LESSONS, DEFAULT_LESSON } from "@/lib/styles";
 
 const READING_LEVEL_GUIDE: Record<string, string> = {
   toddler:
@@ -62,6 +62,7 @@ export function buildStorySystemPrompt(context: {
   readingLevel: string;
   familyMembers: FamilyMember[];
   writingStyle?: string;
+  lesson?: string;
 }): string {
   const levelGuide =
     READING_LEVEL_GUIDE[context.readingLevel] ||
@@ -73,6 +74,13 @@ export function buildStorySystemPrompt(context: {
   const styleId = context.writingStyle || DEFAULT_WRITING_STYLE;
   const style = WRITING_STYLES.find((s) => s.id === styleId) || WRITING_STYLES[0];
   const writingStyleInstructions = style.instructions;
+
+  // Resolve lesson instructions
+  const lessonId = context.lesson || DEFAULT_LESSON;
+  const lesson = LESSONS.find((l) => l.id === lessonId) || LESSONS[0];
+  const lessonSection = lesson.id !== "none" && lesson.instructions
+    ? `\nSTORY LESSON: ${lesson.label}\n${lesson.instructions}\n`
+    : "";
 
   // Build gender context
   const genderLabel = context.kidGender === "boy" ? "a boy" : context.kidGender === "girl" ? "a girl" : "";
@@ -90,8 +98,7 @@ READING LEVEL: ${levelGuide}
 
 WRITING STYLE: ${style.label}
 ${writingStyleInstructions}
-
-FAMILY MEMBERS:
+${lessonSection}FAMILY MEMBERS:
 ${familyContext}
 
 IMPORTANT — FAMILY MEMBER USAGE:

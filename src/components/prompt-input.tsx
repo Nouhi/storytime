@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { WRITING_STYLES, IMAGE_STYLES, DEFAULT_WRITING_STYLE, DEFAULT_IMAGE_STYLE } from "@/lib/styles";
+import { WRITING_STYLES, IMAGE_STYLES, LESSONS, DEFAULT_WRITING_STYLE, DEFAULT_IMAGE_STYLE, DEFAULT_LESSON } from "@/lib/styles";
 
 interface PromptInputProps {
-  onSubmit: (prompt: string, writingStyle: string, imageStyle: string) => void;
+  onSubmit: (prompt: string, writingStyle: string, imageStyle: string, lesson: string) => void;
   disabled?: boolean;
   kidName?: string;
 }
@@ -20,11 +20,14 @@ export function PromptInput({ onSubmit, disabled, kidName }: PromptInputProps) {
   const [value, setValue] = useState("");
   const [writingStyle, setWritingStyle] = useState(DEFAULT_WRITING_STYLE);
   const [imageStyle, setImageStyle] = useState(DEFAULT_IMAGE_STYLE);
+  const [lesson, setLesson] = useState(DEFAULT_LESSON);
   const [showWritingStyles, setShowWritingStyles] = useState(false);
   const [showImageStyles, setShowImageStyles] = useState(false);
+  const [showLessons, setShowLessons] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const writingDropdownRef = useRef<HTMLDivElement>(null);
   const imageDropdownRef = useRef<HTMLDivElement>(null);
+  const lessonDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!disabled && textareaRef.current) {
@@ -41,6 +44,9 @@ export function PromptInput({ onSubmit, disabled, kidName }: PromptInputProps) {
       if (imageDropdownRef.current && !imageDropdownRef.current.contains(e.target as Node)) {
         setShowImageStyles(false);
       }
+      if (lessonDropdownRef.current && !lessonDropdownRef.current.contains(e.target as Node)) {
+        setShowLessons(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -48,14 +54,14 @@ export function PromptInput({ onSubmit, disabled, kidName }: PromptInputProps) {
 
   const handleSubmit = () => {
     if (value.trim() && !disabled) {
-      onSubmit(value.trim(), writingStyle, imageStyle);
+      onSubmit(value.trim(), writingStyle, imageStyle, lesson);
       setValue("");
     }
   };
 
   const handleSuggestion = (prompt: string) => {
     if (!disabled) {
-      onSubmit(prompt, writingStyle, imageStyle);
+      onSubmit(prompt, writingStyle, imageStyle, lesson);
     }
   };
 
@@ -80,6 +86,7 @@ export function PromptInput({ onSubmit, disabled, kidName }: PromptInputProps) {
 
   const activeWritingStyle = WRITING_STYLES.find((s) => s.id === writingStyle) || WRITING_STYLES[0];
   const activeImageStyle = IMAGE_STYLES.find((s) => s.id === imageStyle) || IMAGE_STYLES[0];
+  const activeLesson = LESSONS.find((l) => l.id === lesson) || LESSONS[0];
 
   return (
     <div className="space-y-3">
@@ -106,7 +113,7 @@ export function PromptInput({ onSubmit, disabled, kidName }: PromptInputProps) {
             {/* Writing Style Dropdown */}
             <div className="relative" ref={writingDropdownRef}>
               <button
-                onClick={() => { setShowWritingStyles(!showWritingStyles); setShowImageStyles(false); }}
+                onClick={() => { setShowWritingStyles(!showWritingStyles); setShowImageStyles(false); setShowLessons(false); }}
                 disabled={disabled}
                 className="flex items-center gap-1.5 px-2.5 py-1.5 text-[12px] text-gray-500 hover:text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors disabled:opacity-40"
                 title="Writing style"
@@ -154,7 +161,7 @@ export function PromptInput({ onSubmit, disabled, kidName }: PromptInputProps) {
             {/* Image Style Dropdown */}
             <div className="relative" ref={imageDropdownRef}>
               <button
-                onClick={() => { setShowImageStyles(!showImageStyles); setShowWritingStyles(false); }}
+                onClick={() => { setShowImageStyles(!showImageStyles); setShowWritingStyles(false); setShowLessons(false); }}
                 disabled={disabled}
                 className="flex items-center gap-1.5 px-2.5 py-1.5 text-[12px] text-gray-500 hover:text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors disabled:opacity-40"
                 title="Image style"
@@ -188,6 +195,54 @@ export function PromptInput({ onSubmit, disabled, kidName }: PromptInputProps) {
                           <p className="text-[11px] text-gray-400 mt-0.5">{style.description}</p>
                         </div>
                         {imageStyle === style.id && (
+                          <svg className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Lesson Dropdown */}
+            <div className="relative" ref={lessonDropdownRef}>
+              <button
+                onClick={() => { setShowLessons(!showLessons); setShowWritingStyles(false); setShowImageStyles(false); }}
+                disabled={disabled}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 text-[12px] text-gray-500 hover:text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors disabled:opacity-40"
+                title="Story lesson"
+              >
+                <span>{activeLesson.emoji}</span>
+                <span className="font-medium">{activeLesson.label}</span>
+                <svg className="w-3 h-3 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+
+              {showLessons && (
+                <div className="absolute bottom-full left-0 mb-2 w-72 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden">
+                  <div className="px-3 py-2 border-b border-gray-100">
+                    <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Lesson</p>
+                  </div>
+                  <div className="max-h-64 overflow-y-auto py-1">
+                    {LESSONS.map((l) => (
+                      <button
+                        key={l.id}
+                        onClick={() => { setLesson(l.id); setShowLessons(false); }}
+                        className={`w-full flex items-start gap-2.5 px-3 py-2.5 text-left transition-colors ${
+                          lesson === l.id
+                            ? "bg-orange-50 text-gray-900"
+                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                        }`}
+                      >
+                        <span className="text-base mt-0.5 flex-shrink-0">{l.emoji}</span>
+                        <div className="min-w-0">
+                          <p className="text-[13px] font-medium">{l.label}</p>
+                          <p className="text-[11px] text-gray-400 mt-0.5">{l.description}</p>
+                        </div>
+                        {lesson === l.id && (
                           <svg className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5 ml-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                             <polyline points="20 6 9 17 4 12" />
                           </svg>
