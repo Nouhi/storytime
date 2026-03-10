@@ -14,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import kotlinx.coroutines.launch
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,15 +42,22 @@ import coil.compose.SubcomposeAsyncImage
 import com.storytime.app.model.FamilyMemberResponse
 import com.storytime.app.model.StoryPage
 import com.storytime.app.model.StyleItem
+import com.storytime.app.audio.AmbientSound
+import com.storytime.app.StorytimeApp
+import com.storytime.app.ui.bedtime.BedtimeScreen
 import com.storytime.app.ui.settings.FamilyMembersViewModel
 import com.storytime.app.ui.components.PageNavigationOverlay
 import com.storytime.app.ui.components.PageReader
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import kotlin.math.sin
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GenerateScreen(viewModel: GenerateViewModel = viewModel()) {
     val state by viewModel.state.collectAsState()
+    val showBedtime by viewModel.showBedtime.collectAsState()
     val toastMessage by viewModel.toastMessage.collectAsState()
     val context = androidx.compose.ui.platform.LocalContext.current
 
@@ -62,17 +70,43 @@ fun GenerateScreen(viewModel: GenerateViewModel = viewModel()) {
         }
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(title = { Text("Storytime") })
+    // Reset sleep timer counter when app goes to background
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_STOP) {
+                viewModel.resetSleepTimerCount()
+            }
         }
-    ) { padding ->
-        Box(modifier = Modifier.fillMaxSize().padding(padding)) {
-            when (state) {
-                GenerationState.IDLE -> IdleView(viewModel)
-                GenerationState.GENERATING -> GeneratingView(viewModel)
-                GenerationState.COMPLETE -> CompleteView(viewModel)
-                GenerationState.ERROR -> ErrorView(viewModel)
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
+
+    if (showBedtime) {
+        val app = context.applicationContext as StorytimeApp
+        val bedtimeSoundKey by app.preferencesManager.bedtimeSound.collectAsState(initial = "whiteNoise")
+        val coroutineScope = rememberCoroutineScope()
+        BedtimeScreen(
+            audioManager = app.audioManager,
+            initialSound = AmbientSound.fromKey(bedtimeSoundKey),
+            onSoundChanged = { key ->
+                coroutineScope.launch { app.preferencesManager.setBedtimeSound(key) }
+            },
+            onExit = { viewModel.deactivateBedtimeMode() }
+        )
+    } else {
+        Scaffold(
+            topBar = {
+                TopAppBar(title = { Text("Storytime") })
+            }
+        ) { padding ->
+            Box(modifier = Modifier.fillMaxSize().padding(padding)) {
+                when (state) {
+                    GenerationState.IDLE -> IdleView(viewModel)
+                    GenerationState.GENERATING -> GeneratingView(viewModel)
+                    GenerationState.COMPLETE -> CompleteView(viewModel)
+                    GenerationState.ERROR -> ErrorView(viewModel)
+                }
             }
         }
     }
@@ -816,6 +850,15 @@ private fun CompleteView(viewModel: GenerateViewModel) {
                         Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(4.dp))
                         Text("New")
+                    }
+
+                    Button(
+                        onClick = { viewModel.activateBedtimeMode() },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3949AB))
+                    ) {
+                        Icon(Icons.Default.Bedtime, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(Modifier.width(4.dp))
+                        Text("Sleep")
                     }
                 }
             }

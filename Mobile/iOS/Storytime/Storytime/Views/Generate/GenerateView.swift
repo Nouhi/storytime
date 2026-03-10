@@ -58,6 +58,8 @@ private struct FlowLayout: Layout {
 
 struct GenerateView: View {
     @StateObject private var viewModel = GenerationViewModel()
+    @Environment(\.scenePhase) private var scenePhase
+    @State private var showBedtimeMode = false
 
     var body: some View {
         NavigationStack {
@@ -78,6 +80,21 @@ struct GenerateView: View {
                 viewModel.refreshKidName()
                 await viewModel.loadStyles()
                 await viewModel.loadFamilyMembers()
+            }
+            .fullScreenCover(isPresented: $showBedtimeMode) {
+                BedtimeView(isPresented: $showBedtimeMode)
+            }
+            .onChange(of: viewModel.shouldAutoActivateBedtime) { _, shouldActivate in
+                if shouldActivate {
+                    showBedtimeMode = true
+                    viewModel.shouldAutoActivateBedtime = false
+                    viewModel.storiesCompletedInSession = 0
+                }
+            }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .background {
+                    viewModel.storiesCompletedInSession = 0
+                }
             }
         }
     }
@@ -394,6 +411,18 @@ struct GenerateView: View {
                             .padding(.horizontal, 16)
                             .padding(.vertical, 10)
                             .background(Color(.systemGray5))
+                            .clipShape(Capsule())
+                    }
+
+                    Button {
+                        showBedtimeMode = true
+                    } label: {
+                        Label("Sleep", systemImage: "moon.fill")
+                            .font(.subheadline.bold())
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 10)
+                            .background(Color.indigo)
+                            .foregroundStyle(.white)
                             .clipShape(Capsule())
                     }
                 }
