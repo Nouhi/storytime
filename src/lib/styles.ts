@@ -174,5 +174,87 @@ export const IMAGE_STYLES: ImageStyle[] = [
   },
 ];
 
+export interface Lesson {
+  id: string;
+  label: string;
+  emoji: string;
+  description: string;
+  instructions: string;
+}
+
+export const LESSONS: Lesson[] = [
+  {
+    id: "none",
+    label: "None",
+    emoji: "📖",
+    description: "No specific lesson — just a fun story",
+    instructions: "",
+  },
+  {
+    id: "sharing",
+    label: "Sharing",
+    emoji: "🤝",
+    description: "Learning to share with others",
+    instructions: "Weave a natural lesson about sharing into the story. Show the main character discovering the joy of sharing through the plot — don't lecture or moralize. The lesson should feel earned through the story's events, not stated outright.",
+  },
+  {
+    id: "bravery",
+    label: "Bravery",
+    emoji: "🦁",
+    description: "Finding courage in tough moments",
+    instructions: "Weave a natural lesson about bravery into the story. Show the main character finding courage to face something that feels scary or hard — it could be trying something new, standing up for a friend, or overcoming a fear. Make the bravery feel real and relatable, not superhero-level.",
+  },
+  {
+    id: "kindness",
+    label: "Kindness",
+    emoji: "💛",
+    description: "Being kind and caring to others",
+    instructions: "Weave a natural lesson about kindness into the story. Show the main character performing acts of kindness and seeing how they ripple outward — helping someone, saying something nice, or thinking of others' feelings. The kindness should drive the plot forward naturally.",
+  },
+  {
+    id: "patience",
+    label: "Patience",
+    emoji: "🐢",
+    description: "Learning to wait and be patient",
+    instructions: "Weave a natural lesson about patience into the story. Show the main character learning that good things take time — perhaps waiting for something to grow, practicing a skill, or letting events unfold naturally. Contrast rushing with the rewards of patience.",
+  },
+  {
+    id: "honesty",
+    label: "Honesty",
+    emoji: "⭐",
+    description: "The importance of telling the truth",
+    instructions: "Weave a natural lesson about honesty into the story. Show the main character in a situation where telling the truth is hard but important — perhaps a small fib that grows, or the relief of being honest. Show that honesty builds trust and feels better than hiding the truth.",
+  },
+  {
+    id: "gratitude",
+    label: "Gratitude",
+    emoji: "🙏",
+    description: "Appreciating what you have",
+    instructions: "Weave a natural lesson about gratitude into the story. Show the main character noticing and appreciating the good things in their life — the people, the moments, the little joys. Perhaps they start by wanting something more and discover what they already have is wonderful.",
+  },
+  {
+    id: "teamwork",
+    label: "Teamwork",
+    emoji: "🧩",
+    description: "Working together to achieve goals",
+    instructions: "Weave a natural lesson about teamwork into the story. Present a challenge that the main character can't solve alone — they need help from friends or family, and together they accomplish something none of them could do individually. Celebrate each person's unique contribution.",
+  },
+  {
+    id: "empathy",
+    label: "Empathy",
+    emoji: "🫂",
+    description: "Understanding others' feelings",
+    instructions: "Weave a natural lesson about empathy into the story. Show the main character learning to see things from someone else's perspective — perhaps misunderstanding a friend's behavior, then realizing how that person was feeling. The story should show that understanding others makes us better friends.",
+  },
+  {
+    id: "perseverance",
+    label: "Perseverance",
+    emoji: "🏔️",
+    description: "Not giving up when things are hard",
+    instructions: "Weave a natural lesson about perseverance into the story. Show the main character facing setbacks and wanting to quit, but finding the determination to keep trying. Celebrate the journey and effort, not just the final success. Show that failing is part of learning.",
+  },
+];
+
 export const DEFAULT_WRITING_STYLE = "standard";
 export const DEFAULT_IMAGE_STYLE = "watercolor";
+export const DEFAULT_LESSON = "none";
