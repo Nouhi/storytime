@@ -31,6 +31,7 @@ data class SettingsUpdateRequest(
 data class StylesResponse(
     val writingStyles: List<StyleItem>,
     val imageStyles: List<StyleItem>,
+    val lessons: List<StyleItem>? = null,
     val defaults: StyleDefaults
 )
 
@@ -45,7 +46,8 @@ data class StyleItem(
 @Serializable
 data class StyleDefaults(
     val writingStyle: String,
-    val imageStyle: String
+    val imageStyle: String,
+    val lesson: String? = null
 )
 
 // MARK: - Story Generation
@@ -55,6 +57,7 @@ data class GenerateRequest(
     val prompt: String,
     val writingStyle: String,
     val imageStyle: String,
+    val lesson: String? = null,
     val characterIds: List<Int>? = null
 )
 

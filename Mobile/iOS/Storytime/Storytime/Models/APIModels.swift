@@ -26,6 +26,7 @@ struct SettingsUpdateRequest: Codable {
 struct StylesResponse: Codable {
     let writingStyles: [StyleItem]
     let imageStyles: [StyleItem]
+    let lessons: [StyleItem]?
     let defaults: StyleDefaults
 }
 
@@ -39,6 +40,7 @@ struct StyleItem: Codable, Identifiable {
 struct StyleDefaults: Codable {
     let writingStyle: String
     let imageStyle: String
+    let lesson: String?
 }
 
 // MARK: - Story Generation
@@ -47,6 +49,7 @@ struct GenerateRequest: Codable {
     let prompt: String
     let writingStyle: String
     let imageStyle: String
+    let lesson: String?
     let characterIds: [Int]?
 }
 

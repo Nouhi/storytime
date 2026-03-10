@@ -118,8 +118,10 @@ private fun IdleView(viewModel: GenerateViewModel) {
     val prompt by viewModel.prompt.collectAsState()
     val writingStyle by viewModel.writingStyle.collectAsState()
     val imageStyle by viewModel.imageStyle.collectAsState()
+    val lessonValue by viewModel.lesson.collectAsState()
     val writingStyles by viewModel.writingStyles.collectAsState()
     val imageStyles by viewModel.imageStyles.collectAsState()
+    val lessonsList by viewModel.lessons.collectAsState()
     val kidName by viewModel.kidName.collectAsState()
     val familyMembers by viewModel.familyMembers.collectAsState()
     val selectedCharacterIds by viewModel.selectedCharacterIds.collectAsState()
@@ -196,6 +198,15 @@ private fun IdleView(viewModel: GenerateViewModel) {
                 styles = imageStyles,
                 selected = imageStyle,
                 onSelect = { viewModel.updateImageStyle(it) }
+            )
+        }
+
+        if (lessonsList.isNotEmpty()) {
+            StylePicker(
+                title = "Lesson",
+                styles = lessonsList,
+                selected = lessonValue,
+                onSelect = { viewModel.updateLesson(it) }
             )
         }
 

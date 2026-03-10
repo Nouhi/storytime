@@ -38,12 +38,18 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
     private val _imageStyle = MutableStateFlow("watercolor")
     val imageStyle: StateFlow<String> = _imageStyle.asStateFlow()
 
+    private val _lesson = MutableStateFlow("none")
+    val lesson: StateFlow<String> = _lesson.asStateFlow()
+
     // Styles from server
     private val _writingStyles = MutableStateFlow<List<StyleItem>>(emptyList())
     val writingStyles: StateFlow<List<StyleItem>> = _writingStyles.asStateFlow()
 
     private val _imageStyles = MutableStateFlow<List<StyleItem>>(emptyList())
     val imageStyles: StateFlow<List<StyleItem>> = _imageStyles.asStateFlow()
+
+    private val _lessons = MutableStateFlow<List<StyleItem>>(emptyList())
+    val lessons: StateFlow<List<StyleItem>> = _lessons.asStateFlow()
 
     // Generation progress
     private val _progress = MutableStateFlow(0.0)
@@ -135,6 +141,7 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
     fun updatePrompt(text: String) { _prompt.value = text }
     fun updateWritingStyle(style: String) { _writingStyle.value = style }
     fun updateImageStyle(style: String) { _imageStyle.value = style }
+    fun updateLesson(lesson: String) { _lesson.value = lesson }
     fun updateCurrentPage(page: Int) { _currentPage.value = page }
 
     fun toggleCharacter(id: Int) {
@@ -159,8 +166,10 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                 val styles = api.getStyles()
                 _writingStyles.value = styles.writingStyles
                 _imageStyles.value = styles.imageStyles
+                _lessons.value = styles.lessons ?: emptyList()
                 _writingStyle.value = styles.defaults.writingStyle
                 _imageStyle.value = styles.defaults.imageStyle
+                _lesson.value = styles.defaults.lesson ?: "none"
             } catch (e: Exception) {
                 // Use hardcoded fallbacks
                 _writingStyles.value = listOf(
@@ -176,6 +185,14 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                     StyleItem("fantasy", "Fantasy", "✨", "Rich, magical"),
                     StyleItem("ghibli", "Ghibli", "🏯", "Studio Ghibli"),
                     StyleItem("none", "Text Only", "📝", "No images")
+                )
+                _lessons.value = listOf(
+                    StyleItem("none", "None", "📖", "No specific lesson"),
+                    StyleItem("sharing", "Sharing", "🤝", "Learning to share"),
+                    StyleItem("bravery", "Bravery", "🦁", "Finding courage"),
+                    StyleItem("kindness", "Kindness", "💛", "Being kind"),
+                    StyleItem("patience", "Patience", "🐢", "Learning to wait"),
+                    StyleItem("honesty", "Honesty", "⭐", "Telling the truth")
                 )
             }
         }
@@ -210,11 +227,13 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                     _selectedCharacterIds.value.toList().ifEmpty { null }
                 } else null
 
+                val lessonValue = _lesson.value.let { if (it == "none") null else it }
                 val response = api.startGeneration(
                     GenerateRequest(
                         prompt = _prompt.value,
                         writingStyle = _writingStyle.value,
                         imageStyle = _imageStyle.value,
+                        lesson = lessonValue,
                         characterIds = charIds
                     )
                 )

@@ -181,6 +181,14 @@ struct GenerateView: View {
                         selection: $viewModel.imageStyle,
                         options: viewModel.imageStyles
                     )
+
+                    if !viewModel.lessons.isEmpty {
+                        stylePicker(
+                            title: "Lesson",
+                            selection: $viewModel.lesson,
+                            options: viewModel.lessons
+                        )
+                    }
                 }
                 .padding(.horizontal)
 

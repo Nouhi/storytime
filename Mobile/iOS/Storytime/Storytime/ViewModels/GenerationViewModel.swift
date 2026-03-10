@@ -25,6 +25,7 @@ class GenerationViewModel: ObservableObject {
     @Published var prompt = ""
     @Published var writingStyle = "standard"
     @Published var imageStyle = "watercolor"
+    @Published var lesson = "none"
 
     @Published var progress: Double = 0
     @Published var stepDetail = ""
@@ -39,6 +40,7 @@ class GenerationViewModel: ObservableObject {
 
     @Published var writingStyles: [StyleItem] = []
     @Published var imageStyles: [StyleItem] = []
+    @Published var lessons: [StyleItem] = []
 
     @Published var kidName: String
 
@@ -115,8 +117,10 @@ class GenerationViewModel: ObservableObject {
             let response: StylesResponse = try await APIClient.shared.get("/api/styles")
             writingStyles = response.writingStyles
             imageStyles = response.imageStyles
+            lessons = response.lessons ?? []
             writingStyle = response.defaults.writingStyle
             imageStyle = response.defaults.imageStyle
+            lesson = response.defaults.lesson ?? "none"
         } catch {
             // Use hardcoded fallbacks
             writingStyles = [
@@ -131,6 +135,14 @@ class GenerationViewModel: ObservableObject {
                 StyleItem(id: "cartoon", label: "Cartoon", emoji: "🦸", description: "Bold cartoon"),
                 StyleItem(id: "ghibli", label: "Ghibli", emoji: "🏔️", description: "Studio Ghibli-inspired"),
                 StyleItem(id: "none", label: "No Images", emoji: "📝", description: "Text-only story"),
+            ]
+            lessons = [
+                StyleItem(id: "none", label: "None", emoji: "📖", description: "No specific lesson"),
+                StyleItem(id: "sharing", label: "Sharing", emoji: "🤝", description: "Learning to share"),
+                StyleItem(id: "bravery", label: "Bravery", emoji: "🦁", description: "Finding courage"),
+                StyleItem(id: "kindness", label: "Kindness", emoji: "💛", description: "Being kind"),
+                StyleItem(id: "patience", label: "Patience", emoji: "🐢", description: "Learning to wait"),
+                StyleItem(id: "honesty", label: "Honesty", emoji: "⭐", description: "Telling the truth"),
             ]
         }
     }
@@ -154,6 +166,7 @@ class GenerationViewModel: ObservableObject {
                 prompt: prompt,
                 writingStyle: writingStyle,
                 imageStyle: imageStyle,
+                lesson: lesson == "none" ? nil : lesson,
                 characterIds: charIds
             )
             let response: GenerateResponse = try await APIClient.shared.post("/api/generate", body: request)

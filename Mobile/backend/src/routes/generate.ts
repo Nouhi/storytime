@@ -15,7 +15,7 @@ const GEMINI_COST_PER_IMAGE = 0.039;
 const router = Router();
 
 router.post("/", (req, res) => {
-  const { prompt, writingStyle, imageStyle, characterIds } = req.body;
+  const { prompt, writingStyle, imageStyle, characterIds, lesson } = req.body;
 
   if (!prompt?.trim()) {
     res.status(400).json({ error: "Prompt is required" });
@@ -25,7 +25,7 @@ router.post("/", (req, res) => {
   const storyId = uuid();
   createSession(storyId);
 
-  runPipeline(storyId, prompt, writingStyle, imageStyle, characterIds).catch((err) => {
+  runPipeline(storyId, prompt, writingStyle, imageStyle, characterIds, lesson).catch((err) => {
     console.error("Pipeline error:", err);
     updateSession(storyId, {
       status: "error",
@@ -42,6 +42,7 @@ async function runPipeline(
   writingStyle?: string,
   imageStyle?: string,
   characterIds?: number[],
+  lesson?: string,
 ) {
   const settingsRow = db.select().from(settings).get();
   const allMembers = db.select().from(familyMembers).all();
@@ -68,7 +69,7 @@ async function runPipeline(
     detail: "Writing your story...",
   });
 
-  const storyResult = await generateStory(prompt, context, writingStyle);
+  const storyResult = await generateStory(prompt, context, writingStyle, lesson);
   const storyPages = storyResult.pages;
   const characterSheet = storyResult.characterSheet;
 
