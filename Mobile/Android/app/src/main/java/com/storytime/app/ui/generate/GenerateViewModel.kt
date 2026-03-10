@@ -81,6 +81,12 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
     // Whether the user has explicitly changed the selection (vs default "all")
     private val _hasCustomSelection = MutableStateFlow(false)
 
+    // Bedtime mode
+    private val _showBedtime = MutableStateFlow(false)
+    val showBedtime: StateFlow<Boolean> = _showBedtime.asStateFlow()
+
+    private val _storiesCompletedInSession = MutableStateFlow(0)
+
     // Toast messages for user feedback
     private val _toastMessage = MutableStateFlow<String?>(null)
     val toastMessage: StateFlow<String?> = _toastMessage.asStateFlow()
@@ -118,6 +124,13 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
             }
         }
     }
+
+    fun activateBedtimeMode() { _showBedtime.value = true }
+    fun deactivateBedtimeMode() {
+        _showBedtime.value = false
+        _storiesCompletedInSession.value = 0
+    }
+    fun resetSleepTimerCount() { _storiesCompletedInSession.value = 0 }
 
     fun updatePrompt(text: String) { _prompt.value = text }
     fun updateWritingStyle(style: String) { _writingStyle.value = style }
@@ -231,10 +244,21 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                 _hasImages.value = event.hasImages ?: true
                 _currentPage.value = 1
                 _state.value = GenerationState.COMPLETE
+                _storiesCompletedInSession.value += 1
+                checkSleepTimer()
             }
             "error" -> {
                 _errorMessage.value = event.message ?: "Something went wrong"
                 _state.value = GenerationState.ERROR
+            }
+        }
+    }
+
+    private fun checkSleepTimer() {
+        viewModelScope.launch {
+            val target = prefs.sleepTimerStories.first()
+            if (target > 0 && _storiesCompletedInSession.value >= target) {
+                _showBedtime.value = true
             }
         }
     }
