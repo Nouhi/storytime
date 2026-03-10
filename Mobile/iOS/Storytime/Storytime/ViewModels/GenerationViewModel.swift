@@ -47,6 +47,10 @@ class GenerationViewModel: ObservableObject {
     @Published var selectedCharacterIds: Set<Int> = []
     private var hasCustomSelection = false
 
+    // Sleep timer
+    @Published var storiesCompletedInSession = 0
+    @Published var shouldAutoActivateBedtime = false
+
     private let sseClient = SSEClient()
     private var generationTask: Task<Void, Never>?
 
@@ -254,6 +258,14 @@ class GenerationViewModel: ObservableObject {
 
     // MARK: - Private
 
+    private func checkSleepTimer() {
+        let target = UserDefaults.standard.integer(forKey: "sleepTimerStories")
+        guard target > 0 else { return }
+        if storiesCompletedInSession >= target {
+            shouldAutoActivateBedtime = true
+        }
+    }
+
     private func handleEvent(_ event: GenerationEvent) {
         if let p = event.progress {
             progress = p
@@ -276,6 +288,8 @@ class GenerationViewModel: ObservableObject {
                 storyPages = pages
             }
             state = .complete
+            storiesCompletedInSession += 1
+            checkSleepTimer()
 
         case "error":
             state = .error(event.message ?? "An unknown error occurred")
