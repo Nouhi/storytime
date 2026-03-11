@@ -51,6 +51,10 @@ struct GenerateRequest: Codable {
     let imageStyle: String
     let lesson: String?
     let characterIds: [Int]?
+    let customWritingStyle: String?
+    let customImageStyle: String?
+    let customLesson: String?
+    let bedtimeStory: Bool?
 }
 
 struct GenerateResponse: Codable {

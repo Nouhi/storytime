@@ -26,6 +26,10 @@ class GenerationViewModel: ObservableObject {
     @Published var writingStyle = "standard"
     @Published var imageStyle = "watercolor"
     @Published var lesson = "none"
+    @Published var customWritingStyle = ""
+    @Published var customImageStyle = ""
+    @Published var customLesson = ""
+    @Published var isBedtimeStory = false
 
     @Published var progress: Double = 0
     @Published var stepDetail = ""
@@ -147,8 +151,44 @@ class GenerationViewModel: ObservableObject {
         }
     }
 
+    func validateCustomInputs() -> String? {
+        if writingStyle == "custom" {
+            let text = customWritingStyle.trimmingCharacters(in: .whitespacesAndNewlines)
+            if text.isEmpty {
+                return "Please describe your custom writing style before creating a story."
+            }
+            if text.count > 500 {
+                return "Your custom writing style is too long. Please keep it under 500 characters."
+            }
+        }
+        if imageStyle == "custom" {
+            let text = customImageStyle.trimmingCharacters(in: .whitespacesAndNewlines)
+            if text.isEmpty {
+                return "Please describe your custom image style before creating a story."
+            }
+            if text.count > 500 {
+                return "Your custom image style is too long. Please keep it under 500 characters."
+            }
+        }
+        if lesson == "custom" {
+            let text = customLesson.trimmingCharacters(in: .whitespacesAndNewlines)
+            if text.isEmpty {
+                return "Please describe your custom lesson before creating a story."
+            }
+            if text.count > 500 {
+                return "Your custom lesson is too long. Please keep it under 500 characters."
+            }
+        }
+        return nil
+    }
+
     func generate() async {
         guard !prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+
+        if let validationError = validateCustomInputs() {
+            state = .error(validationError)
+            return
+        }
 
         state = .generating
         progress = 0
@@ -167,7 +207,11 @@ class GenerationViewModel: ObservableObject {
                 writingStyle: writingStyle,
                 imageStyle: imageStyle,
                 lesson: lesson == "none" ? nil : lesson,
-                characterIds: charIds
+                characterIds: charIds,
+                customWritingStyle: writingStyle == "custom" ? customWritingStyle : nil,
+                customImageStyle: imageStyle == "custom" ? customImageStyle : nil,
+                customLesson: lesson == "custom" ? customLesson : nil,
+                bedtimeStory: isBedtimeStory ? true : nil
             )
             let response: GenerateResponse = try await APIClient.shared.post("/api/generate", body: request)
             storyId = response.storyId
@@ -202,6 +246,7 @@ class GenerationViewModel: ObservableObject {
         storyId = nil
         epubUrl = nil
         currentPage = 1
+        isBedtimeStory = false
         // Reset character selection to "all"
         hasCustomSelection = false
         selectedCharacterIds = Set(familyMembers.map { $0.id })

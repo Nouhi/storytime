@@ -107,7 +107,8 @@ struct GenerateView: View {
                 // Personalized greeting
                 VStack(spacing: 4) {
                     Text(viewModel.greeting)
-                        .font(.title2.bold())
+                        .font(.title.bold())
+                        .foregroundStyle(Color.stTextPrimary)
                         .multilineTextAlignment(.center)
                 }
                 .padding(.top, 8)
@@ -118,16 +119,16 @@ struct GenerateView: View {
                     HStack(spacing: 12) {
                         Image(systemName: "person.fill.questionmark")
                             .font(.title3)
-                            .foregroundStyle(.orange)
+                            .foregroundStyle(Color.stSecondary)
 
                         Text("Set up your child's name in Settings for personalized stories")
                             .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color.stTextSecondary)
                     }
                     .padding()
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.orange.opacity(0.1))
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .background(Color.stSecondaryLight)
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
                     .padding(.horizontal)
                 }
 
@@ -135,15 +136,17 @@ struct GenerateView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("What story shall we create?")
                         .font(.headline)
+                        .foregroundStyle(Color.stTextPrimary)
 
                     TextEditor(text: $viewModel.prompt)
                         .frame(minHeight: 100, maxHeight: 150)
                         .padding(8)
-                        .background(Color(.systemGray6))
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .scrollContentBackground(.hidden)
+                        .background(Color.stSurfaceCard)
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
                         .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color(.systemGray4), lineWidth: 1)
+                            RoundedRectangle(cornerRadius: 14)
+                                .stroke(Color.stPrimary.opacity(0.2), lineWidth: 1.5)
                         )
                 }
                 .padding(.horizontal)
@@ -156,11 +159,7 @@ struct GenerateView: View {
                                 viewModel.prompt = suggestion
                             } label: {
                                 Text(suggestion)
-                                    .font(.caption)
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 8)
-                                    .background(Color(.systemGray6))
-                                    .clipShape(Capsule())
+                                    .stChip(isSelected: false)
                             }
                             .buttonStyle(.plain)
                         }
@@ -173,23 +172,45 @@ struct GenerateView: View {
                     stylePicker(
                         title: "Writing Style",
                         selection: $viewModel.writingStyle,
-                        options: viewModel.writingStyles
+                        options: viewModel.writingStyles,
+                        customText: $viewModel.customWritingStyle
                     )
 
                     stylePicker(
                         title: "Image Style",
                         selection: $viewModel.imageStyle,
-                        options: viewModel.imageStyles
+                        options: viewModel.imageStyles,
+                        customText: $viewModel.customImageStyle
                     )
 
                     if !viewModel.lessons.isEmpty {
                         stylePicker(
                             title: "Lesson",
                             selection: $viewModel.lesson,
-                            options: viewModel.lessons
+                            options: viewModel.lessons,
+                            customText: $viewModel.customLesson
                         )
                     }
                 }
+                .padding(.horizontal)
+
+                // Bedtime story toggle
+                VStack(alignment: .leading, spacing: 4) {
+                    Toggle(isOn: $viewModel.isBedtimeStory) {
+                        Label("Bedtime Story", systemImage: "moon.zzz")
+                    }
+                    .tint(Color.stBedtime)
+
+                    if viewModel.isBedtimeStory {
+                        Text("Shorter, calmer story (10 pages) perfect for sleepy time")
+                            .font(.caption2)
+                            .foregroundStyle(Color.stTextTertiary)
+                    }
+                }
+                .padding(viewModel.isBedtimeStory ? 16 : 0)
+                .padding(.horizontal, viewModel.isBedtimeStory ? 0 : 0)
+                .background(viewModel.isBedtimeStory ? Color.stBedtime.opacity(0.06) : Color.clear)
+                .clipShape(RoundedRectangle(cornerRadius: 14))
                 .padding(.horizontal)
 
                 // Character picker
@@ -203,12 +224,7 @@ struct GenerateView: View {
                     Task { await viewModel.generate() }
                 } label: {
                     Label("Create Story", systemImage: "sparkles")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(viewModel.prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? Color.gray : Color.purple)
-                        .foregroundStyle(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .stGradientButton(isDisabled: viewModel.prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
                 .disabled(viewModel.prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 .padding(.horizontal)
@@ -219,39 +235,168 @@ struct GenerateView: View {
 
     // MARK: - Style Picker
 
-    private func stylePicker(title: String, selection: Binding<String>, options: [StyleItem]) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+    private func stylePicker(title: String, selection: Binding<String>, options: [StyleItem], customText: Binding<String>) -> some View {
+        StylePickerView(title: title, selection: selection, options: options, customText: customText)
+    }
+}
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
+// MARK: - StylePickerView
+
+private struct StylePickerView: View {
+    let title: String
+    @Binding var selection: String
+    let options: [StyleItem]
+    @Binding var customText: String
+    @State private var showSheet = false
+    @State private var draftCustomText = ""
+
+    private var selectedOption: StyleItem? {
+        options.first(where: { $0.id == selection })
+    }
+
+    private var isCustom: Bool {
+        selection == "custom"
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title)
+                .stSectionHeader()
+
+            Button { showSheet = true } label: {
+                HStack {
+                    if isCustom {
+                        Text("✏️")
+                            .font(.body)
+                        Text(customText.isEmpty ? "Custom" : customText)
+                            .foregroundStyle(Color.stTextPrimary)
+                            .lineLimit(1)
+                    } else if let sel = selectedOption {
+                        Text(sel.emoji)
+                            .font(.body)
+                        Text(sel.label)
+                            .foregroundStyle(Color.stTextPrimary)
+                    }
+                    Spacer()
+                    Image(systemName: "chevron.up.chevron.down")
+                        .font(.caption)
+                        .foregroundStyle(Color.stTextTertiary)
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 11)
+                .background(Color.stSurfaceCard)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.stPrimary.opacity(0.12), lineWidth: 1)
+                )
+            }
+            .buttonStyle(.plain)
+
+            if isCustom && !customText.isEmpty {
+                Text(customText)
+                    .font(.caption2)
+                    .foregroundStyle(Color.stTextTertiary)
+                    .lineLimit(2)
+            } else if let sel = selectedOption {
+                Text(sel.description)
+                    .font(.caption2)
+                    .foregroundStyle(Color.stTextTertiary)
+            }
+        }
+        .sheet(isPresented: $showSheet) {
+            NavigationStack {
+                List {
                     ForEach(options) { style in
                         Button {
-                            selection.wrappedValue = style.id
+                            selection = style.id
+                            showSheet = false
                         } label: {
-                            VStack(spacing: 4) {
+                            HStack(spacing: 12) {
                                 Text(style.emoji)
                                     .font(.title2)
-                                Text(style.label)
-                                    .font(.caption2)
-                                    .lineLimit(1)
+
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(style.label)
+                                        .font(.body)
+                                        .fontWeight(style.id == selection ? .semibold : .regular)
+                                        .foregroundStyle(.primary)
+                                    Text(style.description)
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+
+                                Spacer()
+
+                                if style.id == selection && !isCustom {
+                                    Image(systemName: "checkmark")
+                                        .foregroundStyle(Color.stPrimary)
+                                        .fontWeight(.semibold)
+                                }
                             }
-                            .frame(width: 70, height: 60)
-                            .background(selection.wrappedValue == style.id ? Color.purple.opacity(0.15) : Color(.systemGray6))
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(selection.wrappedValue == style.id ? Color.purple : Color.clear, lineWidth: 2)
-                            )
+                            .contentShape(Rectangle())
                         }
                         .buttonStyle(.plain)
                     }
+
+                    Section {
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 8) {
+                                Text("✏️")
+                                    .font(.title2)
+                                Text("Custom")
+                                    .font(.body)
+                                    .fontWeight(isCustom ? .semibold : .regular)
+                                Spacer()
+                                if isCustom {
+                                    Image(systemName: "checkmark")
+                                        .foregroundStyle(Color.stPrimary)
+                                        .fontWeight(.semibold)
+                                }
+                            }
+
+                            TextField("Describe your own \(title.lowercased())...", text: $draftCustomText, axis: .vertical)
+                                .lineLimit(2...4)
+                                .textFieldStyle(.roundedBorder)
+
+                            Button {
+                                customText = draftCustomText
+                                selection = "custom"
+                                showSheet = false
+                            } label: {
+                                Text("Use Custom")
+                                    .font(.subheadline.bold())
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 8)
+                                    .background(draftCustomText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? Color.gray.opacity(0.4) : Color.stPrimary)
+                                    .foregroundStyle(.white)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
+                            .disabled(draftCustomText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                        }
+                    } header: {
+                        Text("Or write your own")
+                    }
                 }
+                .navigationTitle(title)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Done") { showSheet = false }
+                    }
+                }
+            }
+            .presentationDetents([.medium, .large])
+            .onAppear {
+                draftCustomText = customText
             }
         }
     }
+}
+
+// MARK: - GenerateView Helpers
+
+private extension GenerateView {
 
     // MARK: - Character Picker
 
@@ -260,15 +405,14 @@ struct GenerateView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Characters")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .stSectionHeader()
                     Text(
                         viewModel.selectedCharacterIds.count == viewModel.familyMembers.count
                             ? "All included"
                             : "\(viewModel.selectedCharacterIds.count) of \(viewModel.familyMembers.count) selected"
                     )
                     .font(.caption2)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(Color.stTextTertiary)
                 }
 
                 Spacer()
@@ -276,9 +420,11 @@ struct GenerateView: View {
                 if viewModel.selectedCharacterIds.count == viewModel.familyMembers.count {
                     Button("Clear") { viewModel.clearCharacterSelection() }
                         .font(.caption)
+                        .foregroundStyle(Color.stPrimary)
                 } else {
                     Button("Select All") { viewModel.selectAllCharacters() }
                         .font(.caption)
+                        .foregroundStyle(Color.stPrimary)
                 }
             }
 
@@ -294,14 +440,7 @@ struct GenerateView: View {
                             Text(member.name)
                                 .font(.caption)
                         }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                        .background(isSelected ? Color.purple.opacity(0.15) : Color(.systemGray6))
-                        .clipShape(Capsule())
-                        .overlay(
-                            Capsule()
-                                .stroke(isSelected ? Color.purple : Color.clear, lineWidth: 1.5)
-                        )
+                        .stChip(isSelected: isSelected)
                     }
                     .buttonStyle(.plain)
                 }
@@ -332,6 +471,14 @@ struct GenerateView: View {
                 .foregroundStyle(.secondary)
 
             Spacer()
+
+            Button {
+                viewModel.cancelGeneration()
+            } label: {
+                Text("Cancel")
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.bottom, 20)
         }
         .padding()
     }
@@ -349,7 +496,7 @@ struct GenerateView: View {
                 Image(systemName: "sparkles")
             }
         }
-        .foregroundStyle(.purple)
+        .foregroundStyle(Color.stPrimary)
     }
 
     // MARK: - Complete View
@@ -394,7 +541,7 @@ struct GenerateView: View {
                             .font(.subheadline.bold())
                             .padding(.horizontal, 16)
                             .padding(.vertical, 10)
-                            .background(Color.purple)
+                            .background(Color.stPrimary)
                             .foregroundStyle(.white)
                             .clipShape(Capsule())
                     }
@@ -406,7 +553,7 @@ struct GenerateView: View {
                             .font(.subheadline.bold())
                             .padding(.horizontal, 16)
                             .padding(.vertical, 10)
-                            .background(Color.orange)
+                            .background(Color.stSecondary)
                             .foregroundStyle(.white)
                             .clipShape(Capsule())
                     }
@@ -418,8 +565,10 @@ struct GenerateView: View {
                             .font(.subheadline.bold())
                             .padding(.horizontal, 16)
                             .padding(.vertical, 10)
-                            .background(Color(.systemGray5))
+                            .background(Color.stSurfaceCard)
+                            .foregroundStyle(Color.stTextPrimary)
                             .clipShape(Capsule())
+                            .overlay(Capsule().stroke(Color.stPrimary.opacity(0.15), lineWidth: 1))
                     }
 
                     Button {
@@ -429,7 +578,7 @@ struct GenerateView: View {
                             .font(.subheadline.bold())
                             .padding(.horizontal, 16)
                             .padding(.vertical, 10)
-                            .background(Color.indigo)
+                            .background(Color.stBedtime)
                             .foregroundStyle(.white)
                             .clipShape(Capsule())
                     }
@@ -576,7 +725,7 @@ struct GenerateView: View {
                 Label("Try Again", systemImage: "arrow.clockwise")
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)
-                    .background(Color.purple)
+                    .background(Color.stPrimary)
                     .foregroundStyle(.white)
                     .clipShape(Capsule())
             }

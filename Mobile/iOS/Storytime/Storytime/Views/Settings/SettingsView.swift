@@ -5,6 +5,7 @@ struct SettingsView: View {
     @StateObject private var viewModel = SettingsViewModel()
     @AppStorage("bedtimeSound") private var bedtimeSound = "whiteNoise"
     @AppStorage("sleepTimerStories") private var sleepTimerStories = 0
+    @State private var showDeveloperOptions = false
 
     var body: some View {
         NavigationStack {
@@ -13,7 +14,7 @@ struct SettingsView: View {
                 childInfoSection
                 familySection
                 bedtimeSection
-                apiKeysSection
+                developerSection
             }
             .navigationTitle("Settings")
             .toolbar {
@@ -21,12 +22,15 @@ struct SettingsView: View {
                     Button("Save") {
                         Task { await viewModel.saveSettings() }
                     }
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color.stPrimary)
                     .disabled(viewModel.isSaving)
                 }
             }
             .overlay {
                 if viewModel.isLoading {
                     ProgressView()
+                        .tint(Color.stPrimary)
                 }
             }
             .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
@@ -44,29 +48,87 @@ struct SettingsView: View {
 
     private var serverSection: some View {
         Section {
-            HStack {
-                TextField("Server URL", text: $viewModel.serverURL)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .keyboardType(.URL)
+            HStack(spacing: 12) {
+                // Status badge
+                HStack(spacing: 6) {
+                    Circle()
+                        .fill(viewModel.isServerOnline ? Color.stAccent : .red)
+                        .frame(width: 8, height: 8)
+                    Text(viewModel.isServerOnline ? "Connected" : "Not connected")
+                        .font(.subheadline)
+                        .foregroundStyle(viewModel.isServerOnline ? Color.stAccent : .red)
+                }
 
-                Circle()
-                    .fill(viewModel.isServerOnline ? .green : .red)
-                    .frame(width: 10, height: 10)
+                Spacer()
+
+                Button("Test") {
+                    Task { await viewModel.loadSettings() }
+                }
+                .font(.subheadline)
+                .foregroundStyle(Color.stPrimary)
             }
 
-            Button("Test Connection") {
-                Task { await viewModel.loadSettings() }
-            }
+            TextField("Server URL", text: $viewModel.serverURL)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .keyboardType(.URL)
+                .font(.subheadline)
+                .foregroundStyle(Color.stTextSecondary)
         } header: {
             Text("Server")
-        } footer: {
-            Text("Enter the URL of your Storytime backend server")
         }
     }
 
     private var childInfoSection: some View {
         Section("Child Details") {
+            // Photo — prominent and centered
+            HStack {
+                Spacer()
+                VStack(spacing: 8) {
+                    if let photoData = viewModel.kidPhotoData,
+                       let uiImage = UIImage(data: photoData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 80, height: 80)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.stPrimary.opacity(0.2), lineWidth: 2))
+                    } else if !viewModel.kidPhotoPath.isEmpty {
+                        AsyncImage(url: APIClient.shared.imageURL(for: "/api/photos/\(viewModel.kidPhotoPath.replacingOccurrences(of: "uploads/photos/", with: ""))")) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                        } placeholder: {
+                            Image(systemName: "person.circle.fill")
+                                .font(.system(size: 40))
+                                .foregroundStyle(Color.stTextTertiary)
+                        }
+                        .frame(width: 80, height: 80)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.stPrimary.opacity(0.2), lineWidth: 2))
+                    } else {
+                        Circle()
+                            .fill(Color.stPrimaryLight)
+                            .frame(width: 80, height: 80)
+                            .overlay(
+                                Image(systemName: "person.fill")
+                                    .font(.title)
+                                    .foregroundStyle(Color.stPrimary.opacity(0.4))
+                            )
+                    }
+
+                    PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
+                        Text("Change Photo")
+                            .font(.caption)
+                            .foregroundStyle(Color.stPrimary)
+                    }
+                }
+                Spacer()
+            }
+            .onChange(of: viewModel.selectedPhoto) {
+                Task { await viewModel.handlePhotoSelection() }
+            }
+
             TextField("Name", text: $viewModel.kidName)
 
             Picker("Gender", selection: $viewModel.kidGender) {
@@ -80,49 +142,6 @@ struct SettingsView: View {
                     Text(label).tag(value)
                 }
             }
-
-            // Photo picker
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Photo")
-                    if !viewModel.kidPhotoPath.isEmpty {
-                        Text("Photo uploaded")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                }
-
-                Spacer()
-
-                if let photoData = viewModel.kidPhotoData,
-                   let uiImage = UIImage(data: photoData) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                } else if !viewModel.kidPhotoPath.isEmpty {
-                    AsyncImage(url: APIClient.shared.imageURL(for: "/api/photos/\(viewModel.kidPhotoPath.replacingOccurrences(of: "uploads/photos/", with: ""))")) { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    } placeholder: {
-                        Image(systemName: "person.circle.fill")
-                            .font(.title)
-                            .foregroundStyle(.secondary)
-                    }
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
-                }
-
-                PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
-                    Label("Choose", systemImage: "photo")
-                        .labelStyle(.iconOnly)
-                }
-            }
-            .onChange(of: viewModel.selectedPhoto) {
-                Task { await viewModel.handlePhotoSelection() }
-            }
         }
     }
 
@@ -133,7 +152,7 @@ struct SettingsView: View {
             } label: {
                 HStack {
                     Image(systemName: "person.3.fill")
-                        .foregroundStyle(.purple)
+                        .foregroundStyle(Color.stPrimary)
                     Text("Family Members")
                 }
             }
@@ -162,29 +181,31 @@ struct SettingsView: View {
         }
     }
 
-    private var apiKeysSection: some View {
+    private var developerSection: some View {
         Section {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Anthropic API Key")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                SecureField("sk-ant-...", text: $viewModel.anthropicApiKey)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-            }
+            DisclosureGroup("Developer Options", isExpanded: $showDeveloperOptions) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Anthropic API Key")
+                        .font(.caption)
+                        .foregroundStyle(Color.stTextSecondary)
+                    SecureField("sk-ant-...", text: $viewModel.anthropicApiKey)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                }
 
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Google AI API Key")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                SecureField("AIza...", text: $viewModel.googleAiApiKey)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Google AI API Key")
+                        .font(.caption)
+                        .foregroundStyle(Color.stTextSecondary)
+                    SecureField("AIza...", text: $viewModel.googleAiApiKey)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                }
             }
-        } header: {
-            Text("API Keys")
         } footer: {
-            Text("Keys are stored on the server. Masked keys (e.g. sk-a...xyz) indicate an existing key is set.")
+            if showDeveloperOptions {
+                Text("Keys are stored on the server. Masked keys indicate an existing key is set.")
+            }
         }
     }
 }

@@ -58,7 +58,11 @@ data class GenerateRequest(
     val writingStyle: String,
     val imageStyle: String,
     val lesson: String? = null,
-    val characterIds: List<Int>? = null
+    val characterIds: List<Int>? = null,
+    val customWritingStyle: String? = null,
+    val customImageStyle: String? = null,
+    val customLesson: String? = null,
+    val bedtimeStory: Boolean? = null
 )
 
 @Serializable

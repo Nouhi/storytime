@@ -93,8 +93,11 @@ export async function generateStory(
   },
   writingStyle?: string,
   lesson?: string,
+  customWritingStyle?: string,
+  customLesson?: string,
+  bedtimeStory?: boolean,
 ): Promise<StoryGenerationResult> {
-  const systemPrompt = buildStorySystemPrompt({ ...context, writingStyle, lesson });
+  const systemPrompt = buildStorySystemPrompt({ ...context, writingStyle, lesson, customWritingStyle, customLesson, bedtimeStory });
   const client = getClient();
 
   const MAX_ATTEMPTS = 2;
@@ -131,13 +134,13 @@ export async function generateStory(
 
     try {
       const parsed = JSON.parse(jsonStr);
-      return extractResult(parsed, totalInputTokens, totalOutputTokens);
+      return extractResult(parsed, totalInputTokens, totalOutputTokens, bedtimeStory, context.kidName);
     } catch (parseError) {
       // Try repairing the JSON (common with truncated responses)
       try {
         const repaired = repairJSON(jsonStr);
         const parsed = JSON.parse(repaired);
-        const result = extractResult(parsed, totalInputTokens, totalOutputTokens);
+        const result = extractResult(parsed, totalInputTokens, totalOutputTokens, bedtimeStory, context.kidName);
         console.log(
           `[story-generator] JSON repaired successfully${wasTruncated ? " (response was truncated)" : ""}`
         );
@@ -163,6 +166,8 @@ function extractResult(
   parsed: any,
   inputTokens: number,
   outputTokens: number,
+  bedtimeStory?: boolean,
+  kidName?: string,
 ): StoryGenerationResult {
   let pages: StoryPage[];
   let characterSheet: CharacterSheet | undefined;
@@ -176,16 +181,20 @@ function extractResult(
     throw new Error("Unexpected response format: expected { characterSheet, pages } or array");
   }
 
-  if (pages.length < 14) {
-    throw new Error(`Expected 16 pages, got ${pages.length}`);
+  const targetPages = bedtimeStory ? 10 : 16;
+  const minPages = bedtimeStory ? 8 : 14;
+  const endPageText = `The End.\nGood night, ${kidName || "sweetheart"}.`;
+
+  if (pages.length < minPages) {
+    throw new Error(`Expected ${targetPages} pages, got ${pages.length}`);
   }
 
-  // If we got 14-15 pages (truncated), pad with placeholder ending
-  if (pages.length < 16) {
+  // If we got fewer pages than target (truncated), pad with placeholder ending
+  if (pages.length < targetPages) {
     console.log(
-      `[story-generator] Got ${pages.length}/16 pages, padding with ending`
+      `[story-generator] Got ${pages.length}/${targetPages} pages, padding with ending`
     );
-    while (pages.length < 15) {
+    while (pages.length < targetPages - 1) {
       pages.push({
         page: pages.length + 1,
         text: "And the adventure continued, filling hearts with joy...",
@@ -193,14 +202,22 @@ function extractResult(
           "A warm, cozy scene with soft golden light and happy characters.",
       });
     }
-    if (pages.length === 15) {
+    if (pages.length === targetPages - 1) {
       pages.push({
-        page: 16,
-        text: "And so, with happy memories and sleepy smiles, it was time for bed. Sweet dreams... The End.",
+        page: targetPages,
+        text: endPageText,
         imageDescription:
           "A peaceful bedroom scene with soft moonlight, cozy blankets, and a sleeping child with a gentle smile.",
       });
     }
+  }
+
+  // Ensure the last page always has the "The End / Good night" text
+  if (pages.length >= targetPages) {
+    pages[targetPages - 1] = {
+      ...pages[targetPages - 1],
+      text: endPageText,
+    };
   }
 
   return {

@@ -7,6 +7,7 @@ import { generateStory } from "../lib/ai/story-generator.js";
 import { generateAllIllustrations } from "../lib/ai/image-generator.js";
 import { generateEpub } from "../lib/epub/epub-generator.js";
 import { saveGeneratedEpub, saveGeneratedImage, saveStoryData } from "../lib/storage.js";
+import { validateCustomInput } from "../lib/ai/validate-custom-input.js";
 
 const CLAUDE_INPUT_COST_PER_TOKEN = 3.0 / 1_000_000;
 const CLAUDE_OUTPUT_COST_PER_TOKEN = 15.0 / 1_000_000;
@@ -14,18 +15,99 @@ const GEMINI_COST_PER_IMAGE = 0.039;
 
 const router = Router();
 
-router.post("/", (req, res) => {
-  const { prompt, writingStyle, imageStyle, characterIds, lesson } = req.body;
+router.post("/", async (req, res) => {
+  const { prompt, writingStyle, imageStyle, characterIds, lesson, customWritingStyle, customImageStyle, customLesson, bedtimeStory } = req.body;
 
   if (!prompt?.trim()) {
     res.status(400).json({ error: "Prompt is required" });
     return;
   }
 
+  // Validate custom inputs — basic checks first (empty + max length)
+  if (writingStyle === "custom") {
+    const text = (customWritingStyle || "").trim();
+    if (!text) {
+      res.status(400).json({ error: "Please describe your custom writing style." });
+      return;
+    }
+    if (text.length > 500) {
+      res.status(400).json({ error: "Your custom writing style description is too long. Please keep it under 500 characters." });
+      return;
+    }
+  }
+
+  if (imageStyle === "custom") {
+    const text = (customImageStyle || "").trim();
+    if (!text) {
+      res.status(400).json({ error: "Please describe your custom image style." });
+      return;
+    }
+    if (text.length > 500) {
+      res.status(400).json({ error: "Your custom image style description is too long. Please keep it under 500 characters." });
+      return;
+    }
+  }
+
+  if (lesson === "custom") {
+    const text = (customLesson || "").trim();
+    if (!text) {
+      res.status(400).json({ error: "Please describe your custom lesson." });
+      return;
+    }
+    if (text.length > 500) {
+      res.status(400).json({ error: "Your custom lesson description is too long. Please keep it under 500 characters." });
+      return;
+    }
+  }
+
+  // Semantic validation — run all custom checks in parallel for speed
+  try {
+    const semanticChecks: Promise<{ field: string; error: string | null }>[] = [];
+
+    if (writingStyle === "custom" && customWritingStyle?.trim()) {
+      semanticChecks.push(
+        validateCustomInput("writing style", customWritingStyle.trim()).then((error) => ({
+          field: "writing style",
+          error,
+        })),
+      );
+    }
+    if (imageStyle === "custom" && customImageStyle?.trim()) {
+      semanticChecks.push(
+        validateCustomInput("image style", customImageStyle.trim()).then((error) => ({
+          field: "image style",
+          error,
+        })),
+      );
+    }
+    if (lesson === "custom" && customLesson?.trim()) {
+      semanticChecks.push(
+        validateCustomInput("lesson", customLesson.trim()).then((error) => ({
+          field: "lesson",
+          error,
+        })),
+      );
+    }
+
+    if (semanticChecks.length > 0) {
+      const results = await Promise.all(semanticChecks);
+      const firstError = results.find((r) => r.error !== null);
+      if (firstError) {
+        res.status(400).json({
+          error: `Your custom ${firstError.field} doesn't look right: ${firstError.error}`,
+        });
+        return;
+      }
+    }
+  } catch (err) {
+    // If semantic validation itself fails (e.g. API key issue), log but don't block generation
+    console.error("[semantic-validation] Validation failed, allowing through:", err);
+  }
+
   const storyId = uuid();
   createSession(storyId);
 
-  runPipeline(storyId, prompt, writingStyle, imageStyle, characterIds, lesson).catch((err) => {
+  runPipeline(storyId, prompt, writingStyle, imageStyle, characterIds, lesson, customWritingStyle, customImageStyle, customLesson, bedtimeStory).catch((err) => {
     console.error("Pipeline error:", err);
     updateSession(storyId, {
       status: "error",
@@ -43,6 +125,10 @@ async function runPipeline(
   imageStyle?: string,
   characterIds?: number[],
   lesson?: string,
+  customWritingStyle?: string,
+  customImageStyle?: string,
+  customLesson?: string,
+  bedtimeStory?: boolean,
 ) {
   const settingsRow = db.select().from(settings).get();
   const allMembers = db.select().from(familyMembers).all();
@@ -69,7 +155,7 @@ async function runPipeline(
     detail: "Writing your story...",
   });
 
-  const storyResult = await generateStory(prompt, context, writingStyle, lesson);
+  const storyResult = await generateStory(prompt, context, writingStyle, lesson, customWritingStyle, customLesson, bedtimeStory);
   const storyPages = storyResult.pages;
   const characterSheet = storyResult.characterSheet;
 
@@ -78,6 +164,7 @@ async function runPipeline(
   }
 
   const skipImages = imageStyle === "none";
+  const effectiveImageStyle = imageStyle === "custom" && customImageStyle ? customImageStyle : imageStyle;
   let images = new Map<number, Buffer>();
   let imageCount = 0;
 
@@ -88,10 +175,11 @@ async function runPipeline(
       storyPages,
     });
   } else {
+    const totalPages = storyPages.length;
     updateSession(storyId, {
       status: "generating-images",
       progress: 15,
-      detail: "Drawing illustrations (0/16)...",
+      detail: `Drawing illustrations (0/${totalPages})...`,
       storyPages,
     });
 
@@ -107,7 +195,7 @@ async function runPipeline(
       },
       kidName,
       kidPhotoPath,
-      imageStyle,
+      effectiveImageStyle,
       characterSheet,
       kidGender,
     );
@@ -129,7 +217,8 @@ async function runPipeline(
     console.error("Failed to save story data:", err);
   }
 
-  const failedCount = skipImages ? 0 : 16 - imageCount;
+  const expectedPages = storyPages.length;
+  const failedCount = skipImages ? 0 : expectedPages - imageCount;
 
   updateSession(storyId, {
     status: "assembling-ebook",

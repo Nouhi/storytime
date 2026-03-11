@@ -13,6 +13,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import retrofit2.HttpException
 import java.util.Calendar
 
 enum class GenerationState {
@@ -40,6 +42,15 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
 
     private val _lesson = MutableStateFlow("none")
     val lesson: StateFlow<String> = _lesson.asStateFlow()
+
+    private val _customWritingStyle = MutableStateFlow("")
+    val customWritingStyle: StateFlow<String> = _customWritingStyle.asStateFlow()
+
+    private val _customImageStyle = MutableStateFlow("")
+    val customImageStyle: StateFlow<String> = _customImageStyle.asStateFlow()
+
+    private val _customLesson = MutableStateFlow("")
+    val customLesson: StateFlow<String> = _customLesson.asStateFlow()
 
     // Styles from server
     private val _writingStyles = MutableStateFlow<List<StyleItem>>(emptyList())
@@ -86,6 +97,10 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
 
     // Whether the user has explicitly changed the selection (vs default "all")
     private val _hasCustomSelection = MutableStateFlow(false)
+
+    // Bedtime story toggle
+    private val _isBedtimeStory = MutableStateFlow(false)
+    val isBedtimeStory: StateFlow<Boolean> = _isBedtimeStory.asStateFlow()
 
     // Bedtime mode
     private val _showBedtime = MutableStateFlow(false)
@@ -142,7 +157,11 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
     fun updateWritingStyle(style: String) { _writingStyle.value = style }
     fun updateImageStyle(style: String) { _imageStyle.value = style }
     fun updateLesson(lesson: String) { _lesson.value = lesson }
+    fun updateCustomWritingStyle(text: String) { _customWritingStyle.value = text }
+    fun updateCustomImageStyle(text: String) { _customImageStyle.value = text }
+    fun updateCustomLesson(text: String) { _customLesson.value = text }
     fun updateCurrentPage(page: Int) { _currentPage.value = page }
+    fun updateBedtimeStory(value: Boolean) { _isBedtimeStory.value = value }
 
     fun toggleCharacter(id: Int) {
         _hasCustomSelection.value = true
@@ -213,8 +232,35 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    private fun validateCustomInputs(): String? {
+        if (_writingStyle.value == "custom") {
+            val text = _customWritingStyle.value.trim()
+            if (text.isEmpty()) return "Please describe your custom writing style before creating a story."
+            if (text.length > 500) return "Your custom writing style is too long. Please keep it under 500 characters."
+        }
+        if (_imageStyle.value == "custom") {
+            val text = _customImageStyle.value.trim()
+            if (text.isEmpty()) return "Please describe your custom image style before creating a story."
+            if (text.length > 500) return "Your custom image style is too long. Please keep it under 500 characters."
+        }
+        if (_lesson.value == "custom") {
+            val text = _customLesson.value.trim()
+            if (text.isEmpty()) return "Please describe your custom lesson before creating a story."
+            if (text.length > 500) return "Your custom lesson is too long. Please keep it under 500 characters."
+        }
+        return null
+    }
+
     fun generate() {
         generationJob?.cancel()
+
+        val validationError = validateCustomInputs()
+        if (validationError != null) {
+            _errorMessage.value = validationError
+            _state.value = GenerationState.ERROR
+            return
+        }
+
         generationJob = viewModelScope.launch {
             _state.value = GenerationState.GENERATING
             _progress.value = 0.0
@@ -234,7 +280,11 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                         writingStyle = _writingStyle.value,
                         imageStyle = _imageStyle.value,
                         lesson = lessonValue,
-                        characterIds = charIds
+                        characterIds = charIds,
+                        customWritingStyle = if (_writingStyle.value == "custom") _customWritingStyle.value else null,
+                        customImageStyle = if (_imageStyle.value == "custom") _customImageStyle.value else null,
+                        customLesson = if (_lesson.value == "custom") _customLesson.value else null,
+                        bedtimeStory = if (_isBedtimeStory.value) true else null
                     )
                 )
                 _storyId.value = response.storyId
@@ -244,6 +294,14 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                 ApiClient.sseClient.connect(streamUrl).collect { event ->
                     handleEvent(event)
                 }
+            } catch (e: HttpException) {
+                // Parse the JSON error body from server (e.g. semantic validation errors)
+                val errorBody = try {
+                    val body = e.response()?.errorBody()?.string()
+                    if (body != null) JSONObject(body).optString("error", "") else ""
+                } catch (_: Exception) { "" }
+                _errorMessage.value = errorBody.ifEmpty { "Server error (HTTP ${e.code()})" }
+                _state.value = GenerationState.ERROR
             } catch (e: Exception) {
                 _errorMessage.value = e.message ?: "Generation failed"
                 _state.value = GenerationState.ERROR
@@ -282,6 +340,12 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    fun cancelGeneration() {
+        generationJob?.cancel()
+        generationJob = null
+        _state.value = GenerationState.IDLE
+    }
+
     fun reset() {
         generationJob?.cancel()
         _state.value = GenerationState.IDLE
@@ -294,6 +358,7 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
         _hasImages.value = true
         _currentPage.value = 1
         _errorMessage.value = ""
+        _isBedtimeStory.value = false
         // Reset character selection to "all"
         _hasCustomSelection.value = false
         _selectedCharacterIds.value = _familyMembers.value.map { it.id }.toSet()
