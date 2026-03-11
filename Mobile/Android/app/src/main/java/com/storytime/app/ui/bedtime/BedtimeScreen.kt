@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Air
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.automirrored.filled.VolumeDown
@@ -44,6 +46,7 @@ fun BedtimeScreen(
     val volume by audioManager.volume.collectAsState()
 
     var showHint by remember { mutableStateOf(true) }
+    var showBreathingGuide by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
     val activity = context as? Activity
@@ -109,6 +112,13 @@ fun BedtimeScreen(
             .systemBarsPadding(),
         contentAlignment = Alignment.Center
     ) {
+        // Background visual
+        if (showBreathingGuide) {
+            BreathingGuideCanvas()
+        } else {
+            StarfieldCanvas()
+        }
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -209,6 +219,20 @@ fun BedtimeScreen(
             }
 
             Spacer(Modifier.weight(1f))
+
+            // Visual mode toggle
+            IconButton(
+                onClick = { showBreathingGuide = !showBreathingGuide },
+                modifier = Modifier.size(44.dp)
+            ) {
+                Icon(
+                    imageVector = if (showBreathingGuide) Icons.Default.AutoAwesome else Icons.Default.Air,
+                    contentDescription = if (showBreathingGuide) "Switch to starfield" else "Switch to breathing guide",
+                    tint = Color.White.copy(alpha = 0.3f)
+                )
+            }
+
+            Spacer(Modifier.height(8.dp))
 
             // Hint
             AnimatedVisibility(

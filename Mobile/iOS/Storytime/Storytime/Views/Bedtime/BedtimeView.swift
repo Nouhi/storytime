@@ -7,12 +7,20 @@ struct BedtimeView: View {
     @AppStorage("bedtimeSound") private var selectedSoundKey = "whiteNoise"
 
     @State private var showHint = true
+    @State private var showBreathingGuide = false
     @State private var previousBrightness: CGFloat = 0.5
     @State private var hasDimmed = false
 
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
+
+            // Background visual
+            if showBreathingGuide {
+                BreathingGuideView()
+            } else {
+                StarfieldView()
+            }
 
             VStack(spacing: 32) {
                 Spacer()
@@ -92,6 +100,20 @@ struct BedtimeView: View {
                 }
 
                 Spacer()
+
+                // Visual mode toggle
+                Button {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        showBreathingGuide.toggle()
+                    }
+                } label: {
+                    Image(systemName: showBreathingGuide ? "sparkles" : "lungs")
+                        .font(.title3)
+                        .foregroundStyle(Color(white: 0.3))
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
 
                 // Hint
                 if showHint {

@@ -5,6 +5,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -13,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.*
 import kotlinx.coroutines.launch
 import androidx.compose.ui.Alignment
@@ -46,6 +48,7 @@ import com.storytime.app.audio.AmbientSound
 import com.storytime.app.StorytimeApp
 import com.storytime.app.ui.bedtime.BedtimeScreen
 import com.storytime.app.ui.settings.FamilyMembersViewModel
+import com.storytime.app.ui.theme.*
 import com.storytime.app.ui.components.PageNavigationOverlay
 import com.storytime.app.ui.components.PageReader
 import androidx.lifecycle.Lifecycle
@@ -118,8 +121,13 @@ private fun IdleView(viewModel: GenerateViewModel) {
     val prompt by viewModel.prompt.collectAsState()
     val writingStyle by viewModel.writingStyle.collectAsState()
     val imageStyle by viewModel.imageStyle.collectAsState()
+    val lessonValue by viewModel.lesson.collectAsState()
     val writingStyles by viewModel.writingStyles.collectAsState()
     val imageStyles by viewModel.imageStyles.collectAsState()
+    val lessonsList by viewModel.lessons.collectAsState()
+    val customWritingStyle by viewModel.customWritingStyle.collectAsState()
+    val customImageStyle by viewModel.customImageStyle.collectAsState()
+    val customLesson by viewModel.customLesson.collectAsState()
     val kidName by viewModel.kidName.collectAsState()
     val familyMembers by viewModel.familyMembers.collectAsState()
     val selectedCharacterIds by viewModel.selectedCharacterIds.collectAsState()
@@ -143,31 +151,43 @@ private fun IdleView(viewModel: GenerateViewModel) {
         if (kidName.isEmpty()) {
             Card(
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFFFFF3E0)
-                )
+                    containerColor = Color(0xFFFEF3C7)
+                ),
+                shape = RoundedCornerShape(14.dp)
             ) {
                 Row(
                     modifier = Modifier.padding(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(Icons.Default.PersonSearch, contentDescription = null, tint = Color(0xFFFF9800))
+                    Icon(Icons.Default.PersonSearch, contentDescription = null, tint = Orange500)
                     Text(
                         "Set up your child's name in Settings for personalized stories",
                         style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                        color = TextPrimary.copy(alpha = 0.7f)
                     )
                 }
             }
         }
 
         // Prompt input
-        Text("What story shall we create?", style = MaterialTheme.typography.titleMedium)
+        Text(
+            "What story shall we create?",
+            style = MaterialTheme.typography.titleMedium,
+            color = TextPrimary
+        )
         OutlinedTextField(
             value = prompt,
             onValueChange = { viewModel.updatePrompt(it) },
             modifier = Modifier.fillMaxWidth().heightIn(min = 100.dp),
-            placeholder = { Text("Describe your story idea...") }
+            placeholder = { Text("Describe your story idea...") },
+            shape = RoundedCornerShape(14.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedContainerColor = SurfaceCard,
+                focusedContainerColor = SurfaceCard,
+                unfocusedBorderColor = Purple500.copy(alpha = 0.15f),
+                focusedBorderColor = Purple500.copy(alpha = 0.5f)
+            )
         )
 
         // Suggestion chips
@@ -186,7 +206,9 @@ private fun IdleView(viewModel: GenerateViewModel) {
                 title = "Writing Style",
                 styles = writingStyles,
                 selected = writingStyle,
-                onSelect = { viewModel.updateWritingStyle(it) }
+                onSelect = { viewModel.updateWritingStyle(it) },
+                customText = customWritingStyle,
+                onCustomTextChange = { viewModel.updateCustomWritingStyle(it) }
             )
         }
 
@@ -195,7 +217,48 @@ private fun IdleView(viewModel: GenerateViewModel) {
                 title = "Image Style",
                 styles = imageStyles,
                 selected = imageStyle,
-                onSelect = { viewModel.updateImageStyle(it) }
+                onSelect = { viewModel.updateImageStyle(it) },
+                customText = customImageStyle,
+                onCustomTextChange = { viewModel.updateCustomImageStyle(it) }
+            )
+        }
+
+        if (lessonsList.isNotEmpty()) {
+            StylePicker(
+                title = "Lesson",
+                styles = lessonsList,
+                selected = lessonValue,
+                onSelect = { viewModel.updateLesson(it) },
+                customText = customLesson,
+                onCustomTextChange = { viewModel.updateCustomLesson(it) }
+            )
+        }
+
+        // Bedtime story toggle
+        val isBedtimeStory by viewModel.isBedtimeStory.collectAsState()
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                Icons.Default.Bedtime,
+                contentDescription = null,
+                tint = if (isBedtimeStory) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(Modifier.width(8.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text("Bedtime Story", style = MaterialTheme.typography.bodyMedium)
+                if (isBedtimeStory) {
+                    Text(
+                        "Shorter, calmer story (10 pages) perfect for sleepy time",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+            Switch(
+                checked = isBedtimeStory,
+                onCheckedChange = { viewModel.updateBedtimeStory(it) }
             )
         }
 
@@ -217,7 +280,12 @@ private fun IdleView(viewModel: GenerateViewModel) {
             enabled = prompt.isNotBlank(),
             shape = RoundedCornerShape(16.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary
+                containerColor = GradientStart,
+                disabledContainerColor = Color.Gray.copy(alpha = 0.4f)
+            ),
+            elevation = ButtonDefaults.buttonElevation(
+                defaultElevation = 4.dp,
+                pressedElevation = 2.dp
             )
         ) {
             Icon(Icons.Default.AutoAwesome, contentDescription = null)
@@ -229,39 +297,195 @@ private fun IdleView(viewModel: GenerateViewModel) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun StylePicker(
     title: String,
     styles: List<StyleItem>,
     selected: String,
-    onSelect: (String) -> Unit
+    onSelect: (String) -> Unit,
+    customText: String,
+    onCustomTextChange: (String) -> Unit
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(title, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            items(styles) { style ->
-                val isSelected = style.id == selected
-                Surface(
-                    onClick = { onSelect(style.id) },
-                    shape = RoundedCornerShape(10.dp),
-                    color = if (isSelected) MaterialTheme.colorScheme.primaryContainer
-                    else MaterialTheme.colorScheme.surfaceVariant,
-                    border = if (isSelected) androidx.compose.foundation.BorderStroke(
-                        2.dp, MaterialTheme.colorScheme.primary
-                    ) else null,
-                    modifier = Modifier.size(width = 72.dp, height = 64.dp)
+    var showSheet by remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState()
+    val selectedStyle = styles.find { it.id == selected }
+    val isCustom = selected == "custom"
+
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Text(title, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
+
+        Surface(
+            onClick = { showSheet = true },
+            shape = RoundedCornerShape(12.dp),
+            color = SurfaceCard,
+            border = androidx.compose.foundation.BorderStroke(1.dp, Purple500.copy(alpha = 0.12f))
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 12.dp)
+            ) {
+                if (isCustom) {
+                    Text("\u270F\uFE0F", fontSize = 18.sp)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        if (customText.isEmpty()) "Custom" else customText,
+                        style = MaterialTheme.typography.bodyLarge,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                } else if (selectedStyle != null) {
+                    Text(selectedStyle.emoji, fontSize = 18.sp)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        selectedStyle.label,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                Icon(
+                    Icons.Default.ArrowDropDown,
+                    contentDescription = "Select $title",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        if (isCustom && customText.isNotEmpty()) {
+            Text(
+                customText,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
+        } else if (selectedStyle != null) {
+            Text(
+                selectedStyle.description,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+            )
+        }
+    }
+
+    if (showSheet) {
+        var draftCustomText by remember { mutableStateOf(customText) }
+
+        ModalBottomSheet(
+            onDismissRequest = { showSheet = false },
+            sheetState = sheetState
+        ) {
+            Column {
+                Text(
+                    title,
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                )
+
+                LazyColumn(
+                    modifier = Modifier.padding(bottom = 32.dp)
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.padding(4.dp)
-                    ) {
-                        Text(style.emoji, fontSize = 20.sp)
-                        Text(
-                            style.label,
-                            style = MaterialTheme.typography.labelSmall,
-                            maxLines = 1
-                        )
+                    items(styles.size) { index ->
+                        val style = styles[index]
+                        val isItemSelected = style.id == selected && !isCustom
+                        Surface(
+                            onClick = {
+                                onSelect(style.id)
+                                showSheet = false
+                            },
+                            color = if (isItemSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
+                                    else Color.Transparent
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                            ) {
+                                Text(style.emoji, fontSize = 24.sp)
+                                Spacer(modifier = Modifier.width(12.dp))
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        style.label,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        fontWeight = if (isItemSelected) FontWeight.SemiBold else FontWeight.Normal
+                                    )
+                                    Text(
+                                        style.description,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                                    )
+                                }
+                                if (isItemSelected) {
+                                    Icon(
+                                        Icons.Default.Check,
+                                        contentDescription = "Selected",
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    // Custom input section
+                    item {
+                        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+
+                        Surface(
+                            color = if (isCustom) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
+                                    else Color.Transparent
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                            ) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Text("\u270F\uFE0F", fontSize = 24.sp)
+                                    Spacer(modifier = Modifier.width(12.dp))
+                                    Text(
+                                        "Custom",
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        fontWeight = if (isCustom) FontWeight.SemiBold else FontWeight.Normal
+                                    )
+                                    Spacer(modifier = Modifier.weight(1f))
+                                    if (isCustom) {
+                                        Icon(
+                                            Icons.Default.Check,
+                                            contentDescription = "Selected",
+                                            tint = MaterialTheme.colorScheme.primary
+                                        )
+                                    }
+                                }
+
+                                Spacer(modifier = Modifier.height(8.dp))
+
+                                OutlinedTextField(
+                                    value = draftCustomText,
+                                    onValueChange = { draftCustomText = it },
+                                    placeholder = { Text("Describe your own ${title.lowercase()}...") },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    minLines = 2,
+                                    maxLines = 4
+                                )
+
+                                Spacer(modifier = Modifier.height(8.dp))
+
+                                Button(
+                                    onClick = {
+                                        onCustomTextChange(draftCustomText)
+                                        onSelect("custom")
+                                        showSheet = false
+                                    },
+                                    enabled = draftCustomText.isNotBlank(),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text("Use Custom")
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -319,7 +543,19 @@ private fun CharacterPicker(
                     label = { Text(member.name) },
                     leadingIcon = {
                         Text(FamilyMembersViewModel.roleEmoji(member.role))
-                    }
+                    },
+                    colors = FilterChipDefaults.filterChipColors(
+                        containerColor = SurfaceCard,
+                        selectedContainerColor = Purple80,
+                        selectedLabelColor = Purple700,
+                        labelColor = TextPrimary
+                    ),
+                    border = FilterChipDefaults.filterChipBorder(
+                        borderColor = Color.Transparent,
+                        selectedBorderColor = Purple500.copy(alpha = 0.3f),
+                        enabled = true,
+                        selected = isSelected
+                    )
                 )
             }
         }
@@ -419,6 +655,12 @@ private fun GeneratingView(viewModel: GenerateViewModel) {
             fontWeight = FontWeight.Bold,
             color = primaryColor
         )
+
+        Spacer(Modifier.height(24.dp))
+
+        TextButton(onClick = { viewModel.cancelGeneration() }) {
+            Text("Cancel")
+        }
     }
 }
 
@@ -839,7 +1081,7 @@ private fun CompleteView(viewModel: GenerateViewModel) {
 
                     Button(
                         onClick = { viewModel.savePdf() },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF9800))
+                        colors = ButtonDefaults.buttonColors(containerColor = Orange500)
                     ) {
                         Icon(Icons.Default.Description, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(4.dp))
@@ -854,7 +1096,7 @@ private fun CompleteView(viewModel: GenerateViewModel) {
 
                     Button(
                         onClick = { viewModel.activateBedtimeMode() },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3949AB))
+                        colors = ButtonDefaults.buttonColors(containerColor = Indigo700)
                     ) {
                         Icon(Icons.Default.Bedtime, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(4.dp))

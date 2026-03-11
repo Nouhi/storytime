@@ -8,13 +8,22 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.exp
+import kotlin.math.sin
 import kotlin.random.Random
+
+private data class Crackle(var remaining: Int, val amplitude: Float, val decay: Float, var elapsed: Int)
 
 enum class AmbientSound(val key: String, val displayName: String) {
     WHITE_NOISE("whiteNoise", "White Noise"),
     BROWN_NOISE("brownNoise", "Brown Noise"),
     PINK_NOISE("pinkNoise", "Pink Noise"),
-    SOFT_RAIN("softRain", "Soft Rain");
+    SOFT_RAIN("softRain", "Soft Rain"),
+    OCEAN_WAVES("oceanWaves", "Ocean Waves"),
+    CRACKLING_FIREPLACE("cracklingFireplace", "Fireplace"),
+    FOREST_NIGHT("forestNight", "Forest Night"),
+    HEARTBEAT("heartbeat", "Heartbeat");
 
     companion object {
         fun fromKey(key: String): AmbientSound =
@@ -131,11 +140,12 @@ class AmbientSoundManager {
 
             AmbientSound.BROWN_NOISE -> {
                 var lastSample = 0f
-                {
+                val generator: () -> Float = {
                     val white = Random.nextFloat() * 2f - 1f
                     lastSample = (lastSample + 0.02f * white) / 1.02f
                     lastSample * 3.5f * 0.3f
                 }
+                generator
             }
 
             AmbientSound.PINK_NOISE -> {
@@ -162,7 +172,7 @@ class AmbientSoundManager {
                 val rc = 1f / (cutoff * 2f * PI.toFloat())
                 val dt = 1f / SAMPLE_RATE.toFloat()
                 val alpha = dt / (rc + dt)
-                {
+                val generator: () -> Float = {
                     val white = Random.nextFloat() * 2f - 1f
                     // Low-pass filter for rain-like sound
                     filterState += alpha * (white - filterState)
@@ -170,6 +180,143 @@ class AmbientSoundManager {
                     val drop = if (Random.nextFloat() < 0.001f) Random.nextFloat() * 0.3f + 0.3f else 0f
                     (filterState * 1.5f + drop) * 0.3f
                 }
+                generator
+            }
+
+            AmbientSound.OCEAN_WAVES -> {
+                var phase = 0.0
+                var filterState = 0f
+                val dtSec = 1.0 / SAMPLE_RATE.toDouble()
+                val cutoff = 400f / SAMPLE_RATE.toFloat()
+                val rc = 1f / (cutoff * 2f * PI.toFloat())
+                val dtf = 1f / SAMPLE_RATE.toFloat()
+                val alphaF = dtf / (rc + dtf)
+                val generator: () -> Float = {
+                    phase += dtSec
+                    // Wave swell with varying period (8-12s cycle)
+                    val cyclePeriod = 10.0 + 2.0 * sin(phase / 60.0)
+                    val swell = (0.5 * (1.0 - cos(2.0 * PI * phase / cyclePeriod))).toFloat()
+                    // Low-pass filtered noise for wave wash
+                    val white = Random.nextFloat() * 2f - 1f
+                    filterState += alphaF * (white - filterState)
+                    // Foam/hiss at wave peaks
+                    val foam = white * 0.15f * swell * swell
+                    (filterState * swell * 0.8f + foam) * 0.3f
+                }
+                generator
+            }
+
+            AmbientSound.CRACKLING_FIREPLACE -> {
+                var brownLast = 0f
+                var filterState = 0f
+                val cutoff = 200f / SAMPLE_RATE.toFloat()
+                val rc = 1f / (cutoff * 2f * PI.toFloat())
+                val dtf = 1f / SAMPLE_RATE.toFloat()
+                val alphaF = dtf / (rc + dtf)
+                val crackles = mutableListOf<Crackle>()
+                val generator: () -> Float = {
+                    // Warm base: brown noise filtered at ~200 Hz
+                    val white = Random.nextFloat() * 2f - 1f
+                    brownLast = (brownLast + 0.02f * white) / 1.02f
+                    filterState += alphaF * (brownLast * 3.5f - filterState)
+                    val warmBase = filterState
+
+                    // Spawn new crackle impulses (~13/sec)
+                    if (Random.nextFloat() < 0.0003f && crackles.size < 4) {
+                        val amp = Random.nextFloat() * 0.6f + 0.4f
+                        val decayVal = Random.nextFloat() * 300f + 100f
+                        crackles.add(Crackle(remaining = (decayVal * 3).toInt(), amplitude = amp, decay = decayVal, elapsed = 0))
+                    }
+
+                    // Sum active crackles
+                    var crackleSum = 0f
+                    val iter = crackles.iterator()
+                    while (iter.hasNext()) {
+                        val c = iter.next()
+                        val env = c.amplitude * exp(-c.elapsed.toFloat() / c.decay)
+                        crackleSum += env * (Random.nextFloat() * 2f - 1f)
+                        c.elapsed++
+                        c.remaining--
+                        if (c.remaining <= 0) iter.remove()
+                    }
+
+                    (warmBase * 0.6f + crackleSum * 0.4f) * 0.3f
+                }
+                generator
+            }
+
+            AmbientSound.FOREST_NIGHT -> {
+                var chirpPhase = 0.0
+                var windPhase = 0.0
+                val forestPinkB = FloatArray(7)
+                val dtSec = 1.0 / SAMPLE_RATE.toDouble()
+                val generator: () -> Float = {
+                    chirpPhase += dtSec
+                    windPhase += dtSec
+
+                    // Cricket 1: 4500 Hz chirps every ~0.5s
+                    val chirpCycle1 = chirpPhase % 0.5
+                    val cricket1 = if (chirpCycle1 < 0.15) {
+                        val env = (1.0 - chirpCycle1 / 0.15).toFloat()
+                        (sin(2.0 * PI * 4500.0 * chirpPhase)).toFloat() * env * 0.3f
+                    } else 0f
+
+                    // Cricket 2: 5200 Hz, offset by 0.25s
+                    val chirpCycle2 = (chirpPhase + 0.25) % 0.5
+                    val cricket2 = if (chirpCycle2 < 0.12) {
+                        val env = (1.0 - chirpCycle2 / 0.12).toFloat()
+                        (sin(2.0 * PI * 5200.0 * chirpPhase)).toFloat() * env * 0.25f
+                    } else 0f
+
+                    // Wind: pink noise with slow amplitude modulation
+                    val white = Random.nextFloat() * 2f - 1f
+                    forestPinkB[0] = 0.99886f * forestPinkB[0] + white * 0.0555179f
+                    forestPinkB[1] = 0.99332f * forestPinkB[1] + white * 0.0750759f
+                    forestPinkB[2] = 0.96900f * forestPinkB[2] + white * 0.1538520f
+                    forestPinkB[3] = 0.86650f * forestPinkB[3] + white * 0.3104856f
+                    forestPinkB[4] = 0.55000f * forestPinkB[4] + white * 0.5329522f
+                    forestPinkB[5] = -0.7616f * forestPinkB[5] - white * 0.0168980f
+                    val pink = forestPinkB[0] + forestPinkB[1] + forestPinkB[2] + forestPinkB[3] +
+                            forestPinkB[4] + forestPinkB[5] + forestPinkB[6] + white * 0.5362f
+                    forestPinkB[6] = white * 0.115926f
+
+                    val windMod = (0.3 + 0.2 * sin(2.0 * PI * windPhase / 6.0)).toFloat()
+                    val wind = pink * 0.11f * windMod
+
+                    (wind * 0.5f + cricket1 * 0.25f + cricket2 * 0.25f) * 0.3f
+                }
+                generator
+            }
+
+            AmbientSound.HEARTBEAT -> {
+                var phase = 0.0
+                var filterState = 0f
+                val dtSec = 1.0 / SAMPLE_RATE.toDouble()
+                val cutoff = 150f / SAMPLE_RATE.toFloat()
+                val rc = 1f / (cutoff * 2f * PI.toFloat())
+                val dtf = 1f / SAMPLE_RATE.toFloat()
+                val alphaF = dtf / (rc + dtf)
+                val generator: () -> Float = {
+                    phase += dtSec
+                    // 60 BPM = 1 beat per second
+                    val t = phase % 1.0
+
+                    // Lub (first heart sound) at t=0, 60 Hz
+                    val lubEnv = exp(-(t * t) / (2.0 * 0.02 * 0.02)).toFloat()
+                    val lub = sin(2.0 * PI * 60.0 * t).toFloat() * lubEnv * 0.8f
+
+                    // Dub (second heart sound) at t=0.3, 80 Hz
+                    val tDub = t - 0.3
+                    val dubEnv = exp(-(tDub * tDub) / (2.0 * 0.015 * 0.015)).toFloat()
+                    val dub = sin(2.0 * PI * 80.0 * t).toFloat() * dubEnv * 0.6f
+
+                    val beat = lub + dub
+
+                    // Gentle low-pass filter to soften
+                    filterState += alphaF * (beat - filterState)
+                    filterState * 0.3f
+                }
+                generator
             }
         }
     }

@@ -13,6 +13,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import retrofit2.HttpException
 import java.util.Calendar
 
 enum class GenerationState {
@@ -38,12 +40,27 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
     private val _imageStyle = MutableStateFlow("watercolor")
     val imageStyle: StateFlow<String> = _imageStyle.asStateFlow()
 
+    private val _lesson = MutableStateFlow("none")
+    val lesson: StateFlow<String> = _lesson.asStateFlow()
+
+    private val _customWritingStyle = MutableStateFlow("")
+    val customWritingStyle: StateFlow<String> = _customWritingStyle.asStateFlow()
+
+    private val _customImageStyle = MutableStateFlow("")
+    val customImageStyle: StateFlow<String> = _customImageStyle.asStateFlow()
+
+    private val _customLesson = MutableStateFlow("")
+    val customLesson: StateFlow<String> = _customLesson.asStateFlow()
+
     // Styles from server
     private val _writingStyles = MutableStateFlow<List<StyleItem>>(emptyList())
     val writingStyles: StateFlow<List<StyleItem>> = _writingStyles.asStateFlow()
 
     private val _imageStyles = MutableStateFlow<List<StyleItem>>(emptyList())
     val imageStyles: StateFlow<List<StyleItem>> = _imageStyles.asStateFlow()
+
+    private val _lessons = MutableStateFlow<List<StyleItem>>(emptyList())
+    val lessons: StateFlow<List<StyleItem>> = _lessons.asStateFlow()
 
     // Generation progress
     private val _progress = MutableStateFlow(0.0)
@@ -80,6 +97,10 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
 
     // Whether the user has explicitly changed the selection (vs default "all")
     private val _hasCustomSelection = MutableStateFlow(false)
+
+    // Bedtime story toggle
+    private val _isBedtimeStory = MutableStateFlow(false)
+    val isBedtimeStory: StateFlow<Boolean> = _isBedtimeStory.asStateFlow()
 
     // Bedtime mode
     private val _showBedtime = MutableStateFlow(false)
@@ -135,7 +156,12 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
     fun updatePrompt(text: String) { _prompt.value = text }
     fun updateWritingStyle(style: String) { _writingStyle.value = style }
     fun updateImageStyle(style: String) { _imageStyle.value = style }
+    fun updateLesson(lesson: String) { _lesson.value = lesson }
+    fun updateCustomWritingStyle(text: String) { _customWritingStyle.value = text }
+    fun updateCustomImageStyle(text: String) { _customImageStyle.value = text }
+    fun updateCustomLesson(text: String) { _customLesson.value = text }
     fun updateCurrentPage(page: Int) { _currentPage.value = page }
+    fun updateBedtimeStory(value: Boolean) { _isBedtimeStory.value = value }
 
     fun toggleCharacter(id: Int) {
         _hasCustomSelection.value = true
@@ -159,8 +185,10 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                 val styles = api.getStyles()
                 _writingStyles.value = styles.writingStyles
                 _imageStyles.value = styles.imageStyles
+                _lessons.value = styles.lessons ?: emptyList()
                 _writingStyle.value = styles.defaults.writingStyle
                 _imageStyle.value = styles.defaults.imageStyle
+                _lesson.value = styles.defaults.lesson ?: "none"
             } catch (e: Exception) {
                 // Use hardcoded fallbacks
                 _writingStyles.value = listOf(
@@ -176,6 +204,14 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                     StyleItem("fantasy", "Fantasy", "✨", "Rich, magical"),
                     StyleItem("ghibli", "Ghibli", "🏯", "Studio Ghibli"),
                     StyleItem("none", "Text Only", "📝", "No images")
+                )
+                _lessons.value = listOf(
+                    StyleItem("none", "None", "📖", "No specific lesson"),
+                    StyleItem("sharing", "Sharing", "🤝", "Learning to share"),
+                    StyleItem("bravery", "Bravery", "🦁", "Finding courage"),
+                    StyleItem("kindness", "Kindness", "💛", "Being kind"),
+                    StyleItem("patience", "Patience", "🐢", "Learning to wait"),
+                    StyleItem("honesty", "Honesty", "⭐", "Telling the truth")
                 )
             }
         }
@@ -196,8 +232,35 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    private fun validateCustomInputs(): String? {
+        if (_writingStyle.value == "custom") {
+            val text = _customWritingStyle.value.trim()
+            if (text.isEmpty()) return "Please describe your custom writing style before creating a story."
+            if (text.length > 500) return "Your custom writing style is too long. Please keep it under 500 characters."
+        }
+        if (_imageStyle.value == "custom") {
+            val text = _customImageStyle.value.trim()
+            if (text.isEmpty()) return "Please describe your custom image style before creating a story."
+            if (text.length > 500) return "Your custom image style is too long. Please keep it under 500 characters."
+        }
+        if (_lesson.value == "custom") {
+            val text = _customLesson.value.trim()
+            if (text.isEmpty()) return "Please describe your custom lesson before creating a story."
+            if (text.length > 500) return "Your custom lesson is too long. Please keep it under 500 characters."
+        }
+        return null
+    }
+
     fun generate() {
         generationJob?.cancel()
+
+        val validationError = validateCustomInputs()
+        if (validationError != null) {
+            _errorMessage.value = validationError
+            _state.value = GenerationState.ERROR
+            return
+        }
+
         generationJob = viewModelScope.launch {
             _state.value = GenerationState.GENERATING
             _progress.value = 0.0
@@ -210,12 +273,18 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                     _selectedCharacterIds.value.toList().ifEmpty { null }
                 } else null
 
+                val lessonValue = _lesson.value.let { if (it == "none") null else it }
                 val response = api.startGeneration(
                     GenerateRequest(
                         prompt = _prompt.value,
                         writingStyle = _writingStyle.value,
                         imageStyle = _imageStyle.value,
-                        characterIds = charIds
+                        lesson = lessonValue,
+                        characterIds = charIds,
+                        customWritingStyle = if (_writingStyle.value == "custom") _customWritingStyle.value else null,
+                        customImageStyle = if (_imageStyle.value == "custom") _customImageStyle.value else null,
+                        customLesson = if (_lesson.value == "custom") _customLesson.value else null,
+                        bedtimeStory = if (_isBedtimeStory.value) true else null
                     )
                 )
                 _storyId.value = response.storyId
@@ -225,6 +294,14 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                 ApiClient.sseClient.connect(streamUrl).collect { event ->
                     handleEvent(event)
                 }
+            } catch (e: HttpException) {
+                // Parse the JSON error body from server (e.g. semantic validation errors)
+                val errorBody = try {
+                    val body = e.response()?.errorBody()?.string()
+                    if (body != null) JSONObject(body).optString("error", "") else ""
+                } catch (_: Exception) { "" }
+                _errorMessage.value = errorBody.ifEmpty { "Server error (HTTP ${e.code()})" }
+                _state.value = GenerationState.ERROR
             } catch (e: Exception) {
                 _errorMessage.value = e.message ?: "Generation failed"
                 _state.value = GenerationState.ERROR
@@ -263,6 +340,12 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    fun cancelGeneration() {
+        generationJob?.cancel()
+        generationJob = null
+        _state.value = GenerationState.IDLE
+    }
+
     fun reset() {
         generationJob?.cancel()
         _state.value = GenerationState.IDLE
@@ -275,6 +358,7 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
         _hasImages.value = true
         _currentPage.value = 1
         _errorMessage.value = ""
+        _isBedtimeStory.value = false
         // Reset character selection to "all"
         _hasCustomSelection.value = false
         _selectedCharacterIds.value = _familyMembers.value.map { it.id }.toSet()

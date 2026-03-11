@@ -25,6 +25,11 @@ class GenerationViewModel: ObservableObject {
     @Published var prompt = ""
     @Published var writingStyle = "standard"
     @Published var imageStyle = "watercolor"
+    @Published var lesson = "none"
+    @Published var customWritingStyle = ""
+    @Published var customImageStyle = ""
+    @Published var customLesson = ""
+    @Published var isBedtimeStory = false
 
     @Published var progress: Double = 0
     @Published var stepDetail = ""
@@ -39,6 +44,7 @@ class GenerationViewModel: ObservableObject {
 
     @Published var writingStyles: [StyleItem] = []
     @Published var imageStyles: [StyleItem] = []
+    @Published var lessons: [StyleItem] = []
 
     @Published var kidName: String
 
@@ -115,8 +121,10 @@ class GenerationViewModel: ObservableObject {
             let response: StylesResponse = try await APIClient.shared.get("/api/styles")
             writingStyles = response.writingStyles
             imageStyles = response.imageStyles
+            lessons = response.lessons ?? []
             writingStyle = response.defaults.writingStyle
             imageStyle = response.defaults.imageStyle
+            lesson = response.defaults.lesson ?? "none"
         } catch {
             // Use hardcoded fallbacks
             writingStyles = [
@@ -132,11 +140,55 @@ class GenerationViewModel: ObservableObject {
                 StyleItem(id: "ghibli", label: "Ghibli", emoji: "🏔️", description: "Studio Ghibli-inspired"),
                 StyleItem(id: "none", label: "No Images", emoji: "📝", description: "Text-only story"),
             ]
+            lessons = [
+                StyleItem(id: "none", label: "None", emoji: "📖", description: "No specific lesson"),
+                StyleItem(id: "sharing", label: "Sharing", emoji: "🤝", description: "Learning to share"),
+                StyleItem(id: "bravery", label: "Bravery", emoji: "🦁", description: "Finding courage"),
+                StyleItem(id: "kindness", label: "Kindness", emoji: "💛", description: "Being kind"),
+                StyleItem(id: "patience", label: "Patience", emoji: "🐢", description: "Learning to wait"),
+                StyleItem(id: "honesty", label: "Honesty", emoji: "⭐", description: "Telling the truth"),
+            ]
         }
+    }
+
+    func validateCustomInputs() -> String? {
+        if writingStyle == "custom" {
+            let text = customWritingStyle.trimmingCharacters(in: .whitespacesAndNewlines)
+            if text.isEmpty {
+                return "Please describe your custom writing style before creating a story."
+            }
+            if text.count > 500 {
+                return "Your custom writing style is too long. Please keep it under 500 characters."
+            }
+        }
+        if imageStyle == "custom" {
+            let text = customImageStyle.trimmingCharacters(in: .whitespacesAndNewlines)
+            if text.isEmpty {
+                return "Please describe your custom image style before creating a story."
+            }
+            if text.count > 500 {
+                return "Your custom image style is too long. Please keep it under 500 characters."
+            }
+        }
+        if lesson == "custom" {
+            let text = customLesson.trimmingCharacters(in: .whitespacesAndNewlines)
+            if text.isEmpty {
+                return "Please describe your custom lesson before creating a story."
+            }
+            if text.count > 500 {
+                return "Your custom lesson is too long. Please keep it under 500 characters."
+            }
+        }
+        return nil
     }
 
     func generate() async {
         guard !prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+
+        if let validationError = validateCustomInputs() {
+            state = .error(validationError)
+            return
+        }
 
         state = .generating
         progress = 0
@@ -154,7 +206,12 @@ class GenerationViewModel: ObservableObject {
                 prompt: prompt,
                 writingStyle: writingStyle,
                 imageStyle: imageStyle,
-                characterIds: charIds
+                lesson: lesson == "none" ? nil : lesson,
+                characterIds: charIds,
+                customWritingStyle: writingStyle == "custom" ? customWritingStyle : nil,
+                customImageStyle: imageStyle == "custom" ? customImageStyle : nil,
+                customLesson: lesson == "custom" ? customLesson : nil,
+                bedtimeStory: isBedtimeStory ? true : nil
             )
             let response: GenerateResponse = try await APIClient.shared.post("/api/generate", body: request)
             storyId = response.storyId
@@ -189,6 +246,7 @@ class GenerationViewModel: ObservableObject {
         storyId = nil
         epubUrl = nil
         currentPage = 1
+        isBedtimeStory = false
         // Reset character selection to "all"
         hasCustomSelection = false
         selectedCharacterIds = Set(familyMembers.map { $0.id })
