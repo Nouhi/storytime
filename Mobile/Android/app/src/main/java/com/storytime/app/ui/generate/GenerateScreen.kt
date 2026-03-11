@@ -45,6 +45,7 @@ import com.storytime.app.model.FamilyMemberResponse
 import com.storytime.app.model.StoryPage
 import com.storytime.app.model.StyleItem
 import com.storytime.app.audio.AmbientSound
+import com.storytime.app.R
 import com.storytime.app.StorytimeApp
 import com.storytime.app.ui.bedtime.BedtimeScreen
 import com.storytime.app.ui.settings.FamilyMembersViewModel
@@ -54,6 +55,7 @@ import com.storytime.app.ui.components.PageReader
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import kotlin.math.sin
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -128,6 +130,8 @@ private fun IdleView(viewModel: GenerateViewModel) {
     val customWritingStyle by viewModel.customWritingStyle.collectAsState()
     val customImageStyle by viewModel.customImageStyle.collectAsState()
     val customLesson by viewModel.customLesson.collectAsState()
+    val languageValue by viewModel.language.collectAsState()
+    val languagesList by viewModel.languages.collectAsState()
     val kidName by viewModel.kidName.collectAsState()
     val familyMembers by viewModel.familyMembers.collectAsState()
     val selectedCharacterIds by viewModel.selectedCharacterIds.collectAsState()
@@ -162,7 +166,7 @@ private fun IdleView(viewModel: GenerateViewModel) {
                 ) {
                     Icon(Icons.Default.PersonSearch, contentDescription = null, tint = Orange500)
                     Text(
-                        "Set up your child's name in Settings for personalized stories",
+                        stringResource(R.string.setup_prompt),
                         style = MaterialTheme.typography.bodySmall,
                         color = TextPrimary.copy(alpha = 0.7f)
                     )
@@ -172,7 +176,7 @@ private fun IdleView(viewModel: GenerateViewModel) {
 
         // Prompt input
         Text(
-            "What story shall we create?",
+            stringResource(R.string.prompt_header),
             style = MaterialTheme.typography.titleMedium,
             color = TextPrimary
         )
@@ -180,7 +184,7 @@ private fun IdleView(viewModel: GenerateViewModel) {
             value = prompt,
             onValueChange = { viewModel.updatePrompt(it) },
             modifier = Modifier.fillMaxWidth().heightIn(min = 100.dp),
-            placeholder = { Text("Describe your story idea...") },
+            placeholder = { Text(stringResource(R.string.prompt_placeholder)) },
             shape = RoundedCornerShape(14.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedContainerColor = SurfaceCard,
@@ -200,10 +204,19 @@ private fun IdleView(viewModel: GenerateViewModel) {
             }
         }
 
+        // Language picker
+        if (languagesList.isNotEmpty()) {
+            LanguagePicker(
+                languages = languagesList,
+                selected = languageValue,
+                onSelect = { viewModel.updateLanguage(it) }
+            )
+        }
+
         // Style pickers
         if (writingStyles.isNotEmpty()) {
             StylePicker(
-                title = "Writing Style",
+                title = stringResource(R.string.section_writing_style),
                 styles = writingStyles,
                 selected = writingStyle,
                 onSelect = { viewModel.updateWritingStyle(it) },
@@ -214,7 +227,7 @@ private fun IdleView(viewModel: GenerateViewModel) {
 
         if (imageStyles.isNotEmpty()) {
             StylePicker(
-                title = "Image Style",
+                title = stringResource(R.string.section_image_style),
                 styles = imageStyles,
                 selected = imageStyle,
                 onSelect = { viewModel.updateImageStyle(it) },
@@ -225,7 +238,7 @@ private fun IdleView(viewModel: GenerateViewModel) {
 
         if (lessonsList.isNotEmpty()) {
             StylePicker(
-                title = "Lesson",
+                title = stringResource(R.string.section_lesson),
                 styles = lessonsList,
                 selected = lessonValue,
                 onSelect = { viewModel.updateLesson(it) },
@@ -247,10 +260,10 @@ private fun IdleView(viewModel: GenerateViewModel) {
             )
             Spacer(Modifier.width(8.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Text("Bedtime Story", style = MaterialTheme.typography.bodyMedium)
+                Text(stringResource(R.string.bedtime_story_label), style = MaterialTheme.typography.bodyMedium)
                 if (isBedtimeStory) {
                     Text(
-                        "Shorter, calmer story (10 pages) perfect for sleepy time",
+                        stringResource(R.string.bedtime_story_hint),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -290,7 +303,7 @@ private fun IdleView(viewModel: GenerateViewModel) {
         ) {
             Icon(Icons.Default.AutoAwesome, contentDescription = null)
             Spacer(Modifier.width(8.dp))
-            Text("Create Story", style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(R.string.button_create_story), style = MaterialTheme.typography.titleMedium)
         }
 
         Spacer(Modifier.height(16.dp))
@@ -331,7 +344,7 @@ private fun StylePicker(
                     Text("\u270F\uFE0F", fontSize = 18.sp)
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        if (customText.isEmpty()) "Custom" else customText,
+                        if (customText.isEmpty()) stringResource(R.string.custom_label) else customText,
                         style = MaterialTheme.typography.bodyLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -446,7 +459,7 @@ private fun StylePicker(
                                     Text("\u270F\uFE0F", fontSize = 24.sp)
                                     Spacer(modifier = Modifier.width(12.dp))
                                     Text(
-                                        "Custom",
+                                        stringResource(R.string.custom_label),
                                         style = MaterialTheme.typography.bodyLarge,
                                         fontWeight = if (isCustom) FontWeight.SemiBold else FontWeight.Normal
                                     )
@@ -465,7 +478,7 @@ private fun StylePicker(
                                 OutlinedTextField(
                                     value = draftCustomText,
                                     onValueChange = { draftCustomText = it },
-                                    placeholder = { Text("Describe your own ${title.lowercase()}...") },
+                                    placeholder = { Text(stringResource(R.string.custom_placeholder, title.lowercase())) },
                                     modifier = Modifier.fillMaxWidth(),
                                     minLines = 2,
                                     maxLines = 4
@@ -482,7 +495,126 @@ private fun StylePicker(
                                     enabled = draftCustomText.isNotBlank(),
                                     modifier = Modifier.fillMaxWidth()
                                 ) {
-                                    Text("Use Custom")
+                                    Text(stringResource(R.string.use_custom))
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun LanguagePicker(
+    languages: List<StyleItem>,
+    selected: String,
+    onSelect: (String) -> Unit
+) {
+    var showSheet by remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState()
+    val selectedLang = languages.find { it.id == selected }
+
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Text(
+            stringResource(R.string.section_language),
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        Surface(
+            onClick = { showSheet = true },
+            shape = RoundedCornerShape(12.dp),
+            color = SurfaceCard,
+            border = androidx.compose.foundation.BorderStroke(1.dp, Purple500.copy(alpha = 0.12f))
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 12.dp)
+            ) {
+                if (selectedLang != null) {
+                    Text(selectedLang.emoji, fontSize = 18.sp)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        selectedLang.label,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                Icon(
+                    Icons.Default.ArrowDropDown,
+                    contentDescription = stringResource(R.string.section_language),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        if (selectedLang != null) {
+            Text(
+                selectedLang.description,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+            )
+        }
+    }
+
+    if (showSheet) {
+        ModalBottomSheet(
+            onDismissRequest = { showSheet = false },
+            sheetState = sheetState
+        ) {
+            Column {
+                Text(
+                    stringResource(R.string.section_language),
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                )
+
+                LazyColumn(
+                    modifier = Modifier.padding(bottom = 32.dp)
+                ) {
+                    items(languages.size) { index ->
+                        val lang = languages[index]
+                        val isItemSelected = lang.id == selected
+                        Surface(
+                            onClick = {
+                                onSelect(lang.id)
+                                showSheet = false
+                            },
+                            color = if (isItemSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
+                                    else Color.Transparent
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                            ) {
+                                Text(lang.emoji, fontSize = 24.sp)
+                                Spacer(modifier = Modifier.width(12.dp))
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        lang.label,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        fontWeight = if (isItemSelected) FontWeight.SemiBold else FontWeight.Normal
+                                    )
+                                    Text(
+                                        lang.description,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                                    )
+                                }
+                                if (isItemSelected) {
+                                    Icon(
+                                        Icons.Default.Check,
+                                        contentDescription = "Selected",
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
                                 }
                             }
                         }
@@ -509,24 +641,24 @@ private fun CharacterPicker(
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    "Characters",
+                    stringResource(R.string.section_characters),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    if (selectedIds.size == members.size) "All included"
-                    else "${selectedIds.size} of ${members.size} selected",
+                    if (selectedIds.size == members.size) stringResource(R.string.characters_all_included)
+                    else stringResource(R.string.characters_count, selectedIds.size, members.size),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                 )
             }
             if (selectedIds.size == members.size) {
                 TextButton(onClick = onClearAll) {
-                    Text("Clear", style = MaterialTheme.typography.labelSmall)
+                    Text(stringResource(R.string.button_clear), style = MaterialTheme.typography.labelSmall)
                 }
             } else {
                 TextButton(onClick = onSelectAll) {
-                    Text("Select All", style = MaterialTheme.typography.labelSmall)
+                    Text(stringResource(R.string.button_select_all), style = MaterialTheme.typography.labelSmall)
                 }
             }
         }
@@ -613,10 +745,10 @@ private fun GeneratingView(viewModel: GenerateViewModel) {
 
         // Step label
         val stepLabel = when (currentStep) {
-            "generating-story" -> "Writing your story..."
-            "generating-images" -> "Painting illustrations..."
-            "assembling-ebook" -> "Assembling your book..."
-            else -> "Preparing..."
+            "generating-story" -> stringResource(R.string.progress_writing)
+            "generating-images" -> stringResource(R.string.progress_painting)
+            "assembling-ebook" -> stringResource(R.string.progress_assembling)
+            else -> stringResource(R.string.progress_starting)
         }
         Text(
             stepLabel,
@@ -659,7 +791,7 @@ private fun GeneratingView(viewModel: GenerateViewModel) {
         Spacer(Modifier.height(24.dp))
 
         TextButton(onClick = { viewModel.cancelGeneration() }) {
-            Text("Cancel")
+            Text(stringResource(R.string.button_cancel))
         }
     }
 }
@@ -1064,7 +1196,7 @@ private fun CompleteView(viewModel: GenerateViewModel) {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
-                    "Page $currentPage of ${storyPages.size}",
+                    stringResource(R.string.page_indicator, currentPage, storyPages.size),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -1076,7 +1208,7 @@ private fun CompleteView(viewModel: GenerateViewModel) {
                     ) {
                         Icon(Icons.Default.Book, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text("Books")
+                        Text(stringResource(R.string.button_books))
                     }
 
                     Button(
@@ -1085,13 +1217,13 @@ private fun CompleteView(viewModel: GenerateViewModel) {
                     ) {
                         Icon(Icons.Default.Description, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text("PDF")
+                        Text(stringResource(R.string.button_pdf))
                     }
 
                     OutlinedButton(onClick = { viewModel.reset() }) {
                         Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text("New")
+                        Text(stringResource(R.string.button_new))
                     }
 
                     Button(
@@ -1100,7 +1232,7 @@ private fun CompleteView(viewModel: GenerateViewModel) {
                     ) {
                         Icon(Icons.Default.Bedtime, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text("Sleep")
+                        Text(stringResource(R.string.button_sleep))
                     }
                 }
             }
@@ -1285,7 +1417,7 @@ private fun ErrorView(viewModel: GenerateViewModel) {
 
         Spacer(Modifier.height(16.dp))
 
-        Text("Something went wrong", style = MaterialTheme.typography.headlineSmall)
+        Text(stringResource(R.string.error_title), style = MaterialTheme.typography.headlineSmall)
 
         Spacer(Modifier.height(8.dp))
 
@@ -1301,13 +1433,13 @@ private fun ErrorView(viewModel: GenerateViewModel) {
         Button(onClick = { viewModel.generate() }) {
             Icon(Icons.Default.Refresh, contentDescription = null)
             Spacer(Modifier.width(8.dp))
-            Text("Try Again")
+            Text(stringResource(R.string.button_try_again))
         }
 
         Spacer(Modifier.height(8.dp))
 
         TextButton(onClick = { viewModel.reset() }) {
-            Text("Start Over")
+            Text(stringResource(R.string.button_start_over))
         }
     }
 }

@@ -57,6 +57,7 @@ private struct FlowLayout: Layout {
 // MARK: - GenerateView
 
 struct GenerateView: View {
+    @EnvironmentObject var localeManager: LocaleManager
     @StateObject private var viewModel = GenerationViewModel()
     @Environment(\.scenePhase) private var scenePhase
     @State private var showBedtimeMode = false
@@ -121,7 +122,7 @@ struct GenerateView: View {
                             .font(.title3)
                             .foregroundStyle(Color.stSecondary)
 
-                        Text("Set up your child's name in Settings for personalized stories")
+                        Text(localeManager.localized("setup_prompt"))
                             .font(.subheadline)
                             .foregroundStyle(Color.stTextSecondary)
                     }
@@ -134,7 +135,7 @@ struct GenerateView: View {
 
                 // Prompt input
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("What story shall we create?")
+                    Text(localeManager.localized("prompt_header"))
                         .font(.headline)
                         .foregroundStyle(Color.stTextPrimary)
 
@@ -167,17 +168,26 @@ struct GenerateView: View {
                     .padding(.horizontal)
                 }
 
+                // Language picker
+                if !viewModel.languages.isEmpty {
+                    LanguagePickerView(
+                        selection: $viewModel.language,
+                        options: viewModel.languages
+                    )
+                    .padding(.horizontal)
+                }
+
                 // Style pickers
                 VStack(spacing: 12) {
                     stylePicker(
-                        title: "Writing Style",
+                        title: localeManager.localized("section_writing_style"),
                         selection: $viewModel.writingStyle,
                         options: viewModel.writingStyles,
                         customText: $viewModel.customWritingStyle
                     )
 
                     stylePicker(
-                        title: "Image Style",
+                        title: localeManager.localized("section_image_style"),
                         selection: $viewModel.imageStyle,
                         options: viewModel.imageStyles,
                         customText: $viewModel.customImageStyle
@@ -185,7 +195,7 @@ struct GenerateView: View {
 
                     if !viewModel.lessons.isEmpty {
                         stylePicker(
-                            title: "Lesson",
+                            title: localeManager.localized("section_lesson"),
                             selection: $viewModel.lesson,
                             options: viewModel.lessons,
                             customText: $viewModel.customLesson
@@ -197,12 +207,12 @@ struct GenerateView: View {
                 // Bedtime story toggle
                 VStack(alignment: .leading, spacing: 4) {
                     Toggle(isOn: $viewModel.isBedtimeStory) {
-                        Label("Bedtime Story", systemImage: "moon.zzz")
+                        Label(localeManager.localized("bedtime_story_label"), systemImage: "moon.zzz")
                     }
                     .tint(Color.stBedtime)
 
                     if viewModel.isBedtimeStory {
-                        Text("Shorter, calmer story (10 pages) perfect for sleepy time")
+                        Text(localeManager.localized("bedtime_story_hint"))
                             .font(.caption2)
                             .foregroundStyle(Color.stTextTertiary)
                     }
@@ -223,7 +233,7 @@ struct GenerateView: View {
                 Button {
                     Task { await viewModel.generate() }
                 } label: {
-                    Label("Create Story", systemImage: "sparkles")
+                    Label(localeManager.localized("button_create_story"), systemImage: "sparkles")
                         .stGradientButton(isDisabled: viewModel.prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
                 .disabled(viewModel.prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -243,6 +253,7 @@ struct GenerateView: View {
 // MARK: - StylePickerView
 
 private struct StylePickerView: View {
+    @EnvironmentObject var localeManager: LocaleManager
     let title: String
     @Binding var selection: String
     let options: [StyleItem]
@@ -268,7 +279,7 @@ private struct StylePickerView: View {
                     if isCustom {
                         Text("✏️")
                             .font(.body)
-                        Text(customText.isEmpty ? "Custom" : customText)
+                        Text(customText.isEmpty ? localeManager.localized("custom_label") : customText)
                             .foregroundStyle(Color.stTextPrimary)
                             .lineLimit(1)
                     } else if let sel = selectedOption {
@@ -344,7 +355,7 @@ private struct StylePickerView: View {
                             HStack(spacing: 8) {
                                 Text("✏️")
                                     .font(.title2)
-                                Text("Custom")
+                                Text(localeManager.localized("custom_label"))
                                     .font(.body)
                                     .fontWeight(isCustom ? .semibold : .regular)
                                 Spacer()
@@ -355,7 +366,7 @@ private struct StylePickerView: View {
                                 }
                             }
 
-                            TextField("Describe your own \(title.lowercased())...", text: $draftCustomText, axis: .vertical)
+                            TextField(localeManager.localized("custom_placeholder", title.lowercased()), text: $draftCustomText, axis: .vertical)
                                 .lineLimit(2...4)
                                 .textFieldStyle(.roundedBorder)
 
@@ -364,7 +375,7 @@ private struct StylePickerView: View {
                                 selection = "custom"
                                 showSheet = false
                             } label: {
-                                Text("Use Custom")
+                                Text(localeManager.localized("use_custom"))
                                     .font(.subheadline.bold())
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 8)
@@ -375,14 +386,14 @@ private struct StylePickerView: View {
                             .disabled(draftCustomText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                         }
                     } header: {
-                        Text("Or write your own")
+                        Text(localeManager.localized("or_write_your_own"))
                     }
                 }
                 .navigationTitle(title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Done") { showSheet = false }
+                        Button(localeManager.localized("done")) { showSheet = false }
                     }
                 }
             }
@@ -390,6 +401,101 @@ private struct StylePickerView: View {
             .onAppear {
                 draftCustomText = customText
             }
+        }
+    }
+}
+
+// MARK: - LanguagePickerView
+
+private struct LanguagePickerView: View {
+    @EnvironmentObject var localeManager: LocaleManager
+    @Binding var selection: String
+    let options: [StyleItem]
+    @State private var showSheet = false
+
+    private var selectedOption: StyleItem? {
+        options.first(where: { $0.id == selection })
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(localeManager.localized("section_language"))
+                .stSectionHeader()
+
+            Button { showSheet = true } label: {
+                HStack {
+                    if let sel = selectedOption {
+                        Text(sel.emoji)
+                            .font(.body)
+                        Text(sel.label)
+                            .foregroundStyle(Color.stTextPrimary)
+                    }
+                    Spacer()
+                    Image(systemName: "chevron.up.chevron.down")
+                        .font(.caption)
+                        .foregroundStyle(Color.stTextTertiary)
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 11)
+                .background(Color.stSurfaceCard)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.stPrimary.opacity(0.12), lineWidth: 1)
+                )
+            }
+            .buttonStyle(.plain)
+
+            if let sel = selectedOption {
+                Text(sel.description)
+                    .font(.caption2)
+                    .foregroundStyle(Color.stTextTertiary)
+            }
+        }
+        .sheet(isPresented: $showSheet) {
+            NavigationStack {
+                List {
+                    ForEach(options) { lang in
+                        Button {
+                            selection = lang.id
+                            showSheet = false
+                        } label: {
+                            HStack(spacing: 12) {
+                                Text(lang.emoji)
+                                    .font(.title2)
+
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(lang.label)
+                                        .font(.body)
+                                        .fontWeight(lang.id == selection ? .semibold : .regular)
+                                        .foregroundStyle(.primary)
+                                    Text(lang.description)
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+
+                                Spacer()
+
+                                if lang.id == selection {
+                                    Image(systemName: "checkmark")
+                                        .foregroundStyle(Color.stPrimary)
+                                        .fontWeight(.semibold)
+                                }
+                            }
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .navigationTitle(localeManager.localized("section_language"))
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button(localeManager.localized("done")) { showSheet = false }
+                    }
+                }
+            }
+            .presentationDetents([.medium, .large])
         }
     }
 }
@@ -404,12 +510,12 @@ private extension GenerateView {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Characters")
+                    Text(localeManager.localized("section_characters"))
                         .stSectionHeader()
                     Text(
                         viewModel.selectedCharacterIds.count == viewModel.familyMembers.count
-                            ? "All included"
-                            : "\(viewModel.selectedCharacterIds.count) of \(viewModel.familyMembers.count) selected"
+                            ? localeManager.localized("characters_all_included")
+                            : localeManager.localized("characters_count", viewModel.selectedCharacterIds.count, viewModel.familyMembers.count)
                     )
                     .font(.caption2)
                     .foregroundStyle(Color.stTextTertiary)
@@ -418,11 +524,11 @@ private extension GenerateView {
                 Spacer()
 
                 if viewModel.selectedCharacterIds.count == viewModel.familyMembers.count {
-                    Button("Clear") { viewModel.clearCharacterSelection() }
+                    Button(localeManager.localized("button_clear")) { viewModel.clearCharacterSelection() }
                         .font(.caption)
                         .foregroundStyle(Color.stPrimary)
                 } else {
-                    Button("Select All") { viewModel.selectAllCharacters() }
+                    Button(localeManager.localized("button_select_all")) { viewModel.selectAllCharacters() }
                         .font(.caption)
                         .foregroundStyle(Color.stPrimary)
                 }
@@ -475,7 +581,7 @@ private extension GenerateView {
             Button {
                 viewModel.cancelGeneration()
             } label: {
-                Text("Cancel")
+                Text(localeManager.localized("button_cancel"))
                     .foregroundStyle(.secondary)
             }
             .padding(.bottom, 20)
@@ -528,7 +634,7 @@ private extension GenerateView {
             // Bottom bar
             VStack(spacing: 12) {
                 // Page indicator
-                Text("Page \(viewModel.currentPage) of \(viewModel.storyPages.count)")
+                Text(localeManager.localized("page_indicator", viewModel.currentPage, viewModel.storyPages.count))
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
@@ -537,7 +643,7 @@ private extension GenerateView {
                     Button {
                         Task { await viewModel.saveEPUB() }
                     } label: {
-                        Label("Books", systemImage: "book")
+                        Label(localeManager.localized("button_books"), systemImage: "book")
                             .font(.subheadline.bold())
                             .padding(.horizontal, 16)
                             .padding(.vertical, 10)
@@ -549,7 +655,7 @@ private extension GenerateView {
                     Button {
                         Task { await viewModel.savePDF() }
                     } label: {
-                        Label("PDF", systemImage: "doc.richtext")
+                        Label(localeManager.localized("button_pdf"), systemImage: "doc.richtext")
                             .font(.subheadline.bold())
                             .padding(.horizontal, 16)
                             .padding(.vertical, 10)
@@ -561,7 +667,7 @@ private extension GenerateView {
                     Button {
                         viewModel.reset()
                     } label: {
-                        Label("New", systemImage: "plus")
+                        Label(localeManager.localized("button_new"), systemImage: "plus")
                             .font(.subheadline.bold())
                             .padding(.horizontal, 16)
                             .padding(.vertical, 10)
@@ -574,7 +680,7 @@ private extension GenerateView {
                     Button {
                         showBedtimeMode = true
                     } label: {
-                        Label("Sleep", systemImage: "moon.fill")
+                        Label(localeManager.localized("button_sleep"), systemImage: "moon.fill")
                             .font(.subheadline.bold())
                             .padding(.horizontal, 16)
                             .padding(.vertical, 10)
@@ -710,7 +816,7 @@ private extension GenerateView {
                 .font(.system(size: 48))
                 .foregroundStyle(.red)
 
-            Text("Something went wrong")
+            Text(localeManager.localized("error_title"))
                 .font(.headline)
 
             Text(message)
@@ -722,7 +828,7 @@ private extension GenerateView {
             Button {
                 Task { await viewModel.generate() }
             } label: {
-                Label("Try Again", systemImage: "arrow.clockwise")
+                Label(localeManager.localized("button_try_again"), systemImage: "arrow.clockwise")
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)
                     .background(Color.stPrimary)
@@ -730,7 +836,7 @@ private extension GenerateView {
                     .clipShape(Capsule())
             }
 
-            Button("Start Over") {
+            Button(localeManager.localized("button_start_over")) {
                 viewModel.reset()
             }
             .foregroundStyle(.secondary)

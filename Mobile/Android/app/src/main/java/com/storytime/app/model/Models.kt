@@ -32,6 +32,7 @@ data class StylesResponse(
     val writingStyles: List<StyleItem>,
     val imageStyles: List<StyleItem>,
     val lessons: List<StyleItem>? = null,
+    val languages: List<StyleItem>? = null,
     val defaults: StyleDefaults
 )
 
@@ -47,7 +48,8 @@ data class StyleItem(
 data class StyleDefaults(
     val writingStyle: String,
     val imageStyle: String,
-    val lesson: String? = null
+    val lesson: String? = null,
+    val language: String? = null
 )
 
 // MARK: - Story Generation
@@ -62,7 +64,8 @@ data class GenerateRequest(
     val customWritingStyle: String? = null,
     val customImageStyle: String? = null,
     val customLesson: String? = null,
-    val bedtimeStory: Boolean? = null
+    val bedtimeStory: Boolean? = null,
+    val language: String? = null
 )
 
 @Serializable

@@ -29,6 +29,9 @@ class GenerationViewModel: ObservableObject {
     @Published var customWritingStyle = ""
     @Published var customImageStyle = ""
     @Published var customLesson = ""
+    @Published var language = "en" {
+        didSet { LocaleManager.shared.languageCode = language }
+    }
     @Published var isBedtimeStory = false
 
     @Published var progress: Double = 0
@@ -45,6 +48,7 @@ class GenerationViewModel: ObservableObject {
     @Published var writingStyles: [StyleItem] = []
     @Published var imageStyles: [StyleItem] = []
     @Published var lessons: [StyleItem] = []
+    @Published var languages: [StyleItem] = []
 
     @Published var kidName: String
 
@@ -64,28 +68,31 @@ class GenerationViewModel: ObservableObject {
         let hour = Calendar.current.component(.hour, from: Date())
         let timeGreeting: String
         switch hour {
-        case 5..<12: timeGreeting = "Good morning"
-        case 12..<17: timeGreeting = "Good afternoon"
-        default: timeGreeting = "Good evening"
+        case 5..<12: timeGreeting = LocaleManager.shared.localized("greeting_morning")
+        case 12..<17: timeGreeting = LocaleManager.shared.localized("greeting_afternoon")
+        default: timeGreeting = LocaleManager.shared.localized("greeting_evening")
         }
 
         if kidName.isEmpty {
-            return "Welcome to Storytime!"
+            return LocaleManager.shared.localized("greeting_welcome")
         } else {
-            return "\(timeGreeting), \(kidName)!"
+            return LocaleManager.shared.localized("greeting_personalized", timeGreeting, kidName)
         }
     }
 
     init() {
         self.kidName = UserDefaults.standard.string(forKey: "kidName") ?? ""
+        self.language = LocaleManager.shared.languageCode
     }
 
-    let suggestions = [
-        "A magical adventure in an enchanted forest",
-        "A trip to outer space to visit friendly aliens",
-        "A day at the beach with a talking dolphin",
-        "A treasure hunt in a pirate ship",
-    ]
+    var suggestions: [String] {
+        [
+            LocaleManager.shared.localized("suggestion_1"),
+            LocaleManager.shared.localized("suggestion_2"),
+            LocaleManager.shared.localized("suggestion_3"),
+            LocaleManager.shared.localized("suggestion_4"),
+        ]
+    }
 
     func toggleCharacter(_ id: Int) {
         hasCustomSelection = true
@@ -117,66 +124,104 @@ class GenerationViewModel: ObservableObject {
     }
 
     func loadStyles() async {
+        let lm = LocaleManager.shared
         do {
             let response: StylesResponse = try await APIClient.shared.get("/api/styles")
-            writingStyles = response.writingStyles
-            imageStyles = response.imageStyles
-            lessons = response.lessons ?? []
+            writingStyles = response.writingStyles.map { lm.localizedStyleItem($0) }
+            imageStyles = response.imageStyles.map { lm.localizedStyleItem($0) }
+            lessons = (response.lessons ?? []).map { lm.localizedLessonItem($0) }
+            languages = response.languages ?? Self.fallbackLanguages
             writingStyle = response.defaults.writingStyle
             imageStyle = response.defaults.imageStyle
             lesson = response.defaults.lesson ?? "none"
+            language = response.defaults.language ?? LocaleManager.shared.languageCode
         } catch {
-            // Use hardcoded fallbacks
+            // Use hardcoded fallbacks mapped through localization
             writingStyles = [
-                StyleItem(id: "standard", label: "Standard", emoji: "📖", description: "Classic bedtime story"),
-                StyleItem(id: "rhyming", label: "Rhyming", emoji: "🎵", description: "Dr. Seuss-style verse"),
-                StyleItem(id: "funny", label: "Funny", emoji: "😂", description: "Silly humor"),
-                StyleItem(id: "bedtime", label: "Bedtime", emoji: "🌙", description: "Calm and dreamy"),
-                StyleItem(id: "adventure", label: "Adventure", emoji: "⚔️", description: "Epic quests"),
-            ]
+                StyleItem(id: "standard", label: "Standard", emoji: "📖", description: "Classic bedtime story narration"),
+                StyleItem(id: "rhyming", label: "Rhyming", emoji: "🎵", description: "Dr. Seuss-style rhyming verse"),
+                StyleItem(id: "funny", label: "Funny", emoji: "😂", description: "Silly humor and unexpected twists"),
+                StyleItem(id: "sound-effects", label: "Sound Effects", emoji: "💥", description: "Onomatopoeia and interactive sounds"),
+                StyleItem(id: "repetitive", label: "Repetitive", emoji: "🔁", description: "Cumulative story with repeating phrases"),
+                StyleItem(id: "bedtime", label: "Bedtime", emoji: "🌙", description: "Extra calm and dreamy for sleepy time"),
+                StyleItem(id: "adventure", label: "Adventure", emoji: "⚔️", description: "Epic quests and brave heroes"),
+            ].map { lm.localizedStyleItem($0) }
             imageStyles = [
-                StyleItem(id: "watercolor", label: "Watercolor", emoji: "🎨", description: "Soft watercolor"),
-                StyleItem(id: "cartoon", label: "Cartoon", emoji: "🦸", description: "Bold cartoon"),
-                StyleItem(id: "ghibli", label: "Ghibli", emoji: "🏔️", description: "Studio Ghibli-inspired"),
-                StyleItem(id: "none", label: "No Images", emoji: "📝", description: "Text-only story"),
-            ]
+                StyleItem(id: "watercolor", label: "Watercolor", emoji: "🎨", description: "Soft, dreamy watercolor paintings"),
+                StyleItem(id: "fantasy", label: "Fantasy", emoji: "🧙", description: "Rich, magical fantasy art"),
+                StyleItem(id: "realistic", label: "Realistic", emoji: "📷", description: "Photo-realistic digital art"),
+                StyleItem(id: "cartoon", label: "Cartoon", emoji: "🦸", description: "Bold, colorful cartoon style"),
+                StyleItem(id: "classic-storybook", label: "Classic Storybook", emoji: "📚", description: "Vintage children's book illustrations"),
+                StyleItem(id: "anime", label: "Anime", emoji: "✨", description: "Japanese anime-inspired art"),
+                StyleItem(id: "ghibli", label: "Ghibli", emoji: "🏔️", description: "Studio Ghibli-inspired art"),
+                StyleItem(id: "chibi", label: "Chibi", emoji: "🎀", description: "Cute, super-deformed chibi art"),
+                StyleItem(id: "papercraft", label: "Papercraft", emoji: "✂️", description: "Cut-paper collage style"),
+                StyleItem(id: "pixel", label: "Pixel Art", emoji: "👾", description: "Retro pixel art style"),
+                StyleItem(id: "minimalist", label: "Minimalist", emoji: "⚪", description: "Clean, simple geometric shapes"),
+                StyleItem(id: "crayon", label: "Crayon", emoji: "🖍️", description: "Child-like crayon and colored pencil"),
+                StyleItem(id: "pop-art", label: "Pop Art", emoji: "🎪", description: "Bold pop art with halftone dots"),
+                StyleItem(id: "oil-painting", label: "Oil Painting", emoji: "🖼️", description: "Rich, textured oil painting style"),
+                StyleItem(id: "none", label: "No Images", emoji: "📝", description: "Text-only story, no illustrations"),
+            ].map { lm.localizedStyleItem($0) }
             lessons = [
-                StyleItem(id: "none", label: "None", emoji: "📖", description: "No specific lesson"),
-                StyleItem(id: "sharing", label: "Sharing", emoji: "🤝", description: "Learning to share"),
-                StyleItem(id: "bravery", label: "Bravery", emoji: "🦁", description: "Finding courage"),
-                StyleItem(id: "kindness", label: "Kindness", emoji: "💛", description: "Being kind"),
-                StyleItem(id: "patience", label: "Patience", emoji: "🐢", description: "Learning to wait"),
-                StyleItem(id: "honesty", label: "Honesty", emoji: "⭐", description: "Telling the truth"),
-            ]
+                StyleItem(id: "none", label: "None", emoji: "📖", description: "No specific lesson — just a fun story"),
+                StyleItem(id: "sharing", label: "Sharing", emoji: "🤝", description: "Learning to share with others"),
+                StyleItem(id: "bravery", label: "Bravery", emoji: "🦁", description: "Finding courage in tough moments"),
+                StyleItem(id: "kindness", label: "Kindness", emoji: "💛", description: "Being kind and caring to others"),
+                StyleItem(id: "patience", label: "Patience", emoji: "🐢", description: "Learning to wait and be patient"),
+                StyleItem(id: "honesty", label: "Honesty", emoji: "⭐", description: "The importance of telling the truth"),
+                StyleItem(id: "gratitude", label: "Gratitude", emoji: "🙏", description: "Appreciating what you have"),
+                StyleItem(id: "teamwork", label: "Teamwork", emoji: "🧩", description: "Working together to achieve goals"),
+                StyleItem(id: "empathy", label: "Empathy", emoji: "🫂", description: "Understanding others' feelings"),
+                StyleItem(id: "perseverance", label: "Perseverance", emoji: "🏔️", description: "Not giving up when things are hard"),
+            ].map { lm.localizedLessonItem($0) }
+            languages = Self.fallbackLanguages
         }
     }
+
+    static let fallbackLanguages: [StyleItem] = [
+        StyleItem(id: "en", label: "English", emoji: "🇺🇸", description: "English"),
+        StyleItem(id: "es", label: "Spanish", emoji: "🇪🇸", description: "Español"),
+        StyleItem(id: "fr", label: "French", emoji: "🇫🇷", description: "Français"),
+        StyleItem(id: "ar", label: "Arabic", emoji: "🇸🇦", description: "العربية"),
+        StyleItem(id: "de", label: "German", emoji: "🇩🇪", description: "Deutsch"),
+        StyleItem(id: "zh", label: "Chinese", emoji: "🇨🇳", description: "中文"),
+        StyleItem(id: "pt", label: "Portuguese", emoji: "🇧🇷", description: "Português"),
+        StyleItem(id: "hi", label: "Hindi", emoji: "🇮🇳", description: "हिन्दी"),
+        StyleItem(id: "ja", label: "Japanese", emoji: "🇯🇵", description: "日本語"),
+        StyleItem(id: "ko", label: "Korean", emoji: "🇰🇷", description: "한국어"),
+        StyleItem(id: "it", label: "Italian", emoji: "🇮🇹", description: "Italiano"),
+        StyleItem(id: "nl", label: "Dutch", emoji: "🇳🇱", description: "Nederlands"),
+        StyleItem(id: "ru", label: "Russian", emoji: "🇷🇺", description: "Русский"),
+        StyleItem(id: "tr", label: "Turkish", emoji: "🇹🇷", description: "Türkçe"),
+    ]
 
     func validateCustomInputs() -> String? {
         if writingStyle == "custom" {
             let text = customWritingStyle.trimmingCharacters(in: .whitespacesAndNewlines)
             if text.isEmpty {
-                return "Please describe your custom writing style before creating a story."
+                return LocaleManager.shared.localized("validation_custom_writing_empty")
             }
             if text.count > 500 {
-                return "Your custom writing style is too long. Please keep it under 500 characters."
+                return LocaleManager.shared.localized("validation_custom_writing_long")
             }
         }
         if imageStyle == "custom" {
             let text = customImageStyle.trimmingCharacters(in: .whitespacesAndNewlines)
             if text.isEmpty {
-                return "Please describe your custom image style before creating a story."
+                return LocaleManager.shared.localized("validation_custom_image_empty")
             }
             if text.count > 500 {
-                return "Your custom image style is too long. Please keep it under 500 characters."
+                return LocaleManager.shared.localized("validation_custom_image_long")
             }
         }
         if lesson == "custom" {
             let text = customLesson.trimmingCharacters(in: .whitespacesAndNewlines)
             if text.isEmpty {
-                return "Please describe your custom lesson before creating a story."
+                return LocaleManager.shared.localized("validation_custom_lesson_empty")
             }
             if text.count > 500 {
-                return "Your custom lesson is too long. Please keep it under 500 characters."
+                return LocaleManager.shared.localized("validation_custom_lesson_long")
             }
         }
         return nil
@@ -192,7 +237,7 @@ class GenerationViewModel: ObservableObject {
 
         state = .generating
         progress = 0
-        stepDetail = "Starting..."
+        stepDetail = LocaleManager.shared.localized("progress_starting")
         currentStep = "pending"
         storyPages = []
         storyId = nil
@@ -211,7 +256,8 @@ class GenerationViewModel: ObservableObject {
                 customWritingStyle: writingStyle == "custom" ? customWritingStyle : nil,
                 customImageStyle: imageStyle == "custom" ? customImageStyle : nil,
                 customLesson: lesson == "custom" ? customLesson : nil,
-                bedtimeStory: isBedtimeStory ? true : nil
+                bedtimeStory: isBedtimeStory ? true : nil,
+                language: language != "en" ? language : nil
             )
             let response: GenerateResponse = try await APIClient.shared.post("/api/generate", body: request)
             storyId = response.storyId
@@ -328,11 +374,22 @@ class GenerationViewModel: ObservableObject {
         if let p = event.progress {
             progress = p
         }
-        if let detail = event.detail {
-            stepDetail = detail
-        }
         if let step = event.step {
             currentStep = step
+            switch step {
+            case "generating-story":
+                stepDetail = LocaleManager.shared.localized("progress_writing")
+            case "generating-images":
+                stepDetail = LocaleManager.shared.localized("progress_painting")
+            case "assembling-ebook":
+                stepDetail = LocaleManager.shared.localized("progress_assembling")
+            default:
+                if let detail = event.detail {
+                    stepDetail = detail
+                }
+            }
+        } else if let detail = event.detail {
+            stepDetail = detail
         }
         if let pages = event.storyPages {
             storyPages = pages
@@ -350,7 +407,7 @@ class GenerationViewModel: ObservableObject {
             checkSleepTimer()
 
         case "error":
-            state = .error(event.message ?? "An unknown error occurred")
+            state = .error(event.message ?? LocaleManager.shared.localized("error_unknown"))
 
         default:
             break

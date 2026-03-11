@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Storytime</string>
+
+    <!-- Navigation -->
+    <string name="tab_create">Создать</string>
+    <string name="tab_history">История</string>
+    <string name="tab_settings">Настройки</string>
+
+    <!-- Generate - Greetings -->
+    <string name="greeting_morning">Доброе утро</string>
+    <string name="greeting_afternoon">Добрый день</string>
+    <string name="greeting_evening">Добрый вечер</string>
+    <string name="greeting_welcome">Добро пожаловать в Storytime!</string>
+    <string name="greeting_personalized">%1$s, %2$s!</string>
+
+    <!-- Generate - Idle -->
+    <string name="setup_prompt">Укажите имя ребёнка в Настройках для персонализированных историй</string>
+    <string name="prompt_header">Какую историю мы создадим?</string>
+    <string name="prompt_placeholder">Опишите вашу идею для истории…</string>
+    <string name="suggestion_1">Волшебное приключение в заколдованном лесу</string>
+    <string name="suggestion_2">Путешествие в космос к дружелюбным инопланетянам</string>
+    <string name="suggestion_3">День на пляже с говорящим дельфином</string>
+    <string name="suggestion_4">Охота за сокровищами на пиратском корабле</string>
+    <string name="section_language">Язык</string>
+    <string name="section_writing_style">Стиль письма</string>
+    <string name="section_image_style">Стиль изображений</string>
+    <string name="section_lesson">Урок</string>
+    <string name="custom_label">Свой вариант</string>
+    <string name="custom_placeholder">Опишите свой %1$s…</string>
+    <string name="use_custom">Использовать свой</string>
+    <string name="or_write_your_own">Или напишите свой</string>
+    <string name="done">Готово</string>
+    <string name="bedtime_story_label">Сказка на ночь</string>
+    <string name="bedtime_story_hint">Короткая, спокойная история (10 страниц), идеальная для засыпания</string>
+    <string name="section_characters">Персонажи</string>
+    <string name="characters_all_included">Все включены</string>
+    <string name="characters_count">%1$d из %2$d выбрано</string>
+    <string name="button_clear">Очистить</string>
+    <string name="button_select_all">Выбрать все</string>
+    <string name="button_create_story">Создать историю</string>
+
+    <!-- Generate - Progress -->
+    <string name="progress_starting">Начинаем…</string>
+    <string name="progress_writing">Пишем вашу историю…</string>
+    <string name="progress_painting">Рисуем иллюстрации…</string>
+    <string name="progress_assembling">Собираем вашу книгу…</string>
+    <string name="button_cancel">Отмена</string>
+
+    <!-- Generate - Complete -->
+    <string name="page_indicator">Страница %1$d из %2$d</string>
+    <string name="button_books">Книги</string>
+    <string name="button_pdf">PDF</string>
+    <string name="button_new">Новая</string>
+    <string name="button_sleep">Сон</string>
+
+    <!-- Generate - Error -->
+    <string name="error_title">Что-то пошло не так</string>
+    <string name="button_try_again">Попробовать снова</string>
+    <string name="button_start_over">Начать заново</string>
+    <string name="error_unknown">Произошла неизвестная ошибка</string>
+
+    <!-- History -->
+    <string name="history_empty_title">Пока нет историй</string>
+    <string name="history_empty_description">Ваши истории появятся здесь, когда вы создадите первую!</string>
+    <string name="date_today">Сегодня</string>
+    <string name="date_yesterday">Вчера</string>
+    <string name="date_days_ago">%1$d дней назад</string>
+    <string name="delete_story_title">Удалить историю</string>
+    <string name="delete_story_message">Вы уверены, что хотите удалить эту историю? Это действие нельзя отменить.</string>
+    <string name="button_delete">Удалить</string>
+    <string name="story_not_found">Данные истории не найдены</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Сервер</string>
+    <string name="settings_connected">Подключено</string>
+    <string name="settings_not_connected">Не подключено</string>
+    <string name="settings_test">Тест</string>
+    <string name="settings_server_url">URL сервера</string>
+    <string name="settings_child_details">Данные ребёнка</string>
+    <string name="settings_change_photo">Сменить фото</string>
+    <string name="settings_add_photo">Добавить фото</string>
+    <string name="settings_name">Имя</string>
+    <string name="settings_gender">Пол</string>
+    <string name="settings_gender_not_set">Не указан</string>
+    <string name="settings_gender_boy">Мальчик</string>
+    <string name="settings_gender_girl">Девочка</string>
+    <string name="settings_reading_level">Уровень чтения</string>
+    <string name="settings_reading_toddler">Малыш (2-3)</string>
+    <string name="settings_reading_early">Начинающий читатель (4-5)</string>
+    <string name="settings_reading_beginner">Новичок (6-7)</string>
+    <string name="settings_reading_intermediate">Средний (8-10)</string>
+    <string name="settings_family">Семья</string>
+    <string name="settings_family_members">Члены семьи</string>
+    <string name="settings_manage_family">Управление членами семьи</string>
+    <string name="settings_bedtime">Время сна</string>
+    <string name="settings_ambient_sound">Фоновый звук</string>
+    <string name="settings_sleep_timer">Таймер сна</string>
+    <string name="settings_sleep_off">Выкл</string>
+    <string name="settings_sleep_1">После 1 истории</string>
+    <string name="settings_sleep_2">После 2 историй</string>
+    <string name="settings_sleep_3">После 3 историй</string>
+    <string name="settings_bedtime_footer">Ночной режим приглушает экран и включает успокаивающие звуки после сказки</string>
+    <string name="settings_developer_options">Параметры разработчика</string>
+    <string name="settings_anthropic_key">Anthropic API Key</string>
+    <string name="settings_google_key">Google AI API Key</string>
+    <string name="settings_keys_footer">Ключи хранятся на сервере. Скрытые ключи означают, что существующий ключ уже установлен.</string>
+    <string name="button_save">Сохранить</string>
+    <string name="settings_saved">Настройки сохранены</string>
+    <string name="settings_connect_error">Не удаётся подключиться к серверу</string>
+    <string name="alert_error">Ошибка</string>
+    <string name="button_ok">ОК</string>
+
+    <!-- Family Members -->
+    <string name="family_empty_title">Нет членов семьи</string>
+    <string name="family_empty_description">Добавьте членов семьи, чтобы они появлялись в ваших историях</string>
+    <string name="family_add_title">Добавить члена семьи</string>
+    <string name="family_edit_title">Редактировать члена семьи</string>
+    <string name="family_add_button">Добавить</string>
+    <string name="family_section_details">Подробности</string>
+    <string name="family_section_description">Описание (необязательно)</string>
+    <string name="family_description_placeholder">Внешность, характер, предыстория…</string>
+    <string name="family_section_photo">Фото</string>
+    <string name="family_choose_photo">Выбрать фото</string>
+    <string name="family_upload_photo">Загрузить фото</string>
+    <string name="family_delete_title">Удалить члена семьи</string>
+    <string name="family_delete_message">Удалить %1$s из семьи?</string>
+    <string name="role_mom">Мама</string>
+    <string name="role_dad">Папа</string>
+    <string name="role_brother">Брат</string>
+    <string name="role_sister">Сестра</string>
+    <string name="role_grandma">Бабушка</string>
+    <string name="role_grandpa">Дедушка</string>
+    <string name="role_aunt">Тётя</string>
+    <string name="role_uncle">Дядя</string>
+    <string name="role_pet">Питомец</string>
+    <string name="role_friend">Друг</string>
+    <string name="role_companion">Спутник</string>
+    <string name="role_classmate">Одноклассник</string>
+    <string name="role_neighbor">Сосед</string>
+    <string name="role_magical_friend">Волшебный друг</string>
+    <string name="role_other">Другой</string>
+
+    <!-- Bedtime & Breathing -->
+    <string name="bedtime_tap_to_exit">Нажмите в любом месте для выхода</string>
+    <string name="breathing_in">Вдох</string>
+    <string name="breathing_hold">Задержка</string>
+    <string name="breathing_out">Выдох</string>
+
+    <!-- Ambient Sounds -->
+    <string name="sound_whiteNoise">Белый шум</string>
+    <string name="sound_brownNoise">Коричневый шум</string>
+    <string name="sound_pinkNoise">Розовый шум</string>
+    <string name="sound_softRain">Тихий дождь</string>
+    <string name="sound_oceanWaves">Морские волны</string>
+    <string name="sound_cracklingFireplace">Камин</string>
+    <string name="sound_forestNight">Ночной лес</string>
+    <string name="sound_heartbeat">Сердцебиение</string>
+
+    <!-- Writing Style Labels -->
+    <string name="style_standard">Стандартный</string>
+    <string name="style_rhyming">Рифмованный</string>
+    <string name="style_funny">Смешной</string>
+    <string name="style_sound_effects">Звуковые эффекты</string>
+    <string name="style_repetitive">Повторяющийся</string>
+    <string name="style_bedtime">Для сна</string>
+    <string name="style_adventure">Приключение</string>
+
+    <!-- Writing Style Descriptions -->
+    <string name="style_desc_standard">Классическая сказка на ночь</string>
+    <string name="style_desc_rhyming">Стихотворный стиль в духе Доктора Сьюза</string>
+    <string name="style_desc_funny">Весёлый юмор и неожиданные повороты</string>
+    <string name="style_desc_sound_effects">Звукоподражания и интерактивные звуки</string>
+    <string name="style_desc_repetitive">Кумулятивная история с повторяющимися фразами</string>
+    <string name="style_desc_bedtime">Особенно спокойная и мечтательная для засыпания</string>
+    <string name="style_desc_adventure">Эпические квесты и храбрые герои</string>
+
+    <!-- Image Style Labels -->
+    <string name="style_watercolor">Акварель</string>
+    <string name="style_fantasy">Фэнтези</string>
+    <string name="style_realistic">Реалистичный</string>
+    <string name="style_cartoon">Мультфильм</string>
+    <string name="style_classic_storybook">Классическая книга</string>
+    <string name="style_anime">Аниме</string>
+    <string name="style_ghibli">Гибли</string>
+    <string name="style_chibi">Чиби</string>
+    <string name="style_papercraft">Аппликация</string>
+    <string name="style_pixel">Пиксель-арт</string>
+    <string name="style_minimalist">Минимализм</string>
+    <string name="style_crayon">Карандаш</string>
+    <string name="style_pop_art">Поп-арт</string>
+    <string name="style_oil_painting">Масляная живопись</string>
+    <string name="style_none">Без изображений</string>
+
+    <!-- Image Style Descriptions -->
+    <string name="style_desc_watercolor">Мягкие, мечтательные акварельные картины</string>
+    <string name="style_desc_fantasy">Богатое, волшебное фэнтези-искусство</string>
+    <string name="style_desc_realistic">Фотореалистичная цифровая графика</string>
+    <string name="style_desc_cartoon">Яркий, красочный мультяшный стиль</string>
+    <string name="style_desc_classic_storybook">Иллюстрации в стиле классических детских книг</string>
+    <string name="style_desc_anime">Искусство в стиле японского аниме</string>
+    <string name="style_desc_ghibli">Искусство в стиле Студии Гибли</string>
+    <string name="style_desc_chibi">Милый, супердеформированный стиль чиби</string>
+    <string name="style_desc_papercraft">Стиль бумажного коллажа</string>
+    <string name="style_desc_pixel">Ретро пиксель-арт стиль</string>
+    <string name="style_desc_minimalist">Чистые, простые геометрические формы</string>
+    <string name="style_desc_crayon">Детский стиль карандашами и цветными мелками</string>
+    <string name="style_desc_pop_art">Яркий поп-арт с растровыми точками</string>
+    <string name="style_desc_oil_painting">Богатый, текстурный стиль масляной живописи</string>
+    <string name="style_desc_none">Только текст, без иллюстраций</string>
+
+    <!-- Lesson Labels -->
+    <string name="lesson_none">Нет</string>
+    <string name="lesson_sharing">Умение делиться</string>
+    <string name="lesson_bravery">Смелость</string>
+    <string name="lesson_kindness">Доброта</string>
+    <string name="lesson_patience">Терпение</string>
+    <string name="lesson_honesty">Честность</string>
+    <string name="lesson_gratitude">Благодарность</string>
+    <string name="lesson_teamwork">Командная работа</string>
+    <string name="lesson_empathy">Сочувствие</string>
+    <string name="lesson_perseverance">Настойчивость</string>
+
+    <!-- Lesson Descriptions -->
+    <string name="lesson_desc_none">Без определённого урока — просто весёлая история</string>
+    <string name="lesson_desc_sharing">Учимся делиться с другими</string>
+    <string name="lesson_desc_bravery">Находим смелость в трудные моменты</string>
+    <string name="lesson_desc_kindness">Быть добрым и заботливым к другим</string>
+    <string name="lesson_desc_patience">Учимся ждать и быть терпеливым</string>
+    <string name="lesson_desc_honesty">Важность говорить правду</string>
+    <string name="lesson_desc_gratitude">Ценить то, что имеешь</string>
+    <string name="lesson_desc_teamwork">Работать вместе для достижения целей</string>
+    <string name="lesson_desc_empathy">Понимание чувств других</string>
+    <string name="lesson_desc_perseverance">Не сдаваться, когда трудно</string>
+
+    <!-- Validation -->
+    <string name="validation_custom_writing_empty">Пожалуйста, опишите свой стиль письма перед созданием истории.</string>
+    <string name="validation_custom_writing_long">Ваш стиль письма слишком длинный. Пожалуйста, сократите до 500 символов.</string>
+    <string name="validation_custom_image_empty">Пожалуйста, опишите свой стиль изображений перед созданием истории.</string>
+    <string name="validation_custom_image_long">Ваш стиль изображений слишком длинный. Пожалуйста, сократите до 500 символов.</string>
+    <string name="validation_custom_lesson_empty">Пожалуйста, опишите свой урок перед созданием истории.</string>
+    <string name="validation_custom_lesson_long">Ваш урок слишком длинный. Пожалуйста, сократите до 500 символов.</string>
+</resources>

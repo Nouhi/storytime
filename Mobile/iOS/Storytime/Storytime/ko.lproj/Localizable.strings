@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "만들기";
+"tab_history" = "기록";
+"tab_settings" = "설정";
+
+/* Generate - Greetings */
+"greeting_morning" = "좋은 아침이에요";
+"greeting_afternoon" = "안녕하세요";
+"greeting_evening" = "좋은 저녁이에요";
+"greeting_welcome" = "Storytime에 오신 걸 환영해요!";
+"greeting_personalized" = "%@, %@!";
+
+/* Generate - Idle */
+"setup_prompt" = "설정에서 아이의 이름을 입력하면 맞춤 이야기를 만들 수 있어요";
+"prompt_header" = "어떤 이야기를 만들까요?";
+"prompt_placeholder" = "이야기 아이디어를 적어보세요...";
+"suggestion_1" = "마법의 숲에서 신비한 모험";
+"suggestion_2" = "친절한 외계인을 만나러 우주 여행";
+"suggestion_3" = "말하는 돌고래와 함께하는 해변의 하루";
+"suggestion_4" = "해적선에서 보물찾기";
+"section_language" = "언어";
+"section_writing_style" = "글쓰기 스타일";
+"section_image_style" = "그림 스타일";
+"section_lesson" = "교훈";
+"custom_label" = "직접 만들기";
+"custom_placeholder" = "나만의 %@을 적어보세요...";
+"use_custom" = "직접 만든 것 사용";
+"or_write_your_own" = "또는 직접 써보세요";
+"done" = "완료";
+"bedtime_story_label" = "잠자리 이야기";
+"bedtime_story_hint" = "더 짧고 차분한 이야기 (10페이지), 잠잘 시간에 딱 좋아요";
+"section_characters" = "등장인물";
+"characters_all_included" = "모두 포함";
+"characters_count" = "%d명 중 %d명 선택";
+"button_clear" = "지우기";
+"button_select_all" = "모두 선택";
+"button_create_story" = "이야기 만들기";
+
+/* Generate - Progress */
+"progress_starting" = "시작하는 중...";
+"progress_writing" = "이야기를 쓰고 있어요...";
+"progress_painting" = "그림을 그리고 있어요...";
+"progress_assembling" = "책을 만들고 있어요...";
+"button_cancel" = "취소";
+
+/* Generate - Complete */
+"page_indicator" = "%d쪽 / %d쪽";
+"button_books" = "책장";
+"button_pdf" = "PDF";
+"button_new" = "새로";
+"button_sleep" = "잠자기";
+
+/* Generate - Error */
+"error_title" = "문제가 생겼어요";
+"button_try_again" = "다시 시도";
+"button_start_over" = "처음부터";
+"error_unknown" = "알 수 없는 오류가 발생했어요";
+
+/* History */
+"history_empty_title" = "아직 이야기가 없어요";
+"history_empty_description" = "이야기를 만들면 여기에 나타나요!";
+"date_today" = "오늘";
+"date_yesterday" = "어제";
+"date_days_ago" = "%d일 전";
+"delete_story_title" = "이야기 삭제";
+"delete_story_message" = "정말로 이 이야기를 삭제할까요? 되돌릴 수 없어요.";
+"button_delete" = "삭제";
+"story_not_found" = "이야기 데이터를 찾을 수 없어요";
+
+/* Settings */
+"settings_server" = "서버";
+"settings_connected" = "연결됨";
+"settings_not_connected" = "연결 안 됨";
+"settings_test" = "테스트";
+"settings_server_url" = "서버 URL";
+"settings_child_details" = "아이 정보";
+"settings_change_photo" = "사진 변경";
+"settings_add_photo" = "사진 추가";
+"settings_name" = "이름";
+"settings_gender" = "성별";
+"settings_gender_not_set" = "설정 안 됨";
+"settings_gender_boy" = "남자아이";
+"settings_gender_girl" = "여자아이";
+"settings_reading_level" = "읽기 수준";
+"settings_reading_toddler" = "유아 (2-3세)";
+"settings_reading_early" = "초기 독자 (4-5세)";
+"settings_reading_beginner" = "초보 (6-7세)";
+"settings_reading_intermediate" = "중급 (8-10세)";
+"settings_family" = "가족";
+"settings_family_members" = "가족 구성원";
+"settings_manage_family" = "가족 구성원 관리";
+"settings_bedtime" = "잠자리 시간";
+"settings_ambient_sound" = "배경 소리";
+"settings_sleep_timer" = "수면 타이머";
+"settings_sleep_off" = "끄기";
+"settings_sleep_1" = "이야기 1개 후";
+"settings_sleep_2" = "이야기 2개 후";
+"settings_sleep_3" = "이야기 3개 후";
+"settings_bedtime_footer" = "잠자리 모드는 이야기 후 화면을 어둡게 하고 편안한 소리를 재생해요";
+"settings_developer_options" = "개발자 옵션";
+"settings_anthropic_key" = "Anthropic API Key";
+"settings_google_key" = "Google AI API Key";
+"settings_keys_footer" = "키는 서버에 저장됩니다. 가려진 키는 기존 키가 설정되어 있음을 나타냅니다.";
+"button_save" = "저장";
+"settings_saved" = "설정이 저장되었어요";
+"settings_connect_error" = "서버에 연결할 수 없어요";
+"alert_error" = "오류";
+"button_ok" = "확인";
+
+/* Family Members */
+"family_empty_title" = "가족 구성원이 없어요";
+"family_empty_description" = "가족을 추가하면 이야기에 등장시킬 수 있어요";
+"family_add_title" = "구성원 추가";
+"family_edit_title" = "구성원 수정";
+"family_add_button" = "추가";
+"family_section_details" = "상세 정보";
+"family_section_description" = "설명 (선택사항)";
+"family_description_placeholder" = "외모, 성격, 배경 이야기...";
+"family_section_photo" = "사진";
+"family_choose_photo" = "사진 선택";
+"family_upload_photo" = "사진 업로드";
+"family_delete_title" = "구성원 삭제";
+"family_delete_message" = "%@를 가족에서 제거할까요?";
+"role_mom" = "엄마";
+"role_dad" = "아빠";
+"role_brother" = "오빠/형";
+"role_sister" = "언니/누나";
+"role_grandma" = "할머니";
+"role_grandpa" = "할아버지";
+"role_aunt" = "이모/고모";
+"role_uncle" = "삼촌/외삼촌";
+"role_pet" = "반려동물";
+"role_friend" = "친구";
+"role_companion" = "동반자";
+"role_classmate" = "같은 반 친구";
+"role_neighbor" = "이웃";
+"role_magical_friend" = "마법 친구";
+"role_other" = "기타";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "아무 곳이나 탭하면 나가요";
+"breathing_in" = "숨 들이쉬기";
+"breathing_hold" = "멈추기";
+"breathing_out" = "숨 내쉬기";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "백색 소음";
+"sound_brownNoise" = "갈색 소음";
+"sound_pinkNoise" = "분홍 소음";
+"sound_softRain" = "잔잔한 비";
+"sound_oceanWaves" = "파도 소리";
+"sound_cracklingFireplace" = "벽난로";
+"sound_forestNight" = "밤의 숲";
+"sound_heartbeat" = "심장 소리";
+
+/* Writing Style Labels */
+"style_standard" = "기본";
+"style_rhyming" = "운율";
+"style_funny" = "재미있는";
+"style_sound_effects" = "효과음";
+"style_repetitive" = "반복";
+"style_bedtime" = "잠자리";
+"style_adventure" = "모험";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "클래식한 잠자리 이야기 스타일";
+"style_desc_rhyming" = "Dr. Seuss 스타일의 운율이 있는 시";
+"style_desc_funny" = "재미있는 유머와 뜻밖의 반전";
+"style_desc_sound_effects" = "의성어와 상호작용하는 소리";
+"style_desc_repetitive" = "반복 구절이 있는 누적 이야기";
+"style_desc_bedtime" = "잠잘 시간에 딱 맞는 아주 차분하고 몽환적인 이야기";
+"style_desc_adventure" = "멋진 모험과 용감한 영웅";
+
+/* Image Style Labels */
+"style_watercolor" = "수채화";
+"style_fantasy" = "판타지";
+"style_realistic" = "사실적";
+"style_cartoon" = "만화";
+"style_classic_storybook" = "클래식 동화책";
+"style_anime" = "애니메";
+"style_ghibli" = "지브리";
+"style_chibi" = "치비";
+"style_papercraft" = "종이 공예";
+"style_pixel" = "픽셀 아트";
+"style_minimalist" = "미니멀";
+"style_crayon" = "크레용";
+"style_pop_art" = "팝 아트";
+"style_oil_painting" = "유화";
+"style_none" = "그림 없음";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "부드럽고 몽환적인 수채화";
+"style_desc_fantasy" = "풍부하고 마법 같은 판타지 아트";
+"style_desc_realistic" = "사진 같은 디지털 아트";
+"style_desc_cartoon" = "선명하고 다채로운 만화 스타일";
+"style_desc_classic_storybook" = "클래식 동화책 삽화";
+"style_desc_anime" = "일본 애니메에서 영감을 받은 아트";
+"style_desc_ghibli" = "Studio Ghibli에서 영감을 받은 아트";
+"style_desc_chibi" = "귀엽고 과장된 치비 아트";
+"style_desc_papercraft" = "오려낸 종이 콜라주 스타일";
+"style_desc_pixel" = "레트로 픽셀 아트 스타일";
+"style_desc_minimalist" = "깔끔하고 단순한 기하학 도형";
+"style_desc_crayon" = "어린이가 그린 듯한 크레용과 색연필 스타일";
+"style_desc_pop_art" = "대담한 팝 아트와 하프톤 도트";
+"style_desc_oil_painting" = "풍부한 질감의 유화 스타일";
+"style_desc_none" = "글만 있는 이야기, 그림 없음";
+
+/* Lesson Labels */
+"lesson_none" = "없음";
+"lesson_sharing" = "나눔";
+"lesson_bravery" = "용기";
+"lesson_kindness" = "친절";
+"lesson_patience" = "인내";
+"lesson_honesty" = "정직";
+"lesson_gratitude" = "감사";
+"lesson_teamwork" = "팀워크";
+"lesson_empathy" = "공감";
+"lesson_perseverance" = "끈기";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "특별한 교훈 없이 재미있는 이야기";
+"lesson_desc_sharing" = "다른 사람들과 나누는 것을 배워요";
+"lesson_desc_bravery" = "어려운 순간에 용기를 찾아요";
+"lesson_desc_kindness" = "다른 사람에게 친절하고 배려해요";
+"lesson_desc_patience" = "기다리고 참는 것을 배워요";
+"lesson_desc_honesty" = "진실을 말하는 것의 중요함";
+"lesson_desc_gratitude" = "가지고 있는 것에 감사해요";
+"lesson_desc_teamwork" = "함께 힘을 모아 목표를 이루어요";
+"lesson_desc_empathy" = "다른 사람의 기분을 이해해요";
+"lesson_desc_perseverance" = "힘들어도 포기하지 않아요";
+
+/* Validation */
+"validation_custom_writing_empty" = "이야기를 만들기 전에 직접 만든 글쓰기 스타일을 설명해 주세요.";
+"validation_custom_writing_long" = "직접 만든 글쓰기 스타일이 너무 길어요. 500자 이내로 작성해 주세요.";
+"validation_custom_image_empty" = "이야기를 만들기 전에 직접 만든 그림 스타일을 설명해 주세요.";
+"validation_custom_image_long" = "직접 만든 그림 스타일이 너무 길어요. 500자 이내로 작성해 주세요.";
+"validation_custom_lesson_empty" = "이야기를 만들기 전에 직접 만든 교훈을 설명해 주세요.";
+"validation_custom_lesson_long" = "직접 만든 교훈이 너무 길어요. 500자 이내로 작성해 주세요.";

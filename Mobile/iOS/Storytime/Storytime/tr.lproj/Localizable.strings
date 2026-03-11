@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "Oluştur";
+"tab_history" = "Geçmiş";
+"tab_settings" = "Ayarlar";
+
+/* Generate - Greetings */
+"greeting_morning" = "Günaydın";
+"greeting_afternoon" = "İyi öğleden sonralar";
+"greeting_evening" = "İyi akşamlar";
+"greeting_welcome" = "Storytime'a hoş geldiniz!";
+"greeting_personalized" = "%@, %@!";
+
+/* Generate - Idle */
+"setup_prompt" = "Kişiselleştirilmiş hikayeler için Ayarlar'da çocuğunuzun adını belirleyin";
+"prompt_header" = "Hangi hikayeyi oluşturalım?";
+"prompt_placeholder" = "Hikaye fikrinizi anlatın...";
+"suggestion_1" = "Büyülü bir ormanda sihirli bir macera";
+"suggestion_2" = "Dost canlısı uzaylıları ziyaret etmek için uzaya yolculuk";
+"suggestion_3" = "Konuşan bir yunusla sahilde bir gün";
+"suggestion_4" = "Korsan gemisinde hazine avı";
+"section_language" = "Dil";
+"section_writing_style" = "Yazım Stili";
+"section_image_style" = "Görsel Stili";
+"section_lesson" = "Ders";
+"custom_label" = "Özel";
+"custom_placeholder" = "Kendi %@ tanımlayın...";
+"use_custom" = "Özel Kullan";
+"or_write_your_own" = "Ya da kendiniz yazın";
+"done" = "Tamam";
+"bedtime_story_label" = "Uyku Hikayesi";
+"bedtime_story_hint" = "Uyku vakti için mükemmel, daha kısa ve sakin hikaye (10 sayfa)";
+"section_characters" = "Karakterler";
+"characters_all_included" = "Tümü dahil";
+"characters_count" = "%d / %d seçili";
+"button_clear" = "Temizle";
+"button_select_all" = "Tümünü Seç";
+"button_create_story" = "Hikaye Oluştur";
+
+/* Generate - Progress */
+"progress_starting" = "Başlıyor...";
+"progress_writing" = "Hikayeniz yazılıyor...";
+"progress_painting" = "Çizimler yapılıyor...";
+"progress_assembling" = "Kitabınız hazırlanıyor...";
+"button_cancel" = "İptal";
+
+/* Generate - Complete */
+"page_indicator" = "Sayfa %d / %d";
+"button_books" = "Kitaplar";
+"button_pdf" = "PDF";
+"button_new" = "Yeni";
+"button_sleep" = "Uyku";
+
+/* Generate - Error */
+"error_title" = "Bir şeyler ters gitti";
+"button_try_again" = "Tekrar Dene";
+"button_start_over" = "Baştan Başla";
+"error_unknown" = "Bilinmeyen bir hata oluştu";
+
+/* History */
+"history_empty_title" = "Henüz Hikaye Yok";
+"history_empty_description" = "Hikayeleriniz bir tane oluşturduğunuzda burada görünecek!";
+"date_today" = "Bugün";
+"date_yesterday" = "Dün";
+"date_days_ago" = "%d gün önce";
+"delete_story_title" = "Hikayeyi Sil";
+"delete_story_message" = "Bu hikayeyi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.";
+"button_delete" = "Sil";
+"story_not_found" = "Hikaye verisi bulunamadı";
+
+/* Settings */
+"settings_server" = "Sunucu";
+"settings_connected" = "Bağlı";
+"settings_not_connected" = "Bağlı değil";
+"settings_test" = "Test";
+"settings_server_url" = "Sunucu URL";
+"settings_child_details" = "Çocuk Bilgileri";
+"settings_change_photo" = "Fotoğrafı Değiştir";
+"settings_add_photo" = "Fotoğraf Ekle";
+"settings_name" = "Ad";
+"settings_gender" = "Cinsiyet";
+"settings_gender_not_set" = "Belirtilmedi";
+"settings_gender_boy" = "Erkek";
+"settings_gender_girl" = "Kız";
+"settings_reading_level" = "Okuma Seviyesi";
+"settings_reading_toddler" = "Küçük Çocuk (2-3)";
+"settings_reading_early" = "Erken Okuyucu (4-5)";
+"settings_reading_beginner" = "Başlangıç (6-7)";
+"settings_reading_intermediate" = "Orta Seviye (8-10)";
+"settings_family" = "Aile";
+"settings_family_members" = "Aile Üyeleri";
+"settings_manage_family" = "Aile Üyelerini Yönet";
+"settings_bedtime" = "Uyku Vakti";
+"settings_ambient_sound" = "Ortam Sesi";
+"settings_sleep_timer" = "Uyku Zamanlayıcısı";
+"settings_sleep_off" = "Kapalı";
+"settings_sleep_1" = "1 hikayeden sonra";
+"settings_sleep_2" = "2 hikayeden sonra";
+"settings_sleep_3" = "3 hikayeden sonra";
+"settings_bedtime_footer" = "Uyku modu, hikaye sonrası ekranı karartır ve rahatlatıcı sesler çalar";
+"settings_developer_options" = "Geliştirici Seçenekleri";
+"settings_anthropic_key" = "Anthropic API Key";
+"settings_google_key" = "Google AI API Key";
+"settings_keys_footer" = "Anahtarlar sunucuda saklanır. Maskelenmiş anahtarlar mevcut bir anahtarın ayarlandığını gösterir.";
+"button_save" = "Kaydet";
+"settings_saved" = "Ayarlar kaydedildi";
+"settings_connect_error" = "Sunucuya bağlanılamıyor";
+"alert_error" = "Hata";
+"button_ok" = "Tamam";
+
+/* Family Members */
+"family_empty_title" = "Aile Üyesi Yok";
+"family_empty_description" = "Hikayelerinizde görünmeleri için aile üyeleri ekleyin";
+"family_add_title" = "Üye Ekle";
+"family_edit_title" = "Üyeyi Düzenle";
+"family_add_button" = "Ekle";
+"family_section_details" = "Ayrıntılar";
+"family_section_description" = "Açıklama (İsteğe bağlı)";
+"family_description_placeholder" = "Görünüş, kişilik, geçmiş...";
+"family_section_photo" = "Fotoğraf";
+"family_choose_photo" = "Fotoğraf Seç";
+"family_upload_photo" = "Fotoğraf Yükle";
+"family_delete_title" = "Üyeyi Sil";
+"family_delete_message" = "%@ aileden çıkarılsın mı?";
+"role_mom" = "Anne";
+"role_dad" = "Baba";
+"role_brother" = "Erkek Kardeş";
+"role_sister" = "Kız Kardeş";
+"role_grandma" = "Büyükanne";
+"role_grandpa" = "Büyükbaba";
+"role_aunt" = "Teyze";
+"role_uncle" = "Amca";
+"role_pet" = "Evcil Hayvan";
+"role_friend" = "Arkadaş";
+"role_companion" = "Yol Arkadaşı";
+"role_classmate" = "Sınıf Arkadaşı";
+"role_neighbor" = "Komşu";
+"role_magical_friend" = "Sihirli Arkadaş";
+"role_other" = "Diğer";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "Çıkmak için herhangi bir yere dokunun";
+"breathing_in" = "Nefes Al";
+"breathing_hold" = "Tut";
+"breathing_out" = "Nefes Ver";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "Beyaz Gürültü";
+"sound_brownNoise" = "Kahverengi Gürültü";
+"sound_pinkNoise" = "Pembe Gürültü";
+"sound_softRain" = "Hafif Yağmur";
+"sound_oceanWaves" = "Okyanus Dalgaları";
+"sound_cracklingFireplace" = "Şömine";
+"sound_forestNight" = "Gece Ormanı";
+"sound_heartbeat" = "Kalp Atışı";
+
+/* Writing Style Labels */
+"style_standard" = "Standart";
+"style_rhyming" = "Kafiyeli";
+"style_funny" = "Komik";
+"style_sound_effects" = "Ses Efektleri";
+"style_repetitive" = "Tekrarlayan";
+"style_bedtime" = "Uyku";
+"style_adventure" = "Macera";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "Klasik uyku hikayesi anlatımı";
+"style_desc_rhyming" = "Dr. Seuss tarzı kafiyeli şiir";
+"style_desc_funny" = "Eğlenceli mizah ve beklenmedik sürprizler";
+"style_desc_sound_effects" = "Yansıma sözcükler ve etkileşimli sesler";
+"style_desc_repetitive" = "Tekrarlayan ifadelerle kümülatif hikaye";
+"style_desc_bedtime" = "Uyku vakti için ekstra sakin ve huzurlu";
+"style_desc_adventure" = "Destansı görevler ve cesur kahramanlar";
+
+/* Image Style Labels */
+"style_watercolor" = "Suluboya";
+"style_fantasy" = "Fantezi";
+"style_realistic" = "Gerçekçi";
+"style_cartoon" = "Çizgi Film";
+"style_classic_storybook" = "Klasik Hikaye Kitabı";
+"style_anime" = "Anime";
+"style_ghibli" = "Ghibli";
+"style_chibi" = "Chibi";
+"style_papercraft" = "Kağıt Sanatı";
+"style_pixel" = "Piksel Sanatı";
+"style_minimalist" = "Minimalist";
+"style_crayon" = "Pastel Boya";
+"style_pop_art" = "Pop Art";
+"style_oil_painting" = "Yağlı Boya";
+"style_none" = "Görsel Yok";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "Yumuşak, rüya gibi suluboya resimler";
+"style_desc_fantasy" = "Zengin, büyülü fantezi sanatı";
+"style_desc_realistic" = "Fotogerçekçi dijital sanat";
+"style_desc_cartoon" = "Cesur, renkli çizgi film stili";
+"style_desc_classic_storybook" = "Nostaljik çocuk kitabı çizimleri";
+"style_desc_anime" = "Japon anime tarzı sanat";
+"style_desc_ghibli" = "Studio Ghibli tarzı sanat";
+"style_desc_chibi" = "Sevimli, süper deforme chibi sanatı";
+"style_desc_papercraft" = "Kesme kağıt kolaj stili";
+"style_desc_pixel" = "Retro piksel sanatı stili";
+"style_desc_minimalist" = "Sade, basit geometrik şekiller";
+"style_desc_crayon" = "Çocuksu pastel boya ve kuru boya stili";
+"style_desc_pop_art" = "Cesur pop art, yarım ton noktalı";
+"style_desc_oil_painting" = "Zengin, dokulu yağlı boya stili";
+"style_desc_none" = "Yalnızca metin, çizim yok";
+
+/* Lesson Labels */
+"lesson_none" = "Yok";
+"lesson_sharing" = "Paylaşım";
+"lesson_bravery" = "Cesaret";
+"lesson_kindness" = "Nezaket";
+"lesson_patience" = "Sabır";
+"lesson_honesty" = "Dürüstlük";
+"lesson_gratitude" = "Minnettarlık";
+"lesson_teamwork" = "Takım Çalışması";
+"lesson_empathy" = "Empati";
+"lesson_perseverance" = "Azim";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "Belirli bir ders yok — sadece eğlenceli bir hikaye";
+"lesson_desc_sharing" = "Başkalarıyla paylaşmayı öğrenmek";
+"lesson_desc_bravery" = "Zor anlarda cesaret bulmak";
+"lesson_desc_kindness" = "Başkalarına nazik ve şefkatli olmak";
+"lesson_desc_patience" = "Beklemeyi ve sabırlı olmayı öğrenmek";
+"lesson_desc_honesty" = "Doğruyu söylemenin önemi";
+"lesson_desc_gratitude" = "Sahip olduklarının değerini bilmek";
+"lesson_desc_teamwork" = "Hedeflere ulaşmak için birlikte çalışmak";
+"lesson_desc_empathy" = "Başkalarının duygularını anlamak";
+"lesson_desc_perseverance" = "İşler zorlaştığında pes etmemek";
+
+/* Validation */
+"validation_custom_writing_empty" = "Lütfen hikaye oluşturmadan önce özel yazım stilinizi tanımlayın.";
+"validation_custom_writing_long" = "Özel yazım stiliniz çok uzun. Lütfen 500 karakterin altında tutun.";
+"validation_custom_image_empty" = "Lütfen hikaye oluşturmadan önce özel görsel stilinizi tanımlayın.";
+"validation_custom_image_long" = "Özel görsel stiliniz çok uzun. Lütfen 500 karakterin altında tutun.";
+"validation_custom_lesson_empty" = "Lütfen hikaye oluşturmadan önce özel dersinizi tanımlayın.";
+"validation_custom_lesson_long" = "Özel dersiniz çok uzun. Lütfen 500 karakterin altında tutun.";

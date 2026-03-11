@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "انشاء";
+"tab_history" = "السجل";
+"tab_settings" = "الاعدادات";
+
+/* Generate - Greetings */
+"greeting_morning" = "صباح الخير";
+"greeting_afternoon" = "مساء الخير";
+"greeting_evening" = "مساء الخير";
+"greeting_welcome" = "اهلا بك في Storytime!";
+"greeting_personalized" = "%@، %@!";
+
+/* Generate - Idle */
+"setup_prompt" = "اضف اسم طفلك في الاعدادات للحصول على قصص مخصصة";
+"prompt_header" = "اي قصة سنصنع اليوم؟";
+"prompt_placeholder" = "صف فكرة قصتك...";
+"suggestion_1" = "مغامرة سحرية في غابة مسحورة";
+"suggestion_2" = "رحلة الى الفضاء لزيارة كائنات فضائية ودودة";
+"suggestion_3" = "يوم على الشاطئ مع دلفين يتكلم";
+"suggestion_4" = "البحث عن كنز في سفينة قراصنة";
+"section_language" = "اللغة";
+"section_writing_style" = "اسلوب الكتابة";
+"section_image_style" = "نمط الصور";
+"section_lesson" = "الدرس";
+"custom_label" = "مخصص";
+"custom_placeholder" = "صف %@ الخاص بك...";
+"use_custom" = "استخدام مخصص";
+"or_write_your_own" = "او اكتب بنفسك";
+"done" = "تم";
+"bedtime_story_label" = "قصة ما قبل النوم";
+"bedtime_story_hint" = "قصة اقصر واهدأ (10 صفحات) مثالية لوقت النوم";
+"section_characters" = "الشخصيات";
+"characters_all_included" = "الكل مشمول";
+"characters_count" = "%d من %d مختارين";
+"button_clear" = "مسح";
+"button_select_all" = "اختيار الكل";
+"button_create_story" = "انشاء القصة";
+
+/* Generate - Progress */
+"progress_starting" = "جاري البدء...";
+"progress_writing" = "جاري كتابة قصتك...";
+"progress_painting" = "جاري رسم الصور...";
+"progress_assembling" = "جاري تجميع كتابك...";
+"button_cancel" = "الغاء";
+
+/* Generate - Complete */
+"page_indicator" = "صفحة %d من %d";
+"button_books" = "الكتب";
+"button_pdf" = "PDF";
+"button_new" = "جديد";
+"button_sleep" = "نوم";
+
+/* Generate - Error */
+"error_title" = "حدث خطأ ما";
+"button_try_again" = "حاول مرة اخرى";
+"button_start_over" = "ابدأ من جديد";
+"error_unknown" = "حدث خطأ غير معروف";
+
+/* History */
+"history_empty_title" = "لا توجد قصص بعد";
+"history_empty_description" = "ستظهر قصصك هنا بمجرد انشاء واحدة!";
+"date_today" = "اليوم";
+"date_yesterday" = "امس";
+"date_days_ago" = "منذ %d ايام";
+"delete_story_title" = "حذف القصة";
+"delete_story_message" = "هل انت متأكد من حذف هذه القصة؟ لا يمكن التراجع عن هذا.";
+"button_delete" = "حذف";
+"story_not_found" = "لم يتم العثور على بيانات القصة";
+
+/* Settings */
+"settings_server" = "الخادم";
+"settings_connected" = "متصل";
+"settings_not_connected" = "غير متصل";
+"settings_test" = "اختبار";
+"settings_server_url" = "رابط الخادم";
+"settings_child_details" = "بيانات الطفل";
+"settings_change_photo" = "تغيير الصورة";
+"settings_add_photo" = "اضافة صورة";
+"settings_name" = "الاسم";
+"settings_gender" = "الجنس";
+"settings_gender_not_set" = "غير محدد";
+"settings_gender_boy" = "ولد";
+"settings_gender_girl" = "بنت";
+"settings_reading_level" = "مستوى القراءة";
+"settings_reading_toddler" = "طفل صغير (2-3)";
+"settings_reading_early" = "قارئ مبتدئ (4-5)";
+"settings_reading_beginner" = "مبتدئ (6-7)";
+"settings_reading_intermediate" = "متوسط (8-10)";
+"settings_family" = "العائلة";
+"settings_family_members" = "افراد العائلة";
+"settings_manage_family" = "ادارة افراد العائلة";
+"settings_bedtime" = "وقت النوم";
+"settings_ambient_sound" = "صوت محيط";
+"settings_sleep_timer" = "مؤقت النوم";
+"settings_sleep_off" = "ايقاف";
+"settings_sleep_1" = "بعد قصة واحدة";
+"settings_sleep_2" = "بعد قصتين";
+"settings_sleep_3" = "بعد 3 قصص";
+"settings_bedtime_footer" = "وضع النوم يخفت الشاشة ويشغل اصوات مهدئة بعد وقت القصة";
+"settings_developer_options" = "خيارات المطور";
+"settings_anthropic_key" = "Anthropic API Key";
+"settings_google_key" = "Google AI API Key";
+"settings_keys_footer" = "يتم تخزين المفاتيح على الخادم. المفاتيح المخفية تشير الى وجود مفتاح محدد مسبقا.";
+"button_save" = "حفظ";
+"settings_saved" = "تم حفظ الاعدادات";
+"settings_connect_error" = "لا يمكن الاتصال بالخادم";
+"alert_error" = "خطأ";
+"button_ok" = "حسنا";
+
+/* Family Members */
+"family_empty_title" = "لا يوجد افراد عائلة";
+"family_empty_description" = "اضف افراد العائلة ليظهروا في قصصك";
+"family_add_title" = "اضافة فرد";
+"family_edit_title" = "تعديل فرد";
+"family_add_button" = "اضافة";
+"family_section_details" = "التفاصيل";
+"family_section_description" = "الوصف (اختياري)";
+"family_description_placeholder" = "المظهر، الشخصية، القصة الخلفية...";
+"family_section_photo" = "الصورة";
+"family_choose_photo" = "اختيار صورة";
+"family_upload_photo" = "رفع صورة";
+"family_delete_title" = "حذف فرد";
+"family_delete_message" = "ازالة %@ من العائلة؟";
+"role_mom" = "ماما";
+"role_dad" = "بابا";
+"role_brother" = "اخ";
+"role_sister" = "اخت";
+"role_grandma" = "جدة";
+"role_grandpa" = "جد";
+"role_aunt" = "خالة";
+"role_uncle" = "خال";
+"role_pet" = "حيوان اليف";
+"role_friend" = "صديق";
+"role_companion" = "رفيق";
+"role_classmate" = "زميل دراسة";
+"role_neighbor" = "جار";
+"role_magical_friend" = "صديق سحري";
+"role_other" = "اخر";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "انقر في اي مكان للخروج";
+"breathing_in" = "شهيق";
+"breathing_hold" = "امسك";
+"breathing_out" = "زفير";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "ضوضاء بيضاء";
+"sound_brownNoise" = "ضوضاء بنية";
+"sound_pinkNoise" = "ضوضاء وردية";
+"sound_softRain" = "مطر خفيف";
+"sound_oceanWaves" = "امواج البحر";
+"sound_cracklingFireplace" = "مدفأة";
+"sound_forestNight" = "غابة ليلية";
+"sound_heartbeat" = "نبض القلب";
+
+/* Writing Style Labels */
+"style_standard" = "قياسي";
+"style_rhyming" = "مقفى";
+"style_funny" = "مضحك";
+"style_sound_effects" = "مؤثرات صوتية";
+"style_repetitive" = "تكراري";
+"style_bedtime" = "قبل النوم";
+"style_adventure" = "مغامرة";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "سرد كلاسيكي لقصة ما قبل النوم";
+"style_desc_rhyming" = "ابيات مقفاة بأسلوب Dr. Seuss";
+"style_desc_funny" = "فكاهة طريفة ومفاجآت غير متوقعة";
+"style_desc_sound_effects" = "محاكاة صوتية واصوات تفاعلية";
+"style_desc_repetitive" = "قصة تراكمية مع عبارات متكررة";
+"style_desc_bedtime" = "هادئ وحالم جدا لوقت النوم";
+"style_desc_adventure" = "مهمات ملحمية وابطال شجعان";
+
+/* Image Style Labels */
+"style_watercolor" = "الوان مائية";
+"style_fantasy" = "خيالي";
+"style_realistic" = "واقعي";
+"style_cartoon" = "رسوم متحركة";
+"style_classic_storybook" = "كتاب قصص كلاسيكي";
+"style_anime" = "انمي";
+"style_ghibli" = "Ghibli";
+"style_chibi" = "تشيبي";
+"style_papercraft" = "فن الورق";
+"style_pixel" = "بكسل ارت";
+"style_minimalist" = "بسيط";
+"style_crayon" = "اقلام شمعية";
+"style_pop_art" = "بوب ارت";
+"style_oil_painting" = "رسم زيتي";
+"style_none" = "بدون صور";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "لوحات مائية ناعمة وحالمة";
+"style_desc_fantasy" = "فن خيالي غني وساحر";
+"style_desc_realistic" = "فن رقمي واقعي";
+"style_desc_cartoon" = "رسوم متحركة ملونة وجريئة";
+"style_desc_classic_storybook" = "رسومات كتب اطفال كلاسيكية";
+"style_desc_anime" = "فن مستوحى من الانمي الياباني";
+"style_desc_ghibli" = "فن مستوحى من Studio Ghibli";
+"style_desc_chibi" = "فن تشيبي لطيف ومبالغ فيه";
+"style_desc_papercraft" = "كولاج ورقي مقطوع";
+"style_desc_pixel" = "بكسل ارت بأسلوب قديم";
+"style_desc_minimalist" = "اشكال هندسية نظيفة وبسيطة";
+"style_desc_crayon" = "رسم طفولي بالاقلام الشمعية والملونة";
+"style_desc_pop_art" = "بوب ارت جريء بنقاط الطباعة";
+"style_desc_oil_painting" = "رسم زيتي غني وذو ملمس";
+"style_desc_none" = "قصة نصية فقط، بدون رسومات";
+
+/* Lesson Labels */
+"lesson_none" = "بدون";
+"lesson_sharing" = "المشاركة";
+"lesson_bravery" = "الشجاعة";
+"lesson_kindness" = "اللطف";
+"lesson_patience" = "الصبر";
+"lesson_honesty" = "الصدق";
+"lesson_gratitude" = "الامتنان";
+"lesson_teamwork" = "العمل الجماعي";
+"lesson_empathy" = "التعاطف";
+"lesson_perseverance" = "المثابرة";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "بدون درس محدد، مجرد قصة ممتعة";
+"lesson_desc_sharing" = "تعلم المشاركة مع الاخرين";
+"lesson_desc_bravery" = "ايجاد الشجاعة في اللحظات الصعبة";
+"lesson_desc_kindness" = "ان تكون لطيفا ومهتما بالاخرين";
+"lesson_desc_patience" = "تعلم الانتظار والصبر";
+"lesson_desc_honesty" = "اهمية قول الحقيقة";
+"lesson_desc_gratitude" = "تقدير ما لديك";
+"lesson_desc_teamwork" = "العمل معا لتحقيق الاهداف";
+"lesson_desc_empathy" = "فهم مشاعر الاخرين";
+"lesson_desc_perseverance" = "عدم الاستسلام عندما تصعب الامور";
+
+/* Validation */
+"validation_custom_writing_empty" = "يرجى وصف اسلوب الكتابة المخصص قبل انشاء القصة.";
+"validation_custom_writing_long" = "اسلوب الكتابة المخصص طويل جدا. يرجى الاحتفاظ به اقل من 500 حرف.";
+"validation_custom_image_empty" = "يرجى وصف نمط الصور المخصص قبل انشاء القصة.";
+"validation_custom_image_long" = "نمط الصور المخصص طويل جدا. يرجى الاحتفاظ به اقل من 500 حرف.";
+"validation_custom_lesson_empty" = "يرجى وصف الدرس المخصص قبل انشاء القصة.";
+"validation_custom_lesson_long" = "الدرس المخصص طويل جدا. يرجى الاحتفاظ به اقل من 500 حرف.";

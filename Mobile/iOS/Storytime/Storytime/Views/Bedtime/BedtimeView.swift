@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct BedtimeView: View {
+    @EnvironmentObject var localeManager: LocaleManager
     @Binding var isPresented: Bool
     @ObservedObject private var audioManager = AmbientSoundManager.shared
 
@@ -34,7 +35,7 @@ struct BedtimeView: View {
 
                 // Sound name + play/pause
                 HStack(spacing: 16) {
-                    Text(audioManager.currentSound.displayName)
+                    Text(localeManager.localized("sound_\(audioManager.currentSound.rawValue)"))
                         .font(.title3)
                         .foregroundStyle(Color(white: 0.5))
 
@@ -82,7 +83,7 @@ struct BedtimeView: View {
                                 selectedSoundKey = sound.rawValue
                                 audioManager.play(sound, fadeDuration: 1.0)
                             } label: {
-                                Label(sound.displayName, systemImage: sound.iconName)
+                                Label(localeManager.localized("sound_\(sound.rawValue)"), systemImage: sound.iconName)
                                     .font(.caption)
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 8)
@@ -117,7 +118,7 @@ struct BedtimeView: View {
 
                 // Hint
                 if showHint {
-                    Text("Tap anywhere to exit")
+                    Text(localeManager.localized("bedtime_tap_to_exit"))
                         .font(.caption)
                         .foregroundStyle(Color(white: 0.3))
                         .transition(.opacity)

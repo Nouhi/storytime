@@ -16,9 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.storytime.app.R
 import com.storytime.app.model.FamilyMemberResponse
 import com.storytime.app.network.ApiClient
 
@@ -40,15 +42,15 @@ fun FamilyMembersScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Family Members") },
+                title = { Text(stringResource(R.string.settings_family_members)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
                     }
                 },
                 actions = {
                     IconButton(onClick = { showAddDialog = true }) {
-                        Icon(Icons.Default.Add, "Add member")
+                        Icon(Icons.Default.Add, contentDescription = stringResource(R.string.family_add_title))
                     }
                 }
             )
@@ -68,10 +70,10 @@ fun FamilyMembersScreen(
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(Modifier.height(16.dp))
-                    Text("No family members yet", style = MaterialTheme.typography.bodyLarge)
+                    Text(stringResource(R.string.family_empty_title), style = MaterialTheme.typography.bodyLarge)
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "Add family members to include them in stories",
+                        stringResource(R.string.family_empty_description),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -97,7 +99,7 @@ fun FamilyMembersScreen(
     // Add dialog
     if (showAddDialog) {
         MemberDialog(
-            title = "Add Family Member",
+            title = stringResource(R.string.family_add_title),
             onDismiss = { showAddDialog = false },
             onSave = { name, role, description ->
                 viewModel.addMember(name, role, description)
@@ -109,7 +111,7 @@ fun FamilyMembersScreen(
     // Edit dialog
     editingMember?.let { member ->
         MemberDialog(
-            title = "Edit Member",
+            title = stringResource(R.string.family_edit_title),
             initialName = member.name,
             initialRole = member.role,
             initialDescription = member.description ?: "",
@@ -129,8 +131,8 @@ fun FamilyMembersScreen(
     memberToDelete?.let { member ->
         AlertDialog(
             onDismissRequest = { memberToDelete = null },
-            title = { Text("Delete Member") },
-            text = { Text("Remove ${member.name} from the family?") },
+            title = { Text(stringResource(R.string.family_delete_title)) },
+            text = { Text(stringResource(R.string.family_delete_message, member.name)) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -140,12 +142,34 @@ fun FamilyMembersScreen(
                     colors = ButtonDefaults.textButtonColors(
                         contentColor = MaterialTheme.colorScheme.error
                     )
-                ) { Text("Delete") }
+                ) { Text(stringResource(R.string.button_delete)) }
             },
             dismissButton = {
-                TextButton(onClick = { memberToDelete = null }) { Text("Cancel") }
+                TextButton(onClick = { memberToDelete = null }) { Text(stringResource(R.string.button_cancel)) }
             }
         )
+    }
+}
+
+@Composable
+private fun localizedRoleName(role: String): String {
+    return when (role) {
+        "mom" -> stringResource(R.string.role_mom)
+        "dad" -> stringResource(R.string.role_dad)
+        "brother" -> stringResource(R.string.role_brother)
+        "sister" -> stringResource(R.string.role_sister)
+        "grandma" -> stringResource(R.string.role_grandma)
+        "grandpa" -> stringResource(R.string.role_grandpa)
+        "aunt" -> stringResource(R.string.role_aunt)
+        "uncle" -> stringResource(R.string.role_uncle)
+        "pet" -> stringResource(R.string.role_pet)
+        "friend" -> stringResource(R.string.role_friend)
+        "companion" -> stringResource(R.string.role_companion)
+        "classmate" -> stringResource(R.string.role_classmate)
+        "neighbor" -> stringResource(R.string.role_neighbor)
+        "magical-friend" -> stringResource(R.string.role_magical_friend)
+        "other" -> stringResource(R.string.role_other)
+        else -> role.replace("-", " ").replaceFirstChar { it.uppercase() }
     }
 }
 
@@ -189,7 +213,7 @@ private fun MemberCard(
             Column(modifier = Modifier.weight(1f)) {
                 Text(member.name, style = MaterialTheme.typography.titleMedium)
                 Text(
-                    member.role.replace("-", " ").replaceFirstChar { it.uppercase() },
+                    localizedRoleName(member.role),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -207,7 +231,7 @@ private fun MemberCard(
             IconButton(onClick = onDelete) {
                 Icon(
                     Icons.Default.Delete,
-                    contentDescription = "Delete",
+                    contentDescription = stringResource(R.string.button_delete),
                     tint = MaterialTheme.colorScheme.error
                 )
             }
@@ -246,7 +270,7 @@ private fun MemberDialog(
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Name") },
+                    label = { Text(stringResource(R.string.settings_name)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -256,17 +280,18 @@ private fun MemberDialog(
                     onExpandedChange = { expanded = it }
                 ) {
                     OutlinedTextField(
-                        value = "${FamilyMembersViewModel.roleEmoji(role)} ${role.replace("-", " ").replaceFirstChar { it.uppercase() }}",
+                        value = "${FamilyMembersViewModel.roleEmoji(role)} ${localizedRoleName(role)}",
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text("Role") },
+                        label = { Text(stringResource(R.string.family_section_details)) },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
                         modifier = Modifier.fillMaxWidth().menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
                     )
                     ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
                         FamilyMembersViewModel.ROLES.forEach { (value, emoji) ->
+                            val roleName = localizedRoleName(value)
                             DropdownMenuItem(
-                                text = { Text("$emoji ${value.replace("-", " ").replaceFirstChar { it.uppercase() }}") },
+                                text = { Text("$emoji $roleName") },
                                 onClick = {
                                     role = value
                                     expanded = false
@@ -279,8 +304,8 @@ private fun MemberDialog(
                 OutlinedTextField(
                     value = description,
                     onValueChange = { description = it },
-                    label = { Text("Description (optional)") },
-                    placeholder = { Text("Appearance, personality, backstory...") },
+                    label = { Text(stringResource(R.string.family_section_description)) },
+                    placeholder = { Text(stringResource(R.string.family_description_placeholder)) },
                     modifier = Modifier.fillMaxWidth().heightIn(min = 80.dp),
                     maxLines = 4
                 )
@@ -292,7 +317,7 @@ private fun MemberDialog(
                     ) {
                         Icon(Icons.Default.PhotoCamera, contentDescription = null)
                         Spacer(Modifier.width(8.dp))
-                        Text("Upload Photo")
+                        Text(stringResource(R.string.family_upload_photo))
                     }
                 }
             }
@@ -301,10 +326,10 @@ private fun MemberDialog(
             TextButton(
                 onClick = { onSave(name, role, description.ifBlank { null }) },
                 enabled = name.isNotBlank()
-            ) { Text("Save") }
+            ) { Text(stringResource(R.string.button_save)) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Cancel") }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.button_cancel)) }
         }
     )
 }

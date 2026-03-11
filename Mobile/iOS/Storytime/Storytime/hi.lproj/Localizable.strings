@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "बनाएं";
+"tab_history" = "इतिहास";
+"tab_settings" = "सेटिंग्स";
+
+/* Generate - Greetings */
+"greeting_morning" = "सुप्रभात";
+"greeting_afternoon" = "नमस्ते";
+"greeting_evening" = "शुभ संध्या";
+"greeting_welcome" = "Storytime में आपका स्वागत है!";
+"greeting_personalized" = "%@, %@!";
+
+/* Generate - Idle */
+"setup_prompt" = "व्यक्तिगत कहानियों के लिए सेटिंग्स में अपने बच्चे का नाम जोड़ें";
+"prompt_header" = "आज कौन सी कहानी बनाएंगे?";
+"prompt_placeholder" = "अपनी कहानी का विचार बताएं...";
+"suggestion_1" = "एक जादुई जंगल में रोमांचक यात्रा";
+"suggestion_2" = "दोस्ताना एलियंस से मिलने अंतरिक्ष की यात्रा";
+"suggestion_3" = "बात करने वाली डॉल्फिन के साथ समुद्र तट पर एक दिन";
+"suggestion_4" = "समुद्री डाकू के जहाज पर खजाने की खोज";
+"section_language" = "भाषा";
+"section_writing_style" = "लेखन शैली";
+"section_image_style" = "चित्र शैली";
+"section_lesson" = "सीख";
+"custom_label" = "कस्टम";
+"custom_placeholder" = "अपना खुद का %@ बताएं...";
+"use_custom" = "कस्टम उपयोग करें";
+"or_write_your_own" = "या अपना खुद का लिखें";
+"done" = "हो गया";
+"bedtime_story_label" = "सोने की कहानी";
+"bedtime_story_hint" = "छोटी और शांत कहानी (10 पृष्ठ), सोने के समय के लिए एकदम सही";
+"section_characters" = "पात्र";
+"characters_all_included" = "सभी शामिल";
+"characters_count" = "%d में से %d चुने गए";
+"button_clear" = "मिटाएं";
+"button_select_all" = "सभी चुनें";
+"button_create_story" = "कहानी बनाएं";
+
+/* Generate - Progress */
+"progress_starting" = "शुरू हो रहा है...";
+"progress_writing" = "आपकी कहानी लिखी जा रही है...";
+"progress_painting" = "चित्र बनाए जा रहे हैं...";
+"progress_assembling" = "आपकी किताब तैयार हो रही है...";
+"button_cancel" = "रद्द करें";
+
+/* Generate - Complete */
+"page_indicator" = "पृष्ठ %d / %d";
+"button_books" = "किताबें";
+"button_pdf" = "PDF";
+"button_new" = "नया";
+"button_sleep" = "सोएं";
+
+/* Generate - Error */
+"error_title" = "कुछ गलत हो गया";
+"button_try_again" = "फिर से कोशिश करें";
+"button_start_over" = "दोबारा शुरू करें";
+"error_unknown" = "एक अज्ञात त्रुटि हुई";
+
+/* History */
+"history_empty_title" = "अभी कोई कहानी नहीं";
+"history_empty_description" = "जब आप कोई कहानी बनाएंगे तो वह यहां दिखेगी!";
+"date_today" = "आज";
+"date_yesterday" = "कल";
+"date_days_ago" = "%d दिन पहले";
+"delete_story_title" = "कहानी हटाएं";
+"delete_story_message" = "क्या आप सच में यह कहानी हटाना चाहते हैं? यह वापस नहीं किया जा सकता।";
+"button_delete" = "हटाएं";
+"story_not_found" = "कहानी का डेटा नहीं मिला";
+
+/* Settings */
+"settings_server" = "सर्वर";
+"settings_connected" = "जुड़ा हुआ";
+"settings_not_connected" = "नहीं जुड़ा";
+"settings_test" = "परीक्षण";
+"settings_server_url" = "सर्वर URL";
+"settings_child_details" = "बच्चे की जानकारी";
+"settings_change_photo" = "फोटो बदलें";
+"settings_add_photo" = "फोटो जोड़ें";
+"settings_name" = "नाम";
+"settings_gender" = "लिंग";
+"settings_gender_not_set" = "सेट नहीं";
+"settings_gender_boy" = "लड़का";
+"settings_gender_girl" = "लड़की";
+"settings_reading_level" = "पढ़ने का स्तर";
+"settings_reading_toddler" = "छोटा बच्चा (2-3)";
+"settings_reading_early" = "शुरुआती पाठक (4-5)";
+"settings_reading_beginner" = "नवसिखिया (6-7)";
+"settings_reading_intermediate" = "मध्यम (8-10)";
+"settings_family" = "परिवार";
+"settings_family_members" = "परिवार के सदस्य";
+"settings_manage_family" = "परिवार के सदस्यों को प्रबंधित करें";
+"settings_bedtime" = "सोने का समय";
+"settings_ambient_sound" = "वातावरण ध्वनि";
+"settings_sleep_timer" = "नींद टाइमर";
+"settings_sleep_off" = "बंद";
+"settings_sleep_1" = "1 कहानी के बाद";
+"settings_sleep_2" = "2 कहानियों के बाद";
+"settings_sleep_3" = "3 कहानियों के बाद";
+"settings_bedtime_footer" = "बेडटाइम मोड कहानी के बाद स्क्रीन मंद करता है और आरामदायक ध्वनियां बजाता है";
+"settings_developer_options" = "डेवलपर विकल्प";
+"settings_anthropic_key" = "Anthropic API Key";
+"settings_google_key" = "Google AI API Key";
+"settings_keys_footer" = "कुंजियां सर्वर पर संग्रहीत हैं। छिपी हुई कुंजियां बताती हैं कि एक मौजूदा कुंजी सेट है।";
+"button_save" = "सहेजें";
+"settings_saved" = "सेटिंग्स सहेजी गईं";
+"settings_connect_error" = "सर्वर से कनेक्ट नहीं हो पा रहा";
+"alert_error" = "त्रुटि";
+"button_ok" = "ठीक है";
+
+/* Family Members */
+"family_empty_title" = "कोई परिवार सदस्य नहीं";
+"family_empty_description" = "परिवार के सदस्य जोड़ें ताकि वे आपकी कहानियों में दिखें";
+"family_add_title" = "सदस्य जोड़ें";
+"family_edit_title" = "सदस्य संपादित करें";
+"family_add_button" = "जोड़ें";
+"family_section_details" = "विवरण";
+"family_section_description" = "विवरण (वैकल्पिक)";
+"family_description_placeholder" = "दिखावट, व्यक्तित्व, पृष्ठभूमि कहानी...";
+"family_section_photo" = "फोटो";
+"family_choose_photo" = "फोटो चुनें";
+"family_upload_photo" = "फोटो अपलोड करें";
+"family_delete_title" = "सदस्य हटाएं";
+"family_delete_message" = "%@ को परिवार से हटाएं?";
+"role_mom" = "मम्मी";
+"role_dad" = "पापा";
+"role_brother" = "भाई";
+"role_sister" = "बहन";
+"role_grandma" = "दादी/नानी";
+"role_grandpa" = "दादा/नाना";
+"role_aunt" = "मौसी/बुआ";
+"role_uncle" = "मामा/चाचा";
+"role_pet" = "पालतू जानवर";
+"role_friend" = "दोस्त";
+"role_companion" = "साथी";
+"role_classmate" = "सहपाठी";
+"role_neighbor" = "पड़ोसी";
+"role_magical_friend" = "जादुई दोस्त";
+"role_other" = "अन्य";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "बाहर निकलने के लिए कहीं भी टैप करें";
+"breathing_in" = "सांस लें";
+"breathing_hold" = "रोकें";
+"breathing_out" = "सांस छोड़ें";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "सफेद शोर";
+"sound_brownNoise" = "भूरा शोर";
+"sound_pinkNoise" = "गुलाबी शोर";
+"sound_softRain" = "हल्की बारिश";
+"sound_oceanWaves" = "समुद्र की लहरें";
+"sound_cracklingFireplace" = "अंगीठी";
+"sound_forestNight" = "रात का जंगल";
+"sound_heartbeat" = "दिल की धड़कन";
+
+/* Writing Style Labels */
+"style_standard" = "मानक";
+"style_rhyming" = "तुकांत";
+"style_funny" = "मजेदार";
+"style_sound_effects" = "ध्वनि प्रभाव";
+"style_repetitive" = "दोहराव";
+"style_bedtime" = "सोने का समय";
+"style_adventure" = "रोमांच";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "सोने की कहानी की क्लासिक कथा शैली";
+"style_desc_rhyming" = "Dr. Seuss शैली की तुकांत कविता";
+"style_desc_funny" = "मजेदार हास्य और अनपेक्षित मोड़";
+"style_desc_sound_effects" = "ध्वनि-अनुकरण और इंटरैक्टिव आवाजें";
+"style_desc_repetitive" = "दोहराए जाने वाले वाक्यों के साथ संचयी कहानी";
+"style_desc_bedtime" = "सोने के समय के लिए अतिरिक्त शांत और स्वप्निल";
+"style_desc_adventure" = "महाकाव्य खोज और बहादुर नायक";
+
+/* Image Style Labels */
+"style_watercolor" = "वॉटरकलर";
+"style_fantasy" = "काल्पनिक";
+"style_realistic" = "यथार्थवादी";
+"style_cartoon" = "कार्टून";
+"style_classic_storybook" = "क्लासिक कहानी की किताब";
+"style_anime" = "एनीमे";
+"style_ghibli" = "Ghibli";
+"style_chibi" = "चीबी";
+"style_papercraft" = "पेपरक्राफ्ट";
+"style_pixel" = "पिक्सल आर्ट";
+"style_minimalist" = "न्यूनतावादी";
+"style_crayon" = "क्रेयॉन";
+"style_pop_art" = "पॉप आर्ट";
+"style_oil_painting" = "तैल चित्र";
+"style_none" = "बिना चित्र";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "कोमल और स्वप्निल वॉटरकलर पेंटिंग";
+"style_desc_fantasy" = "समृद्ध और जादुई काल्पनिक कला";
+"style_desc_realistic" = "फोटो-यथार्थवादी डिजिटल कला";
+"style_desc_cartoon" = "बोल्ड और रंगीन कार्टून शैली";
+"style_desc_classic_storybook" = "क्लासिक बच्चों की किताब के चित्र";
+"style_desc_anime" = "जापानी एनीमे से प्रेरित कला";
+"style_desc_ghibli" = "Studio Ghibli से प्रेरित कला";
+"style_desc_chibi" = "प्यारी और सुपर-विकृत चीबी कला";
+"style_desc_papercraft" = "कटा हुआ कागज कोलाज शैली";
+"style_desc_pixel" = "रेट्रो पिक्सल आर्ट शैली";
+"style_desc_minimalist" = "साफ और सरल ज्यामितीय आकार";
+"style_desc_crayon" = "बच्चों जैसी क्रेयॉन और रंगीन पेंसिल शैली";
+"style_desc_pop_art" = "बोल्ड पॉप आर्ट हाफ़टोन डॉट्स के साथ";
+"style_desc_oil_painting" = "समृद्ध और बनावट वाली तैल चित्र शैली";
+"style_desc_none" = "केवल लेख कहानी, बिना चित्रों के";
+
+/* Lesson Labels */
+"lesson_none" = "कोई नहीं";
+"lesson_sharing" = "बांटना";
+"lesson_bravery" = "बहादुरी";
+"lesson_kindness" = "दयालुता";
+"lesson_patience" = "धैर्य";
+"lesson_honesty" = "ईमानदारी";
+"lesson_gratitude" = "कृतज्ञता";
+"lesson_teamwork" = "टीम वर्क";
+"lesson_empathy" = "सहानुभूति";
+"lesson_perseverance" = "दृढ़ता";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "कोई विशेष सीख नहीं, बस एक मजेदार कहानी";
+"lesson_desc_sharing" = "दूसरों के साथ बांटना सीखना";
+"lesson_desc_bravery" = "कठिन समय में हिम्मत ढूंढना";
+"lesson_desc_kindness" = "दूसरों के प्रति दयालु और करुणामय होना";
+"lesson_desc_patience" = "इंतजार करना और धैर्य रखना सीखना";
+"lesson_desc_honesty" = "सच बोलने का महत्व";
+"lesson_desc_gratitude" = "जो आपके पास है उसकी कदर करना";
+"lesson_desc_teamwork" = "लक्ष्य प्राप्त करने के लिए मिलकर काम करना";
+"lesson_desc_empathy" = "दूसरों की भावनाओं को समझना";
+"lesson_desc_perseverance" = "मुश्किल होने पर भी हार न मानना";
+
+/* Validation */
+"validation_custom_writing_empty" = "कहानी बनाने से पहले कृपया अपनी कस्टम लेखन शैली का वर्णन करें।";
+"validation_custom_writing_long" = "आपकी कस्टम लेखन शैली बहुत लंबी है। कृपया इसे 500 अक्षरों से कम रखें।";
+"validation_custom_image_empty" = "कहानी बनाने से पहले कृपया अपनी कस्टम चित्र शैली का वर्णन करें।";
+"validation_custom_image_long" = "आपकी कस्टम चित्र शैली बहुत लंबी है। कृपया इसे 500 अक्षरों से कम रखें।";
+"validation_custom_lesson_empty" = "कहानी बनाने से पहले कृपया अपनी कस्टम सीख का वर्णन करें।";
+"validation_custom_lesson_long" = "आपकी कस्टम सीख बहुत लंबी है। कृपया इसे 500 अक्षरों से कम रखें।";

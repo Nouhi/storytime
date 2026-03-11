@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "Criar";
+"tab_history" = "Historico";
+"tab_settings" = "Configuracoes";
+
+/* Generate - Greetings */
+"greeting_morning" = "Bom dia";
+"greeting_afternoon" = "Boa tarde";
+"greeting_evening" = "Boa noite";
+"greeting_welcome" = "Bem-vindo ao Storytime!";
+"greeting_personalized" = "%@, %@!";
+
+/* Generate - Idle */
+"setup_prompt" = "Configure o nome da crianca nas Configuracoes para historias personalizadas";
+"prompt_header" = "Que historia vamos criar?";
+"prompt_placeholder" = "Descreva sua ideia de historia...";
+"suggestion_1" = "Uma aventura magica em uma floresta encantada";
+"suggestion_2" = "Uma viagem ao espaco para visitar alienigenas amigaveis";
+"suggestion_3" = "Um dia na praia com um golfinho que fala";
+"suggestion_4" = "Uma caca ao tesouro em um navio pirata";
+"section_language" = "Idioma";
+"section_writing_style" = "Estilo de escrita";
+"section_image_style" = "Estilo de imagem";
+"section_lesson" = "Licao";
+"custom_label" = "Personalizado";
+"custom_placeholder" = "Descreva seu proprio %@...";
+"use_custom" = "Usar personalizado";
+"or_write_your_own" = "Ou escreva o seu";
+"done" = "Pronto";
+"bedtime_story_label" = "Historia para dormir";
+"bedtime_story_hint" = "Historia mais curta e tranquila (10 paginas), perfeita para a hora de dormir";
+"section_characters" = "Personagens";
+"characters_all_included" = "Todos incluidos";
+"characters_count" = "%d de %d selecionados";
+"button_clear" = "Limpar";
+"button_select_all" = "Selecionar tudo";
+"button_create_story" = "Criar historia";
+
+/* Generate - Progress */
+"progress_starting" = "Iniciando...";
+"progress_writing" = "Escrevendo sua historia...";
+"progress_painting" = "Pintando ilustracoes...";
+"progress_assembling" = "Montando seu livro...";
+"button_cancel" = "Cancelar";
+
+/* Generate - Complete */
+"page_indicator" = "Pagina %d de %d";
+"button_books" = "Livros";
+"button_pdf" = "PDF";
+"button_new" = "Novo";
+"button_sleep" = "Dormir";
+
+/* Generate - Error */
+"error_title" = "Algo deu errado";
+"button_try_again" = "Tentar novamente";
+"button_start_over" = "Comecar de novo";
+"error_unknown" = "Ocorreu um erro desconhecido";
+
+/* History */
+"history_empty_title" = "Nenhuma historia ainda";
+"history_empty_description" = "Suas historias aparecerao aqui quando voce criar uma!";
+"date_today" = "Hoje";
+"date_yesterday" = "Ontem";
+"date_days_ago" = "Ha %d dias";
+"delete_story_title" = "Excluir historia";
+"delete_story_message" = "Tem certeza de que deseja excluir esta historia? Isso nao pode ser desfeito.";
+"button_delete" = "Excluir";
+"story_not_found" = "Dados da historia nao encontrados";
+
+/* Settings */
+"settings_server" = "Servidor";
+"settings_connected" = "Conectado";
+"settings_not_connected" = "Nao conectado";
+"settings_test" = "Testar";
+"settings_server_url" = "URL do servidor";
+"settings_child_details" = "Dados da crianca";
+"settings_change_photo" = "Alterar foto";
+"settings_add_photo" = "Adicionar foto";
+"settings_name" = "Nome";
+"settings_gender" = "Genero";
+"settings_gender_not_set" = "Nao definido";
+"settings_gender_boy" = "Menino";
+"settings_gender_girl" = "Menina";
+"settings_reading_level" = "Nivel de leitura";
+"settings_reading_toddler" = "Bebezinho (2-3)";
+"settings_reading_early" = "Leitor iniciante (4-5)";
+"settings_reading_beginner" = "Principiante (6-7)";
+"settings_reading_intermediate" = "Intermediario (8-10)";
+"settings_family" = "Familia";
+"settings_family_members" = "Membros da familia";
+"settings_manage_family" = "Gerenciar membros da familia";
+"settings_bedtime" = "Hora de dormir";
+"settings_ambient_sound" = "Som ambiente";
+"settings_sleep_timer" = "Temporizador de sono";
+"settings_sleep_off" = "Desligado";
+"settings_sleep_1" = "Apos 1 historia";
+"settings_sleep_2" = "Apos 2 historias";
+"settings_sleep_3" = "Apos 3 historias";
+"settings_bedtime_footer" = "O modo noturno escurece a tela e toca sons relaxantes apos a hora da historia";
+"settings_developer_options" = "Opcoes do desenvolvedor";
+"settings_anthropic_key" = "Anthropic API Key";
+"settings_google_key" = "Google AI API Key";
+"settings_keys_footer" = "As chaves sao armazenadas no servidor. Chaves ocultas indicam que uma chave existente esta configurada.";
+"button_save" = "Salvar";
+"settings_saved" = "Configuracoes salvas";
+"settings_connect_error" = "Nao foi possivel conectar ao servidor";
+"alert_error" = "Erro";
+"button_ok" = "OK";
+
+/* Family Members */
+"family_empty_title" = "Nenhum membro da familia";
+"family_empty_description" = "Adicione membros da familia para que aparecam nas suas historias";
+"family_add_title" = "Adicionar membro";
+"family_edit_title" = "Editar membro";
+"family_add_button" = "Adicionar";
+"family_section_details" = "Detalhes";
+"family_section_description" = "Descricao (Opcional)";
+"family_description_placeholder" = "Aparencia, personalidade, historia de fundo...";
+"family_section_photo" = "Foto";
+"family_choose_photo" = "Escolher foto";
+"family_upload_photo" = "Enviar foto";
+"family_delete_title" = "Excluir membro";
+"family_delete_message" = "Remover %@ da familia?";
+"role_mom" = "Mae";
+"role_dad" = "Pai";
+"role_brother" = "Irmao";
+"role_sister" = "Irma";
+"role_grandma" = "Avo";
+"role_grandpa" = "Avo";
+"role_aunt" = "Tia";
+"role_uncle" = "Tio";
+"role_pet" = "Animal de estimacao";
+"role_friend" = "Amigo";
+"role_companion" = "Companheiro";
+"role_classmate" = "Colega de classe";
+"role_neighbor" = "Vizinho";
+"role_magical_friend" = "Amigo magico";
+"role_other" = "Outro";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "Toque em qualquer lugar para sair";
+"breathing_in" = "Inspire";
+"breathing_hold" = "Segure";
+"breathing_out" = "Expire";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "Ruido branco";
+"sound_brownNoise" = "Ruido marrom";
+"sound_pinkNoise" = "Ruido rosa";
+"sound_softRain" = "Chuva leve";
+"sound_oceanWaves" = "Ondas do mar";
+"sound_cracklingFireplace" = "Lareira";
+"sound_forestNight" = "Floresta noturna";
+"sound_heartbeat" = "Batimento cardiaco";
+
+/* Writing Style Labels */
+"style_standard" = "Padrao";
+"style_rhyming" = "Rimado";
+"style_funny" = "Engracado";
+"style_sound_effects" = "Efeitos sonoros";
+"style_repetitive" = "Repetitivo";
+"style_bedtime" = "Para dormir";
+"style_adventure" = "Aventura";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "Narracao classica de historia para dormir";
+"style_desc_rhyming" = "Versos rimados no estilo Dr. Seuss";
+"style_desc_funny" = "Humor bobo e reviravoltas inesperadas";
+"style_desc_sound_effects" = "Onomatopeias e sons interativos";
+"style_desc_repetitive" = "Historia cumulativa com frases repetidas";
+"style_desc_bedtime" = "Extra calmo e sonhador para a hora de dormir";
+"style_desc_adventure" = "Grandes aventuras e herois corajosos";
+
+/* Image Style Labels */
+"style_watercolor" = "Aquarela";
+"style_fantasy" = "Fantasia";
+"style_realistic" = "Realista";
+"style_cartoon" = "Desenho animado";
+"style_classic_storybook" = "Livro classico";
+"style_anime" = "Anime";
+"style_ghibli" = "Ghibli";
+"style_chibi" = "Chibi";
+"style_papercraft" = "Papel recortado";
+"style_pixel" = "Pixel Art";
+"style_minimalist" = "Minimalista";
+"style_crayon" = "Giz de cera";
+"style_pop_art" = "Pop Art";
+"style_oil_painting" = "Pintura a oleo";
+"style_none" = "Sem imagens";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "Pinturas aquarela suaves e sonhadoras";
+"style_desc_fantasy" = "Arte fantastica rica e magica";
+"style_desc_realistic" = "Arte digital fotorrealista";
+"style_desc_cartoon" = "Estilo de desenho animado colorido e marcante";
+"style_desc_classic_storybook" = "Ilustracoes classicas de livros infantis";
+"style_desc_anime" = "Arte inspirada no anime japones";
+"style_desc_ghibli" = "Arte inspirada no Studio Ghibli";
+"style_desc_chibi" = "Arte chibi fofa e super deformada";
+"style_desc_papercraft" = "Estilo colagem de papel recortado";
+"style_desc_pixel" = "Estilo pixel art retro";
+"style_desc_minimalist" = "Formas geometricas limpas e simples";
+"style_desc_crayon" = "Estilo infantil com giz de cera e lapis de cor";
+"style_desc_pop_art" = "Pop art marcante com pontos de reticulagem";
+"style_desc_oil_painting" = "Estilo pintura a oleo rico e texturizado";
+"style_desc_none" = "Historia somente com texto, sem ilustracoes";
+
+/* Lesson Labels */
+"lesson_none" = "Nenhuma";
+"lesson_sharing" = "Compartilhar";
+"lesson_bravery" = "Coragem";
+"lesson_kindness" = "Bondade";
+"lesson_patience" = "Paciencia";
+"lesson_honesty" = "Honestidade";
+"lesson_gratitude" = "Gratidao";
+"lesson_teamwork" = "Trabalho em equipe";
+"lesson_empathy" = "Empatia";
+"lesson_perseverance" = "Perseveranca";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "Sem licao especifica, apenas uma historia divertida";
+"lesson_desc_sharing" = "Aprender a compartilhar com os outros";
+"lesson_desc_bravery" = "Encontrar coragem em momentos dificeis";
+"lesson_desc_kindness" = "Ser gentil e carinhoso com os outros";
+"lesson_desc_patience" = "Aprender a esperar e ter paciencia";
+"lesson_desc_honesty" = "A importancia de dizer a verdade";
+"lesson_desc_gratitude" = "Valorizar o que voce tem";
+"lesson_desc_teamwork" = "Trabalhar juntos para alcancar objetivos";
+"lesson_desc_empathy" = "Entender os sentimentos dos outros";
+"lesson_desc_perseverance" = "Nao desistir quando as coisas ficam dificeis";
+
+/* Validation */
+"validation_custom_writing_empty" = "Por favor, descreva seu estilo de escrita personalizado antes de criar uma historia.";
+"validation_custom_writing_long" = "Seu estilo de escrita personalizado e muito longo. Mantenha abaixo de 500 caracteres.";
+"validation_custom_image_empty" = "Por favor, descreva seu estilo de imagem personalizado antes de criar uma historia.";
+"validation_custom_image_long" = "Seu estilo de imagem personalizado e muito longo. Mantenha abaixo de 500 caracteres.";
+"validation_custom_lesson_empty" = "Por favor, descreva sua licao personalizada antes de criar uma historia.";
+"validation_custom_lesson_long" = "Sua licao personalizada e muito longa. Mantenha abaixo de 500 caracteres.";

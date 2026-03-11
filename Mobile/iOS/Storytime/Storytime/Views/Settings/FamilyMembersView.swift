@@ -2,15 +2,16 @@ import SwiftUI
 import PhotosUI
 
 struct FamilyMembersView: View {
+    @EnvironmentObject var localeManager: LocaleManager
     @StateObject private var viewModel = FamilyMembersViewModel()
 
     var body: some View {
         List {
             if viewModel.members.isEmpty && !viewModel.isLoading {
                 ContentUnavailableView(
-                    "No Family Members",
+                    localeManager.localized("family_empty_title"),
                     systemImage: "person.3",
-                    description: Text("Add family members so they can appear in your stories")
+                    description: Text(localeManager.localized("family_empty_description"))
                 )
                 .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
@@ -31,7 +32,7 @@ struct FamilyMembersView: View {
                 }
             }
         }
-        .navigationTitle("Family Members")
+        .navigationTitle(localeManager.localized("settings_family_members"))
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
@@ -46,8 +47,8 @@ struct FamilyMembersView: View {
                 ProgressView()
             }
         }
-        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
-            Button("OK") { viewModel.errorMessage = nil }
+        .alert(localeManager.localized("alert_error"), isPresented: .constant(viewModel.errorMessage != nil)) {
+            Button(localeManager.localized("button_ok")) { viewModel.errorMessage = nil }
         } message: {
             Text(viewModel.errorMessage ?? "")
         }
@@ -94,7 +95,7 @@ struct FamilyMembersView: View {
                 Text(member.name)
                     .font(.body.bold())
 
-                Text(member.role.replacingOccurrences(of: "-", with: " ").capitalized)
+                Text(localeManager.localized("role_\(member.role.replacingOccurrences(of: "-", with: "_"))"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .padding(.horizontal, 8)
@@ -124,23 +125,23 @@ struct FamilyMembersView: View {
     private var addMemberSheet: some View {
         NavigationStack {
             Form {
-                Section("Details") {
-                    TextField("Name", text: $viewModel.editName)
+                Section(localeManager.localized("family_section_details")) {
+                    TextField(localeManager.localized("settings_name"), text: $viewModel.editName)
                         .textInputAutocapitalization(.words)
 
                     Picker("Role", selection: $viewModel.editRole) {
-                        ForEach(FamilyMembersViewModel.roles, id: \.0) { value, label in
-                            Text(label).tag(value)
+                        ForEach(FamilyMembersViewModel.roles, id: \.0) { value, _ in
+                            Text(localeManager.localized("role_\(value.replacingOccurrences(of: "-", with: "_"))")).tag(value)
                         }
                     }
                 }
 
-                Section("Description (Optional)") {
+                Section(localeManager.localized("family_section_description")) {
                     TextEditor(text: $viewModel.editDescription)
                         .frame(minHeight: 60)
                         .overlay(alignment: .topLeading) {
                             if viewModel.editDescription.isEmpty {
-                                Text("Appearance, personality, backstory...")
+                                Text(localeManager.localized("family_description_placeholder"))
                                     .foregroundStyle(.tertiary)
                                     .padding(.top, 8)
                                     .padding(.leading, 4)
@@ -149,16 +150,16 @@ struct FamilyMembersView: View {
                         }
                 }
             }
-            .navigationTitle("Add Member")
+            .navigationTitle(localeManager.localized("family_add_title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button(localeManager.localized("button_cancel")) {
                         viewModel.isShowingAddSheet = false
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Add") {
+                    Button(localeManager.localized("family_add_button")) {
                         Task { await viewModel.addMember() }
                     }
                     .disabled(viewModel.editName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -173,23 +174,23 @@ struct FamilyMembersView: View {
     private var editMemberSheet: some View {
         NavigationStack {
             Form {
-                Section("Details") {
-                    TextField("Name", text: $viewModel.editName)
+                Section(localeManager.localized("family_section_details")) {
+                    TextField(localeManager.localized("settings_name"), text: $viewModel.editName)
                         .textInputAutocapitalization(.words)
 
                     Picker("Role", selection: $viewModel.editRole) {
-                        ForEach(FamilyMembersViewModel.roles, id: \.0) { value, label in
-                            Text(label).tag(value)
+                        ForEach(FamilyMembersViewModel.roles, id: \.0) { value, _ in
+                            Text(localeManager.localized("role_\(value.replacingOccurrences(of: "-", with: "_"))")).tag(value)
                         }
                     }
                 }
 
-                Section("Description (Optional)") {
+                Section(localeManager.localized("family_section_description")) {
                     TextEditor(text: $viewModel.editDescription)
                         .frame(minHeight: 60)
                         .overlay(alignment: .topLeading) {
                             if viewModel.editDescription.isEmpty {
-                                Text("Appearance, personality, backstory...")
+                                Text(localeManager.localized("family_description_placeholder"))
                                     .foregroundStyle(.tertiary)
                                     .padding(.top, 8)
                                     .padding(.leading, 4)
@@ -199,7 +200,7 @@ struct FamilyMembersView: View {
                 }
 
                 if let member = viewModel.editingMember {
-                    Section("Photo") {
+                    Section(localeManager.localized("family_section_photo")) {
                         HStack {
                             if let photoData = viewModel.selectedPhotoData,
                                let uiImage = UIImage(data: photoData) {
@@ -231,7 +232,7 @@ struct FamilyMembersView: View {
                             Spacer()
 
                             PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
-                                Label("Choose Photo", systemImage: "photo")
+                                Label(localeManager.localized("family_choose_photo"), systemImage: "photo")
                             }
                         }
                         .onChange(of: viewModel.selectedPhoto) {
@@ -245,17 +246,17 @@ struct FamilyMembersView: View {
                     }
                 }
             }
-            .navigationTitle("Edit Member")
+            .navigationTitle(localeManager.localized("family_edit_title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button(localeManager.localized("button_cancel")) {
                         viewModel.isShowingEditSheet = false
                         viewModel.editingMember = nil
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
+                    Button(localeManager.localized("button_save")) {
                         Task { await viewModel.updateMember() }
                     }
                     .disabled(viewModel.editName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)

@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "つくる";
+"tab_history" = "りれき";
+"tab_settings" = "せってい";
+
+/* Generate - Greetings */
+"greeting_morning" = "おはようございます";
+"greeting_afternoon" = "こんにちは";
+"greeting_evening" = "こんばんは";
+"greeting_welcome" = "Storytimeへようこそ!";
+"greeting_personalized" = "%@、%@!";
+
+/* Generate - Idle */
+"setup_prompt" = "せっていでお子さまの名前を入力すると、オリジナルのおはなしが作れます";
+"prompt_header" = "どんなおはなしをつくる?";
+"prompt_placeholder" = "おはなしのアイデアを書いてね...";
+"suggestion_1" = "まほうの森のふしぎなぼうけん";
+"suggestion_2" = "やさしい宇宙人に会いに宇宙へ旅しよう";
+"suggestion_3" = "おしゃべりイルカとすごすビーチの一日";
+"suggestion_4" = "海賊船でたからさがし";
+"section_language" = "ことば";
+"section_writing_style" = "かき方スタイル";
+"section_image_style" = "え のスタイル";
+"section_lesson" = "おしえ";
+"custom_label" = "カスタム";
+"custom_placeholder" = "自分だけの%@を書いてね...";
+"use_custom" = "カスタムを使う";
+"or_write_your_own" = "または自分で書く";
+"done" = "かんりょう";
+"bedtime_story_label" = "おやすみのおはなし";
+"bedtime_story_hint" = "みじかくておだやかなおはなし（10ページ）、おやすみにぴったり";
+"section_characters" = "キャラクター";
+"characters_all_included" = "ぜんいん入り";
+"characters_count" = "%d人中%d人をせんたく";
+"button_clear" = "クリア";
+"button_select_all" = "すべてせんたく";
+"button_create_story" = "おはなしをつくる";
+
+/* Generate - Progress */
+"progress_starting" = "じゅんびちゅう...";
+"progress_writing" = "おはなしを書いています...";
+"progress_painting" = "え をかいています...";
+"progress_assembling" = "えほんを作っています...";
+"button_cancel" = "キャンセル";
+
+/* Generate - Complete */
+"page_indicator" = "%dページ / %dページ";
+"button_books" = "ほんだな";
+"button_pdf" = "PDF";
+"button_new" = "あたらしく";
+"button_sleep" = "おやすみ";
+
+/* Generate - Error */
+"error_title" = "うまくいきませんでした";
+"button_try_again" = "もういちど";
+"button_start_over" = "はじめから";
+"error_unknown" = "不明なエラーが発生しました";
+
+/* History */
+"history_empty_title" = "まだおはなしがありません";
+"history_empty_description" = "おはなしを作ると、ここに表示されます!";
+"date_today" = "きょう";
+"date_yesterday" = "きのう";
+"date_days_ago" = "%d日まえ";
+"delete_story_title" = "おはなしをけす";
+"delete_story_message" = "このおはなしを本当にけしますか? もとにもどせません。";
+"button_delete" = "けす";
+"story_not_found" = "おはなしのデータが見つかりません";
+
+/* Settings */
+"settings_server" = "サーバー";
+"settings_connected" = "せつぞくずみ";
+"settings_not_connected" = "みせつぞく";
+"settings_test" = "テスト";
+"settings_server_url" = "サーバーURL";
+"settings_child_details" = "お子さまのじょうほう";
+"settings_change_photo" = "しゃしんをかえる";
+"settings_add_photo" = "しゃしんをついか";
+"settings_name" = "なまえ";
+"settings_gender" = "せいべつ";
+"settings_gender_not_set" = "みせってい";
+"settings_gender_boy" = "おとこのこ";
+"settings_gender_girl" = "おんなのこ";
+"settings_reading_level" = "よみレベル";
+"settings_reading_toddler" = "ようじ (2-3さい)";
+"settings_reading_early" = "よみはじめ (4-5さい)";
+"settings_reading_beginner" = "しょしんしゃ (6-7さい)";
+"settings_reading_intermediate" = "ちゅうきゅう (8-10さい)";
+"settings_family" = "かぞく";
+"settings_family_members" = "かぞくメンバー";
+"settings_manage_family" = "かぞくメンバーをかんり";
+"settings_bedtime" = "おやすみモード";
+"settings_ambient_sound" = "かんきょうおん";
+"settings_sleep_timer" = "スリープタイマー";
+"settings_sleep_off" = "オフ";
+"settings_sleep_1" = "1つのおはなしのあと";
+"settings_sleep_2" = "2つのおはなしのあと";
+"settings_sleep_3" = "3つのおはなしのあと";
+"settings_bedtime_footer" = "おやすみモードはおはなしのあとに画面をくらくし、やすらぐ音をながします";
+"settings_developer_options" = "かいはつしゃオプション";
+"settings_anthropic_key" = "Anthropic API Key";
+"settings_google_key" = "Google AI API Key";
+"settings_keys_footer" = "キーはサーバーに保存されます。マスクされたキーは既存のキーが設定済みであることを示します。";
+"button_save" = "ほぞん";
+"settings_saved" = "せっていをほぞんしました";
+"settings_connect_error" = "サーバーに接続できません";
+"alert_error" = "エラー";
+"button_ok" = "OK";
+
+/* Family Members */
+"family_empty_title" = "かぞくメンバーがいません";
+"family_empty_description" = "かぞくを追加して、おはなしに登場させよう";
+"family_add_title" = "メンバーをついか";
+"family_edit_title" = "メンバーをへんしゅう";
+"family_add_button" = "ついか";
+"family_section_details" = "しょうさい";
+"family_section_description" = "せつめい (にんい)";
+"family_description_placeholder" = "みため、せいかく、せっていなど...";
+"family_section_photo" = "しゃしん";
+"family_choose_photo" = "しゃしんをえらぶ";
+"family_upload_photo" = "しゃしんをアップロード";
+"family_delete_title" = "メンバーをけす";
+"family_delete_message" = "%@をかぞくからはずしますか?";
+"role_mom" = "ママ";
+"role_dad" = "パパ";
+"role_brother" = "おにいちゃん";
+"role_sister" = "おねえちゃん";
+"role_grandma" = "おばあちゃん";
+"role_grandpa" = "おじいちゃん";
+"role_aunt" = "おばさん";
+"role_uncle" = "おじさん";
+"role_pet" = "ペット";
+"role_friend" = "ともだち";
+"role_companion" = "なかま";
+"role_classmate" = "クラスメイト";
+"role_neighbor" = "おとなりさん";
+"role_magical_friend" = "まほうのともだち";
+"role_other" = "そのほか";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "どこかタップしてもどる";
+"breathing_in" = "すって";
+"breathing_hold" = "とめて";
+"breathing_out" = "はいて";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "ホワイトノイズ";
+"sound_brownNoise" = "ブラウンノイズ";
+"sound_pinkNoise" = "ピンクノイズ";
+"sound_softRain" = "やさしい雨";
+"sound_oceanWaves" = "なみの音";
+"sound_cracklingFireplace" = "だんろ";
+"sound_forestNight" = "よるの森";
+"sound_heartbeat" = "しんぞうの音";
+
+/* Writing Style Labels */
+"style_standard" = "スタンダード";
+"style_rhyming" = "いんふみ";
+"style_funny" = "おもしろい";
+"style_sound_effects" = "おとのこうか";
+"style_repetitive" = "くりかえし";
+"style_bedtime" = "おやすみ";
+"style_adventure" = "ぼうけん";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "おやすみのおはなしのクラシックなかたり";
+"style_desc_rhyming" = "Dr. Seussのようなリズミカルな詩";
+"style_desc_funny" = "おかしなユーモアと予想外の展開";
+"style_desc_sound_effects" = "オノマトペとインタラクティブな音";
+"style_desc_repetitive" = "くりかえしフレーズのあるつみあげおはなし";
+"style_desc_bedtime" = "ねむりの時間にぴったりのとてもおだやかなおはなし";
+"style_desc_adventure" = "すごいぼうけんとゆうかんなヒーロー";
+
+/* Image Style Labels */
+"style_watercolor" = "すいさいが";
+"style_fantasy" = "ファンタジー";
+"style_realistic" = "リアル";
+"style_cartoon" = "カートゥーン";
+"style_classic_storybook" = "クラシックえほん";
+"style_anime" = "アニメ";
+"style_ghibli" = "ジブリ";
+"style_chibi" = "ちび";
+"style_papercraft" = "ペーパークラフト";
+"style_pixel" = "ドット絵";
+"style_minimalist" = "ミニマル";
+"style_crayon" = "クレヨン";
+"style_pop_art" = "ポップアート";
+"style_oil_painting" = "あぶらえ";
+"style_none" = "え なし";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "やわらかくゆめのようなすいさいが";
+"style_desc_fantasy" = "ゆたかでまほうのようなファンタジーアート";
+"style_desc_realistic" = "しゃしんのようなデジタルアート";
+"style_desc_cartoon" = "はっきりカラフルなカートゥーンスタイル";
+"style_desc_classic_storybook" = "むかしながらのえほんイラスト";
+"style_desc_anime" = "にほんのアニメにインスピレーションをうけたアート";
+"style_desc_ghibli" = "Studio Ghibliにインスピレーションをうけたアート";
+"style_desc_chibi" = "かわいいデフォルメのちびアート";
+"style_desc_papercraft" = "きりがみコラージュスタイル";
+"style_desc_pixel" = "レトロなドット絵スタイル";
+"style_desc_minimalist" = "シンプルできれいなきかがくもよう";
+"style_desc_crayon" = "こどもがかいたようなクレヨンといろえんぴつ";
+"style_desc_pop_art" = "はっきりしたポップアートとドットもよう";
+"style_desc_oil_painting" = "ゆたかなしつかんのあぶらえスタイル";
+"style_desc_none" = "ぶんしょうだけのおはなし、え なし";
+
+/* Lesson Labels */
+"lesson_none" = "なし";
+"lesson_sharing" = "わけあい";
+"lesson_bravery" = "ゆうき";
+"lesson_kindness" = "やさしさ";
+"lesson_patience" = "がまん";
+"lesson_honesty" = "しょうじき";
+"lesson_gratitude" = "かんしゃ";
+"lesson_teamwork" = "チームワーク";
+"lesson_empathy" = "おもいやり";
+"lesson_perseverance" = "あきらめない";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "とくべつなおしえなし、たのしいおはなし";
+"lesson_desc_sharing" = "みんなとわけあうことをまなぶ";
+"lesson_desc_bravery" = "たいへんなときにゆうきを見つける";
+"lesson_desc_kindness" = "ほかの人にやさしくおもいやりをもつ";
+"lesson_desc_patience" = "まつこと、がまんすることをまなぶ";
+"lesson_desc_honesty" = "ほんとうのことをいうたいせつさ";
+"lesson_desc_gratitude" = "もっているものにかんしゃする";
+"lesson_desc_teamwork" = "みんなでちからをあわせてもくひょうをたっせい";
+"lesson_desc_empathy" = "ほかの人のきもちをりかいする";
+"lesson_desc_perseverance" = "むずかしくてもあきらめない";
+
+/* Validation */
+"validation_custom_writing_empty" = "おはなしを作る前にカスタムかき方スタイルを入力してください。";
+"validation_custom_writing_long" = "カスタムかき方スタイルがながすぎます。500もじ以内にしてください。";
+"validation_custom_image_empty" = "おはなしを作る前にカスタム え スタイルを入力してください。";
+"validation_custom_image_long" = "カスタム え スタイルがながすぎます。500もじ以内にしてください。";
+"validation_custom_lesson_empty" = "おはなしを作る前にカスタムおしえを入力してください。";
+"validation_custom_lesson_long" = "カスタムおしえがながすぎます。500もじ以内にしてください。";

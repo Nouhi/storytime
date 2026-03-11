@@ -19,6 +19,7 @@ class PreferencesManager(private val context: Context) {
         private val KEY_KID_NAME = stringPreferencesKey("kid_name")
         private val KEY_BEDTIME_SOUND = stringPreferencesKey("bedtime_sound")
         private val KEY_SLEEP_TIMER_STORIES = intPreferencesKey("sleep_timer_stories")
+        private val KEY_LANGUAGE = stringPreferencesKey("app_language")
         private const val DEFAULT_SERVER_URL = "http://10.0.2.2:3002"
     }
 
@@ -59,6 +60,16 @@ class PreferencesManager(private val context: Context) {
     suspend fun setSleepTimerStories(count: Int) {
         context.dataStore.edit { prefs ->
             prefs[KEY_SLEEP_TIMER_STORIES] = count
+        }
+    }
+
+    val language: Flow<String> = context.dataStore.data.map { prefs ->
+        prefs[KEY_LANGUAGE] ?: "en"
+    }
+
+    suspend fun setLanguage(lang: String) {
+        context.dataStore.edit { prefs ->
+            prefs[KEY_LANGUAGE] = lang
         }
     }
 }

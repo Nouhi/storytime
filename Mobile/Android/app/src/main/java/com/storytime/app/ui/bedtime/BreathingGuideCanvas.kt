@@ -1,5 +1,6 @@
 package com.storytime.app.ui.bedtime
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
@@ -8,9 +9,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.storytime.app.R
 import kotlinx.coroutines.android.awaitFrame
 import kotlin.math.pow
 import kotlin.math.sin
@@ -32,7 +35,7 @@ private fun easeInOut(t: Float): Float {
 private data class BreathingState(
     val scale: Float,
     val opacity: Float,
-    val label: String
+    @StringRes val labelRes: Int
 )
 
 private fun computeState(cycleTime: Float): BreathingState {
@@ -41,18 +44,18 @@ private fun computeState(cycleTime: Float): BreathingState {
             val progress = cycleTime / INHALE_DURATION
             val eased = easeInOut(progress)
             val scale = MIN_SCALE + (MAX_SCALE - MIN_SCALE) * eased
-            BreathingState(scale, 0.8f + 0.2f * eased, "Breathe In")
+            BreathingState(scale, 0.8f + 0.2f * eased, R.string.breathing_in)
         }
         cycleTime < INHALE_DURATION + HOLD_DURATION -> {
             val holdProgress = (cycleTime - INHALE_DURATION) / HOLD_DURATION
             val pulse = 0.8f + 0.2f * sin(holdProgress * Math.PI.toFloat() * 2f)
-            BreathingState(MAX_SCALE, pulse, "Hold")
+            BreathingState(MAX_SCALE, pulse, R.string.breathing_hold)
         }
         else -> {
             val exhaleProgress = (cycleTime - INHALE_DURATION - HOLD_DURATION) / EXHALE_DURATION
             val eased = easeInOut(exhaleProgress)
             val scale = MAX_SCALE - (MAX_SCALE - MIN_SCALE) * eased
-            BreathingState(scale, 0.8f - 0.2f * eased, "Breathe Out")
+            BreathingState(scale, 0.8f - 0.2f * eased, R.string.breathing_out)
         }
     }
 }
@@ -111,7 +114,7 @@ fun BreathingGuideCanvas() {
 
         // Phase label below the circle
         Text(
-            text = state.label,
+            text = stringResource(state.labelRes),
             color = Color.White.copy(alpha = 0.4f),
             fontSize = 16.sp,
             fontWeight = FontWeight.Light,

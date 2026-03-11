@@ -1,5 +1,6 @@
 package com.storytime.app.ui.history
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,9 +16,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.storytime.app.R
 import com.storytime.app.model.StoryHistoryEntry
 import com.storytime.app.ui.theme.*
 import java.time.ZonedDateTime
@@ -31,6 +35,7 @@ fun HistoryListScreen(
 ) {
     val stories by viewModel.stories.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
+    val context = LocalContext.current
 
     var storyToDelete by remember { mutableStateOf<StoryHistoryEntry?>(null) }
 
@@ -38,7 +43,7 @@ fun HistoryListScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("History") })
+            TopAppBar(title = { Text(stringResource(R.string.tab_history)) })
         }
     ) { padding ->
         if (isLoading) {
@@ -55,10 +60,10 @@ fun HistoryListScreen(
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(Modifier.height(16.dp))
-                    Text("No stories yet", style = MaterialTheme.typography.bodyLarge)
+                    Text(stringResource(R.string.history_empty_title), style = MaterialTheme.typography.bodyLarge)
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "Your stories will appear here once you create one!",
+                        stringResource(R.string.history_empty_description),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -73,6 +78,7 @@ fun HistoryListScreen(
                 items(stories, key = { it.id }) { story ->
                     StoryCard(
                         story = story,
+                        context = context,
                         onClick = { onStoryClick(story.id) },
                         onDelete = { storyToDelete = story }
                     )
@@ -85,8 +91,8 @@ fun HistoryListScreen(
     storyToDelete?.let { story ->
         AlertDialog(
             onDismissRequest = { storyToDelete = null },
-            title = { Text("Delete Story") },
-            text = { Text("Are you sure you want to delete this story? This cannot be undone.") },
+            title = { Text(stringResource(R.string.delete_story_title)) },
+            text = { Text(stringResource(R.string.delete_story_message)) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -94,10 +100,10 @@ fun HistoryListScreen(
                         storyToDelete = null
                     },
                     colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error)
-                ) { Text("Delete") }
+                ) { Text(stringResource(R.string.button_delete)) }
             },
             dismissButton = {
-                TextButton(onClick = { storyToDelete = null }) { Text("Cancel") }
+                TextButton(onClick = { storyToDelete = null }) { Text(stringResource(R.string.button_cancel)) }
             }
         )
     }
@@ -106,6 +112,7 @@ fun HistoryListScreen(
 @Composable
 private fun StoryCard(
     story: StoryHistoryEntry,
+    context: Context,
     onClick: () -> Unit,
     onDelete: () -> Unit
 ) {
@@ -171,7 +178,7 @@ private fun StoryCard(
 
                 // Relative date
                 Text(
-                    relativeDate(story.createdAt),
+                    relativeDate(story.createdAt, context),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                 )
@@ -180,7 +187,7 @@ private fun StoryCard(
             IconButton(onClick = onDelete) {
                 Icon(
                     Icons.Default.Delete,
-                    contentDescription = "Delete",
+                    contentDescription = stringResource(R.string.button_delete),
                     tint = MaterialTheme.colorScheme.error.copy(alpha = 0.7f)
                 )
             }
@@ -188,15 +195,15 @@ private fun StoryCard(
     }
 }
 
-private fun relativeDate(isoString: String): String {
+private fun relativeDate(isoString: String, context: Context): String {
     return try {
         val parsed = ZonedDateTime.parse(isoString)
         val now = ZonedDateTime.now()
         val days = ChronoUnit.DAYS.between(parsed.toLocalDate(), now.toLocalDate())
         when {
-            days == 0L -> "Today"
-            days == 1L -> "Yesterday"
-            days < 7L -> "$days days ago"
+            days == 0L -> context.getString(R.string.date_today)
+            days == 1L -> context.getString(R.string.date_yesterday)
+            days < 7L -> context.getString(R.string.date_days_ago, days.toInt())
             else -> parsed.toLocalDate().toString()
         }
     } catch (_: Exception) {

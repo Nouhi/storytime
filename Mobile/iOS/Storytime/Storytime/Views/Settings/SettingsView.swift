@@ -2,6 +2,7 @@ import SwiftUI
 import PhotosUI
 
 struct SettingsView: View {
+    @EnvironmentObject var localeManager: LocaleManager
     @StateObject private var viewModel = SettingsViewModel()
     @AppStorage("bedtimeSound") private var bedtimeSound = "whiteNoise"
     @AppStorage("sleepTimerStories") private var sleepTimerStories = 0
@@ -11,15 +12,16 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 serverSection
+                languageSection
                 childInfoSection
                 familySection
                 bedtimeSection
                 developerSection
             }
-            .navigationTitle("Settings")
+            .navigationTitle(localeManager.localized("tab_settings"))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Save") {
+                    Button(localeManager.localized("button_save")) {
                         Task { await viewModel.saveSettings() }
                     }
                     .fontWeight(.semibold)
@@ -33,8 +35,8 @@ struct SettingsView: View {
                         .tint(Color.stPrimary)
                 }
             }
-            .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
-                Button("OK") { viewModel.errorMessage = nil }
+            .alert(localeManager.localized("alert_error"), isPresented: .constant(viewModel.errorMessage != nil)) {
+                Button(localeManager.localized("button_ok")) { viewModel.errorMessage = nil }
             } message: {
                 Text(viewModel.errorMessage ?? "")
             }
@@ -46,6 +48,19 @@ struct SettingsView: View {
 
     // MARK: - Sections
 
+    private var languageSection: some View {
+        Section {
+            Picker(localeManager.localized("section_language"), selection: Binding(
+                get: { localeManager.languageCode },
+                set: { localeManager.languageCode = $0 }
+            )) {
+                ForEach(GenerationViewModel.fallbackLanguages, id: \.id) { lang in
+                    Text("\(lang.emoji) \(lang.description)").tag(lang.id)
+                }
+            }
+        }
+    }
+
     private var serverSection: some View {
         Section {
             HStack(spacing: 12) {
@@ -54,33 +69,33 @@ struct SettingsView: View {
                     Circle()
                         .fill(viewModel.isServerOnline ? Color.stAccent : .red)
                         .frame(width: 8, height: 8)
-                    Text(viewModel.isServerOnline ? "Connected" : "Not connected")
+                    Text(viewModel.isServerOnline ? localeManager.localized("settings_connected") : localeManager.localized("settings_not_connected"))
                         .font(.subheadline)
                         .foregroundStyle(viewModel.isServerOnline ? Color.stAccent : .red)
                 }
 
                 Spacer()
 
-                Button("Test") {
+                Button(localeManager.localized("settings_test")) {
                     Task { await viewModel.loadSettings() }
                 }
                 .font(.subheadline)
                 .foregroundStyle(Color.stPrimary)
             }
 
-            TextField("Server URL", text: $viewModel.serverURL)
+            TextField(localeManager.localized("settings_server_url"), text: $viewModel.serverURL)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .keyboardType(.URL)
                 .font(.subheadline)
                 .foregroundStyle(Color.stTextSecondary)
         } header: {
-            Text("Server")
+            Text(localeManager.localized("settings_server"))
         }
     }
 
     private var childInfoSection: some View {
-        Section("Child Details") {
+        Section(localeManager.localized("settings_child_details")) {
             // Photo — prominent and centered
             HStack {
                 Spacer()
@@ -118,7 +133,7 @@ struct SettingsView: View {
                     }
 
                     PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
-                        Text("Change Photo")
+                        Text(localeManager.localized("settings_change_photo"))
                             .font(.caption)
                             .foregroundStyle(Color.stPrimary)
                     }
@@ -129,31 +144,32 @@ struct SettingsView: View {
                 Task { await viewModel.handlePhotoSelection() }
             }
 
-            TextField("Name", text: $viewModel.kidName)
+            TextField(localeManager.localized("settings_name"), text: $viewModel.kidName)
 
-            Picker("Gender", selection: $viewModel.kidGender) {
-                ForEach(SettingsViewModel.genderOptions, id: \.0) { value, label in
-                    Text(label).tag(value)
-                }
+            Picker(localeManager.localized("settings_gender"), selection: $viewModel.kidGender) {
+                Text(localeManager.localized("settings_gender_not_set")).tag("")
+                Text(localeManager.localized("settings_gender_boy")).tag("boy")
+                Text(localeManager.localized("settings_gender_girl")).tag("girl")
             }
 
-            Picker("Reading Level", selection: $viewModel.readingLevel) {
-                ForEach(SettingsViewModel.readingLevels, id: \.0) { value, label in
-                    Text(label).tag(value)
-                }
+            Picker(localeManager.localized("settings_reading_level"), selection: $viewModel.readingLevel) {
+                Text(localeManager.localized("settings_reading_toddler")).tag("toddler")
+                Text(localeManager.localized("settings_reading_early")).tag("early-reader")
+                Text(localeManager.localized("settings_reading_beginner")).tag("beginner")
+                Text(localeManager.localized("settings_reading_intermediate")).tag("intermediate")
             }
         }
     }
 
     private var familySection: some View {
-        Section("Family") {
+        Section(localeManager.localized("settings_family")) {
             NavigationLink {
                 FamilyMembersView()
             } label: {
                 HStack {
                     Image(systemName: "person.3.fill")
                         .foregroundStyle(Color.stPrimary)
-                    Text("Family Members")
+                    Text(localeManager.localized("settings_family_members"))
                 }
             }
         }
@@ -161,31 +177,31 @@ struct SettingsView: View {
 
     private var bedtimeSection: some View {
         Section {
-            Picker("Ambient Sound", selection: $bedtimeSound) {
+            Picker(localeManager.localized("settings_ambient_sound"), selection: $bedtimeSound) {
                 ForEach(AmbientSound.allCases) { sound in
-                    Label(sound.displayName, systemImage: sound.iconName)
+                    Label(localeManager.localized("sound_\(sound.rawValue)"), systemImage: sound.iconName)
                         .tag(sound.rawValue)
                 }
             }
 
-            Picker("Sleep Timer", selection: $sleepTimerStories) {
-                Text("Off").tag(0)
-                Text("After 1 story").tag(1)
-                Text("After 2 stories").tag(2)
-                Text("After 3 stories").tag(3)
+            Picker(localeManager.localized("settings_sleep_timer"), selection: $sleepTimerStories) {
+                Text(localeManager.localized("settings_sleep_off")).tag(0)
+                Text(localeManager.localized("settings_sleep_1")).tag(1)
+                Text(localeManager.localized("settings_sleep_2")).tag(2)
+                Text(localeManager.localized("settings_sleep_3")).tag(3)
             }
         } header: {
-            Text("Bedtime")
+            Text(localeManager.localized("settings_bedtime"))
         } footer: {
-            Text("Bedtime mode dims the screen and plays soothing sounds after story time")
+            Text(localeManager.localized("settings_bedtime_footer"))
         }
     }
 
     private var developerSection: some View {
         Section {
-            DisclosureGroup("Developer Options", isExpanded: $showDeveloperOptions) {
+            DisclosureGroup(localeManager.localized("settings_developer_options"), isExpanded: $showDeveloperOptions) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Anthropic API Key")
+                    Text(localeManager.localized("settings_anthropic_key"))
                         .font(.caption)
                         .foregroundStyle(Color.stTextSecondary)
                     SecureField("sk-ant-...", text: $viewModel.anthropicApiKey)
@@ -194,7 +210,7 @@ struct SettingsView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Google AI API Key")
+                    Text(localeManager.localized("settings_google_key"))
                         .font(.caption)
                         .foregroundStyle(Color.stTextSecondary)
                     SecureField("AIza...", text: $viewModel.googleAiApiKey)
@@ -204,7 +220,7 @@ struct SettingsView: View {
             }
         } footer: {
             if showDeveloperOptions {
-                Text("Keys are stored on the server. Masked keys indicate an existing key is set.")
+                Text(localeManager.localized("settings_keys_footer"))
             }
         }
     }

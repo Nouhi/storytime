@@ -4,6 +4,8 @@ import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import com.storytime.app.StorytimeApp
 import com.storytime.app.model.SettingsUpdateRequest
 import com.storytime.app.network.ApiClient
@@ -60,6 +62,9 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val _sleepTimerStories = MutableStateFlow(0)
     val sleepTimerStories: StateFlow<Int> = _sleepTimerStories.asStateFlow()
 
+    private val _language = MutableStateFlow("en")
+    val language: StateFlow<String> = _language.asStateFlow()
+
     init {
         viewModelScope.launch {
             _serverUrl.value = prefs.serverUrl.first()
@@ -69,6 +74,9 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         }
         viewModelScope.launch {
             prefs.sleepTimerStories.collect { _sleepTimerStories.value = it }
+        }
+        viewModelScope.launch {
+            _language.value = prefs.language.first()
         }
     }
 
@@ -89,6 +97,14 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     fun updateSleepTimerStories(count: Int) {
         _sleepTimerStories.value = count
         viewModelScope.launch { prefs.setSleepTimerStories(count) }
+    }
+
+    fun updateLanguage(lang: String) {
+        _language.value = lang
+        viewModelScope.launch {
+            prefs.setLanguage(lang)
+        }
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(lang))
     }
 
     fun loadSettings() {
