@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Storytime</string>
+
+    <!-- Navigation -->
+    <string name="tab_create">Maak</string>
+    <string name="tab_history">Geschiedenis</string>
+    <string name="tab_settings">Instellingen</string>
+
+    <!-- Generate - Greetings -->
+    <string name="greeting_morning">Goedemorgen</string>
+    <string name="greeting_afternoon">Goedemiddag</string>
+    <string name="greeting_evening">Goedenavond</string>
+    <string name="greeting_welcome">Welkom bij Storytime!</string>
+    <string name="greeting_personalized">%1$s, %2$s!</string>
+
+    <!-- Generate - Idle -->
+    <string name="setup_prompt">Stel de naam van je kind in bij Instellingen voor gepersonaliseerde verhalen</string>
+    <string name="prompt_header">Welk verhaal gaan we maken?</string>
+    <string name="prompt_placeholder">Beschrijf je verhaalidee\u2026</string>
+    <string name="suggestion_1">Een magisch avontuur in een betoverd bos</string>
+    <string name="suggestion_2">Een reis naar de ruimte om vriendelijke aliens te bezoeken</string>
+    <string name="suggestion_3">Een dag op het strand met een pratende dolfijn</string>
+    <string name="suggestion_4">Een schattenjacht op een piratenschip</string>
+    <string name="section_language">Taal</string>
+    <string name="section_writing_style">Schrijfstijl</string>
+    <string name="section_image_style">Afbeeldingsstijl</string>
+    <string name="section_lesson">Les</string>
+    <string name="custom_label">Aangepast</string>
+    <string name="custom_placeholder">Beschrijf je eigen %1$s\u2026</string>
+    <string name="use_custom">Gebruik Aangepast</string>
+    <string name="or_write_your_own">Of schrijf je eigen</string>
+    <string name="done">Klaar</string>
+    <string name="bedtime_story_label">Slaapverhaaltje</string>
+    <string name="bedtime_story_hint">Korter, rustiger verhaal (10 pagina\'s) perfect voor het slapengaan</string>
+    <string name="section_characters">Personages</string>
+    <string name="characters_all_included">Allemaal inbegrepen</string>
+    <string name="characters_count">%1$d van %2$d geselecteerd</string>
+    <string name="button_clear">Wissen</string>
+    <string name="button_select_all">Alles Selecteren</string>
+    <string name="button_create_story">Maak Verhaal</string>
+
+    <!-- Generate - Progress -->
+    <string name="progress_starting">Starten\u2026</string>
+    <string name="progress_writing">Je verhaal schrijven\u2026</string>
+    <string name="progress_painting">Illustraties schilderen\u2026</string>
+    <string name="progress_assembling">Je boek samenstellen\u2026</string>
+    <string name="button_cancel">Annuleren</string>
+
+    <!-- Generate - Complete -->
+    <string name="page_indicator">Pagina %1$d van %2$d</string>
+    <string name="button_books">Boeken</string>
+    <string name="button_pdf">PDF</string>
+    <string name="button_new">Nieuw</string>
+    <string name="button_sleep">Slapen</string>
+
+    <!-- Generate - Error -->
+    <string name="error_title">Er is iets misgegaan</string>
+    <string name="button_try_again">Opnieuw Proberen</string>
+    <string name="button_start_over">Opnieuw Beginnen</string>
+    <string name="error_unknown">Er is een onbekende fout opgetreden</string>
+
+    <!-- History -->
+    <string name="history_empty_title">Nog Geen Verhalen</string>
+    <string name="history_empty_description">Je verhalen verschijnen hier zodra je er een hebt gemaakt!</string>
+    <string name="date_today">Vandaag</string>
+    <string name="date_yesterday">Gisteren</string>
+    <string name="date_days_ago">%1$d dagen geleden</string>
+    <string name="delete_story_title">Verhaal Verwijderen</string>
+    <string name="delete_story_message">Weet je zeker dat je dit verhaal wilt verwijderen? Dit kan niet ongedaan worden gemaakt.</string>
+    <string name="button_delete">Verwijderen</string>
+    <string name="story_not_found">Verhaalgegevens niet gevonden</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Server</string>
+    <string name="settings_connected">Verbonden</string>
+    <string name="settings_not_connected">Niet verbonden</string>
+    <string name="settings_test">Test</string>
+    <string name="settings_server_url">Server URL</string>
+    <string name="settings_child_details">Gegevens Kind</string>
+    <string name="settings_change_photo">Foto Wijzigen</string>
+    <string name="settings_add_photo">Foto Toevoegen</string>
+    <string name="settings_name">Naam</string>
+    <string name="settings_gender">Geslacht</string>
+    <string name="settings_gender_not_set">Niet ingesteld</string>
+    <string name="settings_gender_boy">Jongen</string>
+    <string name="settings_gender_girl">Meisje</string>
+    <string name="settings_reading_level">Leesniveau</string>
+    <string name="settings_reading_toddler">Peuter (2-3)</string>
+    <string name="settings_reading_early">Beginnend Lezer (4-5)</string>
+    <string name="settings_reading_beginner">Beginner (6-7)</string>
+    <string name="settings_reading_intermediate">Gevorderd (8-10)</string>
+    <string name="settings_family">Familie</string>
+    <string name="settings_family_members">Familieleden</string>
+    <string name="settings_manage_family">Familieleden Beheren</string>
+    <string name="settings_bedtime">Bedtijd</string>
+    <string name="settings_ambient_sound">Omgevingsgeluid</string>
+    <string name="settings_sleep_timer">Slaaptimer</string>
+    <string name="settings_sleep_off">Uit</string>
+    <string name="settings_sleep_1">Na 1 verhaal</string>
+    <string name="settings_sleep_2">Na 2 verhalen</string>
+    <string name="settings_sleep_3">Na 3 verhalen</string>
+    <string name="settings_bedtime_footer">Bedtijdmodus dimt het scherm en speelt rustgevende geluiden af na het voorlezen</string>
+    <string name="settings_developer_options">Ontwikkelaarsopties</string>
+    <string name="settings_anthropic_key">Anthropic API-sleutel</string>
+    <string name="settings_google_key">Google AI API-sleutel</string>
+    <string name="settings_keys_footer">Sleutels worden op de server opgeslagen. Gemaskeerde sleutels geven aan dat er een bestaande sleutel is ingesteld.</string>
+    <string name="button_save">Opslaan</string>
+    <string name="settings_saved">Instellingen opgeslagen</string>
+    <string name="settings_connect_error">Kan geen verbinding maken met de server</string>
+    <string name="alert_error">Fout</string>
+    <string name="button_ok">OK</string>
+
+    <!-- Family Members -->
+    <string name="family_empty_title">Geen Familieleden</string>
+    <string name="family_empty_description">Voeg familieleden toe zodat ze in je verhalen kunnen verschijnen</string>
+    <string name="family_add_title">Lid Toevoegen</string>
+    <string name="family_edit_title">Lid Bewerken</string>
+    <string name="family_add_button">Toevoegen</string>
+    <string name="family_section_details">Details</string>
+    <string name="family_section_description">Beschrijving (Optioneel)</string>
+    <string name="family_description_placeholder">Uiterlijk, persoonlijkheid, achtergrondverhaal\u2026</string>
+    <string name="family_section_photo">Foto</string>
+    <string name="family_choose_photo">Kies Foto</string>
+    <string name="family_upload_photo">Upload Foto</string>
+    <string name="family_delete_title">Lid Verwijderen</string>
+    <string name="family_delete_message">%1$s uit de familie verwijderen?</string>
+    <string name="role_mom">Mama</string>
+    <string name="role_dad">Papa</string>
+    <string name="role_brother">Broer</string>
+    <string name="role_sister">Zus</string>
+    <string name="role_grandma">Oma</string>
+    <string name="role_grandpa">Opa</string>
+    <string name="role_aunt">Tante</string>
+    <string name="role_uncle">Oom</string>
+    <string name="role_pet">Huisdier</string>
+    <string name="role_friend">Vriend</string>
+    <string name="role_companion">Metgezel</string>
+    <string name="role_classmate">Klasgenoot</string>
+    <string name="role_neighbor">Buurman/Buurvrouw</string>
+    <string name="role_magical_friend">Magische Vriend</string>
+    <string name="role_other">Overig</string>
+
+    <!-- Bedtime & Breathing -->
+    <string name="bedtime_tap_to_exit">Tik ergens om af te sluiten</string>
+    <string name="breathing_in">Inademen</string>
+    <string name="breathing_hold">Vasthouden</string>
+    <string name="breathing_out">Uitademen</string>
+
+    <!-- Ambient Sounds -->
+    <string name="sound_whiteNoise">Witte Ruis</string>
+    <string name="sound_brownNoise">Bruine Ruis</string>
+    <string name="sound_pinkNoise">Roze Ruis</string>
+    <string name="sound_softRain">Zachte Regen</string>
+    <string name="sound_oceanWaves">Oceaangolven</string>
+    <string name="sound_cracklingFireplace">Open Haard</string>
+    <string name="sound_forestNight">Nachtelijk Bos</string>
+    <string name="sound_heartbeat">Hartslag</string>
+
+    <!-- Writing Style Labels -->
+    <string name="style_standard">Standaard</string>
+    <string name="style_rhyming">Rijmend</string>
+    <string name="style_funny">Grappig</string>
+    <string name="style_sound_effects">Geluidseffecten</string>
+    <string name="style_repetitive">Herhalend</string>
+    <string name="style_bedtime">Bedtijd</string>
+    <string name="style_adventure">Avontuur</string>
+
+    <!-- Writing Style Descriptions -->
+    <string name="style_desc_standard">Klassieke vertelling van een slaapverhaaltje</string>
+    <string name="style_desc_rhyming">Rijmende verzen in de stijl van een kinderrijm</string>
+    <string name="style_desc_funny">Gekke humor en onverwachte wendingen</string>
+    <string name="style_desc_sound_effects">Klanknabootsing en interactieve geluiden</string>
+    <string name="style_desc_repetitive">Cumulatief verhaal met herhalende zinnen</string>
+    <string name="style_desc_bedtime">Extra rustig en dromerig voor het slapengaan</string>
+    <string name="style_desc_adventure">Epische avonturen en dappere helden</string>
+
+    <!-- Image Style Labels -->
+    <string name="style_watercolor">Aquarel</string>
+    <string name="style_fantasy">Fantasy</string>
+    <string name="style_realistic">Realistisch</string>
+    <string name="style_cartoon">Tekenfilm</string>
+    <string name="style_classic_storybook">Klassiek Prentenboek</string>
+    <string name="style_anime">Anime</string>
+    <string name="style_ghibli">Ghibli</string>
+    <string name="style_chibi">Chibi</string>
+    <string name="style_papercraft">Papierkunst</string>
+    <string name="style_pixel">Pixel Art</string>
+    <string name="style_minimalist">Minimalistisch</string>
+    <string name="style_crayon">Waskrijtje</string>
+    <string name="style_pop_art">Pop Art</string>
+    <string name="style_oil_painting">Olieverfschilderij</string>
+    <string name="style_none">Geen Afbeeldingen</string>
+
+    <!-- Image Style Descriptions -->
+    <string name="style_desc_watercolor">Zachte, dromerige aquarelschilderijen</string>
+    <string name="style_desc_fantasy">Rijke, magische fantasy-kunst</string>
+    <string name="style_desc_realistic">Fotorealistische digitale kunst</string>
+    <string name="style_desc_cartoon">Opvallende, kleurrijke tekenfilmstijl</string>
+    <string name="style_desc_classic_storybook">Vintage illustraties uit kinderboeken</string>
+    <string name="style_desc_anime">Japanse anime-geïnspireerde kunst</string>
+    <string name="style_desc_ghibli">Studio Ghibli-geïnspireerde kunst</string>
+    <string name="style_desc_chibi">Schattige, super-vervormd chibi-kunst</string>
+    <string name="style_desc_papercraft">Stijl van geknipt papieren collage</string>
+    <string name="style_desc_pixel">Retro pixel art-stijl</string>
+    <string name="style_desc_minimalist">Schone, eenvoudige geometrische vormen</string>
+    <string name="style_desc_crayon">Kinderlijke waskrijtjes en kleurpotloden</string>
+    <string name="style_desc_pop_art">Opvallende pop art met rastertonen</string>
+    <string name="style_desc_oil_painting">Rijke, gestructureerde olieverfschilderijstijl</string>
+    <string name="style_desc_none">Alleen tekst, geen illustraties</string>
+
+    <!-- Lesson Labels -->
+    <string name="lesson_none">Geen</string>
+    <string name="lesson_sharing">Delen</string>
+    <string name="lesson_bravery">Moed</string>
+    <string name="lesson_kindness">Vriendelijkheid</string>
+    <string name="lesson_patience">Geduld</string>
+    <string name="lesson_honesty">Eerlijkheid</string>
+    <string name="lesson_gratitude">Dankbaarheid</string>
+    <string name="lesson_teamwork">Samenwerking</string>
+    <string name="lesson_empathy">Empathie</string>
+    <string name="lesson_perseverance">Doorzettingsvermogen</string>
+
+    <!-- Lesson Descriptions -->
+    <string name="lesson_desc_none">Geen specifieke les — gewoon een leuk verhaal</string>
+    <string name="lesson_desc_sharing">Leren delen met anderen</string>
+    <string name="lesson_desc_bravery">Moed vinden in moeilijke momenten</string>
+    <string name="lesson_desc_kindness">Vriendelijk en zorgzaam zijn voor anderen</string>
+    <string name="lesson_desc_patience">Leren wachten en geduldig zijn</string>
+    <string name="lesson_desc_honesty">Het belang van de waarheid vertellen</string>
+    <string name="lesson_desc_gratitude">Waarderen wat je hebt</string>
+    <string name="lesson_desc_teamwork">Samenwerken om doelen te bereiken</string>
+    <string name="lesson_desc_empathy">De gevoelens van anderen begrijpen</string>
+    <string name="lesson_desc_perseverance">Niet opgeven als het moeilijk wordt</string>
+
+    <!-- Validation -->
+    <string name="validation_custom_writing_empty">Beschrijf je aangepaste schrijfstijl voordat je een verhaal maakt.</string>
+    <string name="validation_custom_writing_long">Je aangepaste schrijfstijl is te lang. Houd het onder de 500 tekens.</string>
+    <string name="validation_custom_image_empty">Beschrijf je aangepaste afbeeldingsstijl voordat je een verhaal maakt.</string>
+    <string name="validation_custom_image_long">Je aangepaste afbeeldingsstijl is te lang. Houd het onder de 500 tekens.</string>
+    <string name="validation_custom_lesson_empty">Beschrijf je aangepaste les voordat je een verhaal maakt.</string>
+    <string name="validation_custom_lesson_long">Je aangepaste les is te lang. Houd het onder de 500 tekens.</string>
+</resources>

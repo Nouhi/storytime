@@ -1,5 +1,5 @@
 import type { FamilyMember } from "../types.js";
-import { WRITING_STYLES, DEFAULT_WRITING_STYLE, LESSONS, DEFAULT_LESSON } from "../styles.js";
+import { WRITING_STYLES, DEFAULT_WRITING_STYLE, LESSONS, DEFAULT_LESSON, LANGUAGES } from "../styles.js";
 
 const READING_LEVEL_GUIDE: Record<string, string> = {
   toddler:
@@ -75,6 +75,7 @@ export function buildStorySystemPrompt(context: {
   customWritingStyle?: string;
   customLesson?: string;
   bedtimeStory?: boolean;
+  language?: string;
 }): string {
   const levelGuide =
     READING_LEVEL_GUIDE[context.readingLevel] ||
@@ -112,12 +113,24 @@ export function buildStorySystemPrompt(context: {
       ? `Use she/her/her pronouns for ${context.kidName || "the child"}.`
       : "";
 
+  // Language section
+  const langId = context.language || "en";
+  const lang = LANGUAGES.find((l) => l.id === langId);
+  const isNonEnglish = langId !== "en" && lang;
+  const languageSection = isNonEnglish
+    ? `\nLANGUAGE: Write the ENTIRE story in ${lang.nativeName} (${lang.label}).
+All page text ("text" field) MUST be written in ${lang.nativeName}. Do NOT write any story text in English.
+Character names and family member names stay exactly as provided — do not translate names.
+The final page text should be the equivalent of "The End.\\nGood night, ${context.kidName || "sweetheart"}." translated naturally into ${lang.nativeName}.
+IMPORTANT: Image descriptions ("imageDescription" field) must ALWAYS remain in English — the image generator only understands English.\n`
+    : "";
+
   return `You are a beloved, award-winning children's story author. You create magical, personalized bedtime stories that captivate young minds and end with warmth and sleepiness.
 
 MAIN CHARACTER: ${context.kidName || "the child"}${genderLabel ? ` (${genderLabel})` : ""}
 ${pronounLine ? pronounLine + "\n" : ""}
 READING LEVEL: ${levelGuide}
-
+${languageSection}
 WRITING STYLE: ${writingStyleLabel}
 ${writingStyleInstructions}
 ${lessonSection}FAMILY MEMBERS:

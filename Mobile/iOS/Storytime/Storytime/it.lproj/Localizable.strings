@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "Crea";
+"tab_history" = "Cronologia";
+"tab_settings" = "Impostazioni";
+
+/* Generate - Greetings */
+"greeting_morning" = "Buongiorno";
+"greeting_afternoon" = "Buon pomeriggio";
+"greeting_evening" = "Buonasera";
+"greeting_welcome" = "Benvenuto su Storytime!";
+"greeting_personalized" = "%@, %@!";
+
+/* Generate - Idle */
+"setup_prompt" = "Inserisci il nome del tuo bambino nelle Impostazioni per storie personalizzate";
+"prompt_header" = "Che storia creiamo?";
+"prompt_placeholder" = "Descrivi la tua idea per una storia...";
+"suggestion_1" = "Un'avventura magica in una foresta incantata";
+"suggestion_2" = "Un viaggio nello spazio per visitare simpatici alieni";
+"suggestion_3" = "Una giornata al mare con un delfino parlante";
+"suggestion_4" = "Una caccia al tesoro su una nave pirata";
+"section_language" = "Lingua";
+"section_writing_style" = "Stile di Scrittura";
+"section_image_style" = "Stile delle Immagini";
+"section_lesson" = "Lezione";
+"custom_label" = "Personalizzato";
+"custom_placeholder" = "Descrivi il tuo %@ personalizzato...";
+"use_custom" = "Usa Personalizzato";
+"or_write_your_own" = "Oppure scrivi il tuo";
+"done" = "Fatto";
+"bedtime_story_label" = "Storia della Buonanotte";
+"bedtime_story_hint" = "Storia più breve e tranquilla (10 pagine) perfetta per l'ora della nanna";
+"section_characters" = "Personaggi";
+"characters_all_included" = "Tutti inclusi";
+"characters_count" = "%d di %d selezionati";
+"button_clear" = "Cancella";
+"button_select_all" = "Seleziona Tutti";
+"button_create_story" = "Crea Storia";
+
+/* Generate - Progress */
+"progress_starting" = "Inizio...";
+"progress_writing" = "Sto scrivendo la tua storia...";
+"progress_painting" = "Sto dipingendo le illustrazioni...";
+"progress_assembling" = "Sto assemblando il tuo libro...";
+"button_cancel" = "Annulla";
+
+/* Generate - Complete */
+"page_indicator" = "Pagina %d di %d";
+"button_books" = "Libri";
+"button_pdf" = "PDF";
+"button_new" = "Nuovo";
+"button_sleep" = "Dormi";
+
+/* Generate - Error */
+"error_title" = "Qualcosa è andato storto";
+"button_try_again" = "Riprova";
+"button_start_over" = "Ricomincia";
+"error_unknown" = "Si è verificato un errore sconosciuto";
+
+/* History */
+"history_empty_title" = "Nessuna Storia";
+"history_empty_description" = "Le tue storie appariranno qui quando ne creerai una!";
+"date_today" = "Oggi";
+"date_yesterday" = "Ieri";
+"date_days_ago" = "%d giorni fa";
+"delete_story_title" = "Elimina Storia";
+"delete_story_message" = "Sei sicuro di voler eliminare questa storia? Non è possibile annullare l'operazione.";
+"button_delete" = "Elimina";
+"story_not_found" = "Dati della storia non trovati";
+
+/* Settings */
+"settings_server" = "Server";
+"settings_connected" = "Connesso";
+"settings_not_connected" = "Non connesso";
+"settings_test" = "Test";
+"settings_server_url" = "URL del Server";
+"settings_child_details" = "Dettagli del Bambino";
+"settings_change_photo" = "Cambia Foto";
+"settings_add_photo" = "Aggiungi Foto";
+"settings_name" = "Nome";
+"settings_gender" = "Genere";
+"settings_gender_not_set" = "Non impostato";
+"settings_gender_boy" = "Maschio";
+"settings_gender_girl" = "Femmina";
+"settings_reading_level" = "Livello di Lettura";
+"settings_reading_toddler" = "Piccolino (2-3)";
+"settings_reading_early" = "Lettore Precoce (4-5)";
+"settings_reading_beginner" = "Principiante (6-7)";
+"settings_reading_intermediate" = "Intermedio (8-10)";
+"settings_family" = "Famiglia";
+"settings_family_members" = "Membri della Famiglia";
+"settings_manage_family" = "Gestisci Membri della Famiglia";
+"settings_bedtime" = "Ora della Nanna";
+"settings_ambient_sound" = "Suono Ambientale";
+"settings_sleep_timer" = "Timer del Sonno";
+"settings_sleep_off" = "Spento";
+"settings_sleep_1" = "Dopo 1 storia";
+"settings_sleep_2" = "Dopo 2 storie";
+"settings_sleep_3" = "Dopo 3 storie";
+"settings_bedtime_footer" = "La modalità nanna abbassa la luminosità dello schermo e riproduce suoni rilassanti dopo la storia";
+"settings_developer_options" = "Opzioni Sviluppatore";
+"settings_anthropic_key" = "Chiave API Anthropic";
+"settings_google_key" = "Chiave API Google AI";
+"settings_keys_footer" = "Le chiavi sono memorizzate sul server. Le chiavi mascherate indicano che una chiave esistente è impostata.";
+"button_save" = "Salva";
+"settings_saved" = "Impostazioni salvate";
+"settings_connect_error" = "Impossibile connettersi al server";
+"alert_error" = "Errore";
+"button_ok" = "OK";
+
+/* Family Members */
+"family_empty_title" = "Nessun Membro della Famiglia";
+"family_empty_description" = "Aggiungi membri della famiglia per farli apparire nelle tue storie";
+"family_add_title" = "Aggiungi Membro";
+"family_edit_title" = "Modifica Membro";
+"family_add_button" = "Aggiungi";
+"family_section_details" = "Dettagli";
+"family_section_description" = "Descrizione (Facoltativa)";
+"family_description_placeholder" = "Aspetto, personalità, storia personale...";
+"family_section_photo" = "Foto";
+"family_choose_photo" = "Scegli Foto";
+"family_upload_photo" = "Carica Foto";
+"family_delete_title" = "Elimina Membro";
+"family_delete_message" = "Rimuovere %@ dalla famiglia?";
+"role_mom" = "Mamma";
+"role_dad" = "Papà";
+"role_brother" = "Fratello";
+"role_sister" = "Sorella";
+"role_grandma" = "Nonna";
+"role_grandpa" = "Nonno";
+"role_aunt" = "Zia";
+"role_uncle" = "Zio";
+"role_pet" = "Animale Domestico";
+"role_friend" = "Amico";
+"role_companion" = "Compagno";
+"role_classmate" = "Compagno di Classe";
+"role_neighbor" = "Vicino";
+"role_magical_friend" = "Amico Magico";
+"role_other" = "Altro";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "Tocca ovunque per uscire";
+"breathing_in" = "Inspira";
+"breathing_hold" = "Trattieni";
+"breathing_out" = "Espira";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "Rumore Bianco";
+"sound_brownNoise" = "Rumore Marrone";
+"sound_pinkNoise" = "Rumore Rosa";
+"sound_softRain" = "Pioggia Leggera";
+"sound_oceanWaves" = "Onde del Mare";
+"sound_cracklingFireplace" = "Camino";
+"sound_forestNight" = "Foresta Notturna";
+"sound_heartbeat" = "Battito Cardiaco";
+
+/* Writing Style Labels */
+"style_standard" = "Standard";
+"style_rhyming" = "In Rima";
+"style_funny" = "Divertente";
+"style_sound_effects" = "Effetti Sonori";
+"style_repetitive" = "Ripetitivo";
+"style_bedtime" = "Buonanotte";
+"style_adventure" = "Avventura";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "Narrazione classica della storia della buonanotte";
+"style_desc_rhyming" = "Versi in rima stile filastrocca";
+"style_desc_funny" = "Umorismo sciocco e colpi di scena inaspettati";
+"style_desc_sound_effects" = "Onomatopee e suoni interattivi";
+"style_desc_repetitive" = "Storia cumulativa con frasi ripetute";
+"style_desc_bedtime" = "Extra calmo e sognante per l'ora della nanna";
+"style_desc_adventure" = "Missioni epiche e coraggiosi eroi";
+
+/* Image Style Labels */
+"style_watercolor" = "Acquerello";
+"style_fantasy" = "Fantasy";
+"style_realistic" = "Realistico";
+"style_cartoon" = "Cartone Animato";
+"style_classic_storybook" = "Libro di Fiabe Classico";
+"style_anime" = "Anime";
+"style_ghibli" = "Ghibli";
+"style_chibi" = "Chibi";
+"style_papercraft" = "Carta Ritagliata";
+"style_pixel" = "Pixel Art";
+"style_minimalist" = "Minimalista";
+"style_crayon" = "Pastello";
+"style_pop_art" = "Pop Art";
+"style_oil_painting" = "Pittura a Olio";
+"style_none" = "Senza Immagini";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "Dipinti ad acquerello morbidi e sognanti";
+"style_desc_fantasy" = "Arte fantasy ricca e magica";
+"style_desc_realistic" = "Arte digitale fotorealistica";
+"style_desc_cartoon" = "Stile cartone animato vivace e colorato";
+"style_desc_classic_storybook" = "Illustrazioni vintage di libri per bambini";
+"style_desc_anime" = "Arte ispirata agli anime giapponesi";
+"style_desc_ghibli" = "Arte ispirata allo Studio Ghibli";
+"style_desc_chibi" = "Arte chibi carina e super-deformata";
+"style_desc_papercraft" = "Stile collage di carta ritagliata";
+"style_desc_pixel" = "Stile pixel art retrò";
+"style_desc_minimalist" = "Forme geometriche pulite e semplici";
+"style_desc_crayon" = "Disegno infantile a pastello e matita colorata";
+"style_desc_pop_art" = "Pop art audace con punti mezzitoni";
+"style_desc_oil_painting" = "Stile pittura a olio ricco e strutturato";
+"style_desc_none" = "Solo testo, senza illustrazioni";
+
+/* Lesson Labels */
+"lesson_none" = "Nessuna";
+"lesson_sharing" = "Condivisione";
+"lesson_bravery" = "Coraggio";
+"lesson_kindness" = "Gentilezza";
+"lesson_patience" = "Pazienza";
+"lesson_honesty" = "Onestà";
+"lesson_gratitude" = "Gratitudine";
+"lesson_teamwork" = "Lavoro di Squadra";
+"lesson_empathy" = "Empatia";
+"lesson_perseverance" = "Perseveranza";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "Nessuna lezione specifica — solo una storia divertente";
+"lesson_desc_sharing" = "Imparare a condividere con gli altri";
+"lesson_desc_bravery" = "Trovare il coraggio nei momenti difficili";
+"lesson_desc_kindness" = "Essere gentili e premurosi con gli altri";
+"lesson_desc_patience" = "Imparare ad aspettare e avere pazienza";
+"lesson_desc_honesty" = "L'importanza di dire la verità";
+"lesson_desc_gratitude" = "Apprezzare ciò che si ha";
+"lesson_desc_teamwork" = "Lavorare insieme per raggiungere obiettivi";
+"lesson_desc_empathy" = "Comprendere i sentimenti degli altri";
+"lesson_desc_perseverance" = "Non arrendersi quando le cose sono difficili";
+
+/* Validation */
+"validation_custom_writing_empty" = "Descrivi il tuo stile di scrittura personalizzato prima di creare una storia.";
+"validation_custom_writing_long" = "Il tuo stile di scrittura personalizzato è troppo lungo. Mantienilo sotto i 500 caratteri.";
+"validation_custom_image_empty" = "Descrivi il tuo stile di immagine personalizzato prima di creare una storia.";
+"validation_custom_image_long" = "Il tuo stile di immagine personalizzato è troppo lungo. Mantienilo sotto i 500 caratteri.";
+"validation_custom_lesson_empty" = "Descrivi la tua lezione personalizzata prima di creare una storia.";
+"validation_custom_lesson_long" = "La tua lezione personalizzata è troppo lunga. Mantienila sotto i 500 caratteri.";

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Storytime</string>
+
+    <!-- Navigation -->
+    <string name="tab_create">बनाएं</string>
+    <string name="tab_history">इतिहास</string>
+    <string name="tab_settings">सेटिंग्स</string>
+
+    <!-- Generate - Greetings -->
+    <string name="greeting_morning">सुप्रभात</string>
+    <string name="greeting_afternoon">नमस्ते</string>
+    <string name="greeting_evening">शुभ संध्या</string>
+    <string name="greeting_welcome">Storytime में आपका स्वागत है!</string>
+    <string name="greeting_personalized">%1$s, %2$s!</string>
+
+    <!-- Generate - Idle -->
+    <string name="setup_prompt">व्यक्तिगत कहानियों के लिए सेटिंग्स में अपने बच्चे का नाम जोड़ें</string>
+    <string name="prompt_header">आज कौन सी कहानी बनाएंगे?</string>
+    <string name="prompt_placeholder">अपनी कहानी का विचार बताएं…</string>
+    <string name="suggestion_1">एक जादुई जंगल में रोमांचक यात्रा</string>
+    <string name="suggestion_2">दोस्ताना एलियंस से मिलने अंतरिक्ष की यात्रा</string>
+    <string name="suggestion_3">बात करने वाली डॉल्फिन के साथ समुद्र तट पर एक दिन</string>
+    <string name="suggestion_4">समुद्री डाकू के जहाज पर खजाने की खोज</string>
+    <string name="section_language">भाषा</string>
+    <string name="section_writing_style">लेखन शैली</string>
+    <string name="section_image_style">चित्र शैली</string>
+    <string name="section_lesson">सीख</string>
+    <string name="custom_label">कस्टम</string>
+    <string name="custom_placeholder">अपना खुद का %1$s बताएं…</string>
+    <string name="use_custom">कस्टम उपयोग करें</string>
+    <string name="or_write_your_own">या अपना खुद का लिखें</string>
+    <string name="done">हो गया</string>
+    <string name="bedtime_story_label">सोने की कहानी</string>
+    <string name="bedtime_story_hint">छोटी और शांत कहानी (10 पृष्ठ), सोने के समय के लिए एकदम सही</string>
+    <string name="section_characters">पात्र</string>
+    <string name="characters_all_included">सभी शामिल</string>
+    <string name="characters_count">%1$d में से %2$d चुने गए</string>
+    <string name="button_clear">मिटाएं</string>
+    <string name="button_select_all">सभी चुनें</string>
+    <string name="button_create_story">कहानी बनाएं</string>
+
+    <!-- Generate - Progress -->
+    <string name="progress_starting">शुरू हो रहा है…</string>
+    <string name="progress_writing">आपकी कहानी लिखी जा रही है…</string>
+    <string name="progress_painting">चित्र बनाए जा रहे हैं…</string>
+    <string name="progress_assembling">आपकी किताब तैयार हो रही है…</string>
+    <string name="button_cancel">रद्द करें</string>
+
+    <!-- Generate - Complete -->
+    <string name="page_indicator">पृष्ठ %1$d / %2$d</string>
+    <string name="button_books">किताबें</string>
+    <string name="button_pdf">PDF</string>
+    <string name="button_new">नया</string>
+    <string name="button_sleep">सोएं</string>
+
+    <!-- Generate - Error -->
+    <string name="error_title">कुछ गलत हो गया</string>
+    <string name="button_try_again">फिर से कोशिश करें</string>
+    <string name="button_start_over">दोबारा शुरू करें</string>
+    <string name="error_unknown">एक अज्ञात त्रुटि हुई</string>
+
+    <!-- History -->
+    <string name="history_empty_title">अभी कोई कहानी नहीं</string>
+    <string name="history_empty_description">जब आप कोई कहानी बनाएंगे तो वह यहां दिखेगी!</string>
+    <string name="date_today">आज</string>
+    <string name="date_yesterday">कल</string>
+    <string name="date_days_ago">%1$d दिन पहले</string>
+    <string name="delete_story_title">कहानी हटाएं</string>
+    <string name="delete_story_message">क्या आप सच में यह कहानी हटाना चाहते हैं? यह वापस नहीं किया जा सकता।</string>
+    <string name="button_delete">हटाएं</string>
+    <string name="story_not_found">कहानी का डेटा नहीं मिला</string>
+
+    <!-- Settings -->
+    <string name="settings_server">सर्वर</string>
+    <string name="settings_connected">जुड़ा हुआ</string>
+    <string name="settings_not_connected">नहीं जुड़ा</string>
+    <string name="settings_test">परीक्षण</string>
+    <string name="settings_server_url">सर्वर URL</string>
+    <string name="settings_child_details">बच्चे की जानकारी</string>
+    <string name="settings_change_photo">फोटो बदलें</string>
+    <string name="settings_add_photo">फोटो जोड़ें</string>
+    <string name="settings_name">नाम</string>
+    <string name="settings_gender">लिंग</string>
+    <string name="settings_gender_not_set">सेट नहीं</string>
+    <string name="settings_gender_boy">लड़का</string>
+    <string name="settings_gender_girl">लड़की</string>
+    <string name="settings_reading_level">पढ़ने का स्तर</string>
+    <string name="settings_reading_toddler">छोटा बच्चा (2-3)</string>
+    <string name="settings_reading_early">शुरुआती पाठक (4-5)</string>
+    <string name="settings_reading_beginner">नवसिखिया (6-7)</string>
+    <string name="settings_reading_intermediate">मध्यम (8-10)</string>
+    <string name="settings_family">परिवार</string>
+    <string name="settings_family_members">परिवार के सदस्य</string>
+    <string name="settings_manage_family">परिवार के सदस्यों को प्रबंधित करें</string>
+    <string name="settings_bedtime">सोने का समय</string>
+    <string name="settings_ambient_sound">वातावरण ध्वनि</string>
+    <string name="settings_sleep_timer">नींद टाइमर</string>
+    <string name="settings_sleep_off">बंद</string>
+    <string name="settings_sleep_1">1 कहानी के बाद</string>
+    <string name="settings_sleep_2">2 कहानियों के बाद</string>
+    <string name="settings_sleep_3">3 कहानियों के बाद</string>
+    <string name="settings_bedtime_footer">बेडटाइम मोड कहानी के बाद स्क्रीन मंद करता है और आरामदायक ध्वनियां बजाता है</string>
+    <string name="settings_developer_options">डेवलपर विकल्प</string>
+    <string name="settings_anthropic_key">Anthropic API Key</string>
+    <string name="settings_google_key">Google AI API Key</string>
+    <string name="settings_keys_footer">कुंजियां सर्वर पर संग्रहीत हैं। छिपी हुई कुंजियां बताती हैं कि एक मौजूदा कुंजी सेट है।</string>
+    <string name="button_save">सहेजें</string>
+    <string name="settings_saved">सेटिंग्स सहेजी गईं</string>
+    <string name="settings_connect_error">सर्वर से कनेक्ट नहीं हो पा रहा</string>
+    <string name="alert_error">त्रुटि</string>
+    <string name="button_ok">ठीक है</string>
+
+    <!-- Family Members -->
+    <string name="family_empty_title">कोई परिवार सदस्य नहीं</string>
+    <string name="family_empty_description">परिवार के सदस्य जोड़ें ताकि वे आपकी कहानियों में दिखें</string>
+    <string name="family_add_title">सदस्य जोड़ें</string>
+    <string name="family_edit_title">सदस्य संपादित करें</string>
+    <string name="family_add_button">जोड़ें</string>
+    <string name="family_section_details">विवरण</string>
+    <string name="family_section_description">विवरण (वैकल्पिक)</string>
+    <string name="family_description_placeholder">दिखावट, व्यक्तित्व, पृष्ठभूमि कहानी…</string>
+    <string name="family_section_photo">फोटो</string>
+    <string name="family_choose_photo">फोटो चुनें</string>
+    <string name="family_upload_photo">फोटो अपलोड करें</string>
+    <string name="family_delete_title">सदस्य हटाएं</string>
+    <string name="family_delete_message">%1$s को परिवार से हटाएं?</string>
+    <string name="role_mom">मम्मी</string>
+    <string name="role_dad">पापा</string>
+    <string name="role_brother">भाई</string>
+    <string name="role_sister">बहन</string>
+    <string name="role_grandma">दादी/नानी</string>
+    <string name="role_grandpa">दादा/नाना</string>
+    <string name="role_aunt">मौसी/बुआ</string>
+    <string name="role_uncle">मामा/चाचा</string>
+    <string name="role_pet">पालतू जानवर</string>
+    <string name="role_friend">दोस्त</string>
+    <string name="role_companion">साथी</string>
+    <string name="role_classmate">सहपाठी</string>
+    <string name="role_neighbor">पड़ोसी</string>
+    <string name="role_magical_friend">जादुई दोस्त</string>
+    <string name="role_other">अन्य</string>
+
+    <!-- Bedtime & Breathing -->
+    <string name="bedtime_tap_to_exit">बाहर निकलने के लिए कहीं भी टैप करें</string>
+    <string name="breathing_in">सांस लें</string>
+    <string name="breathing_hold">रोकें</string>
+    <string name="breathing_out">सांस छोड़ें</string>
+
+    <!-- Ambient Sounds -->
+    <string name="sound_whiteNoise">सफेद शोर</string>
+    <string name="sound_brownNoise">भूरा शोर</string>
+    <string name="sound_pinkNoise">गुलाबी शोर</string>
+    <string name="sound_softRain">हल्की बारिश</string>
+    <string name="sound_oceanWaves">समुद्र की लहरें</string>
+    <string name="sound_cracklingFireplace">अंगीठी</string>
+    <string name="sound_forestNight">रात का जंगल</string>
+    <string name="sound_heartbeat">दिल की धड़कन</string>
+
+    <!-- Writing Style Labels -->
+    <string name="style_standard">मानक</string>
+    <string name="style_rhyming">तुकांत</string>
+    <string name="style_funny">मजेदार</string>
+    <string name="style_sound_effects">ध्वनि प्रभाव</string>
+    <string name="style_repetitive">दोहराव</string>
+    <string name="style_bedtime">सोने का समय</string>
+    <string name="style_adventure">रोमांच</string>
+
+    <!-- Writing Style Descriptions -->
+    <string name="style_desc_standard">सोने की कहानी की क्लासिक कथा शैली</string>
+    <string name="style_desc_rhyming">Dr. Seuss शैली की तुकांत कविता</string>
+    <string name="style_desc_funny">मजेदार हास्य और अनपेक्षित मोड़</string>
+    <string name="style_desc_sound_effects">ध्वनि-अनुकरण और इंटरैक्टिव आवाजें</string>
+    <string name="style_desc_repetitive">दोहराए जाने वाले वाक्यों के साथ संचयी कहानी</string>
+    <string name="style_desc_bedtime">सोने के समय के लिए अतिरिक्त शांत और स्वप्निल</string>
+    <string name="style_desc_adventure">महाकाव्य खोज और बहादुर नायक</string>
+
+    <!-- Image Style Labels -->
+    <string name="style_watercolor">वॉटरकलर</string>
+    <string name="style_fantasy">काल्पनिक</string>
+    <string name="style_realistic">यथार्थवादी</string>
+    <string name="style_cartoon">कार्टून</string>
+    <string name="style_classic_storybook">क्लासिक कहानी की किताब</string>
+    <string name="style_anime">एनीमे</string>
+    <string name="style_ghibli">Ghibli</string>
+    <string name="style_chibi">चीबी</string>
+    <string name="style_papercraft">पेपरक्राफ्ट</string>
+    <string name="style_pixel">पिक्सल आर्ट</string>
+    <string name="style_minimalist">न्यूनतावादी</string>
+    <string name="style_crayon">क्रेयॉन</string>
+    <string name="style_pop_art">पॉप आर्ट</string>
+    <string name="style_oil_painting">तैल चित्र</string>
+    <string name="style_none">बिना चित्र</string>
+
+    <!-- Image Style Descriptions -->
+    <string name="style_desc_watercolor">कोमल और स्वप्निल वॉटरकलर पेंटिंग</string>
+    <string name="style_desc_fantasy">समृद्ध और जादुई काल्पनिक कला</string>
+    <string name="style_desc_realistic">फोटो-यथार्थवादी डिजिटल कला</string>
+    <string name="style_desc_cartoon">बोल्ड और रंगीन कार्टून शैली</string>
+    <string name="style_desc_classic_storybook">क्लासिक बच्चों की किताब के चित्र</string>
+    <string name="style_desc_anime">जापानी एनीमे से प्रेरित कला</string>
+    <string name="style_desc_ghibli">Studio Ghibli से प्रेरित कला</string>
+    <string name="style_desc_chibi">प्यारी और सुपर-विकृत चीबी कला</string>
+    <string name="style_desc_papercraft">कटा हुआ कागज कोलाज शैली</string>
+    <string name="style_desc_pixel">रेट्रो पिक्सल आर्ट शैली</string>
+    <string name="style_desc_minimalist">साफ और सरल ज्यामितीय आकार</string>
+    <string name="style_desc_crayon">बच्चों जैसी क्रेयॉन और रंगीन पेंसिल शैली</string>
+    <string name="style_desc_pop_art">बोल्ड पॉप आर्ट हाफ़टोन डॉट्स के साथ</string>
+    <string name="style_desc_oil_painting">समृद्ध और बनावट वाली तैल चित्र शैली</string>
+    <string name="style_desc_none">केवल लेख कहानी, बिना चित्रों के</string>
+
+    <!-- Lesson Labels -->
+    <string name="lesson_none">कोई नहीं</string>
+    <string name="lesson_sharing">बांटना</string>
+    <string name="lesson_bravery">बहादुरी</string>
+    <string name="lesson_kindness">दयालुता</string>
+    <string name="lesson_patience">धैर्य</string>
+    <string name="lesson_honesty">ईमानदारी</string>
+    <string name="lesson_gratitude">कृतज्ञता</string>
+    <string name="lesson_teamwork">टीम वर्क</string>
+    <string name="lesson_empathy">सहानुभूति</string>
+    <string name="lesson_perseverance">दृढ़ता</string>
+
+    <!-- Lesson Descriptions -->
+    <string name="lesson_desc_none">कोई विशेष सीख नहीं, बस एक मजेदार कहानी</string>
+    <string name="lesson_desc_sharing">दूसरों के साथ बांटना सीखना</string>
+    <string name="lesson_desc_bravery">कठिन समय में हिम्मत ढूंढना</string>
+    <string name="lesson_desc_kindness">दूसरों के प्रति दयालु और करुणामय होना</string>
+    <string name="lesson_desc_patience">इंतजार करना और धैर्य रखना सीखना</string>
+    <string name="lesson_desc_honesty">सच बोलने का महत्व</string>
+    <string name="lesson_desc_gratitude">जो आपके पास है उसकी कदर करना</string>
+    <string name="lesson_desc_teamwork">लक्ष्य प्राप्त करने के लिए मिलकर काम करना</string>
+    <string name="lesson_desc_empathy">दूसरों की भावनाओं को समझना</string>
+    <string name="lesson_desc_perseverance">मुश्किल होने पर भी हार न मानना</string>
+
+    <!-- Validation -->
+    <string name="validation_custom_writing_empty">कहानी बनाने से पहले कृपया अपनी कस्टम लेखन शैली का वर्णन करें।</string>
+    <string name="validation_custom_writing_long">आपकी कस्टम लेखन शैली बहुत लंबी है। कृपया इसे 500 अक्षरों से कम रखें।</string>
+    <string name="validation_custom_image_empty">कहानी बनाने से पहले कृपया अपनी कस्टम चित्र शैली का वर्णन करें।</string>
+    <string name="validation_custom_image_long">आपकी कस्टम चित्र शैली बहुत लंबी है। कृपया इसे 500 अक्षरों से कम रखें।</string>
+    <string name="validation_custom_lesson_empty">कहानी बनाने से पहले कृपया अपनी कस्टम सीख का वर्णन करें।</string>
+    <string name="validation_custom_lesson_long">आपकी कस्टम सीख बहुत लंबी है। कृपया इसे 500 अक्षरों से कम रखें।</string>
+</resources>

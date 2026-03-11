@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "Maak";
+"tab_history" = "Geschiedenis";
+"tab_settings" = "Instellingen";
+
+/* Generate - Greetings */
+"greeting_morning" = "Goedemorgen";
+"greeting_afternoon" = "Goedemiddag";
+"greeting_evening" = "Goedenavond";
+"greeting_welcome" = "Welkom bij Storytime!";
+"greeting_personalized" = "%@, %@!";
+
+/* Generate - Idle */
+"setup_prompt" = "Stel de naam van je kind in bij Instellingen voor gepersonaliseerde verhalen";
+"prompt_header" = "Welk verhaal gaan we maken?";
+"prompt_placeholder" = "Beschrijf je verhaalidee...";
+"suggestion_1" = "Een magisch avontuur in een betoverd bos";
+"suggestion_2" = "Een reis naar de ruimte om vriendelijke aliens te bezoeken";
+"suggestion_3" = "Een dag op het strand met een pratende dolfijn";
+"suggestion_4" = "Een schattenjacht op een piratenschip";
+"section_language" = "Taal";
+"section_writing_style" = "Schrijfstijl";
+"section_image_style" = "Afbeeldingsstijl";
+"section_lesson" = "Les";
+"custom_label" = "Aangepast";
+"custom_placeholder" = "Beschrijf je eigen %@...";
+"use_custom" = "Gebruik Aangepast";
+"or_write_your_own" = "Of schrijf je eigen";
+"done" = "Klaar";
+"bedtime_story_label" = "Slaapverhaaltje";
+"bedtime_story_hint" = "Korter, rustiger verhaal (10 pagina's) perfect voor het slapengaan";
+"section_characters" = "Personages";
+"characters_all_included" = "Allemaal inbegrepen";
+"characters_count" = "%d van %d geselecteerd";
+"button_clear" = "Wissen";
+"button_select_all" = "Alles Selecteren";
+"button_create_story" = "Maak Verhaal";
+
+/* Generate - Progress */
+"progress_starting" = "Starten...";
+"progress_writing" = "Je verhaal schrijven...";
+"progress_painting" = "Illustraties schilderen...";
+"progress_assembling" = "Je boek samenstellen...";
+"button_cancel" = "Annuleren";
+
+/* Generate - Complete */
+"page_indicator" = "Pagina %d van %d";
+"button_books" = "Boeken";
+"button_pdf" = "PDF";
+"button_new" = "Nieuw";
+"button_sleep" = "Slapen";
+
+/* Generate - Error */
+"error_title" = "Er is iets misgegaan";
+"button_try_again" = "Opnieuw Proberen";
+"button_start_over" = "Opnieuw Beginnen";
+"error_unknown" = "Er is een onbekende fout opgetreden";
+
+/* History */
+"history_empty_title" = "Nog Geen Verhalen";
+"history_empty_description" = "Je verhalen verschijnen hier zodra je er een hebt gemaakt!";
+"date_today" = "Vandaag";
+"date_yesterday" = "Gisteren";
+"date_days_ago" = "%d dagen geleden";
+"delete_story_title" = "Verhaal Verwijderen";
+"delete_story_message" = "Weet je zeker dat je dit verhaal wilt verwijderen? Dit kan niet ongedaan worden gemaakt.";
+"button_delete" = "Verwijderen";
+"story_not_found" = "Verhaalgegevens niet gevonden";
+
+/* Settings */
+"settings_server" = "Server";
+"settings_connected" = "Verbonden";
+"settings_not_connected" = "Niet verbonden";
+"settings_test" = "Test";
+"settings_server_url" = "Server URL";
+"settings_child_details" = "Gegevens Kind";
+"settings_change_photo" = "Foto Wijzigen";
+"settings_add_photo" = "Foto Toevoegen";
+"settings_name" = "Naam";
+"settings_gender" = "Geslacht";
+"settings_gender_not_set" = "Niet ingesteld";
+"settings_gender_boy" = "Jongen";
+"settings_gender_girl" = "Meisje";
+"settings_reading_level" = "Leesniveau";
+"settings_reading_toddler" = "Peuter (2-3)";
+"settings_reading_early" = "Beginnend Lezer (4-5)";
+"settings_reading_beginner" = "Beginner (6-7)";
+"settings_reading_intermediate" = "Gevorderd (8-10)";
+"settings_family" = "Familie";
+"settings_family_members" = "Familieleden";
+"settings_manage_family" = "Familieleden Beheren";
+"settings_bedtime" = "Bedtijd";
+"settings_ambient_sound" = "Omgevingsgeluid";
+"settings_sleep_timer" = "Slaaptimer";
+"settings_sleep_off" = "Uit";
+"settings_sleep_1" = "Na 1 verhaal";
+"settings_sleep_2" = "Na 2 verhalen";
+"settings_sleep_3" = "Na 3 verhalen";
+"settings_bedtime_footer" = "Bedtijdmodus dimt het scherm en speelt rustgevende geluiden af na het voorlezen";
+"settings_developer_options" = "Ontwikkelaarsopties";
+"settings_anthropic_key" = "Anthropic API-sleutel";
+"settings_google_key" = "Google AI API-sleutel";
+"settings_keys_footer" = "Sleutels worden op de server opgeslagen. Gemaskeerde sleutels geven aan dat er een bestaande sleutel is ingesteld.";
+"button_save" = "Opslaan";
+"settings_saved" = "Instellingen opgeslagen";
+"settings_connect_error" = "Kan geen verbinding maken met de server";
+"alert_error" = "Fout";
+"button_ok" = "OK";
+
+/* Family Members */
+"family_empty_title" = "Geen Familieleden";
+"family_empty_description" = "Voeg familieleden toe zodat ze in je verhalen kunnen verschijnen";
+"family_add_title" = "Lid Toevoegen";
+"family_edit_title" = "Lid Bewerken";
+"family_add_button" = "Toevoegen";
+"family_section_details" = "Details";
+"family_section_description" = "Beschrijving (Optioneel)";
+"family_description_placeholder" = "Uiterlijk, persoonlijkheid, achtergrondverhaal...";
+"family_section_photo" = "Foto";
+"family_choose_photo" = "Kies Foto";
+"family_upload_photo" = "Upload Foto";
+"family_delete_title" = "Lid Verwijderen";
+"family_delete_message" = "%@ uit de familie verwijderen?";
+"role_mom" = "Mama";
+"role_dad" = "Papa";
+"role_brother" = "Broer";
+"role_sister" = "Zus";
+"role_grandma" = "Oma";
+"role_grandpa" = "Opa";
+"role_aunt" = "Tante";
+"role_uncle" = "Oom";
+"role_pet" = "Huisdier";
+"role_friend" = "Vriend";
+"role_companion" = "Metgezel";
+"role_classmate" = "Klasgenoot";
+"role_neighbor" = "Buurman/Buurvrouw";
+"role_magical_friend" = "Magische Vriend";
+"role_other" = "Overig";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "Tik ergens om af te sluiten";
+"breathing_in" = "Inademen";
+"breathing_hold" = "Vasthouden";
+"breathing_out" = "Uitademen";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "Witte Ruis";
+"sound_brownNoise" = "Bruine Ruis";
+"sound_pinkNoise" = "Roze Ruis";
+"sound_softRain" = "Zachte Regen";
+"sound_oceanWaves" = "Oceaangolven";
+"sound_cracklingFireplace" = "Open Haard";
+"sound_forestNight" = "Nachtelijk Bos";
+"sound_heartbeat" = "Hartslag";
+
+/* Writing Style Labels */
+"style_standard" = "Standaard";
+"style_rhyming" = "Rijmend";
+"style_funny" = "Grappig";
+"style_sound_effects" = "Geluidseffecten";
+"style_repetitive" = "Herhalend";
+"style_bedtime" = "Bedtijd";
+"style_adventure" = "Avontuur";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "Klassieke vertelling van een slaapverhaaltje";
+"style_desc_rhyming" = "Rijmende verzen in de stijl van een kinderrijm";
+"style_desc_funny" = "Gekke humor en onverwachte wendingen";
+"style_desc_sound_effects" = "Klanknabootsing en interactieve geluiden";
+"style_desc_repetitive" = "Cumulatief verhaal met herhalende zinnen";
+"style_desc_bedtime" = "Extra rustig en dromerig voor het slapengaan";
+"style_desc_adventure" = "Epische avonturen en dappere helden";
+
+/* Image Style Labels */
+"style_watercolor" = "Aquarel";
+"style_fantasy" = "Fantasy";
+"style_realistic" = "Realistisch";
+"style_cartoon" = "Tekenfilm";
+"style_classic_storybook" = "Klassiek Prentenboek";
+"style_anime" = "Anime";
+"style_ghibli" = "Ghibli";
+"style_chibi" = "Chibi";
+"style_papercraft" = "Papierkunst";
+"style_pixel" = "Pixel Art";
+"style_minimalist" = "Minimalistisch";
+"style_crayon" = "Waskrijtje";
+"style_pop_art" = "Pop Art";
+"style_oil_painting" = "Olieverfschilderij";
+"style_none" = "Geen Afbeeldingen";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "Zachte, dromerige aquarelschilderijen";
+"style_desc_fantasy" = "Rijke, magische fantasy-kunst";
+"style_desc_realistic" = "Fotorealistische digitale kunst";
+"style_desc_cartoon" = "Opvallende, kleurrijke tekenfilmstijl";
+"style_desc_classic_storybook" = "Vintage illustraties uit kinderboeken";
+"style_desc_anime" = "Japanse anime-geïnspireerde kunst";
+"style_desc_ghibli" = "Studio Ghibli-geïnspireerde kunst";
+"style_desc_chibi" = "Schattige, super-vervormd chibi-kunst";
+"style_desc_papercraft" = "Stijl van geknipt papieren collage";
+"style_desc_pixel" = "Retro pixel art-stijl";
+"style_desc_minimalist" = "Schone, eenvoudige geometrische vormen";
+"style_desc_crayon" = "Kinderlijke waskrijtjes en kleurpotloden";
+"style_desc_pop_art" = "Opvallende pop art met rastertonen";
+"style_desc_oil_painting" = "Rijke, gestructureerde olieverfschilderijstijl";
+"style_desc_none" = "Alleen tekst, geen illustraties";
+
+/* Lesson Labels */
+"lesson_none" = "Geen";
+"lesson_sharing" = "Delen";
+"lesson_bravery" = "Moed";
+"lesson_kindness" = "Vriendelijkheid";
+"lesson_patience" = "Geduld";
+"lesson_honesty" = "Eerlijkheid";
+"lesson_gratitude" = "Dankbaarheid";
+"lesson_teamwork" = "Samenwerking";
+"lesson_empathy" = "Empathie";
+"lesson_perseverance" = "Doorzettingsvermogen";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "Geen specifieke les — gewoon een leuk verhaal";
+"lesson_desc_sharing" = "Leren delen met anderen";
+"lesson_desc_bravery" = "Moed vinden in moeilijke momenten";
+"lesson_desc_kindness" = "Vriendelijk en zorgzaam zijn voor anderen";
+"lesson_desc_patience" = "Leren wachten en geduldig zijn";
+"lesson_desc_honesty" = "Het belang van de waarheid vertellen";
+"lesson_desc_gratitude" = "Waarderen wat je hebt";
+"lesson_desc_teamwork" = "Samenwerken om doelen te bereiken";
+"lesson_desc_empathy" = "De gevoelens van anderen begrijpen";
+"lesson_desc_perseverance" = "Niet opgeven als het moeilijk wordt";
+
+/* Validation */
+"validation_custom_writing_empty" = "Beschrijf je aangepaste schrijfstijl voordat je een verhaal maakt.";
+"validation_custom_writing_long" = "Je aangepaste schrijfstijl is te lang. Houd het onder de 500 tekens.";
+"validation_custom_image_empty" = "Beschrijf je aangepaste afbeeldingsstijl voordat je een verhaal maakt.";
+"validation_custom_image_long" = "Je aangepaste afbeeldingsstijl is te lang. Houd het onder de 500 tekens.";
+"validation_custom_lesson_empty" = "Beschrijf je aangepaste les voordat je een verhaal maakt.";
+"validation_custom_lesson_long" = "Je aangepaste les is te lang. Houd het onder de 500 tekens.";

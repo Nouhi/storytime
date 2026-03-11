@@ -2,8 +2,11 @@ package com.storytime.app.ui.generate
 
 import android.app.Application
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.storytime.app.R
 import com.storytime.app.StorytimeApp
 import com.storytime.app.model.*
 import com.storytime.app.network.ApiClient
@@ -52,6 +55,9 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
     private val _customLesson = MutableStateFlow("")
     val customLesson: StateFlow<String> = _customLesson.asStateFlow()
 
+    private val _language = MutableStateFlow("en")
+    val language: StateFlow<String> = _language.asStateFlow()
+
     // Styles from server
     private val _writingStyles = MutableStateFlow<List<StyleItem>>(emptyList())
     val writingStyles: StateFlow<List<StyleItem>> = _writingStyles.asStateFlow()
@@ -61,6 +67,9 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
 
     private val _lessons = MutableStateFlow<List<StyleItem>>(emptyList())
     val lessons: StateFlow<List<StyleItem>> = _lessons.asStateFlow()
+
+    private val _languages = MutableStateFlow<List<StyleItem>>(emptyList())
+    val languages: StateFlow<List<StyleItem>> = _languages.asStateFlow()
 
     // Generation progress
     private val _progress = MutableStateFlow(0.0)
@@ -119,29 +128,39 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
 
     private var generationJob: Job? = null
 
-    val suggestions = listOf(
-        "A magical adventure in an enchanted forest",
-        "A trip to outer space to visit friendly aliens",
-        "A day at the beach with a talking dolphin",
-        "A treasure hunt in a pirate ship"
-    )
+    val suggestions: List<String>
+        get() {
+            val ctx = getApplication<Application>()
+            return listOf(
+                ctx.getString(R.string.suggestion_1),
+                ctx.getString(R.string.suggestion_2),
+                ctx.getString(R.string.suggestion_3),
+                ctx.getString(R.string.suggestion_4)
+            )
+        }
 
     val greeting: String
         get() {
+            val ctx = getApplication<Application>()
             val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
             val timeGreeting = when {
-                hour < 12 -> "Good morning"
-                hour < 17 -> "Good afternoon"
-                else -> "Good evening"
+                hour < 12 -> ctx.getString(R.string.greeting_morning)
+                hour < 17 -> ctx.getString(R.string.greeting_afternoon)
+                else -> ctx.getString(R.string.greeting_evening)
             }
             val name = _kidName.value
-            return if (name.isNotEmpty()) "$timeGreeting, $name!" else "Welcome to Storytime!"
+            return if (name.isNotEmpty()) ctx.getString(R.string.greeting_personalized, timeGreeting, name) else ctx.getString(R.string.greeting_welcome)
         }
 
     init {
         viewModelScope.launch {
             prefs.kidName.collect { name ->
                 _kidName.value = name
+            }
+        }
+        viewModelScope.launch {
+            prefs.language.collect { lang ->
+                _language.value = lang
             }
         }
     }
@@ -161,6 +180,13 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
     fun updateCustomImageStyle(text: String) { _customImageStyle.value = text }
     fun updateCustomLesson(text: String) { _customLesson.value = text }
     fun updateCurrentPage(page: Int) { _currentPage.value = page }
+    fun updateLanguage(lang: String) {
+        _language.value = lang
+        viewModelScope.launch {
+            prefs.setLanguage(lang)
+        }
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(lang))
+    }
     fun updateBedtimeStory(value: Boolean) { _isBedtimeStory.value = value }
 
     fun toggleCharacter(id: Int) {
@@ -183,36 +209,55 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch {
             try {
                 val styles = api.getStyles()
-                _writingStyles.value = styles.writingStyles
-                _imageStyles.value = styles.imageStyles
-                _lessons.value = styles.lessons ?: emptyList()
+                _writingStyles.value = localizeItems(styles.writingStyles, "style")
+                _imageStyles.value = localizeItems(styles.imageStyles, "style")
+                _lessons.value = localizeItems(styles.lessons ?: emptyList(), "lesson")
+                _languages.value = styles.languages ?: FALLBACK_LANGUAGES
                 _writingStyle.value = styles.defaults.writingStyle
                 _imageStyle.value = styles.defaults.imageStyle
                 _lesson.value = styles.defaults.lesson ?: "none"
+                _language.value = styles.defaults.language ?: "en"
             } catch (e: Exception) {
-                // Use hardcoded fallbacks
-                _writingStyles.value = listOf(
-                    StyleItem("standard", "Classic", "📖", "Classic narrative"),
-                    StyleItem("rhyming", "Rhyming", "🎵", "Dr. Seuss style"),
-                    StyleItem("funny", "Funny", "😂", "Silly humor"),
-                    StyleItem("bedtime", "Bedtime", "🌙", "Calm and dreamy"),
-                    StyleItem("adventure", "Adventure", "⚔️", "Epic quests")
-                )
-                _imageStyles.value = listOf(
-                    StyleItem("watercolor", "Watercolor", "🎨", "Soft, dreamy"),
-                    StyleItem("cartoon", "Cartoon", "🖍️", "Bold, colorful"),
-                    StyleItem("fantasy", "Fantasy", "✨", "Rich, magical"),
-                    StyleItem("ghibli", "Ghibli", "🏯", "Studio Ghibli"),
-                    StyleItem("none", "Text Only", "📝", "No images")
-                )
-                _lessons.value = listOf(
-                    StyleItem("none", "None", "📖", "No specific lesson"),
-                    StyleItem("sharing", "Sharing", "🤝", "Learning to share"),
-                    StyleItem("bravery", "Bravery", "🦁", "Finding courage"),
-                    StyleItem("kindness", "Kindness", "💛", "Being kind"),
-                    StyleItem("patience", "Patience", "🐢", "Learning to wait"),
-                    StyleItem("honesty", "Honesty", "⭐", "Telling the truth")
-                )
+                // Use hardcoded fallbacks with localized labels
+                _writingStyles.value = localizeItems(listOf(
+                    StyleItem("standard", "Standard", "\uD83D\uDCD6", "Classic bedtime story narration"),
+                    StyleItem("rhyming", "Rhyming", "\uD83C\uDFB5", "Dr. Seuss-style rhyming verse"),
+                    StyleItem("funny", "Funny", "\uD83D\uDE02", "Silly humor and unexpected twists"),
+                    StyleItem("sound-effects", "Sound Effects", "\uD83D\uDCA5", "Onomatopoeia and interactive sounds"),
+                    StyleItem("repetitive", "Repetitive", "\uD83D\uDD01", "Cumulative story with repeating phrases"),
+                    StyleItem("bedtime", "Bedtime", "\uD83C\uDF19", "Extra calm and dreamy for sleepy time"),
+                    StyleItem("adventure", "Adventure", "⚔\uFE0F", "Epic quests and brave heroes")
+                ), "style")
+                _imageStyles.value = localizeItems(listOf(
+                    StyleItem("watercolor", "Watercolor", "\uD83C\uDFA8", "Soft, dreamy watercolor paintings"),
+                    StyleItem("fantasy", "Fantasy", "\uD83E\uDDD9", "Rich, magical fantasy art"),
+                    StyleItem("realistic", "Realistic", "\uD83D\uDCF7", "Photo-realistic digital art"),
+                    StyleItem("cartoon", "Cartoon", "\uD83E\uDDB8", "Bold, colorful cartoon style"),
+                    StyleItem("classic-storybook", "Classic Storybook", "\uD83D\uDCDA", "Vintage children's book illustrations"),
+                    StyleItem("anime", "Anime", "✨", "Japanese anime-inspired art"),
+                    StyleItem("ghibli", "Ghibli", "\uD83C\uDFD4\uFE0F", "Studio Ghibli-inspired art"),
+                    StyleItem("chibi", "Chibi", "\uD83C\uDF80", "Cute, super-deformed chibi art"),
+                    StyleItem("papercraft", "Papercraft", "✂\uFE0F", "Cut-paper collage style"),
+                    StyleItem("pixel", "Pixel Art", "\uD83D\uDC7E", "Retro pixel art style"),
+                    StyleItem("minimalist", "Minimalist", "⚪", "Clean, simple geometric shapes"),
+                    StyleItem("crayon", "Crayon", "\uD83D\uDD8D\uFE0F", "Child-like crayon and colored pencil"),
+                    StyleItem("pop-art", "Pop Art", "\uD83C\uDFAA", "Bold pop art with halftone dots"),
+                    StyleItem("oil-painting", "Oil Painting", "\uD83D\uDDBC\uFE0F", "Rich, textured oil painting style"),
+                    StyleItem("none", "No Images", "\uD83D\uDCDD", "Text-only story, no illustrations")
+                ), "style")
+                _lessons.value = localizeItems(listOf(
+                    StyleItem("none", "None", "\uD83D\uDCD6", "No specific lesson — just a fun story"),
+                    StyleItem("sharing", "Sharing", "\uD83E\uDD1D", "Learning to share with others"),
+                    StyleItem("bravery", "Bravery", "\uD83E\uDD81", "Finding courage in tough moments"),
+                    StyleItem("kindness", "Kindness", "\uD83D\uDC9B", "Being kind and caring to others"),
+                    StyleItem("patience", "Patience", "\uD83D\uDC22", "Learning to wait and be patient"),
+                    StyleItem("honesty", "Honesty", "⭐", "The importance of telling the truth"),
+                    StyleItem("gratitude", "Gratitude", "\uD83D\uDE4F", "Appreciating what you have"),
+                    StyleItem("teamwork", "Teamwork", "\uD83E\uDDE9", "Working together to achieve goals"),
+                    StyleItem("empathy", "Empathy", "\uD83E\uDEC2", "Understanding others' feelings"),
+                    StyleItem("perseverance", "Perseverance", "\uD83C\uDFD4\uFE0F", "Not giving up when things are hard")
+                ), "lesson")
+                _languages.value = FALLBACK_LANGUAGES
             }
         }
         loadFamilyMembers()
@@ -233,20 +278,21 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
     }
 
     private fun validateCustomInputs(): String? {
+        val ctx = getApplication<Application>()
         if (_writingStyle.value == "custom") {
             val text = _customWritingStyle.value.trim()
-            if (text.isEmpty()) return "Please describe your custom writing style before creating a story."
-            if (text.length > 500) return "Your custom writing style is too long. Please keep it under 500 characters."
+            if (text.isEmpty()) return ctx.getString(R.string.validation_custom_writing_empty)
+            if (text.length > 500) return ctx.getString(R.string.validation_custom_writing_long)
         }
         if (_imageStyle.value == "custom") {
             val text = _customImageStyle.value.trim()
-            if (text.isEmpty()) return "Please describe your custom image style before creating a story."
-            if (text.length > 500) return "Your custom image style is too long. Please keep it under 500 characters."
+            if (text.isEmpty()) return ctx.getString(R.string.validation_custom_image_empty)
+            if (text.length > 500) return ctx.getString(R.string.validation_custom_image_long)
         }
         if (_lesson.value == "custom") {
             val text = _customLesson.value.trim()
-            if (text.isEmpty()) return "Please describe your custom lesson before creating a story."
-            if (text.length > 500) return "Your custom lesson is too long. Please keep it under 500 characters."
+            if (text.isEmpty()) return ctx.getString(R.string.validation_custom_lesson_empty)
+            if (text.length > 500) return ctx.getString(R.string.validation_custom_lesson_long)
         }
         return null
     }
@@ -261,10 +307,12 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
             return
         }
 
+        val ctx = getApplication<Application>()
+
         generationJob = viewModelScope.launch {
             _state.value = GenerationState.GENERATING
             _progress.value = 0.0
-            _stepDetail.value = "Starting..."
+            _stepDetail.value = ctx.getString(R.string.progress_starting)
             _currentStep.value = ""
 
             try {
@@ -284,7 +332,8 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                         customWritingStyle = if (_writingStyle.value == "custom") _customWritingStyle.value else null,
                         customImageStyle = if (_imageStyle.value == "custom") _customImageStyle.value else null,
                         customLesson = if (_lesson.value == "custom") _customLesson.value else null,
-                        bedtimeStory = if (_isBedtimeStory.value) true else null
+                        bedtimeStory = if (_isBedtimeStory.value) true else null,
+                        language = if (_language.value != "en") _language.value else null
                     )
                 )
                 _storyId.value = response.storyId
@@ -313,7 +362,13 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
         when (event.type) {
             "progress" -> {
                 _progress.value = event.progress ?: _progress.value
-                _stepDetail.value = event.detail ?: _stepDetail.value
+                val ctx = getApplication<Application>()
+                _stepDetail.value = when (event.step) {
+                    "generating-story" -> ctx.getString(R.string.progress_writing)
+                    "generating-images" -> ctx.getString(R.string.progress_painting)
+                    "assembling-ebook" -> ctx.getString(R.string.progress_assembling)
+                    else -> event.detail ?: ctx.getString(R.string.progress_starting)
+                }
                 _currentStep.value = event.step ?: _currentStep.value
             }
             "complete" -> {
@@ -325,7 +380,8 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
                 checkSleepTimer()
             }
             "error" -> {
-                _errorMessage.value = event.message ?: "Something went wrong"
+                val ctx = getApplication<Application>()
+                _errorMessage.value = event.message ?: ctx.getString(R.string.error_title)
                 _state.value = GenerationState.ERROR
             }
         }
@@ -448,7 +504,45 @@ class GenerateViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    /**
+     * Localize style/lesson items by mapping their ID to a string resource.
+     * Looks up "style_<id>" / "style_desc_<id>" for styles, "lesson_<id>" / "lesson_desc_<id>" for lessons.
+     */
+    private fun localizeItems(items: List<StyleItem>, keyPrefix: String): List<StyleItem> {
+        val ctx = getApplication<Application>()
+        val resources = ctx.resources
+        val packageName = ctx.packageName
+        return items.map { item ->
+            val idKey = item.id.replace("-", "_")
+            val labelKey = "${keyPrefix}_$idKey"
+            val descKey = "${keyPrefix}_desc_$idKey"
+            val labelResId = resources.getIdentifier(labelKey, "string", packageName)
+            val descResId = resources.getIdentifier(descKey, "string", packageName)
+            item.copy(
+                label = if (labelResId != 0) ctx.getString(labelResId) else item.label,
+                description = if (descResId != 0) ctx.getString(descResId) else item.description
+            )
+        }
+    }
+
     companion object {
         private const val TAG = "GenerateVM"
+
+        val FALLBACK_LANGUAGES = listOf(
+            StyleItem("en", "English", "\uD83C\uDDFA\uD83C\uDDF8", "English"),
+            StyleItem("es", "Spanish", "\uD83C\uDDEA\uD83C\uDDF8", "Español"),
+            StyleItem("fr", "French", "\uD83C\uDDEB\uD83C\uDDF7", "Français"),
+            StyleItem("ar", "Arabic", "\uD83C\uDDF8\uD83C\uDDE6", "العربية"),
+            StyleItem("de", "German", "\uD83C\uDDE9\uD83C\uDDEA", "Deutsch"),
+            StyleItem("zh", "Chinese", "\uD83C\uDDE8\uD83C\uDDF3", "中文"),
+            StyleItem("pt", "Portuguese", "\uD83C\uDDE7\uD83C\uDDF7", "Português"),
+            StyleItem("hi", "Hindi", "\uD83C\uDDEE\uD83C\uDDF3", "हिन्दी"),
+            StyleItem("ja", "Japanese", "\uD83C\uDDEF\uD83C\uDDF5", "日本語"),
+            StyleItem("ko", "Korean", "\uD83C\uDDF0\uD83C\uDDF7", "한국어"),
+            StyleItem("it", "Italian", "\uD83C\uDDEE\uD83C\uDDF9", "Italiano"),
+            StyleItem("nl", "Dutch", "\uD83C\uDDF3\uD83C\uDDF1", "Nederlands"),
+            StyleItem("ru", "Russian", "\uD83C\uDDF7\uD83C\uDDFA", "Русский"),
+            StyleItem("tr", "Turkish", "\uD83C\uDDF9\uD83C\uDDF7", "Türkçe"),
+        )
     }
 }

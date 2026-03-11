@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "创作";
+"tab_history" = "历史";
+"tab_settings" = "设置";
+
+/* Generate - Greetings */
+"greeting_morning" = "早上好";
+"greeting_afternoon" = "下午好";
+"greeting_evening" = "晚上好";
+"greeting_welcome" = "欢迎来到Storytime!";
+"greeting_personalized" = "%@, %@!";
+
+/* Generate - Idle */
+"setup_prompt" = "在设置中填写孩子的名字，获取个性化故事";
+"prompt_header" = "我们来创作什么故事呢？";
+"prompt_placeholder" = "描述你的故事创意...";
+"suggestion_1" = "在魔法森林里的奇妙冒险";
+"suggestion_2" = "去太空拜访友好的外星人";
+"suggestion_3" = "和会说话的海豚一起在海边度过的一天";
+"suggestion_4" = "在海盗船上寻宝";
+"section_language" = "语言";
+"section_writing_style" = "写作风格";
+"section_image_style" = "图片风格";
+"section_lesson" = "寓意";
+"custom_label" = "自定义";
+"custom_placeholder" = "描述你自己的%@...";
+"use_custom" = "使用自定义";
+"or_write_your_own" = "或自己编写";
+"done" = "完成";
+"bedtime_story_label" = "睡前故事";
+"bedtime_story_hint" = "更短更温馨的故事（10页），非常适合睡前";
+"section_characters" = "角色";
+"characters_all_included" = "全部包含";
+"characters_count" = "已选 %d / %d";
+"button_clear" = "清除";
+"button_select_all" = "全选";
+"button_create_story" = "创作故事";
+
+/* Generate - Progress */
+"progress_starting" = "正在开始...";
+"progress_writing" = "正在编写你的故事...";
+"progress_painting" = "正在绘制插图...";
+"progress_assembling" = "正在组装你的书...";
+"button_cancel" = "取消";
+
+/* Generate - Complete */
+"page_indicator" = "第 %d 页，共 %d 页";
+"button_books" = "书架";
+"button_pdf" = "PDF";
+"button_new" = "新建";
+"button_sleep" = "睡眠";
+
+/* Generate - Error */
+"error_title" = "出了点问题";
+"button_try_again" = "重试";
+"button_start_over" = "重新开始";
+"error_unknown" = "发生了未知错误";
+
+/* History */
+"history_empty_title" = "还没有故事";
+"history_empty_description" = "创作一个故事后，它会出现在这里！";
+"date_today" = "今天";
+"date_yesterday" = "昨天";
+"date_days_ago" = "%d天前";
+"delete_story_title" = "删除故事";
+"delete_story_message" = "确定要删除这个故事吗？此操作无法撤销。";
+"button_delete" = "删除";
+"story_not_found" = "未找到故事数据";
+
+/* Settings */
+"settings_server" = "服务器";
+"settings_connected" = "已连接";
+"settings_not_connected" = "未连接";
+"settings_test" = "测试";
+"settings_server_url" = "服务器地址";
+"settings_child_details" = "孩子信息";
+"settings_change_photo" = "更换照片";
+"settings_add_photo" = "添加照片";
+"settings_name" = "名字";
+"settings_gender" = "性别";
+"settings_gender_not_set" = "未设置";
+"settings_gender_boy" = "男孩";
+"settings_gender_girl" = "女孩";
+"settings_reading_level" = "阅读水平";
+"settings_reading_toddler" = "幼儿 (2-3岁)";
+"settings_reading_early" = "启蒙读者 (4-5岁)";
+"settings_reading_beginner" = "初级 (6-7岁)";
+"settings_reading_intermediate" = "中级 (8-10岁)";
+"settings_family" = "家庭";
+"settings_family_members" = "家庭成员";
+"settings_manage_family" = "管理家庭成员";
+"settings_bedtime" = "睡前模式";
+"settings_ambient_sound" = "背景音";
+"settings_sleep_timer" = "睡眠定时器";
+"settings_sleep_off" = "关闭";
+"settings_sleep_1" = "1个故事后";
+"settings_sleep_2" = "2个故事后";
+"settings_sleep_3" = "3个故事后";
+"settings_bedtime_footer" = "睡前模式会调暗屏幕，并在故事结束后播放舒缓的声音";
+"settings_developer_options" = "开发者选项";
+"settings_anthropic_key" = "Anthropic API Key";
+"settings_google_key" = "Google AI API Key";
+"settings_keys_footer" = "密钥存储在服务器上。隐藏的密钥表示已设置现有密钥。";
+"button_save" = "保存";
+"settings_saved" = "设置已保存";
+"settings_connect_error" = "无法连接到服务器";
+"alert_error" = "错误";
+"button_ok" = "好的";
+
+/* Family Members */
+"family_empty_title" = "没有家庭成员";
+"family_empty_description" = "添加家庭成员，让他们出现在你的故事中";
+"family_add_title" = "添加成员";
+"family_edit_title" = "编辑成员";
+"family_add_button" = "添加";
+"family_section_details" = "详情";
+"family_section_description" = "描述（可选）";
+"family_description_placeholder" = "外貌、性格、背景故事...";
+"family_section_photo" = "照片";
+"family_choose_photo" = "选择照片";
+"family_upload_photo" = "上传照片";
+"family_delete_title" = "删除成员";
+"family_delete_message" = "将%@从家庭中移除？";
+"role_mom" = "妈妈";
+"role_dad" = "爸爸";
+"role_brother" = "哥哥/弟弟";
+"role_sister" = "姐姐/妹妹";
+"role_grandma" = "奶奶/外婆";
+"role_grandpa" = "爷爷/外公";
+"role_aunt" = "阿姨/姑姑";
+"role_uncle" = "叔叔/舅舅";
+"role_pet" = "宠物";
+"role_friend" = "朋友";
+"role_companion" = "伙伴";
+"role_classmate" = "同学";
+"role_neighbor" = "邻居";
+"role_magical_friend" = "魔法朋友";
+"role_other" = "其他";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "点击任意位置退出";
+"breathing_in" = "吸气";
+"breathing_hold" = "屏住";
+"breathing_out" = "呼气";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "白噪音";
+"sound_brownNoise" = "棕噪音";
+"sound_pinkNoise" = "粉噪音";
+"sound_softRain" = "细雨";
+"sound_oceanWaves" = "海浪";
+"sound_cracklingFireplace" = "壁炉";
+"sound_forestNight" = "夜晚森林";
+"sound_heartbeat" = "心跳";
+
+/* Writing Style Labels */
+"style_standard" = "标准";
+"style_rhyming" = "押韵";
+"style_funny" = "搞笑";
+"style_sound_effects" = "拟声词";
+"style_repetitive" = "重复";
+"style_bedtime" = "睡前";
+"style_adventure" = "冒险";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "经典的睡前故事叙述";
+"style_desc_rhyming" = "Dr. Seuss风格的押韵诗句";
+"style_desc_funny" = "逗趣的幽默和出人意料的转折";
+"style_desc_sound_effects" = "拟声词和互动音效";
+"style_desc_repetitive" = "带有重复短语的累积式故事";
+"style_desc_bedtime" = "格外平静和梦幻，适合入睡时刻";
+"style_desc_adventure" = "史诗般的冒险和勇敢的英雄";
+
+/* Image Style Labels */
+"style_watercolor" = "水彩";
+"style_fantasy" = "奇幻";
+"style_realistic" = "写实";
+"style_cartoon" = "卡通";
+"style_classic_storybook" = "经典绘本";
+"style_anime" = "动漫";
+"style_ghibli" = "Ghibli";
+"style_chibi" = "Q版";
+"style_papercraft" = "剪纸";
+"style_pixel" = "像素";
+"style_minimalist" = "极简";
+"style_crayon" = "蜡笔";
+"style_pop_art" = "波普艺术";
+"style_oil_painting" = "油画";
+"style_none" = "无图片";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "柔和梦幻的水彩画";
+"style_desc_fantasy" = "丰富而奇妙的幻想艺术";
+"style_desc_realistic" = "逼真的数字艺术";
+"style_desc_cartoon" = "大胆多彩的卡通风格";
+"style_desc_classic_storybook" = "经典儿童绘本插图";
+"style_desc_anime" = "日本动漫风格艺术";
+"style_desc_ghibli" = "Studio Ghibli风格艺术";
+"style_desc_chibi" = "可爱的Q版风格艺术";
+"style_desc_papercraft" = "剪纸拼贴风格";
+"style_desc_pixel" = "复古像素艺术风格";
+"style_desc_minimalist" = "简洁的几何图形";
+"style_desc_crayon" = "童趣蜡笔和彩铅风格";
+"style_desc_pop_art" = "大胆的波普艺术半调点风格";
+"style_desc_oil_painting" = "浓郁质感的油画风格";
+"style_desc_none" = "纯文字故事，无插图";
+
+/* Lesson Labels */
+"lesson_none" = "无";
+"lesson_sharing" = "分享";
+"lesson_bravery" = "勇敢";
+"lesson_kindness" = "善良";
+"lesson_patience" = "耐心";
+"lesson_honesty" = "诚实";
+"lesson_gratitude" = "感恩";
+"lesson_teamwork" = "团队合作";
+"lesson_empathy" = "同理心";
+"lesson_perseverance" = "坚持不懈";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "没有特定寓意，只是一个有趣的故事";
+"lesson_desc_sharing" = "学会与他人分享";
+"lesson_desc_bravery" = "在困难时刻找到勇气";
+"lesson_desc_kindness" = "对他人友善和关爱";
+"lesson_desc_patience" = "学会等待和保持耐心";
+"lesson_desc_honesty" = "说实话的重要性";
+"lesson_desc_gratitude" = "珍惜你所拥有的";
+"lesson_desc_teamwork" = "一起合作实现目标";
+"lesson_desc_empathy" = "理解他人的感受";
+"lesson_desc_perseverance" = "遇到困难不放弃";
+
+/* Validation */
+"validation_custom_writing_empty" = "请在创作故事之前描述你的自定义写作风格。";
+"validation_custom_writing_long" = "你的自定义写作风格太长了，请控制在500个字符以内。";
+"validation_custom_image_empty" = "请在创作故事之前描述你的自定义图片风格。";
+"validation_custom_image_long" = "你的自定义图片风格太长了，请控制在500个字符以内。";
+"validation_custom_lesson_empty" = "请在创作故事之前描述你的自定义寓意。";
+"validation_custom_lesson_long" = "你的自定义寓意太长了，请控制在500个字符以内。";

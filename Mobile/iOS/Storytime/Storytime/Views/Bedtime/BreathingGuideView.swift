@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct BreathingGuideView: View {
+    @EnvironmentObject var localeManager: LocaleManager
     // 4-7-8 breathing pattern: 4s inhale, 7s hold, 8s exhale = 19s total
     private let inhaleDuration: Double = 4.0
     private let holdDuration: Double = 7.0
@@ -60,18 +61,18 @@ struct BreathingGuideView: View {
             let progress = cycleTime / inhaleDuration
             let eased = easeInOut(progress)
             let scale = minScale + (maxScale - minScale) * CGFloat(eased)
-            return (scale, 0.8 + 0.2 * CGFloat(eased), "Breathe In")
+            return (scale, 0.8 + 0.2 * CGFloat(eased), localeManager.localized("breathing_in"))
         } else if cycleTime < inhaleDuration + holdDuration {
             // Hold: stay at max with gentle pulse
             let holdProgress = (cycleTime - inhaleDuration) / holdDuration
             let pulse: CGFloat = 0.8 + 0.2 * CGFloat(sin(holdProgress * .pi * 2))
-            return (maxScale, pulse, "Hold")
+            return (maxScale, pulse, localeManager.localized("breathing_hold"))
         } else {
             // Exhale: scale from max to min
             let exhaleProgress = (cycleTime - inhaleDuration - holdDuration) / exhaleDuration
             let eased = easeInOut(exhaleProgress)
             let scale = maxScale - (maxScale - minScale) * CGFloat(eased)
-            return (scale, 0.8 - 0.2 * CGFloat(eased), "Breathe Out")
+            return (scale, 0.8 - 0.2 * CGFloat(eased), localeManager.localized("breathing_out"))
         }
     }
 

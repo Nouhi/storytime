@@ -19,13 +19,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.storytime.app.R
 import com.storytime.app.audio.AmbientSound
 import com.storytime.app.network.ApiClient
+import com.storytime.app.ui.generate.GenerateViewModel
 import com.storytime.app.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,6 +46,7 @@ fun SettingsScreen(
     val serverUrl by viewModel.serverUrl.collectAsState()
     val bedtimeSound by viewModel.bedtimeSound.collectAsState()
     val sleepTimerStories by viewModel.sleepTimerStories.collectAsState()
+    val language by viewModel.language.collectAsState()
     val isOnline by viewModel.isServerOnline.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val isSaving by viewModel.isSaving.collectAsState()
@@ -71,7 +75,7 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Settings") },
+                title = { Text(stringResource(R.string.tab_settings)) },
                 actions = {
                     if (isSaving) {
                         CircularProgressIndicator(
@@ -81,7 +85,7 @@ fun SettingsScreen(
                         )
                     } else {
                         TextButton(onClick = { viewModel.saveSettings() }) {
-                            Text("Save", fontWeight = FontWeight.SemiBold, color = Purple500)
+                            Text(stringResource(R.string.button_save), fontWeight = FontWeight.SemiBold, color = Purple500)
                         }
                     }
                 }
@@ -119,7 +123,7 @@ fun SettingsScreen(
                         ) {
                             Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(16.dp), tint = Teal500)
                             Spacer(Modifier.width(8.dp))
-                            Text("Settings saved", style = MaterialTheme.typography.bodyMedium, color = Teal500)
+                            Text(stringResource(R.string.settings_saved), style = MaterialTheme.typography.bodyMedium, color = Teal500)
                         }
                     }
                 }
@@ -142,14 +146,14 @@ fun SettingsScreen(
                                 modifier = Modifier.weight(1f)
                             )
                             IconButton(onClick = { viewModel.clearError() }) {
-                                Icon(Icons.Default.Close, contentDescription = "Dismiss")
+                                Icon(Icons.Default.Close, contentDescription = null)
                             }
                         }
                     }
                 }
 
                 // Server section
-                Text("Server", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.settings_server), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
 
                 // Status badge
                 Row(
@@ -163,20 +167,20 @@ fun SettingsScreen(
                         modifier = Modifier.size(10.dp)
                     )
                     Text(
-                        if (isOnline) "Connected" else "Not connected",
+                        if (isOnline) stringResource(R.string.settings_connected) else stringResource(R.string.settings_not_connected),
                         style = MaterialTheme.typography.bodyMedium,
                         color = if (isOnline) Teal500 else Red500
                     )
                     Spacer(Modifier.weight(1f))
                     TextButton(onClick = { viewModel.testConnection() }) {
-                        Text("Test", color = Purple500)
+                        Text(stringResource(R.string.settings_test), color = Purple500)
                     }
                 }
 
                 OutlinedTextField(
                     value = serverUrl,
                     onValueChange = { viewModel.updateServerUrl(it) },
-                    label = { Text("Server URL") },
+                    label = { Text(stringResource(R.string.settings_server_url)) },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
                     shape = RoundedCornerShape(12.dp),
@@ -185,8 +189,69 @@ fun SettingsScreen(
 
                 HorizontalDivider()
 
+                // Language
+                Text(stringResource(R.string.section_language), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+
+                var showLanguageMenu by remember { mutableStateOf(false) }
+                val languages = GenerateViewModel.FALLBACK_LANGUAGES
+                val currentLang = languages.find { it.id == language } ?: languages.first()
+
+                Box {
+                    Surface(
+                        onClick = { showLanguageMenu = true },
+                        shape = RoundedCornerShape(12.dp),
+                        color = SurfaceCard
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(currentLang.emoji, style = MaterialTheme.typography.titleMedium)
+                            Spacer(Modifier.width(12.dp))
+                            Text(
+                                currentLang.description,
+                                style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier.weight(1f)
+                            )
+                            Icon(
+                                Icons.Default.ArrowDropDown,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+
+                    DropdownMenu(
+                        expanded = showLanguageMenu,
+                        onDismissRequest = { showLanguageMenu = false }
+                    ) {
+                        languages.forEach { lang ->
+                            DropdownMenuItem(
+                                text = {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Text(lang.emoji)
+                                        Spacer(Modifier.width(8.dp))
+                                        Text(lang.description)
+                                    }
+                                },
+                                onClick = {
+                                    viewModel.updateLanguage(lang.id)
+                                    showLanguageMenu = false
+                                },
+                                trailingIcon = if (lang.id == language) {
+                                    { Icon(Icons.Default.Check, contentDescription = null, tint = Purple500) }
+                                } else null
+                            )
+                        }
+                    }
+                }
+
+                HorizontalDivider()
+
                 // Child details
-                Text("Child Details", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.settings_child_details), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
 
                 // Photo — centered and prominent
                 Column(
@@ -196,7 +261,7 @@ fun SettingsScreen(
                     if (kidPhotoPath.isNotEmpty()) {
                         AsyncImage(
                             model = ApiClient.imageUrl("/api/photos/$kidPhotoPath"),
-                            contentDescription = "Child photo",
+                            contentDescription = null,
                             modifier = Modifier
                                 .size(80.dp)
                                 .clip(CircleShape),
@@ -223,7 +288,7 @@ fun SettingsScreen(
 
                     TextButton(onClick = { photoPicker.launch("image/*") }) {
                         Text(
-                            if (kidPhotoPath.isNotEmpty()) "Change Photo" else "Add Photo",
+                            if (kidPhotoPath.isNotEmpty()) stringResource(R.string.settings_change_photo) else stringResource(R.string.settings_add_photo),
                             color = Purple500
                         )
                     }
@@ -232,16 +297,20 @@ fun SettingsScreen(
                 OutlinedTextField(
                     value = kidName,
                     onValueChange = { viewModel.updateKidName(it) },
-                    label = { Text("Name") },
+                    label = { Text(stringResource(R.string.settings_name)) },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
                     shape = RoundedCornerShape(12.dp)
                 )
 
                 // Gender picker
-                Text("Gender", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+                Text(stringResource(R.string.settings_gender), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
                 SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
-                    val options = listOf("" to "Not set", "boy" to "Boy", "girl" to "Girl")
+                    val options = listOf(
+                        "" to stringResource(R.string.settings_gender_not_set),
+                        "boy" to stringResource(R.string.settings_gender_boy),
+                        "girl" to stringResource(R.string.settings_gender_girl)
+                    )
                     options.forEachIndexed { index, (value, label) ->
                         SegmentedButton(
                             selected = kidGender == value,
@@ -254,13 +323,13 @@ fun SettingsScreen(
                 }
 
                 // Reading level picker
-                Text("Reading Level", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+                Text(stringResource(R.string.settings_reading_level), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
                 SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
                     val levels = listOf(
-                        "toddler" to "Toddler",
-                        "early-reader" to "Early",
-                        "beginner" to "Beginner",
-                        "intermediate" to "Intermediate"
+                        "toddler" to stringResource(R.string.settings_reading_toddler),
+                        "early-reader" to stringResource(R.string.settings_reading_early),
+                        "beginner" to stringResource(R.string.settings_reading_beginner),
+                        "intermediate" to stringResource(R.string.settings_reading_intermediate)
                     )
                     levels.forEachIndexed { index, (value, label) ->
                         SegmentedButton(
@@ -276,7 +345,7 @@ fun SettingsScreen(
                 HorizontalDivider()
 
                 // Family members
-                Text("Family", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.settings_family), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                 OutlinedButton(
                     onClick = onFamilyMembersClick,
                     modifier = Modifier.fillMaxWidth(),
@@ -284,25 +353,26 @@ fun SettingsScreen(
                 ) {
                     Icon(Icons.Default.People, contentDescription = null, tint = Purple500)
                     Spacer(Modifier.width(8.dp))
-                    Text("Manage Family Members")
+                    Text(stringResource(R.string.settings_manage_family))
                 }
 
                 HorizontalDivider()
 
                 // Bedtime
-                Text("Bedtime", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.settings_bedtime), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
 
-                Text("Ambient Sound", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+                Text(stringResource(R.string.settings_ambient_sound), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     items(AmbientSound.entries.size) { index ->
                         val sound = AmbientSound.entries[index]
+                        val soundLabel = ambientSoundLabel(sound)
                         FilterChip(
                             selected = bedtimeSound == sound.key,
                             onClick = { viewModel.updateBedtimeSound(sound.key) },
-                            label = { Text(sound.displayName, style = MaterialTheme.typography.labelSmall) },
+                            label = { Text(soundLabel, style = MaterialTheme.typography.labelSmall) },
                             colors = FilterChipDefaults.filterChipColors(
                                 containerColor = SurfaceCard,
                                 selectedContainerColor = Purple80,
@@ -312,9 +382,14 @@ fun SettingsScreen(
                     }
                 }
 
-                Text("Sleep Timer", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+                Text(stringResource(R.string.settings_sleep_timer), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
                 SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
-                    val timerOptions = listOf(0 to "Off", 1 to "1 Story", 2 to "2 Stories", 3 to "3 Stories")
+                    val timerOptions = listOf(
+                        0 to stringResource(R.string.settings_sleep_off),
+                        1 to stringResource(R.string.settings_sleep_1),
+                        2 to stringResource(R.string.settings_sleep_2),
+                        3 to stringResource(R.string.settings_sleep_3)
+                    )
                     timerOptions.forEachIndexed { index, (value, label) ->
                         SegmentedButton(
                             selected = sleepTimerStories == value,
@@ -327,7 +402,7 @@ fun SettingsScreen(
                 }
 
                 Text(
-                    "Bedtime mode dims the screen and plays soothing sounds after story time",
+                    stringResource(R.string.settings_bedtime_footer),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -352,7 +427,7 @@ fun SettingsScreen(
                         )
                         Spacer(Modifier.width(12.dp))
                         Text(
-                            "Developer Options",
+                            stringResource(R.string.settings_developer_options),
                             style = MaterialTheme.typography.bodyMedium,
                             modifier = Modifier.weight(1f)
                         )
@@ -369,7 +444,7 @@ fun SettingsScreen(
                         OutlinedTextField(
                             value = anthropicKey,
                             onValueChange = { viewModel.updateAnthropicKey(it) },
-                            label = { Text("Anthropic API Key") },
+                            label = { Text(stringResource(R.string.settings_anthropic_key)) },
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true,
                             visualTransformation = PasswordVisualTransformation(),
@@ -378,14 +453,14 @@ fun SettingsScreen(
                         OutlinedTextField(
                             value = googleKey,
                             onValueChange = { viewModel.updateGoogleKey(it) },
-                            label = { Text("Google AI API Key") },
+                            label = { Text(stringResource(R.string.settings_google_key)) },
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true,
                             visualTransformation = PasswordVisualTransformation(),
                             shape = RoundedCornerShape(12.dp)
                         )
                         Text(
-                            "Keys are stored on the server. Masked keys indicate an existing key is set.",
+                            stringResource(R.string.settings_keys_footer),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -395,5 +470,19 @@ fun SettingsScreen(
                 Spacer(Modifier.height(32.dp))
             }
         }
+    }
+}
+
+@Composable
+private fun ambientSoundLabel(sound: AmbientSound): String {
+    return when (sound) {
+        AmbientSound.WHITE_NOISE -> stringResource(R.string.sound_whiteNoise)
+        AmbientSound.BROWN_NOISE -> stringResource(R.string.sound_brownNoise)
+        AmbientSound.PINK_NOISE -> stringResource(R.string.sound_pinkNoise)
+        AmbientSound.SOFT_RAIN -> stringResource(R.string.sound_softRain)
+        AmbientSound.OCEAN_WAVES -> stringResource(R.string.sound_oceanWaves)
+        AmbientSound.CRACKLING_FIREPLACE -> stringResource(R.string.sound_cracklingFireplace)
+        AmbientSound.FOREST_NIGHT -> stringResource(R.string.sound_forestNight)
+        AmbientSound.HEARTBEAT -> stringResource(R.string.sound_heartbeat)
     }
 }

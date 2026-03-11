@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Storytime</string>
+
+    <!-- Navigation -->
+    <string name="tab_create">つくる</string>
+    <string name="tab_history">りれき</string>
+    <string name="tab_settings">せってい</string>
+
+    <!-- Generate - Greetings -->
+    <string name="greeting_morning">おはようございます</string>
+    <string name="greeting_afternoon">こんにちは</string>
+    <string name="greeting_evening">こんばんは</string>
+    <string name="greeting_welcome">Storytimeへようこそ!</string>
+    <string name="greeting_personalized">%1$s、%2$s!</string>
+
+    <!-- Generate - Idle -->
+    <string name="setup_prompt">せっていでお子さまの名前を入力すると、オリジナルのおはなしが作れます</string>
+    <string name="prompt_header">どんなおはなしをつくる?</string>
+    <string name="prompt_placeholder">おはなしのアイデアを書いてね…</string>
+    <string name="suggestion_1">まほうの森のふしぎなぼうけん</string>
+    <string name="suggestion_2">やさしい宇宙人に会いに宇宙へ旅しよう</string>
+    <string name="suggestion_3">おしゃべりイルカとすごすビーチの一日</string>
+    <string name="suggestion_4">海賊船でたからさがし</string>
+    <string name="section_language">ことば</string>
+    <string name="section_writing_style">かき方スタイル</string>
+    <string name="section_image_style">え のスタイル</string>
+    <string name="section_lesson">おしえ</string>
+    <string name="custom_label">カスタム</string>
+    <string name="custom_placeholder">自分だけの%1$sを書いてね…</string>
+    <string name="use_custom">カスタムを使う</string>
+    <string name="or_write_your_own">または自分で書く</string>
+    <string name="done">かんりょう</string>
+    <string name="bedtime_story_label">おやすみのおはなし</string>
+    <string name="bedtime_story_hint">みじかくておだやかなおはなし（10ページ）、おやすみにぴったり</string>
+    <string name="section_characters">キャラクター</string>
+    <string name="characters_all_included">ぜんいん入り</string>
+    <string name="characters_count">%1$d人中%2$d人をせんたく</string>
+    <string name="button_clear">クリア</string>
+    <string name="button_select_all">すべてせんたく</string>
+    <string name="button_create_story">おはなしをつくる</string>
+
+    <!-- Generate - Progress -->
+    <string name="progress_starting">じゅんびちゅう…</string>
+    <string name="progress_writing">おはなしを書いています…</string>
+    <string name="progress_painting">え をかいています…</string>
+    <string name="progress_assembling">えほんを作っています…</string>
+    <string name="button_cancel">キャンセル</string>
+
+    <!-- Generate - Complete -->
+    <string name="page_indicator">%1$dページ / %2$dページ</string>
+    <string name="button_books">ほんだな</string>
+    <string name="button_pdf">PDF</string>
+    <string name="button_new">あたらしく</string>
+    <string name="button_sleep">おやすみ</string>
+
+    <!-- Generate - Error -->
+    <string name="error_title">うまくいきませんでした</string>
+    <string name="button_try_again">もういちど</string>
+    <string name="button_start_over">はじめから</string>
+    <string name="error_unknown">不明なエラーが発生しました</string>
+
+    <!-- History -->
+    <string name="history_empty_title">まだおはなしがありません</string>
+    <string name="history_empty_description">おはなしを作ると、ここに表示されます!</string>
+    <string name="date_today">きょう</string>
+    <string name="date_yesterday">きのう</string>
+    <string name="date_days_ago">%1$d日まえ</string>
+    <string name="delete_story_title">おはなしをけす</string>
+    <string name="delete_story_message">このおはなしを本当にけしますか? もとにもどせません。</string>
+    <string name="button_delete">けす</string>
+    <string name="story_not_found">おはなしのデータが見つかりません</string>
+
+    <!-- Settings -->
+    <string name="settings_server">サーバー</string>
+    <string name="settings_connected">せつぞくずみ</string>
+    <string name="settings_not_connected">みせつぞく</string>
+    <string name="settings_test">テスト</string>
+    <string name="settings_server_url">サーバーURL</string>
+    <string name="settings_child_details">お子さまのじょうほう</string>
+    <string name="settings_change_photo">しゃしんをかえる</string>
+    <string name="settings_add_photo">しゃしんをついか</string>
+    <string name="settings_name">なまえ</string>
+    <string name="settings_gender">せいべつ</string>
+    <string name="settings_gender_not_set">みせってい</string>
+    <string name="settings_gender_boy">おとこのこ</string>
+    <string name="settings_gender_girl">おんなのこ</string>
+    <string name="settings_reading_level">よみレベル</string>
+    <string name="settings_reading_toddler">ようじ (2-3さい)</string>
+    <string name="settings_reading_early">よみはじめ (4-5さい)</string>
+    <string name="settings_reading_beginner">しょしんしゃ (6-7さい)</string>
+    <string name="settings_reading_intermediate">ちゅうきゅう (8-10さい)</string>
+    <string name="settings_family">かぞく</string>
+    <string name="settings_family_members">かぞくメンバー</string>
+    <string name="settings_manage_family">かぞくメンバーをかんり</string>
+    <string name="settings_bedtime">おやすみモード</string>
+    <string name="settings_ambient_sound">かんきょうおん</string>
+    <string name="settings_sleep_timer">スリープタイマー</string>
+    <string name="settings_sleep_off">オフ</string>
+    <string name="settings_sleep_1">1つのおはなしのあと</string>
+    <string name="settings_sleep_2">2つのおはなしのあと</string>
+    <string name="settings_sleep_3">3つのおはなしのあと</string>
+    <string name="settings_bedtime_footer">おやすみモードはおはなしのあとに画面をくらくし、やすらぐ音をながします</string>
+    <string name="settings_developer_options">かいはつしゃオプション</string>
+    <string name="settings_anthropic_key">Anthropic API Key</string>
+    <string name="settings_google_key">Google AI API Key</string>
+    <string name="settings_keys_footer">キーはサーバーに保存されます。マスクされたキーは既存のキーが設定済みであることを示します。</string>
+    <string name="button_save">ほぞん</string>
+    <string name="settings_saved">せっていをほぞんしました</string>
+    <string name="settings_connect_error">サーバーに接続できません</string>
+    <string name="alert_error">エラー</string>
+    <string name="button_ok">OK</string>
+
+    <!-- Family Members -->
+    <string name="family_empty_title">かぞくメンバーがいません</string>
+    <string name="family_empty_description">かぞくを追加して、おはなしに登場させよう</string>
+    <string name="family_add_title">メンバーをついか</string>
+    <string name="family_edit_title">メンバーをへんしゅう</string>
+    <string name="family_add_button">ついか</string>
+    <string name="family_section_details">しょうさい</string>
+    <string name="family_section_description">せつめい (にんい)</string>
+    <string name="family_description_placeholder">みため、せいかく、せっていなど…</string>
+    <string name="family_section_photo">しゃしん</string>
+    <string name="family_choose_photo">しゃしんをえらぶ</string>
+    <string name="family_upload_photo">しゃしんをアップロード</string>
+    <string name="family_delete_title">メンバーをけす</string>
+    <string name="family_delete_message">%1$sをかぞくからはずしますか?</string>
+    <string name="role_mom">ママ</string>
+    <string name="role_dad">パパ</string>
+    <string name="role_brother">おにいちゃん</string>
+    <string name="role_sister">おねえちゃん</string>
+    <string name="role_grandma">おばあちゃん</string>
+    <string name="role_grandpa">おじいちゃん</string>
+    <string name="role_aunt">おばさん</string>
+    <string name="role_uncle">おじさん</string>
+    <string name="role_pet">ペット</string>
+    <string name="role_friend">ともだち</string>
+    <string name="role_companion">なかま</string>
+    <string name="role_classmate">クラスメイト</string>
+    <string name="role_neighbor">おとなりさん</string>
+    <string name="role_magical_friend">まほうのともだち</string>
+    <string name="role_other">そのほか</string>
+
+    <!-- Bedtime & Breathing -->
+    <string name="bedtime_tap_to_exit">どこかタップしてもどる</string>
+    <string name="breathing_in">すって</string>
+    <string name="breathing_hold">とめて</string>
+    <string name="breathing_out">はいて</string>
+
+    <!-- Ambient Sounds -->
+    <string name="sound_whiteNoise">ホワイトノイズ</string>
+    <string name="sound_brownNoise">ブラウンノイズ</string>
+    <string name="sound_pinkNoise">ピンクノイズ</string>
+    <string name="sound_softRain">やさしい雨</string>
+    <string name="sound_oceanWaves">なみの音</string>
+    <string name="sound_cracklingFireplace">だんろ</string>
+    <string name="sound_forestNight">よるの森</string>
+    <string name="sound_heartbeat">しんぞうの音</string>
+
+    <!-- Writing Style Labels -->
+    <string name="style_standard">スタンダード</string>
+    <string name="style_rhyming">いんふみ</string>
+    <string name="style_funny">おもしろい</string>
+    <string name="style_sound_effects">おとのこうか</string>
+    <string name="style_repetitive">くりかえし</string>
+    <string name="style_bedtime">おやすみ</string>
+    <string name="style_adventure">ぼうけん</string>
+
+    <!-- Writing Style Descriptions -->
+    <string name="style_desc_standard">おやすみのおはなしのクラシックなかたり</string>
+    <string name="style_desc_rhyming">Dr. Seussのようなリズミカルな詩</string>
+    <string name="style_desc_funny">おかしなユーモアと予想外の展開</string>
+    <string name="style_desc_sound_effects">オノマトペとインタラクティブな音</string>
+    <string name="style_desc_repetitive">くりかえしフレーズのあるつみあげおはなし</string>
+    <string name="style_desc_bedtime">ねむりの時間にぴったりのとてもおだやかなおはなし</string>
+    <string name="style_desc_adventure">すごいぼうけんとゆうかんなヒーロー</string>
+
+    <!-- Image Style Labels -->
+    <string name="style_watercolor">すいさいが</string>
+    <string name="style_fantasy">ファンタジー</string>
+    <string name="style_realistic">リアル</string>
+    <string name="style_cartoon">カートゥーン</string>
+    <string name="style_classic_storybook">クラシックえほん</string>
+    <string name="style_anime">アニメ</string>
+    <string name="style_ghibli">ジブリ</string>
+    <string name="style_chibi">ちび</string>
+    <string name="style_papercraft">ペーパークラフト</string>
+    <string name="style_pixel">ドット絵</string>
+    <string name="style_minimalist">ミニマル</string>
+    <string name="style_crayon">クレヨン</string>
+    <string name="style_pop_art">ポップアート</string>
+    <string name="style_oil_painting">あぶらえ</string>
+    <string name="style_none">え なし</string>
+
+    <!-- Image Style Descriptions -->
+    <string name="style_desc_watercolor">やわらかくゆめのようなすいさいが</string>
+    <string name="style_desc_fantasy">ゆたかでまほうのようなファンタジーアート</string>
+    <string name="style_desc_realistic">しゃしんのようなデジタルアート</string>
+    <string name="style_desc_cartoon">はっきりカラフルなカートゥーンスタイル</string>
+    <string name="style_desc_classic_storybook">むかしながらのえほんイラスト</string>
+    <string name="style_desc_anime">にほんのアニメにインスピレーションをうけたアート</string>
+    <string name="style_desc_ghibli">Studio Ghibliにインスピレーションをうけたアート</string>
+    <string name="style_desc_chibi">かわいいデフォルメのちびアート</string>
+    <string name="style_desc_papercraft">きりがみコラージュスタイル</string>
+    <string name="style_desc_pixel">レトロなドット絵スタイル</string>
+    <string name="style_desc_minimalist">シンプルできれいなきかがくもよう</string>
+    <string name="style_desc_crayon">こどもがかいたようなクレヨンといろえんぴつ</string>
+    <string name="style_desc_pop_art">はっきりしたポップアートとドットもよう</string>
+    <string name="style_desc_oil_painting">ゆたかなしつかんのあぶらえスタイル</string>
+    <string name="style_desc_none">ぶんしょうだけのおはなし、え なし</string>
+
+    <!-- Lesson Labels -->
+    <string name="lesson_none">なし</string>
+    <string name="lesson_sharing">わけあい</string>
+    <string name="lesson_bravery">ゆうき</string>
+    <string name="lesson_kindness">やさしさ</string>
+    <string name="lesson_patience">がまん</string>
+    <string name="lesson_honesty">しょうじき</string>
+    <string name="lesson_gratitude">かんしゃ</string>
+    <string name="lesson_teamwork">チームワーク</string>
+    <string name="lesson_empathy">おもいやり</string>
+    <string name="lesson_perseverance">あきらめない</string>
+
+    <!-- Lesson Descriptions -->
+    <string name="lesson_desc_none">とくべつなおしえなし、たのしいおはなし</string>
+    <string name="lesson_desc_sharing">みんなとわけあうことをまなぶ</string>
+    <string name="lesson_desc_bravery">たいへんなときにゆうきを見つける</string>
+    <string name="lesson_desc_kindness">ほかの人にやさしくおもいやりをもつ</string>
+    <string name="lesson_desc_patience">まつこと、がまんすることをまなぶ</string>
+    <string name="lesson_desc_honesty">ほんとうのことをいうたいせつさ</string>
+    <string name="lesson_desc_gratitude">もっているものにかんしゃする</string>
+    <string name="lesson_desc_teamwork">みんなでちからをあわせてもくひょうをたっせい</string>
+    <string name="lesson_desc_empathy">ほかの人のきもちをりかいする</string>
+    <string name="lesson_desc_perseverance">むずかしくてもあきらめない</string>
+
+    <!-- Validation -->
+    <string name="validation_custom_writing_empty">おはなしを作る前にカスタムかき方スタイルを入力してください。</string>
+    <string name="validation_custom_writing_long">カスタムかき方スタイルがながすぎます。500もじ以内にしてください。</string>
+    <string name="validation_custom_image_empty">おはなしを作る前にカスタム え スタイルを入力してください。</string>
+    <string name="validation_custom_image_long">カスタム え スタイルがながすぎます。500もじ以内にしてください。</string>
+    <string name="validation_custom_lesson_empty">おはなしを作る前にカスタムおしえを入力してください。</string>
+    <string name="validation_custom_lesson_long">カスタムおしえがながすぎます。500もじ以内にしてください。</string>
+</resources>

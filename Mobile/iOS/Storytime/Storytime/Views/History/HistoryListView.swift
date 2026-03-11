@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct HistoryListView: View {
+    @EnvironmentObject var localeManager: LocaleManager
     @StateObject private var viewModel = HistoryViewModel()
 
     var body: some View {
@@ -11,15 +12,15 @@ struct HistoryListView: View {
                         .tint(Color.stPrimary)
                 } else if viewModel.stories.isEmpty {
                     ContentUnavailableView(
-                        "No Stories Yet",
+                        localeManager.localized("history_empty_title"),
                         systemImage: "book.closed",
-                        description: Text("Your stories will appear here once you create one!")
+                        description: Text(localeManager.localized("history_empty_description"))
                     )
                 } else {
                     storyList
                 }
             }
-            .navigationTitle("History")
+            .navigationTitle(localeManager.localized("tab_history"))
             .refreshable {
                 await viewModel.loadHistory()
             }
@@ -104,13 +105,13 @@ struct HistoryListView: View {
         if calendar.isDateInToday(date) {
             let timeFormatter = DateFormatter()
             timeFormatter.timeStyle = .short
-            return "Today, \(timeFormatter.string(from: date))"
+            return "\(localeManager.localized("date_today")), \(timeFormatter.string(from: date))"
         } else if calendar.isDateInYesterday(date) {
-            return "Yesterday"
+            return localeManager.localized("date_yesterday")
         } else {
             let days = calendar.dateComponents([.day], from: date, to: Date()).day ?? 0
             if days < 7 {
-                return "\(days) days ago"
+                return localeManager.localized("date_days_ago", days)
             } else {
                 let displayFormatter = DateFormatter()
                 displayFormatter.dateStyle = .medium

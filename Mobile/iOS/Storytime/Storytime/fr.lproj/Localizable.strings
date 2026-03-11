@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "Creer";
+"tab_history" = "Historique";
+"tab_settings" = "Reglages";
+
+/* Generate - Greetings */
+"greeting_morning" = "Bonjour";
+"greeting_afternoon" = "Bon apres-midi";
+"greeting_evening" = "Bonsoir";
+"greeting_welcome" = "Bienvenue sur Storytime!";
+"greeting_personalized" = "%@, %@!";
+
+/* Generate - Idle */
+"setup_prompt" = "Configurez le prenom de votre enfant dans les Reglages pour des histoires personnalisees";
+"prompt_header" = "Quelle histoire allons-nous creer?";
+"prompt_placeholder" = "Decrivez votre idee d'histoire...";
+"suggestion_1" = "Une aventure magique dans une foret enchantee";
+"suggestion_2" = "Un voyage dans l'espace pour rencontrer des extraterrestres amicaux";
+"suggestion_3" = "Une journee a la plage avec un dauphin qui parle";
+"suggestion_4" = "Une chasse au tresor sur un bateau pirate";
+"section_language" = "Langue";
+"section_writing_style" = "Style d'ecriture";
+"section_image_style" = "Style d'image";
+"section_lesson" = "Lecon";
+"custom_label" = "Personnalise";
+"custom_placeholder" = "Decrivez votre propre %@...";
+"use_custom" = "Utiliser personnalise";
+"or_write_your_own" = "Ou ecrivez le votre";
+"done" = "Termine";
+"bedtime_story_label" = "Histoire du soir";
+"bedtime_story_hint" = "Histoire plus courte et plus calme (10 pages) parfaite pour l'heure du coucher";
+"section_characters" = "Personnages";
+"characters_all_included" = "Tous inclus";
+"characters_count" = "%d sur %d selectionnes";
+"button_clear" = "Effacer";
+"button_select_all" = "Tout selectionner";
+"button_create_story" = "Creer l'histoire";
+
+/* Generate - Progress */
+"progress_starting" = "Demarrage...";
+"progress_writing" = "Ecriture de votre histoire...";
+"progress_painting" = "Peinture des illustrations...";
+"progress_assembling" = "Assemblage de votre livre...";
+"button_cancel" = "Annuler";
+
+/* Generate - Complete */
+"page_indicator" = "Page %d sur %d";
+"button_books" = "Livres";
+"button_pdf" = "PDF";
+"button_new" = "Nouveau";
+"button_sleep" = "Dormir";
+
+/* Generate - Error */
+"error_title" = "Quelque chose s'est mal passe";
+"button_try_again" = "Reessayer";
+"button_start_over" = "Recommencer";
+"error_unknown" = "Une erreur inconnue est survenue";
+
+/* History */
+"history_empty_title" = "Pas encore d'histoires";
+"history_empty_description" = "Vos histoires apparaitront ici quand vous en aurez cree une!";
+"date_today" = "Aujourd'hui";
+"date_yesterday" = "Hier";
+"date_days_ago" = "Il y a %d jours";
+"delete_story_title" = "Supprimer l'histoire";
+"delete_story_message" = "Etes-vous sur de vouloir supprimer cette histoire? Cette action est irreversible.";
+"button_delete" = "Supprimer";
+"story_not_found" = "Donnees de l'histoire introuvables";
+
+/* Settings */
+"settings_server" = "Serveur";
+"settings_connected" = "Connecte";
+"settings_not_connected" = "Non connecte";
+"settings_test" = "Tester";
+"settings_server_url" = "URL du serveur";
+"settings_child_details" = "Details de l'enfant";
+"settings_change_photo" = "Changer la photo";
+"settings_add_photo" = "Ajouter une photo";
+"settings_name" = "Prenom";
+"settings_gender" = "Genre";
+"settings_gender_not_set" = "Non defini";
+"settings_gender_boy" = "Garcon";
+"settings_gender_girl" = "Fille";
+"settings_reading_level" = "Niveau de lecture";
+"settings_reading_toddler" = "Tout-petit (2-3)";
+"settings_reading_early" = "Jeune lecteur (4-5)";
+"settings_reading_beginner" = "Debutant (6-7)";
+"settings_reading_intermediate" = "Intermediaire (8-10)";
+"settings_family" = "Famille";
+"settings_family_members" = "Membres de la famille";
+"settings_manage_family" = "Gerer les membres de la famille";
+"settings_bedtime" = "Heure du coucher";
+"settings_ambient_sound" = "Son d'ambiance";
+"settings_sleep_timer" = "Minuterie de sommeil";
+"settings_sleep_off" = "Desactive";
+"settings_sleep_1" = "Apres 1 histoire";
+"settings_sleep_2" = "Apres 2 histoires";
+"settings_sleep_3" = "Apres 3 histoires";
+"settings_bedtime_footer" = "Le mode coucher attenue l'ecran et joue des sons apaisants apres l'heure de l'histoire";
+"settings_developer_options" = "Options developpeur";
+"settings_anthropic_key" = "Anthropic API Key";
+"settings_google_key" = "Google AI API Key";
+"settings_keys_footer" = "Les cles sont stockees sur le serveur. Les cles masquees indiquent qu'une cle existante est configuree.";
+"button_save" = "Enregistrer";
+"settings_saved" = "Reglages enregistres";
+"settings_connect_error" = "Impossible de se connecter au serveur";
+"alert_error" = "Erreur";
+"button_ok" = "OK";
+
+/* Family Members */
+"family_empty_title" = "Aucun membre de la famille";
+"family_empty_description" = "Ajoutez des membres de la famille pour qu'ils apparaissent dans vos histoires";
+"family_add_title" = "Ajouter un membre";
+"family_edit_title" = "Modifier le membre";
+"family_add_button" = "Ajouter";
+"family_section_details" = "Details";
+"family_section_description" = "Description (Facultatif)";
+"family_description_placeholder" = "Apparence, personnalite, histoire de fond...";
+"family_section_photo" = "Photo";
+"family_choose_photo" = "Choisir une photo";
+"family_upload_photo" = "Telecharger une photo";
+"family_delete_title" = "Supprimer le membre";
+"family_delete_message" = "Retirer %@ de la famille?";
+"role_mom" = "Maman";
+"role_dad" = "Papa";
+"role_brother" = "Frere";
+"role_sister" = "Soeur";
+"role_grandma" = "Grand-mere";
+"role_grandpa" = "Grand-pere";
+"role_aunt" = "Tante";
+"role_uncle" = "Oncle";
+"role_pet" = "Animal de compagnie";
+"role_friend" = "Ami";
+"role_companion" = "Compagnon";
+"role_classmate" = "Camarade de classe";
+"role_neighbor" = "Voisin";
+"role_magical_friend" = "Ami magique";
+"role_other" = "Autre";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "Touchez n'importe ou pour quitter";
+"breathing_in" = "Inspirez";
+"breathing_hold" = "Retenez";
+"breathing_out" = "Expirez";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "Bruit blanc";
+"sound_brownNoise" = "Bruit brun";
+"sound_pinkNoise" = "Bruit rose";
+"sound_softRain" = "Pluie douce";
+"sound_oceanWaves" = "Vagues de l'ocean";
+"sound_cracklingFireplace" = "Cheminee";
+"sound_forestNight" = "Foret la nuit";
+"sound_heartbeat" = "Battement de coeur";
+
+/* Writing Style Labels */
+"style_standard" = "Standard";
+"style_rhyming" = "Rime";
+"style_funny" = "Drole";
+"style_sound_effects" = "Effets sonores";
+"style_repetitive" = "Repetitif";
+"style_bedtime" = "Coucher";
+"style_adventure" = "Aventure";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "Narration classique d'histoire du soir";
+"style_desc_rhyming" = "Vers rimes a la maniere de Dr. Seuss";
+"style_desc_funny" = "Humour loufoque et rebondissements inattendus";
+"style_desc_sound_effects" = "Onomatopees et sons interactifs";
+"style_desc_repetitive" = "Histoire cumulative avec des phrases qui se repetent";
+"style_desc_bedtime" = "Extra calme et reveur pour l'heure du dodo";
+"style_desc_adventure" = "Quetes epiques et heros courageux";
+
+/* Image Style Labels */
+"style_watercolor" = "Aquarelle";
+"style_fantasy" = "Fantaisie";
+"style_realistic" = "Realiste";
+"style_cartoon" = "Dessin anime";
+"style_classic_storybook" = "Livre classique";
+"style_anime" = "Anime";
+"style_ghibli" = "Ghibli";
+"style_chibi" = "Chibi";
+"style_papercraft" = "Papier decoupe";
+"style_pixel" = "Pixel Art";
+"style_minimalist" = "Minimaliste";
+"style_crayon" = "Crayon";
+"style_pop_art" = "Pop Art";
+"style_oil_painting" = "Peinture a l'huile";
+"style_none" = "Sans images";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "Peintures aquarelles douces et reveuses";
+"style_desc_fantasy" = "Art fantaisie riche et magique";
+"style_desc_realistic" = "Art numerique photorealiste";
+"style_desc_cartoon" = "Style dessin anime colore et audacieux";
+"style_desc_classic_storybook" = "Illustrations classiques de livres d'enfants";
+"style_desc_anime" = "Art inspire de l'anime japonais";
+"style_desc_ghibli" = "Art inspire de Studio Ghibli";
+"style_desc_chibi" = "Art chibi mignon et super deforme";
+"style_desc_papercraft" = "Style collage de papier decoupe";
+"style_desc_pixel" = "Style pixel art retro";
+"style_desc_minimalist" = "Formes geometriques epurees et simples";
+"style_desc_crayon" = "Style enfantin au crayon et crayons de couleur";
+"style_desc_pop_art" = "Pop art audacieux avec des points de trame";
+"style_desc_oil_painting" = "Style peinture a l'huile riche et texture";
+"style_desc_none" = "Histoire en texte uniquement, sans illustrations";
+
+/* Lesson Labels */
+"lesson_none" = "Aucune";
+"lesson_sharing" = "Partage";
+"lesson_bravery" = "Courage";
+"lesson_kindness" = "Gentillesse";
+"lesson_patience" = "Patience";
+"lesson_honesty" = "Honnetete";
+"lesson_gratitude" = "Gratitude";
+"lesson_teamwork" = "Travail d'equipe";
+"lesson_empathy" = "Empathie";
+"lesson_perseverance" = "Perseverance";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "Pas de lecon particuliere, juste une histoire amusante";
+"lesson_desc_sharing" = "Apprendre a partager avec les autres";
+"lesson_desc_bravery" = "Trouver du courage dans les moments difficiles";
+"lesson_desc_kindness" = "Etre gentil et attentionne envers les autres";
+"lesson_desc_patience" = "Apprendre a attendre et etre patient";
+"lesson_desc_honesty" = "L'importance de dire la verite";
+"lesson_desc_gratitude" = "Apprecier ce que l'on a";
+"lesson_desc_teamwork" = "Travailler ensemble pour atteindre des objectifs";
+"lesson_desc_empathy" = "Comprendre les sentiments des autres";
+"lesson_desc_perseverance" = "Ne pas abandonner quand les choses sont difficiles";
+
+/* Validation */
+"validation_custom_writing_empty" = "Veuillez decrire votre style d'ecriture personnalise avant de creer une histoire.";
+"validation_custom_writing_long" = "Votre style d'ecriture personnalise est trop long. Veuillez le limiter a 500 caracteres.";
+"validation_custom_image_empty" = "Veuillez decrire votre style d'image personnalise avant de creer une histoire.";
+"validation_custom_image_long" = "Votre style d'image personnalise est trop long. Veuillez le limiter a 500 caracteres.";
+"validation_custom_lesson_empty" = "Veuillez decrire votre lecon personnalisee avant de creer une histoire.";
+"validation_custom_lesson_long" = "Votre lecon personnalisee est trop longue. Veuillez la limiter a 500 caracteres.";

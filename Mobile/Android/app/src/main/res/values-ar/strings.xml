@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Storytime</string>
+
+    <!-- Navigation -->
+    <string name="tab_create">انشاء</string>
+    <string name="tab_history">السجل</string>
+    <string name="tab_settings">الاعدادات</string>
+
+    <!-- Generate - Greetings -->
+    <string name="greeting_morning">صباح الخير</string>
+    <string name="greeting_afternoon">مساء الخير</string>
+    <string name="greeting_evening">مساء الخير</string>
+    <string name="greeting_welcome">اهلا بك في Storytime!</string>
+    <string name="greeting_personalized">%1$s، %2$s!</string>
+
+    <!-- Generate - Idle -->
+    <string name="setup_prompt">اضف اسم طفلك في الاعدادات للحصول على قصص مخصصة</string>
+    <string name="prompt_header">اي قصة سنصنع اليوم؟</string>
+    <string name="prompt_placeholder">صف فكرة قصتك…</string>
+    <string name="suggestion_1">مغامرة سحرية في غابة مسحورة</string>
+    <string name="suggestion_2">رحلة الى الفضاء لزيارة كائنات فضائية ودودة</string>
+    <string name="suggestion_3">يوم على الشاطئ مع دلفين يتكلم</string>
+    <string name="suggestion_4">البحث عن كنز في سفينة قراصنة</string>
+    <string name="section_language">اللغة</string>
+    <string name="section_writing_style">اسلوب الكتابة</string>
+    <string name="section_image_style">نمط الصور</string>
+    <string name="section_lesson">الدرس</string>
+    <string name="custom_label">مخصص</string>
+    <string name="custom_placeholder">صف %1$s الخاص بك…</string>
+    <string name="use_custom">استخدام مخصص</string>
+    <string name="or_write_your_own">او اكتب بنفسك</string>
+    <string name="done">تم</string>
+    <string name="bedtime_story_label">قصة ما قبل النوم</string>
+    <string name="bedtime_story_hint">قصة اقصر واهدأ (10 صفحات) مثالية لوقت النوم</string>
+    <string name="section_characters">الشخصيات</string>
+    <string name="characters_all_included">الكل مشمول</string>
+    <string name="characters_count">%1$d من %2$d مختارين</string>
+    <string name="button_clear">مسح</string>
+    <string name="button_select_all">اختيار الكل</string>
+    <string name="button_create_story">انشاء القصة</string>
+
+    <!-- Generate - Progress -->
+    <string name="progress_starting">جاري البدء…</string>
+    <string name="progress_writing">جاري كتابة قصتك…</string>
+    <string name="progress_painting">جاري رسم الصور…</string>
+    <string name="progress_assembling">جاري تجميع كتابك…</string>
+    <string name="button_cancel">الغاء</string>
+
+    <!-- Generate - Complete -->
+    <string name="page_indicator">صفحة %1$d من %2$d</string>
+    <string name="button_books">الكتب</string>
+    <string name="button_pdf">PDF</string>
+    <string name="button_new">جديد</string>
+    <string name="button_sleep">نوم</string>
+
+    <!-- Generate - Error -->
+    <string name="error_title">حدث خطأ ما</string>
+    <string name="button_try_again">حاول مرة اخرى</string>
+    <string name="button_start_over">ابدأ من جديد</string>
+    <string name="error_unknown">حدث خطأ غير معروف</string>
+
+    <!-- History -->
+    <string name="history_empty_title">لا توجد قصص بعد</string>
+    <string name="history_empty_description">ستظهر قصصك هنا بمجرد انشاء واحدة!</string>
+    <string name="date_today">اليوم</string>
+    <string name="date_yesterday">امس</string>
+    <string name="date_days_ago">منذ %1$d ايام</string>
+    <string name="delete_story_title">حذف القصة</string>
+    <string name="delete_story_message">هل انت متأكد من حذف هذه القصة؟ لا يمكن التراجع عن هذا.</string>
+    <string name="button_delete">حذف</string>
+    <string name="story_not_found">لم يتم العثور على بيانات القصة</string>
+
+    <!-- Settings -->
+    <string name="settings_server">الخادم</string>
+    <string name="settings_connected">متصل</string>
+    <string name="settings_not_connected">غير متصل</string>
+    <string name="settings_test">اختبار</string>
+    <string name="settings_server_url">رابط الخادم</string>
+    <string name="settings_child_details">بيانات الطفل</string>
+    <string name="settings_change_photo">تغيير الصورة</string>
+    <string name="settings_add_photo">اضافة صورة</string>
+    <string name="settings_name">الاسم</string>
+    <string name="settings_gender">الجنس</string>
+    <string name="settings_gender_not_set">غير محدد</string>
+    <string name="settings_gender_boy">ولد</string>
+    <string name="settings_gender_girl">بنت</string>
+    <string name="settings_reading_level">مستوى القراءة</string>
+    <string name="settings_reading_toddler">طفل صغير (2-3)</string>
+    <string name="settings_reading_early">قارئ مبتدئ (4-5)</string>
+    <string name="settings_reading_beginner">مبتدئ (6-7)</string>
+    <string name="settings_reading_intermediate">متوسط (8-10)</string>
+    <string name="settings_family">العائلة</string>
+    <string name="settings_family_members">افراد العائلة</string>
+    <string name="settings_manage_family">ادارة افراد العائلة</string>
+    <string name="settings_bedtime">وقت النوم</string>
+    <string name="settings_ambient_sound">صوت محيط</string>
+    <string name="settings_sleep_timer">مؤقت النوم</string>
+    <string name="settings_sleep_off">ايقاف</string>
+    <string name="settings_sleep_1">بعد قصة واحدة</string>
+    <string name="settings_sleep_2">بعد قصتين</string>
+    <string name="settings_sleep_3">بعد 3 قصص</string>
+    <string name="settings_bedtime_footer">وضع النوم يخفت الشاشة ويشغل اصوات مهدئة بعد وقت القصة</string>
+    <string name="settings_developer_options">خيارات المطور</string>
+    <string name="settings_anthropic_key">Anthropic API Key</string>
+    <string name="settings_google_key">Google AI API Key</string>
+    <string name="settings_keys_footer">يتم تخزين المفاتيح على الخادم. المفاتيح المخفية تشير الى وجود مفتاح محدد مسبقا.</string>
+    <string name="button_save">حفظ</string>
+    <string name="settings_saved">تم حفظ الاعدادات</string>
+    <string name="settings_connect_error">لا يمكن الاتصال بالخادم</string>
+    <string name="alert_error">خطأ</string>
+    <string name="button_ok">حسنا</string>
+
+    <!-- Family Members -->
+    <string name="family_empty_title">لا يوجد افراد عائلة</string>
+    <string name="family_empty_description">اضف افراد العائلة ليظهروا في قصصك</string>
+    <string name="family_add_title">اضافة فرد</string>
+    <string name="family_edit_title">تعديل فرد</string>
+    <string name="family_add_button">اضافة</string>
+    <string name="family_section_details">التفاصيل</string>
+    <string name="family_section_description">الوصف (اختياري)</string>
+    <string name="family_description_placeholder">المظهر، الشخصية، القصة الخلفية…</string>
+    <string name="family_section_photo">الصورة</string>
+    <string name="family_choose_photo">اختيار صورة</string>
+    <string name="family_upload_photo">رفع صورة</string>
+    <string name="family_delete_title">حذف فرد</string>
+    <string name="family_delete_message">ازالة %1$s من العائلة؟</string>
+    <string name="role_mom">ماما</string>
+    <string name="role_dad">بابا</string>
+    <string name="role_brother">اخ</string>
+    <string name="role_sister">اخت</string>
+    <string name="role_grandma">جدة</string>
+    <string name="role_grandpa">جد</string>
+    <string name="role_aunt">خالة</string>
+    <string name="role_uncle">خال</string>
+    <string name="role_pet">حيوان اليف</string>
+    <string name="role_friend">صديق</string>
+    <string name="role_companion">رفيق</string>
+    <string name="role_classmate">زميل دراسة</string>
+    <string name="role_neighbor">جار</string>
+    <string name="role_magical_friend">صديق سحري</string>
+    <string name="role_other">اخر</string>
+
+    <!-- Bedtime & Breathing -->
+    <string name="bedtime_tap_to_exit">انقر في اي مكان للخروج</string>
+    <string name="breathing_in">شهيق</string>
+    <string name="breathing_hold">امسك</string>
+    <string name="breathing_out">زفير</string>
+
+    <!-- Ambient Sounds -->
+    <string name="sound_whiteNoise">ضوضاء بيضاء</string>
+    <string name="sound_brownNoise">ضوضاء بنية</string>
+    <string name="sound_pinkNoise">ضوضاء وردية</string>
+    <string name="sound_softRain">مطر خفيف</string>
+    <string name="sound_oceanWaves">امواج البحر</string>
+    <string name="sound_cracklingFireplace">مدفأة</string>
+    <string name="sound_forestNight">غابة ليلية</string>
+    <string name="sound_heartbeat">نبض القلب</string>
+
+    <!-- Writing Style Labels -->
+    <string name="style_standard">قياسي</string>
+    <string name="style_rhyming">مقفى</string>
+    <string name="style_funny">مضحك</string>
+    <string name="style_sound_effects">مؤثرات صوتية</string>
+    <string name="style_repetitive">تكراري</string>
+    <string name="style_bedtime">قبل النوم</string>
+    <string name="style_adventure">مغامرة</string>
+
+    <!-- Writing Style Descriptions -->
+    <string name="style_desc_standard">سرد كلاسيكي لقصة ما قبل النوم</string>
+    <string name="style_desc_rhyming">ابيات مقفاة بأسلوب Dr. Seuss</string>
+    <string name="style_desc_funny">فكاهة طريفة ومفاجآت غير متوقعة</string>
+    <string name="style_desc_sound_effects">محاكاة صوتية واصوات تفاعلية</string>
+    <string name="style_desc_repetitive">قصة تراكمية مع عبارات متكررة</string>
+    <string name="style_desc_bedtime">هادئ وحالم جدا لوقت النوم</string>
+    <string name="style_desc_adventure">مهمات ملحمية وابطال شجعان</string>
+
+    <!-- Image Style Labels -->
+    <string name="style_watercolor">الوان مائية</string>
+    <string name="style_fantasy">خيالي</string>
+    <string name="style_realistic">واقعي</string>
+    <string name="style_cartoon">رسوم متحركة</string>
+    <string name="style_classic_storybook">كتاب قصص كلاسيكي</string>
+    <string name="style_anime">انمي</string>
+    <string name="style_ghibli">Ghibli</string>
+    <string name="style_chibi">تشيبي</string>
+    <string name="style_papercraft">فن الورق</string>
+    <string name="style_pixel">بكسل ارت</string>
+    <string name="style_minimalist">بسيط</string>
+    <string name="style_crayon">اقلام شمعية</string>
+    <string name="style_pop_art">بوب ارت</string>
+    <string name="style_oil_painting">رسم زيتي</string>
+    <string name="style_none">بدون صور</string>
+
+    <!-- Image Style Descriptions -->
+    <string name="style_desc_watercolor">لوحات مائية ناعمة وحالمة</string>
+    <string name="style_desc_fantasy">فن خيالي غني وساحر</string>
+    <string name="style_desc_realistic">فن رقمي واقعي</string>
+    <string name="style_desc_cartoon">رسوم متحركة ملونة وجريئة</string>
+    <string name="style_desc_classic_storybook">رسومات كتب اطفال كلاسيكية</string>
+    <string name="style_desc_anime">فن مستوحى من الانمي الياباني</string>
+    <string name="style_desc_ghibli">فن مستوحى من Studio Ghibli</string>
+    <string name="style_desc_chibi">فن تشيبي لطيف ومبالغ فيه</string>
+    <string name="style_desc_papercraft">كولاج ورقي مقطوع</string>
+    <string name="style_desc_pixel">بكسل ارت بأسلوب قديم</string>
+    <string name="style_desc_minimalist">اشكال هندسية نظيفة وبسيطة</string>
+    <string name="style_desc_crayon">رسم طفولي بالاقلام الشمعية والملونة</string>
+    <string name="style_desc_pop_art">بوب ارت جريء بنقاط الطباعة</string>
+    <string name="style_desc_oil_painting">رسم زيتي غني وذو ملمس</string>
+    <string name="style_desc_none">قصة نصية فقط، بدون رسومات</string>
+
+    <!-- Lesson Labels -->
+    <string name="lesson_none">بدون</string>
+    <string name="lesson_sharing">المشاركة</string>
+    <string name="lesson_bravery">الشجاعة</string>
+    <string name="lesson_kindness">اللطف</string>
+    <string name="lesson_patience">الصبر</string>
+    <string name="lesson_honesty">الصدق</string>
+    <string name="lesson_gratitude">الامتنان</string>
+    <string name="lesson_teamwork">العمل الجماعي</string>
+    <string name="lesson_empathy">التعاطف</string>
+    <string name="lesson_perseverance">المثابرة</string>
+
+    <!-- Lesson Descriptions -->
+    <string name="lesson_desc_none">بدون درس محدد، مجرد قصة ممتعة</string>
+    <string name="lesson_desc_sharing">تعلم المشاركة مع الاخرين</string>
+    <string name="lesson_desc_bravery">ايجاد الشجاعة في اللحظات الصعبة</string>
+    <string name="lesson_desc_kindness">ان تكون لطيفا ومهتما بالاخرين</string>
+    <string name="lesson_desc_patience">تعلم الانتظار والصبر</string>
+    <string name="lesson_desc_honesty">اهمية قول الحقيقة</string>
+    <string name="lesson_desc_gratitude">تقدير ما لديك</string>
+    <string name="lesson_desc_teamwork">العمل معا لتحقيق الاهداف</string>
+    <string name="lesson_desc_empathy">فهم مشاعر الاخرين</string>
+    <string name="lesson_desc_perseverance">عدم الاستسلام عندما تصعب الامور</string>
+
+    <!-- Validation -->
+    <string name="validation_custom_writing_empty">يرجى وصف اسلوب الكتابة المخصص قبل انشاء القصة.</string>
+    <string name="validation_custom_writing_long">اسلوب الكتابة المخصص طويل جدا. يرجى الاحتفاظ به اقل من 500 حرف.</string>
+    <string name="validation_custom_image_empty">يرجى وصف نمط الصور المخصص قبل انشاء القصة.</string>
+    <string name="validation_custom_image_long">نمط الصور المخصص طويل جدا. يرجى الاحتفاظ به اقل من 500 حرف.</string>
+    <string name="validation_custom_lesson_empty">يرجى وصف الدرس المخصص قبل انشاء القصة.</string>
+    <string name="validation_custom_lesson_long">الدرس المخصص طويل جدا. يرجى الاحتفاظ به اقل من 500 حرف.</string>
+</resources>

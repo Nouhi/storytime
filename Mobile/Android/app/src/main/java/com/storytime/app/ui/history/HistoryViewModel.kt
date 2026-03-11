@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.storytime.app.R
 import com.storytime.app.model.StoryHistoryEntry
 import com.storytime.app.model.StoryPage
 import com.storytime.app.network.ApiClient
@@ -67,7 +68,7 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
                 _storyTitle.value = data.title
             } catch (e: Exception) {
                 _storyPages.value = emptyList()
-                _storyTitle.value = "Error loading story"
+                _storyTitle.value = getApplication<Application>().getString(R.string.error_title)
             }
             _isLoadingDetail.value = false
         }

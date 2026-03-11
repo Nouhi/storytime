@@ -23,15 +23,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.storytime.app.R
 import com.storytime.app.audio.AmbientSound
 import com.storytime.app.audio.AmbientSoundManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import java.util.Calendar
+
+@Composable
+private fun ambientSoundLabel(sound: AmbientSound): String {
+    return when (sound) {
+        AmbientSound.WHITE_NOISE -> stringResource(R.string.sound_whiteNoise)
+        AmbientSound.BROWN_NOISE -> stringResource(R.string.sound_brownNoise)
+        AmbientSound.PINK_NOISE -> stringResource(R.string.sound_pinkNoise)
+        AmbientSound.SOFT_RAIN -> stringResource(R.string.sound_softRain)
+        AmbientSound.OCEAN_WAVES -> stringResource(R.string.sound_oceanWaves)
+        AmbientSound.CRACKLING_FIREPLACE -> stringResource(R.string.sound_cracklingFireplace)
+        AmbientSound.FOREST_NIGHT -> stringResource(R.string.sound_forestNight)
+        AmbientSound.HEARTBEAT -> stringResource(R.string.sound_heartbeat)
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -143,7 +159,7 @@ fun BedtimeScreen(
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
-                    text = currentSound.displayName,
+                    text = ambientSoundLabel(currentSound),
                     color = Color.White.copy(alpha = 0.5f),
                     style = MaterialTheme.typography.titleMedium
                 )
@@ -153,7 +169,7 @@ fun BedtimeScreen(
                 }) {
                     Icon(
                         imageVector = if (isPlaying) Icons.Default.Pause else Icons.Default.PlayArrow,
-                        contentDescription = if (isPlaying) "Pause" else "Play",
+                        contentDescription = null,
                         tint = Color.White.copy(alpha = 0.5f),
                         modifier = Modifier.size(36.dp)
                     )
@@ -207,7 +223,7 @@ fun BedtimeScreen(
                             onSoundChanged(sound.key)
                             audioManager.play(sound, fadeDurationMs = 1000)
                         },
-                        label = { Text(sound.displayName) },
+                        label = { Text(ambientSoundLabel(sound)) },
                         colors = FilterChipDefaults.filterChipColors(
                             containerColor = Color.White.copy(alpha = 0.05f),
                             selectedContainerColor = Color.White.copy(alpha = 0.15f),
@@ -227,7 +243,7 @@ fun BedtimeScreen(
             ) {
                 Icon(
                     imageVector = if (showBreathingGuide) Icons.Default.AutoAwesome else Icons.Default.Air,
-                    contentDescription = if (showBreathingGuide) "Switch to starfield" else "Switch to breathing guide",
+                    contentDescription = null,
                     tint = Color.White.copy(alpha = 0.3f)
                 )
             }
@@ -240,7 +256,7 @@ fun BedtimeScreen(
                 exit = fadeOut()
             ) {
                 Text(
-                    text = "Tap anywhere to exit",
+                    text = stringResource(R.string.bedtime_tap_to_exit),
                     color = Color.White.copy(alpha = 0.3f),
                     style = MaterialTheme.typography.bodySmall
                 )

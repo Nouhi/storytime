@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Storytime</string>
+
+    <!-- Navigation -->
+    <string name="tab_create">Crea</string>
+    <string name="tab_history">Cronologia</string>
+    <string name="tab_settings">Impostazioni</string>
+
+    <!-- Generate - Greetings -->
+    <string name="greeting_morning">Buongiorno</string>
+    <string name="greeting_afternoon">Buon pomeriggio</string>
+    <string name="greeting_evening">Buonasera</string>
+    <string name="greeting_welcome">Benvenuto su Storytime!</string>
+    <string name="greeting_personalized">%1$s, %2$s!</string>
+
+    <!-- Generate - Idle -->
+    <string name="setup_prompt">Inserisci il nome del tuo bambino nelle Impostazioni per storie personalizzate</string>
+    <string name="prompt_header">Che storia creiamo?</string>
+    <string name="prompt_placeholder">Descrivi la tua idea per una storia\u2026</string>
+    <string name="suggestion_1">Un\'avventura magica in una foresta incantata</string>
+    <string name="suggestion_2">Un viaggio nello spazio per visitare simpatici alieni</string>
+    <string name="suggestion_3">Una giornata al mare con un delfino parlante</string>
+    <string name="suggestion_4">Una caccia al tesoro su una nave pirata</string>
+    <string name="section_language">Lingua</string>
+    <string name="section_writing_style">Stile di Scrittura</string>
+    <string name="section_image_style">Stile delle Immagini</string>
+    <string name="section_lesson">Lezione</string>
+    <string name="custom_label">Personalizzato</string>
+    <string name="custom_placeholder">Descrivi il tuo %1$s personalizzato\u2026</string>
+    <string name="use_custom">Usa Personalizzato</string>
+    <string name="or_write_your_own">Oppure scrivi il tuo</string>
+    <string name="done">Fatto</string>
+    <string name="bedtime_story_label">Storia della Buonanotte</string>
+    <string name="bedtime_story_hint">Storia più breve e tranquilla (10 pagine) perfetta per l\'ora della nanna</string>
+    <string name="section_characters">Personaggi</string>
+    <string name="characters_all_included">Tutti inclusi</string>
+    <string name="characters_count">%1$d di %2$d selezionati</string>
+    <string name="button_clear">Cancella</string>
+    <string name="button_select_all">Seleziona Tutti</string>
+    <string name="button_create_story">Crea Storia</string>
+
+    <!-- Generate - Progress -->
+    <string name="progress_starting">Inizio\u2026</string>
+    <string name="progress_writing">Sto scrivendo la tua storia\u2026</string>
+    <string name="progress_painting">Sto dipingendo le illustrazioni\u2026</string>
+    <string name="progress_assembling">Sto assemblando il tuo libro\u2026</string>
+    <string name="button_cancel">Annulla</string>
+
+    <!-- Generate - Complete -->
+    <string name="page_indicator">Pagina %1$d di %2$d</string>
+    <string name="button_books">Libri</string>
+    <string name="button_pdf">PDF</string>
+    <string name="button_new">Nuovo</string>
+    <string name="button_sleep">Dormi</string>
+
+    <!-- Generate - Error -->
+    <string name="error_title">Qualcosa è andato storto</string>
+    <string name="button_try_again">Riprova</string>
+    <string name="button_start_over">Ricomincia</string>
+    <string name="error_unknown">Si è verificato un errore sconosciuto</string>
+
+    <!-- History -->
+    <string name="history_empty_title">Nessuna Storia</string>
+    <string name="history_empty_description">Le tue storie appariranno qui quando ne creerai una!</string>
+    <string name="date_today">Oggi</string>
+    <string name="date_yesterday">Ieri</string>
+    <string name="date_days_ago">%1$d giorni fa</string>
+    <string name="delete_story_title">Elimina Storia</string>
+    <string name="delete_story_message">Sei sicuro di voler eliminare questa storia? Non è possibile annullare l\'operazione.</string>
+    <string name="button_delete">Elimina</string>
+    <string name="story_not_found">Dati della storia non trovati</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Server</string>
+    <string name="settings_connected">Connesso</string>
+    <string name="settings_not_connected">Non connesso</string>
+    <string name="settings_test">Test</string>
+    <string name="settings_server_url">URL del Server</string>
+    <string name="settings_child_details">Dettagli del Bambino</string>
+    <string name="settings_change_photo">Cambia Foto</string>
+    <string name="settings_add_photo">Aggiungi Foto</string>
+    <string name="settings_name">Nome</string>
+    <string name="settings_gender">Genere</string>
+    <string name="settings_gender_not_set">Non impostato</string>
+    <string name="settings_gender_boy">Maschio</string>
+    <string name="settings_gender_girl">Femmina</string>
+    <string name="settings_reading_level">Livello di Lettura</string>
+    <string name="settings_reading_toddler">Piccolino (2-3)</string>
+    <string name="settings_reading_early">Lettore Precoce (4-5)</string>
+    <string name="settings_reading_beginner">Principiante (6-7)</string>
+    <string name="settings_reading_intermediate">Intermedio (8-10)</string>
+    <string name="settings_family">Famiglia</string>
+    <string name="settings_family_members">Membri della Famiglia</string>
+    <string name="settings_manage_family">Gestisci Membri della Famiglia</string>
+    <string name="settings_bedtime">Ora della Nanna</string>
+    <string name="settings_ambient_sound">Suono Ambientale</string>
+    <string name="settings_sleep_timer">Timer del Sonno</string>
+    <string name="settings_sleep_off">Spento</string>
+    <string name="settings_sleep_1">Dopo 1 storia</string>
+    <string name="settings_sleep_2">Dopo 2 storie</string>
+    <string name="settings_sleep_3">Dopo 3 storie</string>
+    <string name="settings_bedtime_footer">La modalità nanna abbassa la luminosità dello schermo e riproduce suoni rilassanti dopo la storia</string>
+    <string name="settings_developer_options">Opzioni Sviluppatore</string>
+    <string name="settings_anthropic_key">Chiave API Anthropic</string>
+    <string name="settings_google_key">Chiave API Google AI</string>
+    <string name="settings_keys_footer">Le chiavi sono memorizzate sul server. Le chiavi mascherate indicano che una chiave esistente è impostata.</string>
+    <string name="button_save">Salva</string>
+    <string name="settings_saved">Impostazioni salvate</string>
+    <string name="settings_connect_error">Impossibile connettersi al server</string>
+    <string name="alert_error">Errore</string>
+    <string name="button_ok">OK</string>
+
+    <!-- Family Members -->
+    <string name="family_empty_title">Nessun Membro della Famiglia</string>
+    <string name="family_empty_description">Aggiungi membri della famiglia per farli apparire nelle tue storie</string>
+    <string name="family_add_title">Aggiungi Membro</string>
+    <string name="family_edit_title">Modifica Membro</string>
+    <string name="family_add_button">Aggiungi</string>
+    <string name="family_section_details">Dettagli</string>
+    <string name="family_section_description">Descrizione (Facoltativa)</string>
+    <string name="family_description_placeholder">Aspetto, personalità, storia personale\u2026</string>
+    <string name="family_section_photo">Foto</string>
+    <string name="family_choose_photo">Scegli Foto</string>
+    <string name="family_upload_photo">Carica Foto</string>
+    <string name="family_delete_title">Elimina Membro</string>
+    <string name="family_delete_message">Rimuovere %1$s dalla famiglia?</string>
+    <string name="role_mom">Mamma</string>
+    <string name="role_dad">Papà</string>
+    <string name="role_brother">Fratello</string>
+    <string name="role_sister">Sorella</string>
+    <string name="role_grandma">Nonna</string>
+    <string name="role_grandpa">Nonno</string>
+    <string name="role_aunt">Zia</string>
+    <string name="role_uncle">Zio</string>
+    <string name="role_pet">Animale Domestico</string>
+    <string name="role_friend">Amico</string>
+    <string name="role_companion">Compagno</string>
+    <string name="role_classmate">Compagno di Classe</string>
+    <string name="role_neighbor">Vicino</string>
+    <string name="role_magical_friend">Amico Magico</string>
+    <string name="role_other">Altro</string>
+
+    <!-- Bedtime & Breathing -->
+    <string name="bedtime_tap_to_exit">Tocca ovunque per uscire</string>
+    <string name="breathing_in">Inspira</string>
+    <string name="breathing_hold">Trattieni</string>
+    <string name="breathing_out">Espira</string>
+
+    <!-- Ambient Sounds -->
+    <string name="sound_whiteNoise">Rumore Bianco</string>
+    <string name="sound_brownNoise">Rumore Marrone</string>
+    <string name="sound_pinkNoise">Rumore Rosa</string>
+    <string name="sound_softRain">Pioggia Leggera</string>
+    <string name="sound_oceanWaves">Onde del Mare</string>
+    <string name="sound_cracklingFireplace">Camino</string>
+    <string name="sound_forestNight">Foresta Notturna</string>
+    <string name="sound_heartbeat">Battito Cardiaco</string>
+
+    <!-- Writing Style Labels -->
+    <string name="style_standard">Standard</string>
+    <string name="style_rhyming">In Rima</string>
+    <string name="style_funny">Divertente</string>
+    <string name="style_sound_effects">Effetti Sonori</string>
+    <string name="style_repetitive">Ripetitivo</string>
+    <string name="style_bedtime">Buonanotte</string>
+    <string name="style_adventure">Avventura</string>
+
+    <!-- Writing Style Descriptions -->
+    <string name="style_desc_standard">Narrazione classica della storia della buonanotte</string>
+    <string name="style_desc_rhyming">Versi in rima stile filastrocca</string>
+    <string name="style_desc_funny">Umorismo sciocco e colpi di scena inaspettati</string>
+    <string name="style_desc_sound_effects">Onomatopee e suoni interattivi</string>
+    <string name="style_desc_repetitive">Storia cumulativa con frasi ripetute</string>
+    <string name="style_desc_bedtime">Extra calmo e sognante per l\'ora della nanna</string>
+    <string name="style_desc_adventure">Missioni epiche e coraggiosi eroi</string>
+
+    <!-- Image Style Labels -->
+    <string name="style_watercolor">Acquerello</string>
+    <string name="style_fantasy">Fantasy</string>
+    <string name="style_realistic">Realistico</string>
+    <string name="style_cartoon">Cartone Animato</string>
+    <string name="style_classic_storybook">Libro di Fiabe Classico</string>
+    <string name="style_anime">Anime</string>
+    <string name="style_ghibli">Ghibli</string>
+    <string name="style_chibi">Chibi</string>
+    <string name="style_papercraft">Carta Ritagliata</string>
+    <string name="style_pixel">Pixel Art</string>
+    <string name="style_minimalist">Minimalista</string>
+    <string name="style_crayon">Pastello</string>
+    <string name="style_pop_art">Pop Art</string>
+    <string name="style_oil_painting">Pittura a Olio</string>
+    <string name="style_none">Senza Immagini</string>
+
+    <!-- Image Style Descriptions -->
+    <string name="style_desc_watercolor">Dipinti ad acquerello morbidi e sognanti</string>
+    <string name="style_desc_fantasy">Arte fantasy ricca e magica</string>
+    <string name="style_desc_realistic">Arte digitale fotorealistica</string>
+    <string name="style_desc_cartoon">Stile cartone animato vivace e colorato</string>
+    <string name="style_desc_classic_storybook">Illustrazioni vintage di libri per bambini</string>
+    <string name="style_desc_anime">Arte ispirata agli anime giapponesi</string>
+    <string name="style_desc_ghibli">Arte ispirata allo Studio Ghibli</string>
+    <string name="style_desc_chibi">Arte chibi carina e super-deformata</string>
+    <string name="style_desc_papercraft">Stile collage di carta ritagliata</string>
+    <string name="style_desc_pixel">Stile pixel art retrò</string>
+    <string name="style_desc_minimalist">Forme geometriche pulite e semplici</string>
+    <string name="style_desc_crayon">Disegno infantile a pastello e matita colorata</string>
+    <string name="style_desc_pop_art">Pop art audace con punti mezzitoni</string>
+    <string name="style_desc_oil_painting">Stile pittura a olio ricco e strutturato</string>
+    <string name="style_desc_none">Solo testo, senza illustrazioni</string>
+
+    <!-- Lesson Labels -->
+    <string name="lesson_none">Nessuna</string>
+    <string name="lesson_sharing">Condivisione</string>
+    <string name="lesson_bravery">Coraggio</string>
+    <string name="lesson_kindness">Gentilezza</string>
+    <string name="lesson_patience">Pazienza</string>
+    <string name="lesson_honesty">Onestà</string>
+    <string name="lesson_gratitude">Gratitudine</string>
+    <string name="lesson_teamwork">Lavoro di Squadra</string>
+    <string name="lesson_empathy">Empatia</string>
+    <string name="lesson_perseverance">Perseveranza</string>
+
+    <!-- Lesson Descriptions -->
+    <string name="lesson_desc_none">Nessuna lezione specifica — solo una storia divertente</string>
+    <string name="lesson_desc_sharing">Imparare a condividere con gli altri</string>
+    <string name="lesson_desc_bravery">Trovare il coraggio nei momenti difficili</string>
+    <string name="lesson_desc_kindness">Essere gentili e premurosi con gli altri</string>
+    <string name="lesson_desc_patience">Imparare ad aspettare e avere pazienza</string>
+    <string name="lesson_desc_honesty">L\'importanza di dire la verità</string>
+    <string name="lesson_desc_gratitude">Apprezzare ciò che si ha</string>
+    <string name="lesson_desc_teamwork">Lavorare insieme per raggiungere obiettivi</string>
+    <string name="lesson_desc_empathy">Comprendere i sentimenti degli altri</string>
+    <string name="lesson_desc_perseverance">Non arrendersi quando le cose sono difficili</string>
+
+    <!-- Validation -->
+    <string name="validation_custom_writing_empty">Descrivi il tuo stile di scrittura personalizzato prima di creare una storia.</string>
+    <string name="validation_custom_writing_long">Il tuo stile di scrittura personalizzato è troppo lungo. Mantienilo sotto i 500 caratteri.</string>
+    <string name="validation_custom_image_empty">Descrivi il tuo stile di immagine personalizzato prima di creare una storia.</string>
+    <string name="validation_custom_image_long">Il tuo stile di immagine personalizzato è troppo lungo. Mantienilo sotto i 500 caratteri.</string>
+    <string name="validation_custom_lesson_empty">Descrivi la tua lezione personalizzata prima di creare una storia.</string>
+    <string name="validation_custom_lesson_long">La tua lezione personalizzata è troppo lunga. Mantienila sotto i 500 caratteri.</string>
+</resources>

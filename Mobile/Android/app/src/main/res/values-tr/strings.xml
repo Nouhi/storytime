@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Storytime</string>
+
+    <!-- Navigation -->
+    <string name="tab_create">Oluştur</string>
+    <string name="tab_history">Geçmiş</string>
+    <string name="tab_settings">Ayarlar</string>
+
+    <!-- Generate - Greetings -->
+    <string name="greeting_morning">Günaydın</string>
+    <string name="greeting_afternoon">İyi öğleden sonralar</string>
+    <string name="greeting_evening">İyi akşamlar</string>
+    <string name="greeting_welcome">Storytime\'a hoş geldiniz!</string>
+    <string name="greeting_personalized">%1$s, %2$s!</string>
+
+    <!-- Generate - Idle -->
+    <string name="setup_prompt">Kişiselleştirilmiş hikayeler için Ayarlar\'da çocuğunuzun adını belirleyin</string>
+    <string name="prompt_header">Hangi hikayeyi oluşturalım?</string>
+    <string name="prompt_placeholder">Hikaye fikrinizi anlatın…</string>
+    <string name="suggestion_1">Büyülü bir ormanda sihirli bir macera</string>
+    <string name="suggestion_2">Dost canlısı uzaylıları ziyaret etmek için uzaya yolculuk</string>
+    <string name="suggestion_3">Konuşan bir yunusla sahilde bir gün</string>
+    <string name="suggestion_4">Korsan gemisinde hazine avı</string>
+    <string name="section_language">Dil</string>
+    <string name="section_writing_style">Yazım Stili</string>
+    <string name="section_image_style">Görsel Stili</string>
+    <string name="section_lesson">Ders</string>
+    <string name="custom_label">Özel</string>
+    <string name="custom_placeholder">Kendi %1$s tanımlayın…</string>
+    <string name="use_custom">Özel Kullan</string>
+    <string name="or_write_your_own">Ya da kendiniz yazın</string>
+    <string name="done">Tamam</string>
+    <string name="bedtime_story_label">Uyku Hikayesi</string>
+    <string name="bedtime_story_hint">Uyku vakti için mükemmel, daha kısa ve sakin hikaye (10 sayfa)</string>
+    <string name="section_characters">Karakterler</string>
+    <string name="characters_all_included">Tümü dahil</string>
+    <string name="characters_count">%1$d / %2$d seçili</string>
+    <string name="button_clear">Temizle</string>
+    <string name="button_select_all">Tümünü Seç</string>
+    <string name="button_create_story">Hikaye Oluştur</string>
+
+    <!-- Generate - Progress -->
+    <string name="progress_starting">Başlıyor…</string>
+    <string name="progress_writing">Hikayeniz yazılıyor…</string>
+    <string name="progress_painting">Çizimler yapılıyor…</string>
+    <string name="progress_assembling">Kitabınız hazırlanıyor…</string>
+    <string name="button_cancel">İptal</string>
+
+    <!-- Generate - Complete -->
+    <string name="page_indicator">Sayfa %1$d / %2$d</string>
+    <string name="button_books">Kitaplar</string>
+    <string name="button_pdf">PDF</string>
+    <string name="button_new">Yeni</string>
+    <string name="button_sleep">Uyku</string>
+
+    <!-- Generate - Error -->
+    <string name="error_title">Bir şeyler ters gitti</string>
+    <string name="button_try_again">Tekrar Dene</string>
+    <string name="button_start_over">Baştan Başla</string>
+    <string name="error_unknown">Bilinmeyen bir hata oluştu</string>
+
+    <!-- History -->
+    <string name="history_empty_title">Henüz Hikaye Yok</string>
+    <string name="history_empty_description">Hikayeleriniz bir tane oluşturduğunuzda burada görünecek!</string>
+    <string name="date_today">Bugün</string>
+    <string name="date_yesterday">Dün</string>
+    <string name="date_days_ago">%1$d gün önce</string>
+    <string name="delete_story_title">Hikayeyi Sil</string>
+    <string name="delete_story_message">Bu hikayeyi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</string>
+    <string name="button_delete">Sil</string>
+    <string name="story_not_found">Hikaye verisi bulunamadı</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Sunucu</string>
+    <string name="settings_connected">Bağlı</string>
+    <string name="settings_not_connected">Bağlı değil</string>
+    <string name="settings_test">Test</string>
+    <string name="settings_server_url">Sunucu URL</string>
+    <string name="settings_child_details">Çocuk Bilgileri</string>
+    <string name="settings_change_photo">Fotoğrafı Değiştir</string>
+    <string name="settings_add_photo">Fotoğraf Ekle</string>
+    <string name="settings_name">Ad</string>
+    <string name="settings_gender">Cinsiyet</string>
+    <string name="settings_gender_not_set">Belirtilmedi</string>
+    <string name="settings_gender_boy">Erkek</string>
+    <string name="settings_gender_girl">Kız</string>
+    <string name="settings_reading_level">Okuma Seviyesi</string>
+    <string name="settings_reading_toddler">Küçük Çocuk (2-3)</string>
+    <string name="settings_reading_early">Erken Okuyucu (4-5)</string>
+    <string name="settings_reading_beginner">Başlangıç (6-7)</string>
+    <string name="settings_reading_intermediate">Orta Seviye (8-10)</string>
+    <string name="settings_family">Aile</string>
+    <string name="settings_family_members">Aile Üyeleri</string>
+    <string name="settings_manage_family">Aile Üyelerini Yönet</string>
+    <string name="settings_bedtime">Uyku Vakti</string>
+    <string name="settings_ambient_sound">Ortam Sesi</string>
+    <string name="settings_sleep_timer">Uyku Zamanlayıcısı</string>
+    <string name="settings_sleep_off">Kapalı</string>
+    <string name="settings_sleep_1">1 hikayeden sonra</string>
+    <string name="settings_sleep_2">2 hikayeden sonra</string>
+    <string name="settings_sleep_3">3 hikayeden sonra</string>
+    <string name="settings_bedtime_footer">Uyku modu, hikaye sonrası ekranı karartır ve rahatlatıcı sesler çalar</string>
+    <string name="settings_developer_options">Geliştirici Seçenekleri</string>
+    <string name="settings_anthropic_key">Anthropic API Key</string>
+    <string name="settings_google_key">Google AI API Key</string>
+    <string name="settings_keys_footer">Anahtarlar sunucuda saklanır. Maskelenmiş anahtarlar mevcut bir anahtarın ayarlandığını gösterir.</string>
+    <string name="button_save">Kaydet</string>
+    <string name="settings_saved">Ayarlar kaydedildi</string>
+    <string name="settings_connect_error">Sunucuya bağlanılamıyor</string>
+    <string name="alert_error">Hata</string>
+    <string name="button_ok">Tamam</string>
+
+    <!-- Family Members -->
+    <string name="family_empty_title">Aile Üyesi Yok</string>
+    <string name="family_empty_description">Hikayelerinizde görünmeleri için aile üyeleri ekleyin</string>
+    <string name="family_add_title">Üye Ekle</string>
+    <string name="family_edit_title">Üyeyi Düzenle</string>
+    <string name="family_add_button">Ekle</string>
+    <string name="family_section_details">Ayrıntılar</string>
+    <string name="family_section_description">Açıklama (İsteğe bağlı)</string>
+    <string name="family_description_placeholder">Görünüş, kişilik, geçmiş…</string>
+    <string name="family_section_photo">Fotoğraf</string>
+    <string name="family_choose_photo">Fotoğraf Seç</string>
+    <string name="family_upload_photo">Fotoğraf Yükle</string>
+    <string name="family_delete_title">Üyeyi Sil</string>
+    <string name="family_delete_message">%1$s aileden çıkarılsın mı?</string>
+    <string name="role_mom">Anne</string>
+    <string name="role_dad">Baba</string>
+    <string name="role_brother">Erkek Kardeş</string>
+    <string name="role_sister">Kız Kardeş</string>
+    <string name="role_grandma">Büyükanne</string>
+    <string name="role_grandpa">Büyükbaba</string>
+    <string name="role_aunt">Teyze</string>
+    <string name="role_uncle">Amca</string>
+    <string name="role_pet">Evcil Hayvan</string>
+    <string name="role_friend">Arkadaş</string>
+    <string name="role_companion">Yol Arkadaşı</string>
+    <string name="role_classmate">Sınıf Arkadaşı</string>
+    <string name="role_neighbor">Komşu</string>
+    <string name="role_magical_friend">Sihirli Arkadaş</string>
+    <string name="role_other">Diğer</string>
+
+    <!-- Bedtime & Breathing -->
+    <string name="bedtime_tap_to_exit">Çıkmak için herhangi bir yere dokunun</string>
+    <string name="breathing_in">Nefes Al</string>
+    <string name="breathing_hold">Tut</string>
+    <string name="breathing_out">Nefes Ver</string>
+
+    <!-- Ambient Sounds -->
+    <string name="sound_whiteNoise">Beyaz Gürültü</string>
+    <string name="sound_brownNoise">Kahverengi Gürültü</string>
+    <string name="sound_pinkNoise">Pembe Gürültü</string>
+    <string name="sound_softRain">Hafif Yağmur</string>
+    <string name="sound_oceanWaves">Okyanus Dalgaları</string>
+    <string name="sound_cracklingFireplace">Şömine</string>
+    <string name="sound_forestNight">Gece Ormanı</string>
+    <string name="sound_heartbeat">Kalp Atışı</string>
+
+    <!-- Writing Style Labels -->
+    <string name="style_standard">Standart</string>
+    <string name="style_rhyming">Kafiyeli</string>
+    <string name="style_funny">Komik</string>
+    <string name="style_sound_effects">Ses Efektleri</string>
+    <string name="style_repetitive">Tekrarlayan</string>
+    <string name="style_bedtime">Uyku</string>
+    <string name="style_adventure">Macera</string>
+
+    <!-- Writing Style Descriptions -->
+    <string name="style_desc_standard">Klasik uyku hikayesi anlatımı</string>
+    <string name="style_desc_rhyming">Dr. Seuss tarzı kafiyeli şiir</string>
+    <string name="style_desc_funny">Eğlenceli mizah ve beklenmedik sürprizler</string>
+    <string name="style_desc_sound_effects">Yansıma sözcükler ve etkileşimli sesler</string>
+    <string name="style_desc_repetitive">Tekrarlayan ifadelerle kümülatif hikaye</string>
+    <string name="style_desc_bedtime">Uyku vakti için ekstra sakin ve huzurlu</string>
+    <string name="style_desc_adventure">Destansı görevler ve cesur kahramanlar</string>
+
+    <!-- Image Style Labels -->
+    <string name="style_watercolor">Suluboya</string>
+    <string name="style_fantasy">Fantezi</string>
+    <string name="style_realistic">Gerçekçi</string>
+    <string name="style_cartoon">Çizgi Film</string>
+    <string name="style_classic_storybook">Klasik Hikaye Kitabı</string>
+    <string name="style_anime">Anime</string>
+    <string name="style_ghibli">Ghibli</string>
+    <string name="style_chibi">Chibi</string>
+    <string name="style_papercraft">Kağıt Sanatı</string>
+    <string name="style_pixel">Piksel Sanatı</string>
+    <string name="style_minimalist">Minimalist</string>
+    <string name="style_crayon">Pastel Boya</string>
+    <string name="style_pop_art">Pop Art</string>
+    <string name="style_oil_painting">Yağlı Boya</string>
+    <string name="style_none">Görsel Yok</string>
+
+    <!-- Image Style Descriptions -->
+    <string name="style_desc_watercolor">Yumuşak, rüya gibi suluboya resimler</string>
+    <string name="style_desc_fantasy">Zengin, büyülü fantezi sanatı</string>
+    <string name="style_desc_realistic">Fotogerçekçi dijital sanat</string>
+    <string name="style_desc_cartoon">Cesur, renkli çizgi film stili</string>
+    <string name="style_desc_classic_storybook">Nostaljik çocuk kitabı çizimleri</string>
+    <string name="style_desc_anime">Japon anime tarzı sanat</string>
+    <string name="style_desc_ghibli">Studio Ghibli tarzı sanat</string>
+    <string name="style_desc_chibi">Sevimli, süper deforme chibi sanatı</string>
+    <string name="style_desc_papercraft">Kesme kağıt kolaj stili</string>
+    <string name="style_desc_pixel">Retro piksel sanatı stili</string>
+    <string name="style_desc_minimalist">Sade, basit geometrik şekiller</string>
+    <string name="style_desc_crayon">Çocuksu pastel boya ve kuru boya stili</string>
+    <string name="style_desc_pop_art">Cesur pop art, yarım ton noktalı</string>
+    <string name="style_desc_oil_painting">Zengin, dokulu yağlı boya stili</string>
+    <string name="style_desc_none">Yalnızca metin, çizim yok</string>
+
+    <!-- Lesson Labels -->
+    <string name="lesson_none">Yok</string>
+    <string name="lesson_sharing">Paylaşım</string>
+    <string name="lesson_bravery">Cesaret</string>
+    <string name="lesson_kindness">Nezaket</string>
+    <string name="lesson_patience">Sabır</string>
+    <string name="lesson_honesty">Dürüstlük</string>
+    <string name="lesson_gratitude">Minnettarlık</string>
+    <string name="lesson_teamwork">Takım Çalışması</string>
+    <string name="lesson_empathy">Empati</string>
+    <string name="lesson_perseverance">Azim</string>
+
+    <!-- Lesson Descriptions -->
+    <string name="lesson_desc_none">Belirli bir ders yok — sadece eğlenceli bir hikaye</string>
+    <string name="lesson_desc_sharing">Başkalarıyla paylaşmayı öğrenmek</string>
+    <string name="lesson_desc_bravery">Zor anlarda cesaret bulmak</string>
+    <string name="lesson_desc_kindness">Başkalarına nazik ve şefkatli olmak</string>
+    <string name="lesson_desc_patience">Beklemeyi ve sabırlı olmayı öğrenmek</string>
+    <string name="lesson_desc_honesty">Doğruyu söylemenin önemi</string>
+    <string name="lesson_desc_gratitude">Sahip olduklarının değerini bilmek</string>
+    <string name="lesson_desc_teamwork">Hedeflere ulaşmak için birlikte çalışmak</string>
+    <string name="lesson_desc_empathy">Başkalarının duygularını anlamak</string>
+    <string name="lesson_desc_perseverance">İşler zorlaştığında pes etmemek</string>
+
+    <!-- Validation -->
+    <string name="validation_custom_writing_empty">Lütfen hikaye oluşturmadan önce özel yazım stilinizi tanımlayın.</string>
+    <string name="validation_custom_writing_long">Özel yazım stiliniz çok uzun. Lütfen 500 karakterin altında tutun.</string>
+    <string name="validation_custom_image_empty">Lütfen hikaye oluşturmadan önce özel görsel stilinizi tanımlayın.</string>
+    <string name="validation_custom_image_long">Özel görsel stiliniz çok uzun. Lütfen 500 karakterin altında tutun.</string>
+    <string name="validation_custom_lesson_empty">Lütfen hikaye oluşturmadan önce özel dersinizi tanımlayın.</string>
+    <string name="validation_custom_lesson_long">Özel dersiniz çok uzun. Lütfen 500 karakterin altında tutun.</string>
+</resources>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Storytime</string>
+
+    <!-- Navigation -->
+    <string name="tab_create">创作</string>
+    <string name="tab_history">历史</string>
+    <string name="tab_settings">设置</string>
+
+    <!-- Generate - Greetings -->
+    <string name="greeting_morning">早上好</string>
+    <string name="greeting_afternoon">下午好</string>
+    <string name="greeting_evening">晚上好</string>
+    <string name="greeting_welcome">欢迎来到Storytime!</string>
+    <string name="greeting_personalized">%1$s, %2$s!</string>
+
+    <!-- Generate - Idle -->
+    <string name="setup_prompt">在设置中填写孩子的名字，获取个性化故事</string>
+    <string name="prompt_header">我们来创作什么故事呢？</string>
+    <string name="prompt_placeholder">描述你的故事创意…</string>
+    <string name="suggestion_1">在魔法森林里的奇妙冒险</string>
+    <string name="suggestion_2">去太空拜访友好的外星人</string>
+    <string name="suggestion_3">和会说话的海豚一起在海边度过的一天</string>
+    <string name="suggestion_4">在海盗船上寻宝</string>
+    <string name="section_language">语言</string>
+    <string name="section_writing_style">写作风格</string>
+    <string name="section_image_style">图片风格</string>
+    <string name="section_lesson">寓意</string>
+    <string name="custom_label">自定义</string>
+    <string name="custom_placeholder">描述你自己的%1$s…</string>
+    <string name="use_custom">使用自定义</string>
+    <string name="or_write_your_own">或自己编写</string>
+    <string name="done">完成</string>
+    <string name="bedtime_story_label">睡前故事</string>
+    <string name="bedtime_story_hint">更短更温馨的故事（10页），非常适合睡前</string>
+    <string name="section_characters">角色</string>
+    <string name="characters_all_included">全部包含</string>
+    <string name="characters_count">已选 %1$d / %2$d</string>
+    <string name="button_clear">清除</string>
+    <string name="button_select_all">全选</string>
+    <string name="button_create_story">创作故事</string>
+
+    <!-- Generate - Progress -->
+    <string name="progress_starting">正在开始…</string>
+    <string name="progress_writing">正在编写你的故事…</string>
+    <string name="progress_painting">正在绘制插图…</string>
+    <string name="progress_assembling">正在组装你的书…</string>
+    <string name="button_cancel">取消</string>
+
+    <!-- Generate - Complete -->
+    <string name="page_indicator">第 %1$d 页，共 %2$d 页</string>
+    <string name="button_books">书架</string>
+    <string name="button_pdf">PDF</string>
+    <string name="button_new">新建</string>
+    <string name="button_sleep">睡眠</string>
+
+    <!-- Generate - Error -->
+    <string name="error_title">出了点问题</string>
+    <string name="button_try_again">重试</string>
+    <string name="button_start_over">重新开始</string>
+    <string name="error_unknown">发生了未知错误</string>
+
+    <!-- History -->
+    <string name="history_empty_title">还没有故事</string>
+    <string name="history_empty_description">创作一个故事后，它会出现在这里！</string>
+    <string name="date_today">今天</string>
+    <string name="date_yesterday">昨天</string>
+    <string name="date_days_ago">%1$d天前</string>
+    <string name="delete_story_title">删除故事</string>
+    <string name="delete_story_message">确定要删除这个故事吗？此操作无法撤销。</string>
+    <string name="button_delete">删除</string>
+    <string name="story_not_found">未找到故事数据</string>
+
+    <!-- Settings -->
+    <string name="settings_server">服务器</string>
+    <string name="settings_connected">已连接</string>
+    <string name="settings_not_connected">未连接</string>
+    <string name="settings_test">测试</string>
+    <string name="settings_server_url">服务器地址</string>
+    <string name="settings_child_details">孩子信息</string>
+    <string name="settings_change_photo">更换照片</string>
+    <string name="settings_add_photo">添加照片</string>
+    <string name="settings_name">名字</string>
+    <string name="settings_gender">性别</string>
+    <string name="settings_gender_not_set">未设置</string>
+    <string name="settings_gender_boy">男孩</string>
+    <string name="settings_gender_girl">女孩</string>
+    <string name="settings_reading_level">阅读水平</string>
+    <string name="settings_reading_toddler">幼儿 (2-3岁)</string>
+    <string name="settings_reading_early">启蒙读者 (4-5岁)</string>
+    <string name="settings_reading_beginner">初级 (6-7岁)</string>
+    <string name="settings_reading_intermediate">中级 (8-10岁)</string>
+    <string name="settings_family">家庭</string>
+    <string name="settings_family_members">家庭成员</string>
+    <string name="settings_manage_family">管理家庭成员</string>
+    <string name="settings_bedtime">睡前模式</string>
+    <string name="settings_ambient_sound">背景音</string>
+    <string name="settings_sleep_timer">睡眠定时器</string>
+    <string name="settings_sleep_off">关闭</string>
+    <string name="settings_sleep_1">1个故事后</string>
+    <string name="settings_sleep_2">2个故事后</string>
+    <string name="settings_sleep_3">3个故事后</string>
+    <string name="settings_bedtime_footer">睡前模式会调暗屏幕，并在故事结束后播放舒缓的声音</string>
+    <string name="settings_developer_options">开发者选项</string>
+    <string name="settings_anthropic_key">Anthropic API Key</string>
+    <string name="settings_google_key">Google AI API Key</string>
+    <string name="settings_keys_footer">密钥存储在服务器上。隐藏的密钥表示已设置现有密钥。</string>
+    <string name="button_save">保存</string>
+    <string name="settings_saved">设置已保存</string>
+    <string name="settings_connect_error">无法连接到服务器</string>
+    <string name="alert_error">错误</string>
+    <string name="button_ok">好的</string>
+
+    <!-- Family Members -->
+    <string name="family_empty_title">没有家庭成员</string>
+    <string name="family_empty_description">添加家庭成员，让他们出现在你的故事中</string>
+    <string name="family_add_title">添加成员</string>
+    <string name="family_edit_title">编辑成员</string>
+    <string name="family_add_button">添加</string>
+    <string name="family_section_details">详情</string>
+    <string name="family_section_description">描述（可选）</string>
+    <string name="family_description_placeholder">外貌、性格、背景故事…</string>
+    <string name="family_section_photo">照片</string>
+    <string name="family_choose_photo">选择照片</string>
+    <string name="family_upload_photo">上传照片</string>
+    <string name="family_delete_title">删除成员</string>
+    <string name="family_delete_message">将%1$s从家庭中移除？</string>
+    <string name="role_mom">妈妈</string>
+    <string name="role_dad">爸爸</string>
+    <string name="role_brother">哥哥/弟弟</string>
+    <string name="role_sister">姐姐/妹妹</string>
+    <string name="role_grandma">奶奶/外婆</string>
+    <string name="role_grandpa">爷爷/外公</string>
+    <string name="role_aunt">阿姨/姑姑</string>
+    <string name="role_uncle">叔叔/舅舅</string>
+    <string name="role_pet">宠物</string>
+    <string name="role_friend">朋友</string>
+    <string name="role_companion">伙伴</string>
+    <string name="role_classmate">同学</string>
+    <string name="role_neighbor">邻居</string>
+    <string name="role_magical_friend">魔法朋友</string>
+    <string name="role_other">其他</string>
+
+    <!-- Bedtime & Breathing -->
+    <string name="bedtime_tap_to_exit">点击任意位置退出</string>
+    <string name="breathing_in">吸气</string>
+    <string name="breathing_hold">屏住</string>
+    <string name="breathing_out">呼气</string>
+
+    <!-- Ambient Sounds -->
+    <string name="sound_whiteNoise">白噪音</string>
+    <string name="sound_brownNoise">棕噪音</string>
+    <string name="sound_pinkNoise">粉噪音</string>
+    <string name="sound_softRain">细雨</string>
+    <string name="sound_oceanWaves">海浪</string>
+    <string name="sound_cracklingFireplace">壁炉</string>
+    <string name="sound_forestNight">夜晚森林</string>
+    <string name="sound_heartbeat">心跳</string>
+
+    <!-- Writing Style Labels -->
+    <string name="style_standard">标准</string>
+    <string name="style_rhyming">押韵</string>
+    <string name="style_funny">搞笑</string>
+    <string name="style_sound_effects">拟声词</string>
+    <string name="style_repetitive">重复</string>
+    <string name="style_bedtime">睡前</string>
+    <string name="style_adventure">冒险</string>
+
+    <!-- Writing Style Descriptions -->
+    <string name="style_desc_standard">经典的睡前故事叙述</string>
+    <string name="style_desc_rhyming">Dr. Seuss风格的押韵诗句</string>
+    <string name="style_desc_funny">逗趣的幽默和出人意料的转折</string>
+    <string name="style_desc_sound_effects">拟声词和互动音效</string>
+    <string name="style_desc_repetitive">带有重复短语的累积式故事</string>
+    <string name="style_desc_bedtime">格外平静和梦幻，适合入睡时刻</string>
+    <string name="style_desc_adventure">史诗般的冒险和勇敢的英雄</string>
+
+    <!-- Image Style Labels -->
+    <string name="style_watercolor">水彩</string>
+    <string name="style_fantasy">奇幻</string>
+    <string name="style_realistic">写实</string>
+    <string name="style_cartoon">卡通</string>
+    <string name="style_classic_storybook">经典绘本</string>
+    <string name="style_anime">动漫</string>
+    <string name="style_ghibli">Ghibli</string>
+    <string name="style_chibi">Q版</string>
+    <string name="style_papercraft">剪纸</string>
+    <string name="style_pixel">像素</string>
+    <string name="style_minimalist">极简</string>
+    <string name="style_crayon">蜡笔</string>
+    <string name="style_pop_art">波普艺术</string>
+    <string name="style_oil_painting">油画</string>
+    <string name="style_none">无图片</string>
+
+    <!-- Image Style Descriptions -->
+    <string name="style_desc_watercolor">柔和梦幻的水彩画</string>
+    <string name="style_desc_fantasy">丰富而奇妙的幻想艺术</string>
+    <string name="style_desc_realistic">逼真的数字艺术</string>
+    <string name="style_desc_cartoon">大胆多彩的卡通风格</string>
+    <string name="style_desc_classic_storybook">经典儿童绘本插图</string>
+    <string name="style_desc_anime">日本动漫风格艺术</string>
+    <string name="style_desc_ghibli">Studio Ghibli风格艺术</string>
+    <string name="style_desc_chibi">可爱的Q版风格艺术</string>
+    <string name="style_desc_papercraft">剪纸拼贴风格</string>
+    <string name="style_desc_pixel">复古像素艺术风格</string>
+    <string name="style_desc_minimalist">简洁的几何图形</string>
+    <string name="style_desc_crayon">童趣蜡笔和彩铅风格</string>
+    <string name="style_desc_pop_art">大胆的波普艺术半调点风格</string>
+    <string name="style_desc_oil_painting">浓郁质感的油画风格</string>
+    <string name="style_desc_none">纯文字故事，无插图</string>
+
+    <!-- Lesson Labels -->
+    <string name="lesson_none">无</string>
+    <string name="lesson_sharing">分享</string>
+    <string name="lesson_bravery">勇敢</string>
+    <string name="lesson_kindness">善良</string>
+    <string name="lesson_patience">耐心</string>
+    <string name="lesson_honesty">诚实</string>
+    <string name="lesson_gratitude">感恩</string>
+    <string name="lesson_teamwork">团队合作</string>
+    <string name="lesson_empathy">同理心</string>
+    <string name="lesson_perseverance">坚持不懈</string>
+
+    <!-- Lesson Descriptions -->
+    <string name="lesson_desc_none">没有特定寓意，只是一个有趣的故事</string>
+    <string name="lesson_desc_sharing">学会与他人分享</string>
+    <string name="lesson_desc_bravery">在困难时刻找到勇气</string>
+    <string name="lesson_desc_kindness">对他人友善和关爱</string>
+    <string name="lesson_desc_patience">学会等待和保持耐心</string>
+    <string name="lesson_desc_honesty">说实话的重要性</string>
+    <string name="lesson_desc_gratitude">珍惜你所拥有的</string>
+    <string name="lesson_desc_teamwork">一起合作实现目标</string>
+    <string name="lesson_desc_empathy">理解他人的感受</string>
+    <string name="lesson_desc_perseverance">遇到困难不放弃</string>
+
+    <!-- Validation -->
+    <string name="validation_custom_writing_empty">请在创作故事之前描述你的自定义写作风格。</string>
+    <string name="validation_custom_writing_long">你的自定义写作风格太长了，请控制在500个字符以内。</string>
+    <string name="validation_custom_image_empty">请在创作故事之前描述你的自定义图片风格。</string>
+    <string name="validation_custom_image_long">你的自定义图片风格太长了，请控制在500个字符以内。</string>
+    <string name="validation_custom_lesson_empty">请在创作故事之前描述你的自定义寓意。</string>
+    <string name="validation_custom_lesson_long">你的自定义寓意太长了，请控制在500个字符以内。</string>
+</resources>

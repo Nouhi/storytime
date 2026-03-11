@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "Создать";
+"tab_history" = "История";
+"tab_settings" = "Настройки";
+
+/* Generate - Greetings */
+"greeting_morning" = "Доброе утро";
+"greeting_afternoon" = "Добрый день";
+"greeting_evening" = "Добрый вечер";
+"greeting_welcome" = "Добро пожаловать в Storytime!";
+"greeting_personalized" = "%@, %@!";
+
+/* Generate - Idle */
+"setup_prompt" = "Укажите имя ребёнка в Настройках для персонализированных историй";
+"prompt_header" = "Какую историю мы создадим?";
+"prompt_placeholder" = "Опишите вашу идею для истории...";
+"suggestion_1" = "Волшебное приключение в заколдованном лесу";
+"suggestion_2" = "Путешествие в космос к дружелюбным инопланетянам";
+"suggestion_3" = "День на пляже с говорящим дельфином";
+"suggestion_4" = "Охота за сокровищами на пиратском корабле";
+"section_language" = "Язык";
+"section_writing_style" = "Стиль письма";
+"section_image_style" = "Стиль изображений";
+"section_lesson" = "Урок";
+"custom_label" = "Свой вариант";
+"custom_placeholder" = "Опишите свой %@...";
+"use_custom" = "Использовать свой";
+"or_write_your_own" = "Или напишите свой";
+"done" = "Готово";
+"bedtime_story_label" = "Сказка на ночь";
+"bedtime_story_hint" = "Короткая, спокойная история (10 страниц), идеальная для засыпания";
+"section_characters" = "Персонажи";
+"characters_all_included" = "Все включены";
+"characters_count" = "%d из %d выбрано";
+"button_clear" = "Очистить";
+"button_select_all" = "Выбрать все";
+"button_create_story" = "Создать историю";
+
+/* Generate - Progress */
+"progress_starting" = "Начинаем...";
+"progress_writing" = "Пишем вашу историю...";
+"progress_painting" = "Рисуем иллюстрации...";
+"progress_assembling" = "Собираем вашу книгу...";
+"button_cancel" = "Отмена";
+
+/* Generate - Complete */
+"page_indicator" = "Страница %d из %d";
+"button_books" = "Книги";
+"button_pdf" = "PDF";
+"button_new" = "Новая";
+"button_sleep" = "Сон";
+
+/* Generate - Error */
+"error_title" = "Что-то пошло не так";
+"button_try_again" = "Попробовать снова";
+"button_start_over" = "Начать заново";
+"error_unknown" = "Произошла неизвестная ошибка";
+
+/* History */
+"history_empty_title" = "Пока нет историй";
+"history_empty_description" = "Ваши истории появятся здесь, когда вы создадите первую!";
+"date_today" = "Сегодня";
+"date_yesterday" = "Вчера";
+"date_days_ago" = "%d дней назад";
+"delete_story_title" = "Удалить историю";
+"delete_story_message" = "Вы уверены, что хотите удалить эту историю? Это действие нельзя отменить.";
+"button_delete" = "Удалить";
+"story_not_found" = "Данные истории не найдены";
+
+/* Settings */
+"settings_server" = "Сервер";
+"settings_connected" = "Подключено";
+"settings_not_connected" = "Не подключено";
+"settings_test" = "Тест";
+"settings_server_url" = "URL сервера";
+"settings_child_details" = "Данные ребёнка";
+"settings_change_photo" = "Сменить фото";
+"settings_add_photo" = "Добавить фото";
+"settings_name" = "Имя";
+"settings_gender" = "Пол";
+"settings_gender_not_set" = "Не указан";
+"settings_gender_boy" = "Мальчик";
+"settings_gender_girl" = "Девочка";
+"settings_reading_level" = "Уровень чтения";
+"settings_reading_toddler" = "Малыш (2-3)";
+"settings_reading_early" = "Начинающий читатель (4-5)";
+"settings_reading_beginner" = "Новичок (6-7)";
+"settings_reading_intermediate" = "Средний (8-10)";
+"settings_family" = "Семья";
+"settings_family_members" = "Члены семьи";
+"settings_manage_family" = "Управление членами семьи";
+"settings_bedtime" = "Время сна";
+"settings_ambient_sound" = "Фоновый звук";
+"settings_sleep_timer" = "Таймер сна";
+"settings_sleep_off" = "Выкл";
+"settings_sleep_1" = "После 1 истории";
+"settings_sleep_2" = "После 2 историй";
+"settings_sleep_3" = "После 3 историй";
+"settings_bedtime_footer" = "Ночной режим приглушает экран и включает успокаивающие звуки после сказки";
+"settings_developer_options" = "Параметры разработчика";
+"settings_anthropic_key" = "Anthropic API Key";
+"settings_google_key" = "Google AI API Key";
+"settings_keys_footer" = "Ключи хранятся на сервере. Скрытые ключи означают, что существующий ключ уже установлен.";
+"button_save" = "Сохранить";
+"settings_saved" = "Настройки сохранены";
+"settings_connect_error" = "Не удаётся подключиться к серверу";
+"alert_error" = "Ошибка";
+"button_ok" = "ОК";
+
+/* Family Members */
+"family_empty_title" = "Нет членов семьи";
+"family_empty_description" = "Добавьте членов семьи, чтобы они появлялись в ваших историях";
+"family_add_title" = "Добавить члена семьи";
+"family_edit_title" = "Редактировать члена семьи";
+"family_add_button" = "Добавить";
+"family_section_details" = "Подробности";
+"family_section_description" = "Описание (необязательно)";
+"family_description_placeholder" = "Внешность, характер, предыстория...";
+"family_section_photo" = "Фото";
+"family_choose_photo" = "Выбрать фото";
+"family_upload_photo" = "Загрузить фото";
+"family_delete_title" = "Удалить члена семьи";
+"family_delete_message" = "Удалить %@ из семьи?";
+"role_mom" = "Мама";
+"role_dad" = "Папа";
+"role_brother" = "Брат";
+"role_sister" = "Сестра";
+"role_grandma" = "Бабушка";
+"role_grandpa" = "Дедушка";
+"role_aunt" = "Тётя";
+"role_uncle" = "Дядя";
+"role_pet" = "Питомец";
+"role_friend" = "Друг";
+"role_companion" = "Спутник";
+"role_classmate" = "Одноклассник";
+"role_neighbor" = "Сосед";
+"role_magical_friend" = "Волшебный друг";
+"role_other" = "Другой";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "Нажмите в любом месте для выхода";
+"breathing_in" = "Вдох";
+"breathing_hold" = "Задержка";
+"breathing_out" = "Выдох";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "Белый шум";
+"sound_brownNoise" = "Коричневый шум";
+"sound_pinkNoise" = "Розовый шум";
+"sound_softRain" = "Тихий дождь";
+"sound_oceanWaves" = "Морские волны";
+"sound_cracklingFireplace" = "Камин";
+"sound_forestNight" = "Ночной лес";
+"sound_heartbeat" = "Сердцебиение";
+
+/* Writing Style Labels */
+"style_standard" = "Стандартный";
+"style_rhyming" = "Рифмованный";
+"style_funny" = "Смешной";
+"style_sound_effects" = "Звуковые эффекты";
+"style_repetitive" = "Повторяющийся";
+"style_bedtime" = "Для сна";
+"style_adventure" = "Приключение";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "Классическая сказка на ночь";
+"style_desc_rhyming" = "Стихотворный стиль в духе Доктора Сьюза";
+"style_desc_funny" = "Весёлый юмор и неожиданные повороты";
+"style_desc_sound_effects" = "Звукоподражания и интерактивные звуки";
+"style_desc_repetitive" = "Кумулятивная история с повторяющимися фразами";
+"style_desc_bedtime" = "Особенно спокойная и мечтательная для засыпания";
+"style_desc_adventure" = "Эпические квесты и храбрые герои";
+
+/* Image Style Labels */
+"style_watercolor" = "Акварель";
+"style_fantasy" = "Фэнтези";
+"style_realistic" = "Реалистичный";
+"style_cartoon" = "Мультфильм";
+"style_classic_storybook" = "Классическая книга";
+"style_anime" = "Аниме";
+"style_ghibli" = "Гибли";
+"style_chibi" = "Чиби";
+"style_papercraft" = "Аппликация";
+"style_pixel" = "Пиксель-арт";
+"style_minimalist" = "Минимализм";
+"style_crayon" = "Карандаш";
+"style_pop_art" = "Поп-арт";
+"style_oil_painting" = "Масляная живопись";
+"style_none" = "Без изображений";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "Мягкие, мечтательные акварельные картины";
+"style_desc_fantasy" = "Богатое, волшебное фэнтези-искусство";
+"style_desc_realistic" = "Фотореалистичная цифровая графика";
+"style_desc_cartoon" = "Яркий, красочный мультяшный стиль";
+"style_desc_classic_storybook" = "Иллюстрации в стиле классических детских книг";
+"style_desc_anime" = "Искусство в стиле японского аниме";
+"style_desc_ghibli" = "Искусство в стиле Студии Гибли";
+"style_desc_chibi" = "Милый, супердеформированный стиль чиби";
+"style_desc_papercraft" = "Стиль бумажного коллажа";
+"style_desc_pixel" = "Ретро пиксель-арт стиль";
+"style_desc_minimalist" = "Чистые, простые геометрические формы";
+"style_desc_crayon" = "Детский стиль карандашами и цветными мелками";
+"style_desc_pop_art" = "Яркий поп-арт с растровыми точками";
+"style_desc_oil_painting" = "Богатый, текстурный стиль масляной живописи";
+"style_desc_none" = "Только текст, без иллюстраций";
+
+/* Lesson Labels */
+"lesson_none" = "Нет";
+"lesson_sharing" = "Умение делиться";
+"lesson_bravery" = "Смелость";
+"lesson_kindness" = "Доброта";
+"lesson_patience" = "Терпение";
+"lesson_honesty" = "Честность";
+"lesson_gratitude" = "Благодарность";
+"lesson_teamwork" = "Командная работа";
+"lesson_empathy" = "Сочувствие";
+"lesson_perseverance" = "Настойчивость";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "Без определённого урока — просто весёлая история";
+"lesson_desc_sharing" = "Учимся делиться с другими";
+"lesson_desc_bravery" = "Находим смелость в трудные моменты";
+"lesson_desc_kindness" = "Быть добрым и заботливым к другим";
+"lesson_desc_patience" = "Учимся ждать и быть терпеливым";
+"lesson_desc_honesty" = "Важность говорить правду";
+"lesson_desc_gratitude" = "Ценить то, что имеешь";
+"lesson_desc_teamwork" = "Работать вместе для достижения целей";
+"lesson_desc_empathy" = "Понимание чувств других";
+"lesson_desc_perseverance" = "Не сдаваться, когда трудно";
+
+/* Validation */
+"validation_custom_writing_empty" = "Пожалуйста, опишите свой стиль письма перед созданием истории.";
+"validation_custom_writing_long" = "Ваш стиль письма слишком длинный. Пожалуйста, сократите до 500 символов.";
+"validation_custom_image_empty" = "Пожалуйста, опишите свой стиль изображений перед созданием истории.";
+"validation_custom_image_long" = "Ваш стиль изображений слишком длинный. Пожалуйста, сократите до 500 символов.";
+"validation_custom_lesson_empty" = "Пожалуйста, опишите свой урок перед созданием истории.";
+"validation_custom_lesson_long" = "Ваш урок слишком длинный. Пожалуйста, сократите до 500 символов.";

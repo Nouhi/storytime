@@ -1,5 +1,6 @@
 package com.storytime.app.ui.navigation
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AutoAwesome
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
@@ -18,16 +20,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.storytime.app.R
 import com.storytime.app.ui.generate.GenerateScreen
 import com.storytime.app.ui.history.HistoryDetailScreen
 import com.storytime.app.ui.history.HistoryListScreen
 import com.storytime.app.ui.settings.FamilyMembersScreen
 import com.storytime.app.ui.settings.SettingsScreen
 
-sealed class Screen(val route: String, val label: String, val icon: ImageVector) {
-    data object Create : Screen("create", "Create", Icons.Default.AutoAwesome)
-    data object History : Screen("history", "History", Icons.Default.History)
-    data object Settings : Screen("settings", "Settings", Icons.Default.Settings)
+sealed class Screen(val route: String, @StringRes val labelRes: Int, val icon: ImageVector) {
+    data object Create : Screen("create", R.string.tab_create, Icons.Default.AutoAwesome)
+    data object History : Screen("history", R.string.tab_history, Icons.Default.History)
+    data object Settings : Screen("settings", R.string.tab_settings, Icons.Default.Settings)
 }
 
 private val bottomNavItems = listOf(Screen.Create, Screen.History, Screen.Settings)
@@ -48,8 +51,8 @@ fun AppNavigation() {
                 NavigationBar {
                     bottomNavItems.forEach { screen ->
                         NavigationBarItem(
-                            icon = { Icon(screen.icon, contentDescription = screen.label) },
-                            label = { Text(screen.label) },
+                            icon = { Icon(screen.icon, contentDescription = stringResource(screen.labelRes)) },
+                            label = { Text(stringResource(screen.labelRes)) },
                             selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                             onClick = {
                                 navController.navigate(screen.route) {

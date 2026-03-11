@@ -9,8 +9,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.storytime.app.R
 import com.storytime.app.ui.components.PageNavigationOverlay
 import com.storytime.app.ui.components.PageReader
 import com.storytime.app.ui.generate.StoryPageContent
@@ -65,14 +67,14 @@ fun HistoryDetailScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
                     }
                 },
                 actions = {
                     IconButton(onClick = { showDeleteDialog = true }) {
                         Icon(
                             Icons.Default.Delete,
-                            contentDescription = "Delete",
+                            contentDescription = stringResource(R.string.button_delete),
                             tint = MaterialTheme.colorScheme.error
                         )
                     }
@@ -97,7 +99,7 @@ fun HistoryDetailScreen(
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Spacer(Modifier.height(16.dp))
-                        Text("Story data not found", style = MaterialTheme.typography.bodyLarge)
+                        Text(stringResource(R.string.story_not_found), style = MaterialTheme.typography.bodyLarge)
                     }
                 }
             } else {
@@ -133,7 +135,7 @@ fun HistoryDetailScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Text(
-                            "Page $currentPage of ${storyPages.size}",
+                            stringResource(R.string.page_indicator, currentPage, storyPages.size),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -149,7 +151,7 @@ fun HistoryDetailScreen(
                             ) {
                                 Icon(Icons.Default.Book, contentDescription = null, modifier = Modifier.size(16.dp))
                                 Spacer(Modifier.width(4.dp))
-                                Text("Books")
+                                Text(stringResource(R.string.button_books))
                             }
 
                             Button(
@@ -162,7 +164,7 @@ fun HistoryDetailScreen(
                             ) {
                                 Icon(Icons.Default.Description, contentDescription = null, modifier = Modifier.size(16.dp))
                                 Spacer(Modifier.width(4.dp))
-                                Text("PDF")
+                                Text(stringResource(R.string.button_pdf))
                             }
                         }
                     }
@@ -175,8 +177,8 @@ fun HistoryDetailScreen(
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("Delete Story") },
-            text = { Text("Are you sure you want to delete this story? This cannot be undone.") },
+            title = { Text(stringResource(R.string.delete_story_title)) },
+            text = { Text(stringResource(R.string.delete_story_message)) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -185,10 +187,10 @@ fun HistoryDetailScreen(
                         onBack()
                     },
                     colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error)
-                ) { Text("Delete") }
+                ) { Text(stringResource(R.string.button_delete)) }
             },
             dismissButton = {
-                TextButton(onClick = { showDeleteDialog = false }) { Text("Cancel") }
+                TextButton(onClick = { showDeleteDialog = false }) { Text(stringResource(R.string.button_cancel)) }
             }
         )
     }

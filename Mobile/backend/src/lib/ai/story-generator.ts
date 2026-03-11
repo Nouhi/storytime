@@ -96,8 +96,9 @@ export async function generateStory(
   customWritingStyle?: string,
   customLesson?: string,
   bedtimeStory?: boolean,
+  language?: string,
 ): Promise<StoryGenerationResult> {
-  const systemPrompt = buildStorySystemPrompt({ ...context, writingStyle, lesson, customWritingStyle, customLesson, bedtimeStory });
+  const systemPrompt = buildStorySystemPrompt({ ...context, writingStyle, lesson, customWritingStyle, customLesson, bedtimeStory, language });
   const client = getClient();
 
   const MAX_ATTEMPTS = 2;
@@ -134,13 +135,13 @@ export async function generateStory(
 
     try {
       const parsed = JSON.parse(jsonStr);
-      return extractResult(parsed, totalInputTokens, totalOutputTokens, bedtimeStory, context.kidName);
+      return extractResult(parsed, totalInputTokens, totalOutputTokens, bedtimeStory, context.kidName, language);
     } catch (parseError) {
       // Try repairing the JSON (common with truncated responses)
       try {
         const repaired = repairJSON(jsonStr);
         const parsed = JSON.parse(repaired);
-        const result = extractResult(parsed, totalInputTokens, totalOutputTokens, bedtimeStory, context.kidName);
+        const result = extractResult(parsed, totalInputTokens, totalOutputTokens, bedtimeStory, context.kidName, language);
         console.log(
           `[story-generator] JSON repaired successfully${wasTruncated ? " (response was truncated)" : ""}`
         );
@@ -168,6 +169,7 @@ function extractResult(
   outputTokens: number,
   bedtimeStory?: boolean,
   kidName?: string,
+  language?: string,
 ): StoryGenerationResult {
   let pages: StoryPage[];
   let characterSheet: CharacterSheet | undefined;
@@ -213,7 +215,9 @@ function extractResult(
   }
 
   // Ensure the last page always has the "The End / Good night" text
-  if (pages.length >= targetPages) {
+  // For non-English languages, trust Claude's translated ending
+  const isNonEnglish = language && language !== "en";
+  if (pages.length >= targetPages && !isNonEnglish) {
     pages[targetPages - 1] = {
       ...pages[targetPages - 1],
       text: endPageText,

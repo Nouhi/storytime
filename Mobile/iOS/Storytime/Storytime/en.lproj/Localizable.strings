@@ -1,0 +1,238 @@
+/* Navigation */
+"tab_create" = "Create";
+"tab_history" = "History";
+"tab_settings" = "Settings";
+
+/* Generate - Greetings */
+"greeting_morning" = "Good morning";
+"greeting_afternoon" = "Good afternoon";
+"greeting_evening" = "Good evening";
+"greeting_welcome" = "Welcome to Storytime!";
+"greeting_personalized" = "%@, %@!";
+
+/* Generate - Idle */
+"setup_prompt" = "Set up your child's name in Settings for personalized stories";
+"prompt_header" = "What story shall we create?";
+"prompt_placeholder" = "Describe your story idea...";
+"suggestion_1" = "A magical adventure in an enchanted forest";
+"suggestion_2" = "A trip to outer space to visit friendly aliens";
+"suggestion_3" = "A day at the beach with a talking dolphin";
+"suggestion_4" = "A treasure hunt in a pirate ship";
+"section_language" = "Language";
+"section_writing_style" = "Writing Style";
+"section_image_style" = "Image Style";
+"section_lesson" = "Lesson";
+"custom_label" = "Custom";
+"custom_placeholder" = "Describe your own %@...";
+"use_custom" = "Use Custom";
+"or_write_your_own" = "Or write your own";
+"done" = "Done";
+"bedtime_story_label" = "Bedtime Story";
+"bedtime_story_hint" = "Shorter, calmer story (10 pages) perfect for sleepy time";
+"section_characters" = "Characters";
+"characters_all_included" = "All included";
+"characters_count" = "%d of %d selected";
+"button_clear" = "Clear";
+"button_select_all" = "Select All";
+"button_create_story" = "Create Story";
+
+/* Generate - Progress */
+"progress_starting" = "Starting...";
+"progress_writing" = "Writing your story...";
+"progress_painting" = "Painting illustrations...";
+"progress_assembling" = "Assembling your book...";
+"button_cancel" = "Cancel";
+
+/* Generate - Complete */
+"page_indicator" = "Page %d of %d";
+"button_books" = "Books";
+"button_pdf" = "PDF";
+"button_new" = "New";
+"button_sleep" = "Sleep";
+
+/* Generate - Error */
+"error_title" = "Something went wrong";
+"button_try_again" = "Try Again";
+"button_start_over" = "Start Over";
+"error_unknown" = "An unknown error occurred";
+
+/* History */
+"history_empty_title" = "No Stories Yet";
+"history_empty_description" = "Your stories will appear here once you create one!";
+"date_today" = "Today";
+"date_yesterday" = "Yesterday";
+"date_days_ago" = "%d days ago";
+"delete_story_title" = "Delete Story";
+"delete_story_message" = "Are you sure you want to delete this story? This cannot be undone.";
+"button_delete" = "Delete";
+"story_not_found" = "Story data not found";
+
+/* Settings */
+"settings_server" = "Server";
+"settings_connected" = "Connected";
+"settings_not_connected" = "Not connected";
+"settings_test" = "Test";
+"settings_server_url" = "Server URL";
+"settings_child_details" = "Child Details";
+"settings_change_photo" = "Change Photo";
+"settings_add_photo" = "Add Photo";
+"settings_name" = "Name";
+"settings_gender" = "Gender";
+"settings_gender_not_set" = "Not set";
+"settings_gender_boy" = "Boy";
+"settings_gender_girl" = "Girl";
+"settings_reading_level" = "Reading Level";
+"settings_reading_toddler" = "Toddler (2-3)";
+"settings_reading_early" = "Early Reader (4-5)";
+"settings_reading_beginner" = "Beginner (6-7)";
+"settings_reading_intermediate" = "Intermediate (8-10)";
+"settings_family" = "Family";
+"settings_family_members" = "Family Members";
+"settings_manage_family" = "Manage Family Members";
+"settings_bedtime" = "Bedtime";
+"settings_ambient_sound" = "Ambient Sound";
+"settings_sleep_timer" = "Sleep Timer";
+"settings_sleep_off" = "Off";
+"settings_sleep_1" = "After 1 story";
+"settings_sleep_2" = "After 2 stories";
+"settings_sleep_3" = "After 3 stories";
+"settings_bedtime_footer" = "Bedtime mode dims the screen and plays soothing sounds after story time";
+"settings_developer_options" = "Developer Options";
+"settings_anthropic_key" = "Anthropic API Key";
+"settings_google_key" = "Google AI API Key";
+"settings_keys_footer" = "Keys are stored on the server. Masked keys indicate an existing key is set.";
+"button_save" = "Save";
+"settings_saved" = "Settings saved";
+"settings_connect_error" = "Cannot connect to server";
+"alert_error" = "Error";
+"button_ok" = "OK";
+
+/* Family Members */
+"family_empty_title" = "No Family Members";
+"family_empty_description" = "Add family members so they can appear in your stories";
+"family_add_title" = "Add Member";
+"family_edit_title" = "Edit Member";
+"family_add_button" = "Add";
+"family_section_details" = "Details";
+"family_section_description" = "Description (Optional)";
+"family_description_placeholder" = "Appearance, personality, backstory...";
+"family_section_photo" = "Photo";
+"family_choose_photo" = "Choose Photo";
+"family_upload_photo" = "Upload Photo";
+"family_delete_title" = "Delete Member";
+"family_delete_message" = "Remove %@ from the family?";
+"role_mom" = "Mom";
+"role_dad" = "Dad";
+"role_brother" = "Brother";
+"role_sister" = "Sister";
+"role_grandma" = "Grandma";
+"role_grandpa" = "Grandpa";
+"role_aunt" = "Aunt";
+"role_uncle" = "Uncle";
+"role_pet" = "Pet";
+"role_friend" = "Friend";
+"role_companion" = "Companion";
+"role_classmate" = "Classmate";
+"role_neighbor" = "Neighbor";
+"role_magical_friend" = "Magical Friend";
+"role_other" = "Other";
+
+/* Bedtime & Breathing */
+"bedtime_tap_to_exit" = "Tap anywhere to exit";
+"breathing_in" = "Breathe In";
+"breathing_hold" = "Hold";
+"breathing_out" = "Breathe Out";
+
+/* Ambient Sounds */
+"sound_whiteNoise" = "White Noise";
+"sound_brownNoise" = "Brown Noise";
+"sound_pinkNoise" = "Pink Noise";
+"sound_softRain" = "Soft Rain";
+"sound_oceanWaves" = "Ocean Waves";
+"sound_cracklingFireplace" = "Fireplace";
+"sound_forestNight" = "Forest Night";
+"sound_heartbeat" = "Heartbeat";
+
+/* Writing Style Labels */
+"style_standard" = "Standard";
+"style_rhyming" = "Rhyming";
+"style_funny" = "Funny";
+"style_sound_effects" = "Sound Effects";
+"style_repetitive" = "Repetitive";
+"style_bedtime" = "Bedtime";
+"style_adventure" = "Adventure";
+
+/* Writing Style Descriptions */
+"style_desc_standard" = "Classic bedtime story narration";
+"style_desc_rhyming" = "Dr. Seuss-style rhyming verse";
+"style_desc_funny" = "Silly humor and unexpected twists";
+"style_desc_sound_effects" = "Onomatopoeia and interactive sounds";
+"style_desc_repetitive" = "Cumulative story with repeating phrases";
+"style_desc_bedtime" = "Extra calm and dreamy for sleepy time";
+"style_desc_adventure" = "Epic quests and brave heroes";
+
+/* Image Style Labels */
+"style_watercolor" = "Watercolor";
+"style_fantasy" = "Fantasy";
+"style_realistic" = "Realistic";
+"style_cartoon" = "Cartoon";
+"style_classic_storybook" = "Classic Storybook";
+"style_anime" = "Anime";
+"style_ghibli" = "Ghibli";
+"style_chibi" = "Chibi";
+"style_papercraft" = "Papercraft";
+"style_pixel" = "Pixel Art";
+"style_minimalist" = "Minimalist";
+"style_crayon" = "Crayon";
+"style_pop_art" = "Pop Art";
+"style_oil_painting" = "Oil Painting";
+"style_none" = "No Images";
+
+/* Image Style Descriptions */
+"style_desc_watercolor" = "Soft, dreamy watercolor paintings";
+"style_desc_fantasy" = "Rich, magical fantasy art";
+"style_desc_realistic" = "Photo-realistic digital art";
+"style_desc_cartoon" = "Bold, colorful cartoon style";
+"style_desc_classic_storybook" = "Vintage children's book illustrations";
+"style_desc_anime" = "Japanese anime-inspired art";
+"style_desc_ghibli" = "Studio Ghibli-inspired art";
+"style_desc_chibi" = "Cute, super-deformed chibi art";
+"style_desc_papercraft" = "Cut-paper collage style";
+"style_desc_pixel" = "Retro pixel art style";
+"style_desc_minimalist" = "Clean, simple geometric shapes";
+"style_desc_crayon" = "Child-like crayon and colored pencil";
+"style_desc_pop_art" = "Bold pop art with halftone dots";
+"style_desc_oil_painting" = "Rich, textured oil painting style";
+"style_desc_none" = "Text-only story, no illustrations";
+
+/* Lesson Labels */
+"lesson_none" = "None";
+"lesson_sharing" = "Sharing";
+"lesson_bravery" = "Bravery";
+"lesson_kindness" = "Kindness";
+"lesson_patience" = "Patience";
+"lesson_honesty" = "Honesty";
+"lesson_gratitude" = "Gratitude";
+"lesson_teamwork" = "Teamwork";
+"lesson_empathy" = "Empathy";
+"lesson_perseverance" = "Perseverance";
+
+/* Lesson Descriptions */
+"lesson_desc_none" = "No specific lesson — just a fun story";
+"lesson_desc_sharing" = "Learning to share with others";
+"lesson_desc_bravery" = "Finding courage in tough moments";
+"lesson_desc_kindness" = "Being kind and caring to others";
+"lesson_desc_patience" = "Learning to wait and be patient";
+"lesson_desc_honesty" = "The importance of telling the truth";
+"lesson_desc_gratitude" = "Appreciating what you have";
+"lesson_desc_teamwork" = "Working together to achieve goals";
+"lesson_desc_empathy" = "Understanding others' feelings";
+"lesson_desc_perseverance" = "Not giving up when things are hard";
+
+/* Validation */
+"validation_custom_writing_empty" = "Please describe your custom writing style before creating a story.";
+"validation_custom_writing_long" = "Your custom writing style is too long. Please keep it under 500 characters.";
+"validation_custom_image_empty" = "Please describe your custom image style before creating a story.";
+"validation_custom_image_long" = "Your custom image style is too long. Please keep it under 500 characters.";
+"validation_custom_lesson_empty" = "Please describe your custom lesson before creating a story.";
+"validation_custom_lesson_long" = "Your custom lesson is too long. Please keep it under 500 characters.";
