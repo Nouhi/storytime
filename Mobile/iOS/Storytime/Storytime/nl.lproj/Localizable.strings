@@ -47,6 +47,7 @@
 "page_indicator" = "Pagina %d van %d";
 "button_books" = "Boeken";
 "button_pdf" = "PDF";
+"button_booklet" = "Afdrukken";
 "button_new" = "Nieuw";
 "button_sleep" = "Slapen";
 

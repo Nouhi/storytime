@@ -51,6 +51,7 @@
     <string name="page_indicator">Страница %1$d из %2$d</string>
     <string name="button_books">Книги</string>
     <string name="button_pdf">PDF</string>
+    <string name="button_booklet">Печать</string>
     <string name="button_new">Новая</string>
     <string name="button_sleep">Сон</string>
 

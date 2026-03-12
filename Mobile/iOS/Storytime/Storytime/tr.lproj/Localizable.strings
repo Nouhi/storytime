@@ -47,6 +47,7 @@
 "page_indicator" = "Sayfa %d / %d";
 "button_books" = "Kitaplar";
 "button_pdf" = "PDF";
+"button_booklet" = "Yazdır";
 "button_new" = "Yeni";
 "button_sleep" = "Uyku";
 

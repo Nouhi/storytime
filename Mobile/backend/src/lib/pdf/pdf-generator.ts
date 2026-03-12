@@ -20,6 +20,8 @@ const SUBTITLE_COLOR = rgb(0.4, 0.4, 0.4);
  */
 function sanitizeForPdf(text: string): string {
   return text
+    // Replace newlines/tabs with spaces first
+    .replace(/[\r\n\t]+/g, " ")
     // Replace smart quotes / curly quotes with straight ones
     .replace(/[\u2018\u2019\u201A]/g, "'")
     .replace(/[\u201C\u201D\u201E]/g, '"')
@@ -33,7 +35,10 @@ function sanitizeForPdf(text: string): string {
     .replace(/\u00A0/g, " ")
     // Remove any remaining characters outside WinAnsi range
     // WinAnsi covers: 0x20-0x7E (basic ASCII printable) and 0xA0-0xFF (Latin-1 Supplement)
-    .replace(/[^\x20-\x7E\xA0-\xFF\n\r\t]/g, "");
+    .replace(/[^\x20-\x7E\xA0-\xFF]/g, "")
+    // Collapse multiple spaces
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }
 
 /**

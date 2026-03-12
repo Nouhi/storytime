@@ -89,6 +89,17 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    // Booklet download state
+    sealed class BookletState {
+        data object Idle : BookletState()
+        data object Downloading : BookletState()
+        data class Done(val message: String, val isError: Boolean = false) : BookletState()
+    }
+
+    private val _bookletState = MutableStateFlow<BookletState>(BookletState.Idle)
+    val bookletState: StateFlow<BookletState> = _bookletState.asStateFlow()
+    fun dismissBookletOverlay() { _bookletState.value = BookletState.Idle }
+
     // Toast message for user feedback
     private val _toastMessage = MutableStateFlow<String?>(null)
     val toastMessage: StateFlow<String?> = _toastMessage.asStateFlow()
@@ -143,6 +154,38 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
                 }
             }
             _toastMessage.value = result
+        }
+    }
+
+    fun downloadBookletPdf(storyId: Int, title: String) {
+        viewModelScope.launch {
+            _bookletState.value = BookletState.Downloading
+            withContext(Dispatchers.IO) {
+                try {
+                    Log.d(TAG, "downloadBookletPdf: storyId=$storyId")
+                    val response = api.downloadHistoryBookletPdf(storyId)
+                    Log.d(TAG, "downloadBookletPdf: response code=${response.code()}")
+                    if (!response.isSuccessful) {
+                        val errorBody = response.errorBody()?.string()
+                        Log.e(TAG, "downloadBookletPdf: HTTP error body=$errorBody")
+                        _bookletState.value = BookletState.Done("Download failed (HTTP ${response.code()})", isError = true)
+                        return@withContext
+                    }
+                    val body = response.body()
+                    if (body == null) {
+                        _bookletState.value = BookletState.Done("Download returned empty response", isError = true)
+                        return@withContext
+                    }
+                    val bytes = body.bytes()
+                    Log.d(TAG, "downloadBookletPdf: received ${bytes.size} bytes")
+                    val filename = "${FileHelper.sanitizeFilename(title)}-booklet.pdf"
+                    FileHelper.saveToDownloads(getApplication(), bytes, filename, "application/pdf")
+                    _bookletState.value = BookletState.Done("Booklet downloaded and ready to print!")
+                } catch (e: Exception) {
+                    Log.e(TAG, "downloadBookletPdf: exception", e)
+                    _bookletState.value = BookletState.Done("Failed: ${e.message ?: e.javaClass.simpleName}", isError = true)
+                }
+            }
         }
     }
 

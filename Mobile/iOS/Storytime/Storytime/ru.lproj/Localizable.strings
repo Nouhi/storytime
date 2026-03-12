@@ -47,6 +47,7 @@
 "page_indicator" = "Страница %d из %d";
 "button_books" = "Книги";
 "button_pdf" = "PDF";
+"button_booklet" = "Печать";
 "button_new" = "Новая";
 "button_sleep" = "Сон";
 

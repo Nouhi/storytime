@@ -13,6 +13,12 @@ class HistoryViewModel: ObservableObject {
     @Published var storyTitle = ""
     @Published var isLoadingDetail = false
     @Published var currentPage = 1
+    enum BookletState: Equatable {
+        case idle
+        case downloading
+        case done(message: String, isError: Bool)
+    }
+    @Published var bookletState: BookletState = .idle
 
     func loadHistory() async {
         isLoading = true
@@ -89,6 +95,25 @@ class HistoryViewModel: ObservableObject {
             }
         } catch {
             // Silently handle
+        }
+    }
+
+    func downloadBookletPDF(storyId: Int, title: String) async {
+        bookletState = .downloading
+        do {
+            let data = try await APIClient.shared.downloadData("/api/story-history/\(storyId)/booklet-pdf")
+            let safeName = title
+                .replacingOccurrences(of: "[^a-zA-Z0-9\\s-]", with: "", options: .regularExpression)
+                .replacingOccurrences(of: "\\s+", with: "-", options: .regularExpression)
+                .prefix(60)
+            let filename = "\(safeName.isEmpty ? "story" : safeName)-booklet.pdf"
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let fileURL = documentsURL.appendingPathComponent(String(filename))
+            try data.write(to: fileURL)
+
+            bookletState = .done(message: "Booklet downloaded and ready to print!", isError: false)
+        } catch {
+            bookletState = .done(message: "Download failed: \(error.localizedDescription)", isError: true)
         }
     }
 

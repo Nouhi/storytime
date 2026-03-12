@@ -51,6 +51,7 @@
     <string name="page_indicator">%1$dページ / %2$dページ</string>
     <string name="button_books">ほんだな</string>
     <string name="button_pdf">PDF</string>
+    <string name="button_booklet">印刷</string>
     <string name="button_new">あたらしく</string>
     <string name="button_sleep">おやすみ</string>
 

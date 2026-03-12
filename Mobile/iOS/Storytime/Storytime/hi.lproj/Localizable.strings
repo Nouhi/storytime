@@ -47,6 +47,7 @@
 "page_indicator" = "पृष्ठ %d / %d";
 "button_books" = "किताबें";
 "button_pdf" = "PDF";
+"button_booklet" = "प्रिंट";
 "button_new" = "नया";
 "button_sleep" = "सोएं";
 

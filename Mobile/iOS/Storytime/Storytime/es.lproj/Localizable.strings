@@ -47,6 +47,7 @@
 "page_indicator" = "Pagina %d de %d";
 "button_books" = "Libros";
 "button_pdf" = "PDF";
+"button_booklet" = "Imprimir";
 "button_new" = "Nuevo";
 "button_sleep" = "Dormir";
 

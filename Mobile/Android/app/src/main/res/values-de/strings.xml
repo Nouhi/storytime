@@ -51,6 +51,7 @@
     <string name="page_indicator">Seite %1$d von %2$d</string>
     <string name="button_books">Buecher</string>
     <string name="button_pdf">PDF</string>
+    <string name="button_booklet">Drucken</string>
     <string name="button_new">Neu</string>
     <string name="button_sleep">Schlafen</string>
 
