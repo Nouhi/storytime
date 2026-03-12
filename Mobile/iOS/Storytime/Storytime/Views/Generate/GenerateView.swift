@@ -168,15 +168,6 @@ struct GenerateView: View {
                     .padding(.horizontal)
                 }
 
-                // Language picker
-                if !viewModel.languages.isEmpty {
-                    LanguagePickerView(
-                        selection: $viewModel.language,
-                        options: viewModel.languages
-                    )
-                    .padding(.horizontal)
-                }
-
                 // Style pickers
                 VStack(spacing: 12) {
                     stylePicker(
@@ -401,101 +392,6 @@ private struct StylePickerView: View {
             .onAppear {
                 draftCustomText = customText
             }
-        }
-    }
-}
-
-// MARK: - LanguagePickerView
-
-private struct LanguagePickerView: View {
-    @EnvironmentObject var localeManager: LocaleManager
-    @Binding var selection: String
-    let options: [StyleItem]
-    @State private var showSheet = false
-
-    private var selectedOption: StyleItem? {
-        options.first(where: { $0.id == selection })
-    }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(localeManager.localized("section_language"))
-                .stSectionHeader()
-
-            Button { showSheet = true } label: {
-                HStack {
-                    if let sel = selectedOption {
-                        Text(sel.emoji)
-                            .font(.body)
-                        Text(sel.label)
-                            .foregroundStyle(Color.stTextPrimary)
-                    }
-                    Spacer()
-                    Image(systemName: "chevron.up.chevron.down")
-                        .font(.caption)
-                        .foregroundStyle(Color.stTextTertiary)
-                }
-                .padding(.horizontal, 14)
-                .padding(.vertical, 11)
-                .background(Color.stSurfaceCard)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.stPrimary.opacity(0.12), lineWidth: 1)
-                )
-            }
-            .buttonStyle(.plain)
-
-            if let sel = selectedOption {
-                Text(sel.description)
-                    .font(.caption2)
-                    .foregroundStyle(Color.stTextTertiary)
-            }
-        }
-        .sheet(isPresented: $showSheet) {
-            NavigationStack {
-                List {
-                    ForEach(options) { lang in
-                        Button {
-                            selection = lang.id
-                            showSheet = false
-                        } label: {
-                            HStack(spacing: 12) {
-                                Text(lang.emoji)
-                                    .font(.title2)
-
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(lang.label)
-                                        .font(.body)
-                                        .fontWeight(lang.id == selection ? .semibold : .regular)
-                                        .foregroundStyle(.primary)
-                                    Text(lang.description)
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-
-                                Spacer()
-
-                                if lang.id == selection {
-                                    Image(systemName: "checkmark")
-                                        .foregroundStyle(Color.stPrimary)
-                                        .fontWeight(.semibold)
-                                }
-                            }
-                            .contentShape(Rectangle())
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-                .navigationTitle(localeManager.localized("section_language"))
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button(localeManager.localized("done")) { showSheet = false }
-                    }
-                }
-            }
-            .presentationDetents([.medium, .large])
         }
     }
 }

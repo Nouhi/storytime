@@ -51,6 +51,7 @@
     <string name="page_indicator">Pagina %1$d van %2$d</string>
     <string name="button_books">Boeken</string>
     <string name="button_pdf">PDF</string>
+    <string name="button_booklet">Afdrukken</string>
     <string name="button_new">Nieuw</string>
     <string name="button_sleep">Slapen</string>
 

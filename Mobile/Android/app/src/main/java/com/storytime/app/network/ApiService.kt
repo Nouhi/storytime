@@ -61,6 +61,14 @@ interface ApiService {
     @Streaming
     suspend fun downloadHistoryPdf(@Path("id") id: Int): Response<ResponseBody>
 
+    @GET("api/generate/{storyId}/booklet-pdf")
+    @Streaming
+    suspend fun downloadGeneratedBookletPdf(@Path("storyId") storyId: String): Response<ResponseBody>
+
+    @GET("api/story-history/{id}/booklet-pdf")
+    @Streaming
+    suspend fun downloadHistoryBookletPdf(@Path("id") id: Int): Response<ResponseBody>
+
     @DELETE("api/story-history/{id}")
     suspend fun deleteStory(@Path("id") id: Int): DeleteResponse
 

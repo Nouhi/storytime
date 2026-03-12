@@ -12,7 +12,7 @@ import epubRouter from "./routes/epub.js";
 import pagesRouter from "./routes/pages.js";
 import historyRouter from "./routes/history.js";
 import familyMembersRouter from "./routes/family-members.js";
-import { generatePdfRouter, historyPdfRouter } from "./routes/pdf.js";
+import { generatePdfRouter, historyPdfRouter, generateBookletPdfRouter, historyBookletPdfRouter } from "./routes/pdf.js";
 
 const app = express();
 const PORT = parseInt(process.env.PORT || "3002", 10);
@@ -37,6 +37,8 @@ app.use("/api/story-history", historyRouter);
 app.use("/api/family-members", familyMembersRouter);
 app.use("/api/generate", generatePdfRouter);
 app.use("/api/story-history", historyPdfRouter);
+app.use("/api/generate", generateBookletPdfRouter);
+app.use("/api/story-history", historyBookletPdfRouter);
 
 // Health check
 app.get("/api/health", (_req, res) => {

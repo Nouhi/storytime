@@ -51,6 +51,7 @@
     <string name="page_indicator">Sayfa %1$d / %2$d</string>
     <string name="button_books">Kitaplar</string>
     <string name="button_pdf">PDF</string>
+    <string name="button_booklet">Yazdır</string>
     <string name="button_new">Yeni</string>
     <string name="button_sleep">Uyku</string>
 

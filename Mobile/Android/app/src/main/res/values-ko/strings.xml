@@ -51,6 +51,7 @@
     <string name="page_indicator">%1$d쪽 / %2$d쪽</string>
     <string name="button_books">책장</string>
     <string name="button_pdf">PDF</string>
+    <string name="button_booklet">인쇄</string>
     <string name="button_new">새로</string>
     <string name="button_sleep">잠자기</string>
 

@@ -47,6 +47,7 @@
 "page_indicator" = "%d쪽 / %d쪽";
 "button_books" = "책장";
 "button_pdf" = "PDF";
+"button_booklet" = "인쇄";
 "button_new" = "새로";
 "button_sleep" = "잠자기";
 

@@ -51,6 +51,7 @@
     <string name="page_indicator">第 %1$d 页，共 %2$d 页</string>
     <string name="button_books">书架</string>
     <string name="button_pdf">PDF</string>
+    <string name="button_booklet">打印</string>
     <string name="button_new">新建</string>
     <string name="button_sleep">睡眠</string>
 

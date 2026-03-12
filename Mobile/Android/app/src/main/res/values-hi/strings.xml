@@ -51,6 +51,7 @@
     <string name="page_indicator">पृष्ठ %1$d / %2$d</string>
     <string name="button_books">किताबें</string>
     <string name="button_pdf">PDF</string>
+    <string name="button_booklet">प्रिंट</string>
     <string name="button_new">नया</string>
     <string name="button_sleep">सोएं</string>
 

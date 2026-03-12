@@ -47,6 +47,7 @@
 "page_indicator" = "%dページ / %dページ";
 "button_books" = "ほんだな";
 "button_pdf" = "PDF";
+"button_booklet" = "印刷";
 "button_new" = "あたらしく";
 "button_sleep" = "おやすみ";
 

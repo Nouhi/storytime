@@ -74,6 +74,11 @@ struct HistoryDetailView: View {
         .task {
             await viewModel.loadStoryDetail(id: story.id)
         }
+        .overlay {
+            if viewModel.bookletState != .idle {
+                bookletDownloadOverlay
+            }
+        }
     }
 
     private func pageView(page: StoryPage) -> some View {
@@ -213,10 +218,77 @@ struct HistoryDetailView: View {
                         .foregroundStyle(.white)
                         .clipShape(Capsule())
                 }
+
+                Button {
+                    Task { await viewModel.downloadBookletPDF(storyId: story.id, title: story.title) }
+                } label: {
+                    Label(localeManager.localized("button_booklet"), systemImage: "printer")
+                        .font(.subheadline.bold())
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 10)
+                        .background(Color.green)
+                        .foregroundStyle(.white)
+                        .clipShape(Capsule())
+                }
             }
         }
         .padding()
         .background(.ultraThinMaterial)
+    }
+
+    private var bookletDownloadOverlay: some View {
+        ZStack {
+            Color.black.opacity(0.7)
+                .ignoresSafeArea()
+
+            VStack(spacing: 20) {
+                switch viewModel.bookletState {
+                case .downloading:
+                    PrintingAnimationView()
+
+                    Text("Preparing your booklet")
+                        .font(.headline)
+
+                    ProgressView()
+                        .progressViewStyle(.linear)
+                        .tint(.green)
+                        .frame(width: 200)
+
+                    Text("Your story is being formatted\nfor printing")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+
+                case .done(let message, let isError):
+                    Image(systemName: isError ? "exclamationmark.circle.fill" : "checkmark.circle.fill")
+                        .font(.system(size: 56))
+                        .foregroundStyle(isError ? .red : .green)
+                        .symbolEffect(.bounce, value: message)
+
+                    Text(message)
+                        .font(.headline)
+                        .multilineTextAlignment(.center)
+
+                    Button {
+                        viewModel.bookletState = .idle
+                    } label: {
+                        Text("OK")
+                            .font(.subheadline.bold())
+                            .padding(.horizontal, 32)
+                            .padding(.vertical, 10)
+                            .background(isError ? Color.red : Color.green)
+                            .foregroundStyle(.white)
+                            .clipShape(Capsule())
+                    }
+
+                case .idle:
+                    EmptyView()
+                }
+            }
+            .padding(32)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 24))
+            .padding(48)
+        }
     }
 
     private func cleanTitle(_ title: String) -> String {
@@ -224,5 +296,108 @@ struct HistoryDetailView: View {
             return String(title[title.startIndex..<range.lowerBound])
         }
         return title
+    }
+}
+
+// MARK: - Printing Animation
+
+private struct PrintingAnimationView: View {
+    @State private var pageOffset: CGFloat = -30
+    @State private var pageOpacity: Double = 0
+    @State private var printerScale: CGFloat = 1.0
+    @State private var stackCount = 0
+
+    // Staggered page positions for the "printed stack"
+    private let maxStack = 3
+
+    var body: some View {
+        ZStack {
+            // Printed page stack below printer
+            ForEach(0..<stackCount, id: \.self) { i in
+                RoundedRectangle(cornerRadius: 3)
+                    .fill(Color.white)
+                    .frame(width: 36 - CGFloat(i * 2), height: 44 - CGFloat(i * 2))
+                    .shadow(color: .black.opacity(0.08), radius: 1, y: 1)
+                    .offset(y: 38 + CGFloat(i * 3))
+                    .transition(.asymmetric(
+                        insertion: .move(edge: .top).combined(with: .opacity),
+                        removal: .opacity
+                    ))
+            }
+
+            // Animated page sliding out of printer
+            RoundedRectangle(cornerRadius: 2)
+                .fill(Color.white)
+                .frame(width: 32, height: 40)
+                .shadow(color: .black.opacity(0.1), radius: 2, y: 2)
+                .overlay(
+                    VStack(spacing: 3) {
+                        ForEach(0..<4, id: \.self) { _ in
+                            RoundedRectangle(cornerRadius: 0.5)
+                                .fill(Color.gray.opacity(0.3))
+                                .frame(height: 2)
+                        }
+                    }
+                    .padding(6)
+                )
+                .offset(y: pageOffset)
+                .opacity(pageOpacity)
+
+            // Printer icon on top
+            Image(systemName: "printer.fill")
+                .font(.system(size: 52))
+                .foregroundStyle(.green)
+                .scaleEffect(printerScale)
+        }
+        .frame(width: 100, height: 120)
+        .onAppear {
+            startPrintCycle()
+        }
+    }
+
+    private func startPrintCycle() {
+        // Page slides down from printer
+        withAnimation(.easeIn(duration: 0.3)) {
+            pageOpacity = 1
+        }
+        withAnimation(.easeOut(duration: 1.2)) {
+            pageOffset = 30
+        }
+
+        // Printer "clunks" as it prints
+        withAnimation(.easeInOut(duration: 0.15).delay(0.1)) {
+            printerScale = 1.03
+        }
+        withAnimation(.easeInOut(duration: 0.15).delay(0.25)) {
+            printerScale = 0.98
+        }
+        withAnimation(.easeInOut(duration: 0.15).delay(0.4)) {
+            printerScale = 1.0
+        }
+
+        // Page lands in stack, then reset and loop
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                stackCount = min(stackCount + 1, maxStack)
+            }
+
+            // Reset page for next cycle
+            pageOffset = -30
+            pageOpacity = 0
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                // Reset stack if full, then print again
+                if stackCount >= maxStack {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        stackCount = 0
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        startPrintCycle()
+                    }
+                } else {
+                    startPrintCycle()
+                }
+            }
+        }
     }
 }

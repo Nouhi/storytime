@@ -47,6 +47,7 @@
 "page_indicator" = "صفحة %d من %d";
 "button_books" = "الكتب";
 "button_pdf" = "PDF";
+"button_booklet" = "طباعة";
 "button_new" = "جديد";
 "button_sleep" = "نوم";
 

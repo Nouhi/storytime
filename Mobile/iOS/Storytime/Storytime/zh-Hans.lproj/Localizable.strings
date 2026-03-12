@@ -47,6 +47,7 @@
 "page_indicator" = "第 %d 页，共 %d 页";
 "button_books" = "书架";
 "button_pdf" = "PDF";
+"button_booklet" = "打印";
 "button_new" = "新建";
 "button_sleep" = "睡眠";
 
